@@ -1,0 +1,205 @@
+---
+title: "Cybersécurité pour les systèmes d'ingénierie"
+description: "Convergence OT/IT, menaces industrielles, cadres NIST et IEC 62443, segmentation réseau, gestion des vulnérabilités ICS, réponse aux incidents et réglementation canadienne."
+icon: "shield-halved"
+---
+
+La cybersécurité des systèmes industriels (OT — Operational Technology) est devenue une priorité absolue depuis les attaques de grande ampleur qui ont frappé des infrastructures critiques mondiales. L'interconnexion croissante des réseaux OT et IT dans le cadre de l'Industrie 4.0 multiplie les surfaces d'attaque tout en exposant des systèmes conçus sans considération de sécurité numérique.
+
+## Convergence OT/IT : risques spécifiques
+
+### Différences fondamentales IT vs OT
+
+| Caractéristique | IT (Technologie de l'information) | OT (Technologie opérationnelle) |
+|----------------|----------------------------------|--------------------------------|
+| **Priorité principale** | Confidentialité → Intégrité → Disponibilité | **Disponibilité → Intégrité → Confidentialité** |
+| **Tolérance aux pannes** | Redémarrage acceptable | Arrêt non planifié = pertes financières, risques sécurité |
+| **Cycles de vie** | 3-5 ans | 15-30 ans (API encore sous Windows XP) |
+| **Mises à jour** | Fréquentes, automatisées | Rares, fenêtres de maintenance planifiées |
+| **Protocoles** | TCP/IP, HTTPS, SSH | Modbus, DNP3, PROFIBUS, IEC 61850 |
+| **Tests de sécurité** | Tests de pénétration courants | Tests limités (risque d'arrêt de production) |
+
+### Pourquoi la convergence est-elle risquée ?
+Historiquement, les réseaux OT étaient **isolés physiquement** (air gap). L'Industrie 4.0 a brisé cet isolement : connectivité cloud pour la télémaintenance, accès distant des fournisseurs, collecte de données temps réel vers les ERP. Cette ouverture apporte des bénéfices immenses mais expose des systèmes vieux de 20 ans, non patchés et sans authentification, à des attaquants sophistiqués.
+
+## Menaces courantes sur les systèmes industriels
+
+### Ransomware industriel
+Le ransomware chiffre les données et systèmes, exigeant une rançon. En milieu OT, les conséquences vont bien au-delà de la perte de données.
+
+**Colonial Pipeline (mai 2021)** : ransomware DarkSide sur le réseau IT d'un opérateur de pipeline aux États-Unis. La direction a arrêté préventivement le système OT de contrôle du pipeline par précaution, interrompant 45 % de l'approvisionnement en carburant de la côte Est américaine pendant 6 jours. Rançon payée : 4,4 M$ (partiellement récupérée par le FBI). Impact économique : pénuries locales, hausse des prix à la pompe.
+
+**NotPetya (juin 2017)** : logiciel malveillant déguisé en ransomware, en réalité un wiper destructeur. A visé initialement l'Ukraine mais s'est propagé mondialement via les réseaux d'entreprise. Dommages : >10 Mds$ mondialement. Maersk (transport maritime) : 45 000 PC et 4 000 serveurs à reconstruire, 10 jours d'interruption partielle, 300 M$ de pertes.
+
+### Attaques sur la chaîne d'approvisionnement
+**SolarWinds (2020)** : les attaquants ont compromis les serveurs de build de SolarWinds et inséré un backdoor (Sunburst) dans les mises à jour légitimes d'Orion, touchant 18 000 organisations dont des agences gouvernementales américaines et des entreprises industrielles.
+
+**XZ Utils (2024)** : backdoor inséré dans une bibliothèque de compression open-source après 2 ans d'infiltration sociale d'un contributeur malveillant. Rappel que la supply chain logicielle est une surface d'attaque critique.
+
+### Accès à distance non sécurisé
+Pendant la pandémie COVID-19, de nombreux accès VPN et RDP (Remote Desktop Protocol) ont été ouverts en urgence pour la télémaintenance. Des milliers de ports RDP exposés à Internet ont été compromis via des attaques par force brute ou des vulnérabilités (BlueKeep CVE-2019-0708).
+
+### Ingénierie sociale (Spear Phishing)
+Les ingénieurs et techniciens industriels sont ciblés par des courriels spécifiques usurpant l'identité de fournisseurs d'équipements (Siemens, Rockwell, Schneider) avec des « mises à jour de firmware » malveillantes.
+
+<Warning>
+**Stuxnet** reste la référence ultime des cyberattaques industrielles : logiciel malveillant sophistiqué ciblant les centrifugeuses d'enrichissement d'uranium iraniens via Siemens S7-315 et des variateurs de fréquence Siemens/Vacon. A causé la destruction physique de ~1 000 centrifugeuses tout en affichant des valeurs normales aux opérateurs. Première cyberattaque ayant causé des dommages physiques significatifs.
+</Warning>
+
+## Cadres de cybersécurité
+
+### NIST Cybersecurity Framework (CSF) — 5 fonctions
+
+Le NIST CSF v1.1 (et v2.0 publiée en 2024) structure la cybersécurité autour de cinq fonctions :
+
+<CardGroup cols={2}>
+  <Card title="Identifier (ID)" icon="magnifying-glass">
+    Inventaire des actifs, classification des risques, gouvernance. Comprendre son environnement pour gérer les risques cybersécurité sur les systèmes, personnes, actifs, données et capacités.
+  </Card>
+  <Card title="Protéger (PR)" icon="shield">
+    Contrôles d'accès, formation, sécurité des données, maintenance sécurisée, technologies de protection. Mettre en œuvre les mesures de sécurité appropriées.
+  </Card>
+  <Card title="Détecter (DE)" icon="bell">
+    Surveillance continue, détection des anomalies, monitoring des événements de sécurité. Identifier rapidement un incident cybersécurité.
+  </Card>
+  <Card title="Répondre (RS)" icon="fire-extinguisher">
+    Plan de réponse aux incidents, communications, analyse, atténuation, améliorations. Agir suite à un incident détecté.
+  </Card>
+</CardGroup>
+
+**Récupérer (RC)** : planification de la reprise, améliorations post-incident, communications de rétablissement. Restaurer les capacités ou services impactés.
+
+### IEC 62443 — Sécurité des systèmes d'automatisation industrielle
+
+IEC 62443 est la famille de normes de référence pour la cybersécurité des systèmes de contrôle industriel (IACS). Structure en quatre séries :
+
+- **IEC 62443-1** : concepts généraux, terminologie, modèles
+- **IEC 62443-2** : politiques et procédures pour les opérateurs et intégrateurs
+- **IEC 62443-3** : exigences systèmes — zones, conduits, niveaux de sécurité cibles (SL)
+- **IEC 62443-4** : exigences composants — développement sécurisé, capabilités des produits
+
+**Niveaux de sécurité (Security Levels — SL)** :
+- **SL 0** : pas d'exigences de sécurité spécifiques
+- **SL 1** : protection contre les accès non intentionnels (mesures de base)
+- **SL 2** : protection contre les attaquants motivés avec moyens limités (hackers opportunistes)
+- **SL 3** : protection contre les attaquants sophistiqués avec ressources significatives (groupes criminels organisés)
+- **SL 4** : protection contre les attaquants étatiques avec ressources quasi-illimitées (APT — Advanced Persistent Threats)
+
+### Modèle de Purdue (PERA)
+
+Le modèle de référence de Purdue (Industrial Automation Control System — PACS) définit 5 niveaux avec des zones de sécurité séparées :
+
+- **Niveau 0** : terrain physique (capteurs, actionneurs)
+- **Niveau 1** : contrôle de base (PLC, DCS, régulateurs)
+- **Niveau 2** : contrôle de supervision (SCADA, IHM, histor ians)
+- **Niveau 3** : opérations de site (MES, gestion de production)
+- **Niveau 4** : logistique d'entreprise (ERP, IT corporate)
+
+**DMZ industrielle** : zone démilitarisée entre les niveaux 3 et 4, contenant des serveurs proxy, des historiens, des passerelles de données. Aucun flux direct de données entre niveaux IT et OT sans passer par la DMZ.
+
+## Segmentation réseau industrielle
+
+### Architecture défensive en profondeur
+
+**Principes fondamentaux** :
+- **Séparation des zones** : réseau terrain séparé du réseau SCADA, séparé du réseau IT corporate
+- **VLAN** (Virtual LAN) : segmentation logique au niveau L2, limitant la propagation latérale
+- **Pare-feux industriels** : Fortinet FortiGate ICS, Cisco Firepower, Palo Alto PA, Tofino (Belden/Hirschmann). Listes blanches (whitelist) plutôt que listes noires — tout ce qui n'est pas explicitement autorisé est bloqué.
+- **Zones de transfert de données (Data Diodes)** : flux de données unidirectionnel hardware (OWL Cyber Defense, Waterfall Security). Aucune communication possible dans le sens bloqué — garantie physique.
+
+### Accès à distance sécurisé
+
+**VPN avec MFA** : tunnel chiffré (IPsec ou TLS) avec authentification multifacteur. Solutions industrielles : Cisco AnyConnect, Fortinet FortiClient, Secomea SiteManager, Tosibox.
+
+**Serveurs Jump (Bastion Host)** : point d'entrée unique pour l'accès à distance OT. Toutes les sessions sont enregistrées et auditées. L'accès direct aux équipements OT sans passer par le bastion est impossible.
+
+**Principe du moindre privilège** : chaque compte d'accès distant n'a accès qu'aux équipements nécessaires à sa mission. Les techniciens de maintenance du fournisseur A n'accèdent pas aux équipements du fournisseur B.
+
+<Tip>
+Pour les petites installations, le service Secomea GoTo ou la solution Tosibox offrent des accès distants sécurisés clés en main, adaptés aux PME industrielles sans expertise réseau dédiée. Ces solutions créent des tunnels chiffrés sans ouvrir de ports entrants sur le pare-feu.
+</Tip>
+
+## Gestion des vulnérabilités ICS
+
+### Inventaire des actifs
+Impossible de protéger ce qu'on ne connaît pas. Outils passifs de découverte réseau (Claroty, Dragos, Nozomi Networks, Armis) qui identifient les actifs OT sans envoyer de paquets actifs susceptibles de perturber les équipements sensibles.
+
+Informations à maintenir dans l'inventaire : fabricant, modèle, version firmware, protocoles actifs, comptes configurés, connexions réseau, criticité.
+
+### Veille CVE spécifique OT
+Sources de veille spécialisées :
+- **ICS-CERT Advisories** (CISA) : alertes sur les vulnérabilités ICS
+- **Dragos Industrial Intelligence** : menaces spécifiques par secteur
+- **Claroty Research** : vulnérabilités 0-day ICS/OT
+- **CCCS (Centre canadien pour la cybersécurité)** : alertes et avis pour les organisations canadiennes
+
+### Gestion des correctifs en milieu OT
+Patcher les systèmes OT est bien plus complexe qu'en IT :
+- Tests préalables obligatoires (les correctifs peuvent casser des fonctionnalités critiques)
+- Fenêtres de maintenance limitées (arrêts planifiés souvent annuels dans certaines industries)
+- Systèmes hors support (Windows XP, Windows 2003 encore présents)
+- Certifications pouvant être invalidées par les modifications
+
+**Stratégies compensatoires** : segmentation réseau renforcée, pare-feux virtuels en mode inline devant les équipements non patchés, surveillance de détection d'anomalies.
+
+## Réponse aux incidents en milieu OT
+
+### Planification préalable — ICS-IR Plan
+Un plan de réponse aux incidents spécifique OT doit être élaboré AVANT qu'un incident survienne :
+
+1. **Déclenchement** : critères de détection, qui appelle qui
+2. **Confinement** : isolation (réseau, physique) vs arrêt sécurisé — décision critique dans l'industrie de processus
+3. **Éradication** : nettoyage, réinstallation depuis des sauvegardes vérifiées
+4. **Rétablissement** : procédure de redémarrage sécurisé, validation des systèmes
+5. **Leçons apprises** : post-mortem documenté
+
+**Équipe CSIRT industrielle** : inclure des experts OT (ingénieurs procédé, automaticiens) aux côtés des experts cybersécurité IT — les décisions d'arrêt ou d'isolation doivent prendre en compte la sécurité des personnes et la stabilité du procédé.
+
+**Isolation vs arrêt sécurisé** : dans une industrie de processus (chimique, nucléaire), isoler le réseau peut laisser le procédé en fonctionnement autonome — parfois préférable à un arrêt brutal qui peut lui-même créer des risques.
+
+## Réglementation canadienne
+
+**Loi C-26 — Loi sur la protection des cybersystèmes essentiels** (adoptée 2024) : oblige les exploitants d'infrastructures critiques fédérales (télécommunications, pipelines, nucléaire, transport aérien/ferroviaire/maritime, finance) à :
+- Établir et maintenir un programme de cybersécurité
+- Déclarer les incidents cybersécurité dans des délais stricts (72 h pour les incidents graves)
+- Respecter les directives du gouvernement en cas d'urgence
+
+**Secteurs réglementés provinciaux** : les infrastructures critiques provinciales (distribution électrique, eau, santé) relèvent des provinces. Hydro-Québec, Hydro One (Ontario) ont leurs propres programmes de cybersécurité alignés avec les standards NERC CIP.
+
+**CCCS (Centre canadien pour la cybersécurité)** : agence fédérale offrant des guides techniques gratuits, alertes, assistance aux organisations canadiennes. Publie régulièrement des guides sectoriels (eau/eaux usées, secteur énergétique, soins de santé).
+
+**CRE-ISACs** : Information Sharing and Analysis Centres par secteur — partage d'informations sur les menaces entre organisations du même secteur (E-ISAC pour l'énergie, H-ISAC pour la santé).
+
+## Meilleures pratiques — Check-list de base
+
+- Inventaire complet des actifs OT/IT (automatisé, mis à jour en continu)
+- Segmentation réseau et DMZ industrielle documentée
+- Authentification multifacteur (MFA) sur tous les accès distants
+- Comptes de service dédiés (pas d'utilisation de comptes administrateurs génériques)
+- Gestion des mots de passe (rotation, complexité, coffre-fort type CyberArk, BeyondTrust)
+- Principe du moindre privilège pour tous les comptes (opérateurs, intégrateurs, fournisseurs)
+- Journaux (logs) centralisés et conservés ≥ 12 mois, analysés (SIEM)
+- Sauvegarde des configurations (programmes API, paramètres réseau, images systèmes)
+- Plan de réponse aux incidents OT testé annuellement (exercice tabletop)
+- Formation annuelle du personnel (reconnaître le phishing, procédures de signalement)
+
+<Info>
+Le Centre canadien pour la cybersécurité (CCCS) publie gratuitement le guide « Cybersécurité pour les technologies opérationnelles » disponible sur cyber.gc.ca — lecture obligatoire pour tout ingénieur travaillant sur des systèmes ICS au Canada.
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Automatisation industrielle et PLC" icon="robot" href="/genie-industriel/automatisation-plc">
+    Protocoles industriels, architecture réseau OT et systèmes SCADA à sécuriser.
+  </Card>
+  <Card title="Intelligence artificielle appliquée" icon="brain" href="/genie-logiciel/intelligence-artificielle">
+    IA pour la détection d'anomalies réseau et la cybersécurité proactive en milieu OT.
+  </Card>
+  <Card title="Éthique professionnelle en ingénierie" icon="scale-balanced" href="/leadership/ethique-ingenierie">
+    Responsabilités de l'ingénieur face aux risques cybersécurité sur les systèmes qu'il conçoit.
+  </Card>
+  <Card title="Contrats et appels d'offres" icon="file-signature" href="/gestion-projets/contrats-appels-offres">
+    Exigences cybersécurité dans les contrats d'approvisionnement et cahiers des charges.
+  </Card>
+</CardGroup>
