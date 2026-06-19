@@ -1,0 +1,310 @@
+---
+title: "Industrial Engineering & Process Optimization"
+description: "Lean manufacturing, Six Sigma, simulation, supply chain management, quality systems, and ergonomics — the methodologies of industrial engineering"
+icon: "chart-line"
+---
+
+## What is Industrial Engineering?
+
+Industrial engineering (IE) is the discipline concerned with the design, improvement, and installation of integrated systems of people, materials, energy, equipment, and information. Unlike most engineering disciplines that focus on a specific physical domain (structures, circuits, fluids), industrial engineering takes the entire production system as its subject — optimizing the whole rather than maximizing individual components.
+
+The fundamental question an industrial engineer asks is: **given a set of inputs and constraints, what is the best way to organize the system to achieve its objectives?** This question applies to manufacturing floors, hospital patient flows, airport baggage handling, supply chains, and software development teams.
+
+<Note>
+Full French content is available at [/genie-industriel/optimisation-procedes](/genie-industriel/optimisation-procedes).
+</Note>
+
+---
+
+## Lean Manufacturing
+
+Lean manufacturing derives from the **Toyota Production System (TPS)**, developed by Taiichi Ohno and Shigeo Shingo at Toyota from the 1940s through the 1970s, and popularized in the West by Womack and Jones in *The Machine That Changed the World* (1990) and *Lean Thinking* (1996).
+
+### The Five Lean Principles
+
+1. **Define value**: value is defined by the customer — what are they willing to pay for?
+2. **Map the value stream**: identify every step in the production process and classify each as value-adding, non-value-adding but necessary, or pure waste
+3. **Create flow**: eliminate barriers to smooth, continuous flow of work through the value stream
+4. **Establish pull**: produce only what is needed, when it is needed, in the amount needed — triggered by customer demand
+5. **Pursue perfection**: continuous improvement (kaizen) — there is no final state, only a direction
+
+### The 8 Wastes — TIMWOODE
+
+Lean identifies eight categories of waste (muda) that consume resources without adding value:
+
+| Letter | Waste | Example |
+|---|---|---|
+| **T** | Transportation | Moving parts between non-adjacent workstations |
+| **I** | Inventory | Work-in-process sitting between operations |
+| **M** | Motion | Workers walking to retrieve tools not at point of use |
+| **W** | Waiting | Operators idle waiting for a machine to finish |
+| **O** | Overproduction | Making more than customer demand requires |
+| **O** | Over-processing | Applying tighter tolerances than the customer requires |
+| **D** | Defects | Producing parts that must be reworked or scrapped |
+| **E** | Employee talent | Not utilizing the problem-solving capabilities of the workforce |
+
+### Value Stream Mapping (VSM)
+
+VSM is a paper-and-pencil mapping tool that visualizes the flow of material and information from raw material to customer. A current-state map identifies all process steps with their:
+- Cycle time (C/T): time to produce one unit
+- Change-over time (C/O): time to switch from one product to another
+- Uptime/reliability
+- Inventory buffers (number of units)
+
+The future-state map designs the improved system using lean principles (takt time, flow, pull, supermarkets). The gap between maps becomes the improvement plan.
+
+### Key Lean Tools
+
+| Tool | Purpose |
+|---|---|
+| **5S** | Sort, Set in order, Shine, Standardize, Sustain — workplace organization |
+| **Kanban** | Visual pull signal — card or digital trigger authorizing production or movement |
+| **Poka-yoke** | Error-proofing — design that makes defects impossible or immediately obvious |
+| **SMED** (Single Minute Exchange of Die) | Reduces change-over time to under 10 minutes |
+| **Heijunka** | Production leveling — smooths the production schedule to reduce variability |
+| **Jidoka** | Autonomation — machines detect abnormalities and stop automatically |
+| **Andon** | Visual signal (light, buzzer) indicating a quality or production problem |
+
+---
+
+## Six Sigma
+
+Six Sigma is a data-driven quality management methodology developed at Motorola in the 1980s and popularized by General Electric under Jack Welch in the 1990s. The name refers to the goal of achieving a process that produces no more than **3.4 defects per million opportunities (DPMO)**, which corresponds to six standard deviations (6σ) between the process mean and the nearest specification limit.
+
+### The DMAIC Methodology
+
+Six Sigma improvement projects follow the **DMAIC** cycle:
+
+| Phase | Activities | Key Deliverables |
+|---|---|---|
+| **Define** | Identify the problem, scope the project, define the customer's Critical to Quality (CTQ) requirements | Project charter, SIPOC diagram, VOC analysis |
+| **Measure** | Quantify the current process performance, establish a measurement system | Baseline DPMO, process capability Cp/Cpk, Gauge R&R study |
+| **Analyze** | Identify root causes of defects and variation | Fishbone diagram, 5 Whys, regression analysis, hypothesis testing |
+| **Improve** | Design, pilot, and implement solutions | DOE (Design of Experiments), solution matrix, pilot results |
+| **Control** | Sustain the gains — prevent regression to old behavior | Control plan, control charts (SPC), updated SOPs |
+
+### Process Capability Indices
+
+**Cp** measures whether the process spread fits within the specification limits:
+
+$$C_p = \frac{USL - LSL}{6\sigma}$$
+
+**Cpk** also accounts for the process centering (distance from mean to nearest specification limit):
+
+$$C_{pk} = \min\left(\frac{USL - \mu}{3\sigma}, \frac{\mu - LSL}{3\sigma}\right)$$
+
+### Sigma Level to DPMO Conversion
+
+| Sigma Level | DPMO | Yield |
+|---|---|---|
+| 3σ | 66,807 | 93.32% |
+| 4σ | 6,210 | 99.379% |
+| 5σ | 233 | 99.977% |
+| **6σ** | **3.4** | **99.9997%** |
+
+<Info>
+The "1.5σ shift" is a convention in Six Sigma accounting for long-term process drift. A process at "6 sigma quality" technically means the short-term capability is 6σ but the DPMO of 3.4 assumes a 1.5σ shift in the mean over time.
+</Info>
+
+### Belt Certification Levels
+
+| Belt | Scope | Typical Training |
+|---|---|---|
+| **White Belt** | Awareness — understands basic concepts | 4-8 hours |
+| **Yellow Belt** | Team member on DMAIC projects | 2-3 days |
+| **Green Belt** | Leads part-time improvement projects in own work area | 2-4 weeks |
+| **Black Belt** | Leads full-time DMAIC projects across the organization | 4-5 months |
+| **Master Black Belt** | Trains and coaches belts; designs the Six Sigma program | Several years of BB experience |
+
+**Lean Six Sigma** combines both methodologies — Lean for speed and waste elimination, Six Sigma for quality and variation reduction.
+
+---
+
+## Simulation and Modeling
+
+### Discrete Event Simulation (DES)
+
+DES models systems where the state changes at discrete points in time (events) — machine breakdowns, customer arrivals, job completions. Key applications:
+- Manufacturing line balancing and bottleneck identification
+- Warehouse and logistics design
+- Healthcare patient flow (emergency departments, operating suites)
+- Airport and port terminal design
+
+**Commercial DES software:**
+- **Arena** (Rockwell Automation): longtime industry standard, Visual Basic-based logic
+- **FlexSim**: 3D DES with drag-and-drop interface, strong in manufacturing and logistics
+- **Simio**: object-oriented, strong in healthcare and service systems
+- **AnyLogic**: multi-method simulation (DES + agent-based + system dynamics) in Java
+
+**Open-source alternatives:**
+- **SimPy** (Python): event-driven simulation framework — excellent for custom models and teaching
+- **SALABIM** (Python): DES with 2D/3D animation
+
+### Agent-Based Modeling
+
+Models individual autonomous agents whose local interactions produce emergent system behavior. Used for:
+- Pedestrian and crowd dynamics
+- Supply chain disruption propagation
+- Organizational behavior and policy analysis
+
+**Software**: **NetLogo** (teaching), **AnyLogic** (professional), **Mesa** (Python, open source)
+
+### System Dynamics
+
+Focuses on stocks (accumulations), flows, and feedback loops at an aggregate level. Ideal for strategic, long-horizon problems:
+- Market dynamics and technology adoption
+- Policy analysis (healthcare capacity, environmental management)
+- Supply chain bullwhip effect analysis
+
+**Software**: **Vensim** (industry standard), **Stella Architect** (education), **Insight Maker** (free, web-based)
+
+### Monte Carlo Simulation for Risk Analysis
+
+Monte Carlo replaces deterministic inputs with probability distributions, running thousands of iterations to produce output distributions. Applications in IE:
+- Project schedule risk (stochastic CPM/PERT)
+- Inventory policy evaluation under demand uncertainty
+- Equipment reliability and maintenance optimization
+- Financial risk in capital projects
+
+**Software**: **@RISK** (Palisade, Excel add-in), **Crystal Ball** (Oracle), **Python with NumPy/SciPy** (free)
+
+---
+
+## Supply Chain Management
+
+### Economic Order Quantity (EOQ)
+
+The EOQ model determines the optimal order quantity that minimizes total inventory costs (ordering costs + holding costs):
+
+$$Q^* = \sqrt{\frac{2DS}{H}}$$
+
+Where:
+- D = annual demand (units/year)
+- S = ordering cost per order ($/order)
+- H = annual holding cost per unit ($/unit/year)
+
+**Total annual cost** at EOQ: $TC = \sqrt{2DSH}$
+
+### Safety Stock and Service Level
+
+Safety stock protects against demand variability and lead time variability:
+
+$$SS = z \cdot \sigma_{demand} \cdot \sqrt{L}$$
+
+Where z is the safety factor corresponding to the desired service level (z = 1.65 for 95%, z = 2.33 for 99%), σ_demand is demand standard deviation per period, and L is lead time in periods.
+
+### ABC Analysis
+
+ABC analysis classifies inventory items by their relative importance (typically by annual dollar volume):
+- **A items** (~20% of SKUs, ~70-80% of value): tight control, frequent review, high accuracy
+- **B items** (~30% of SKUs, ~15-25% of value): moderate control
+- **C items** (~50% of SKUs, ~5-10% of value): simple management, bulk orders
+
+### Demand Forecasting Methods
+
+| Method | Best For | Complexity |
+|---|---|---|
+| Moving average | Stable demand, no trend/seasonality | Low |
+| Exponential smoothing (SES) | Stable demand with random variation | Low |
+| Holt's method | Demand with trend | Moderate |
+| Holt-Winters | Trend + seasonality | Moderate |
+| ARIMA | Complex time series patterns | High |
+| Machine learning (XGBoost, LSTM) | Large datasets with many explanatory variables | High |
+
+### The Bullwhip Effect
+
+The bullwhip effect describes how demand variability amplifies as one moves up the supply chain — a small variation in retail sales becomes large swings in distributor orders, manufacturer production, and supplier deliveries. Causes include:
+- Demand forecast updating
+- Order batching
+- Price fluctuations (forward buying)
+- Shortage gaming
+
+**Mitigation strategies**: information sharing (VMI — Vendor Managed Inventory), CPFR (Collaborative Planning, Forecasting, and Replenishment), order frequency smoothing, EDLP pricing, reduced lead times.
+
+---
+
+## Quality Management Systems
+
+### ISO 9001:2015
+
+The international standard for quality management systems, based on seven quality management principles: customer focus, leadership, engagement of people, process approach, improvement, evidence-based decision making, and relationship management.
+
+Key clauses relevant to engineering organizations:
+- **Clause 4**: Context of the organization — understanding internal and external issues
+- **Clause 6**: Planning — risk and opportunity management, quality objectives
+- **Clause 8**: Operation — design and development controls, control of externally provided processes
+- **Clause 10**: Improvement — nonconformity management, corrective action, continual improvement
+
+### Industry-Specific QMS Standards
+
+| Standard | Industry | Key Requirements |
+|---|---|---|
+| **AS9100 Rev D** | Aerospace and defense | Adds configuration management, first article inspection, risk management, special requirements from Boeing, Airbus, etc. |
+| **IATF 16949:2016** | Automotive | FMEA (AIAG/VDA), control plans, MSA, APQP, PPAP production part approval |
+| **ISO 13485:2016** | Medical devices | Design controls per 21 CFR Part 820, risk management per ISO 14971, regulatory requirements traceability |
+| **GMP / GDP** | Pharmaceuticals | Health Canada and FDA requirements for drug manufacturing and distribution — validation, documentation, batch records |
+
+---
+
+## Ergonomics and Human Factors
+
+### NIOSH Lifting Equation
+
+The revised NIOSH lifting equation computes a Recommended Weight Limit (RWL) for two-handed manual lifting tasks:
+
+$$RWL = LC \times HM \times VM \times DM \times AM \times FM \times CM$$
+
+Where LC = 23 kg (load constant), and the multipliers account for horizontal distance (HM), vertical height (VM), vertical travel distance (DM), asymmetry angle (AM), lifting frequency (FM), and coupling quality (CM).
+
+The **Lifting Index (LI)** = Actual load / RWL. LI > 1 indicates increased risk of musculoskeletal disorders.
+
+### RULA and REBA — Posture Assessment
+
+- **RULA** (Rapid Upper Limb Assessment): scores posture of upper arm, lower arm, wrist, neck, trunk, and legs. Generates an action level (1-4) indicating urgency of intervention.
+- **REBA** (Rapid Entire Body Assessment): similar but includes the whole body, better for dynamic tasks and varied postures.
+
+Both tools are observational — trained analysts assess postures from video or direct observation and score against published worksheets.
+
+### Cognitive Ergonomics in Control Rooms
+
+For process industries and nuclear facilities, **cognitive ergonomics** applies human factors principles to the design of:
+- **Human-machine interfaces (HMI)**: alarm management (EEMUA 191, ISA 18.2), display hierarchy design, alarm rationalization
+- **Procedure management**: procedure format, step-based instructions, human error prevention
+- **Situation awareness**: ensuring operators have accurate, timely mental models of the process state — Endsley's SA model (perception → comprehension → projection)
+
+**Standards**: NUREG-0711 (nuclear control rooms), ISO 11064 (ergonomic design of control centres), ISA 101 (HMI standard)
+
+---
+
+## Canadian Industrial Engineering Context
+
+### Manufacturing Sectors
+
+**Ontario** hosts Canada's largest manufacturing economy:
+- **Automotive**: Stellantis (Windsor, Brampton), Toyota (Cambridge, Woodstock), Honda (Alliston), Ford (Oakville), General Motors (Oshawa). Industrial engineers are central to assembly line balance, defect prevention, and lean implementation. Transitioning rapidly to EV manufacturing.
+- **Aerospace**: Pratt & Whitney Canada (Longueuil QC), Bombardier Aerospace (Montreal QC), CAE (Montreal), Héroux-Devtek (Longueuil) — AS9100-regulated manufacturing with very high quality requirements.
+- **Food and beverage**: Ontario and Quebec host major food processing clusters (Maple Leaf Foods, McCain, Loblaws manufacturing, Kraft Heinz) where industrial engineers manage high-volume, low-margin production systems with strict food safety (FSSC 22000, BRC) requirements.
+
+**Quebec**:
+- **Aerospace corridor** (Longueuil-Mirabel-Montreal): one of the world's top-five aerospace manufacturing clusters. Bell Textron, Pratt & Whitney, Héroux-Devtek, CAE.
+- **Aluminum**: Aluminerie de Becancour, Aluminerie Alouette (Sept-Îles) — capital-intensive, high-energy operations where process control and maintenance optimization are key.
+- **Pharmaceuticals**: Apotex, Pharmascience — significant employers of industrial engineers in QMS and continuous improvement roles.
+
+---
+
+## See Also
+
+<CardGroup cols={2}>
+  <Card title="Project Management" icon="calendar-check" href="/en/project-management/planning">
+    WBS, CPM scheduling, earned value management, and risk management — complementary tools for IE practitioners managing capital projects.
+  </Card>
+  <Card title="Chemical Process Engineering" icon="flask" href="/en/chemical/introduction">
+    Process optimization, mass and energy balances, and process control in chemical manufacturing environments.
+  </Card>
+  <Card title="Software Architecture" icon="diagram-project" href="/en/software/architecture">
+    Software engineering methods for building MES, ERP, and production scheduling systems that support industrial operations.
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Software for simulation (Arena, FlexSim), statistical analysis (Minitab, Python), and supply chain modeling.
+  </Card>
+</CardGroup>

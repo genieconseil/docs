@@ -1,0 +1,208 @@
+---
+title: "Introduction to Chemical Engineering"
+description: "Definition, scope, core competencies, industry sectors, and career paths in chemical engineering with a focus on the Canadian context"
+icon: "flask"
+---
+
+## What is Chemical Engineering?
+
+Chemical engineering sits at the productive intersection of chemistry, physics, biology, and engineering. Where a chemist asks *why* a reaction occurs, a chemical engineer asks *how* to make it occur reliably, safely, and economically at industrial scale. The discipline transforms laboratory discoveries into operational processes: a pharmaceutical compound synthesized in milligrams becomes a drug manufactured in metric tonnes; a catalytic reaction observed in a test tube becomes a refinery unit processing thousands of barrels per day.
+
+The defining challenge of chemical engineering is **scale-up**: bridging the gap between bench-scale results and industrial-scale production while managing heat transfer, mass transfer, fluid dynamics, reaction kinetics, and thermodynamics simultaneously. A process that looks clean and simple in a 250 mL flask may become turbulent, exothermic, mass-transfer limited, and economically challenging at 10,000 L.
+
+<Note>
+Full French content is available at [/genie-chimique/introduction](/genie-chimique/introduction). The French version covers the historical development of the discipline, detailed industry sectors, the Quebec and Alberta chemical engineering landscape, and the OIQ regulatory framework in depth.
+</Note>
+
+---
+
+## Core Competencies
+
+### Mass and Energy Balances
+
+The foundation of every chemical engineering calculation. A mass balance tracks material entering, leaving, accumulating in, or being consumed by a system boundary. An energy balance does the same for enthalpy, internal energy, kinetic energy, and potential energy. Together they determine:
+
+- Flow rates and compositions throughout a process
+- Heating and cooling duties at each unit operation
+- Reactor conversion and yield constraints
+- Process efficiency and utility consumption
+
+**Degree of freedom analysis** determines whether a system of equations is solvable given the available specifications — a skill that transfers directly from single-unit problems to full plant simulations in Aspen Plus or HYSYS.
+
+### Transport Phenomena
+
+Transport phenomena unifies three parallel processes through analogous mathematical frameworks:
+
+| Phenomenon | Driving Force | Key Parameter | Governing Law |
+|---|---|---|---|
+| Momentum transfer | Pressure gradient / shear stress | Viscosity (μ) | Newton's law of viscosity |
+| Heat transfer | Temperature gradient | Thermal conductivity (k) | Fourier's law |
+| Mass transfer | Concentration gradient | Diffusivity (D) | Fick's law |
+
+The **Reynolds analogy** and **Colburn analogy** connect these three phenomena, allowing engineers to use experimental heat transfer correlations to estimate mass transfer coefficients — a powerful shortcut in equipment design.
+
+### Reaction Engineering
+
+Chemical reactor design requires quantifying how quickly reactions proceed (kinetics) and how efficiently reactants contact each other (residence time distribution, mixing). The key reactor archetypes are:
+
+- **Batch reactor (BR)**: time-dependent, no flow — pharmaceuticals, specialty chemicals
+- **Continuous stirred tank reactor (CSTR)**: steady-state, perfect mixing — polymerization, fermentation
+- **Plug flow reactor (PFR)**: steady-state, no axial mixing — gas-phase reactions, tubular reactors
+
+The **Damköhler number** (Da = reaction rate / transport rate) determines whether a reactor is kinetically controlled (Da << 1) or transport-limited (Da >> 1), guiding the focus of scale-up efforts.
+
+### Thermodynamics
+
+Applied thermodynamics in chemical engineering goes beyond the introductory treatment in mechanical engineering. Key topics include:
+
+- **Phase equilibrium**: vapor-liquid equilibrium (VLE), liquid-liquid equilibrium (LLE) — the basis of distillation, extraction, and absorption design
+- **Equations of state**: cubic EOS (Peng-Robinson, Soave-Redlich-Kwong) for gas-phase and mixed-phase systems; activity coefficient models (NRTL, UNIQUAC) for liquid mixtures
+- **Chemical reaction equilibrium**: Gibbs free energy minimization, equilibrium constants, Le Chatelier's principle applied to reactor conditions
+- **Fugacity and activity**: departure from ideal behavior in non-ideal mixtures
+
+### Process Control
+
+A chemical process at steady state is a controlled system: flow controllers maintain material balance, temperature controllers maintain heat balance, and pressure controllers maintain mechanical integrity. Chemical engineers design and tune control loops using:
+
+- **PID control**: proportional-integral-derivative tuning (Ziegler-Nichols, Cohen-Coon methods)
+- **HAZOP (Hazard and Operability Study)**: systematic identification of deviations that could cause hazardous conditions
+- **Safety instrumented systems (SIS)**: independent protection layers per IEC 61511
+- **Advanced process control (APC)**: model predictive control (MPC) for multivariable optimization
+
+---
+
+## Major Industry Sectors
+
+### Oil & Gas Refining
+
+Canada's oil sands in Alberta represent one of the world's largest hydrocarbon resources. Chemical engineers at companies like **Suncor**, **Cenovus**, and **Imperial Oil** work on:
+
+- **SAGD (Steam Assisted Gravity Drainage)**: injecting steam underground to reduce bitumen viscosity for extraction from oil sands deposits
+- **Upgrading**: converting heavy bitumen into synthetic crude oil (SCO) via hydrocracking and coking
+- **Amine treating**: removing H₂S and CO₂ from natural gas and refinery off-gases using monoethanolamine (MEA) or other solvents
+- **Hydrotreating and hydrocracking**: catalytic reaction with hydrogen to remove sulfur (desulfurization), nitrogen, and metals from crude fractions
+
+Conventional refineries (Ontario, Quebec, BC, Atlantic Canada) operate atmospheric and vacuum distillation, catalytic cracking (FCC), catalytic reforming, alkylation, and blending units to produce transportation fuels, heating oil, and petrochemical feedstocks.
+
+### Petrochemicals
+
+The petrochemical industry converts refinery byproducts (naphtha, ethane, propane) into building-block chemicals:
+
+- **Ethylene** via steam cracking of ethane or naphtha — feedstock for polyethylene, PVC, ethylene oxide, ethylene glycol
+- **Propylene** — feedstock for polypropylene, acrylonitrile, propylene oxide
+- **Aromatics (BTX — benzene, toluene, xylenes)** — feedstocks for plastics, fibers, solvents, explosives
+
+**NOVA Chemicals** (Corunna, ON and Joffre, AB) is Canada's largest polyethylene producer.
+
+### Pharmaceuticals
+
+Canadian pharmaceutical and biopharmaceutical companies require chemical engineers for:
+
+- **API synthesis**: multi-step organic synthesis of active pharmaceutical ingredients under cGMP (current Good Manufacturing Practices)
+- **Bioprocessing**: fermentation and cell culture for biologics (insulin, monoclonal antibodies, vaccines) — sterile design, clean-in-place (CIP), steam-in-place (SIP)
+- **Formulation engineering**: solid dosage forms (tablet compression, granulation, coating), injectables, controlled release systems
+- **Regulatory compliance**: Health Canada Division 2 (drugs), ICH Q10 (pharmaceutical quality system), ICH Q11 (development of drug substances)
+
+### Food and Beverage
+
+Food engineering applies unit operations to biological materials:
+
+- **Thermal processing**: pasteurization, UHT sterilization, F₀ value calculations for microbial inactivation
+- **Evaporation and drying**: juice concentration, milk powder, instant coffee — energy-intensive operations
+- **Membrane separation**: ultrafiltration and nanofiltration for dairy (whey protein concentration, milk protein standardization)
+- **Fermentation**: beer, wine, yogurt, cheese — microbial growth kinetics and metabolite production
+
+### Water Treatment
+
+Municipal and industrial water treatment applies chemical engineering principles to aqueous systems:
+
+- **Coagulation/flocculation**: alum or ferric sulfate addition to destabilize colloidal particles
+- **Filtration**: sand filtration, membrane filtration (MF, UF, NF, RO)
+- **Disinfection**: chlorination, UV, ozone — CT (concentration × time) calculations for pathogen inactivation per Health Canada guidelines
+- **Wastewater treatment**: biological oxygen demand (BOD) removal via activated sludge, nutrient removal (biological nitrogen and phosphorus removal), biosolids management
+
+### Polymers and Advanced Materials
+
+- **Polymer synthesis**: free radical, ionic, coordination, and step-growth polymerization — controlling molecular weight distribution
+- **Composites manufacturing**: resin transfer molding (RTM), prepreg lay-up — interface chemistry and cure kinetics
+- **Electrochemical systems**: lithium-ion battery electrode design, fuel cell membrane electrode assemblies — growing rapidly with energy transition
+
+### Mining Processing
+
+Chemical engineers play a central role in mineral processing:
+
+- **Hydrometallurgy**: leaching (acid leach for copper, cyanide leach for gold, pressure oxidation for refractory ores), solvent extraction, electrowinning
+- **Pyrometallurgy**: smelting, converting, refining — thermodynamic modeling of high-temperature slag-metal systems
+- **Tailings management**: thickening, filtration, paste tailings, tailings storage facility (TSF) design — critical environmental issue
+
+---
+
+## Canadian Chemical Engineering Landscape
+
+### Alberta — Oil Sands and Petrochemicals
+
+Alberta is the epicenter of Canadian chemical engineering employment. The oil sands complex around Fort McMurray employs thousands of chemical engineers, as do the petrochemical clusters in **Joffre** (NOVA Chemicals polyethylene), **Fort Saskatchewan** (Dow Chemical, Methanex), and **Edmonton** (refineries and upgraders).
+
+### Ontario — Chemicals, Pharmaceuticals, and Manufacturing
+
+Ontario's chemical industry is concentrated in:
+- **Sarnia-Lambton "Chemical Valley"**: Imperial Oil, Shell, INEOS, Lanxess — largest concentration of petrochemical facilities in Canada
+- **Golden Horseshoe**: Dow Chemical (Ternium), Bayer, BASF, pharmaceutical facilities
+- **Ottawa/Montreal corridor**: National Research Council bioprocessing facilities, biopharmaceutical startups
+
+### Quebec — Nutrien, Chemtrade, and Specialty Chemicals
+
+- **Nutrien** (formerly Agrium): largest global potash and nitrogen fertilizer producer — major employer in Saskatchewan and with operations in Quebec
+- **Chemtrade Logistics**: sulphuric acid and electrochemical products
+- **Tronox**: titanium dioxide from the Sept-Îles ilmenite smelting complex
+- Strong food processing sector — dairy, maple products, beverages — in the Laurentians and Eastern Townships
+
+---
+
+## Key Professional Organizations
+
+| Organization | Acronym | Role |
+|---|---|---|
+| Chemical Institute of Canada | CIC / CSChE | National professional society — Canadian Society for Chemical Engineering (CSChE) is the engineering division |
+| American Institute of Chemical Engineers | AIChE | Premier international professional society — student chapters at most Canadian universities |
+| Ordre des ingénieurs du Québec | OIQ | Professional licensing body for chemical engineers practicing in Quebec |
+| APEGA | APEGA | Professional licensing body for chemical engineers in Alberta |
+| Canadian Society of Chemical Technology | CSCT | Technologists and technicians in chemical technology |
+
+---
+
+## Typical Career Paths
+
+<CardGroup cols={2}>
+  <Card title="Process Engineer" icon="gears" href="/genie-chimique/operations-unitaires">
+    Designs, optimizes, and troubleshoots industrial processes. Works with simulation tools (HYSYS, Aspen Plus), P&ID development, and process hazard analysis. The most common entry-level role in oil & gas, chemicals, and pharmaceuticals.
+  </Card>
+  <Card title="Project Engineer" icon="diagram-project" href="/gestion-projets/planification">
+    Manages the execution of capital projects — from process design through commissioning. Coordinates between process, mechanical, instrumentation, civil, and electrical disciplines.
+  </Card>
+  <Card title="Research & Development" icon="microscope" href="#">
+    Develops new products, processes, and materials in industrial or academic research settings. Requires strong fundamental knowledge in kinetics, materials, and separation science.
+  </Card>
+  <Card title="Environmental Health & Safety" icon="leaf" href="/genie-environnemental/introduction">
+    Manages process safety (HAZOP, SIL assessment, consequence modeling), environmental compliance (emissions, effluents), and occupational health in industrial facilities.
+  </Card>
+</CardGroup>
+
+---
+
+## See Also
+
+<CardGroup cols={2}>
+  <Card title="Chemical Engineering — Unit Operations (FR)" icon="flask" href="/genie-chimique/operations-unitaires">
+    Detailed French-language coverage of distillation, absorption, extraction, heat exchange, and other unit operations.
+  </Card>
+  <Card title="Process Simulation Software" icon="laptop-code" href="/en/resources/calculation-tools">
+    Guide to Aspen HYSYS, Aspen Plus, DWSIM, and other process simulation tools used by chemical engineers.
+  </Card>
+  <Card title="Industrial Engineering & Optimization" icon="chart-line" href="/en/industrial/optimization">
+    Lean, Six Sigma, and process optimization methods complementary to chemical process engineering.
+  </Card>
+  <Card title="Canadian Standards" icon="file-contract" href="/ressources/normes-canadiennes">
+    CSA B51 (pressure vessels), CSA Z662 (pipelines), and other standards relevant to chemical plants in Canada.
+  </Card>
+</CardGroup>

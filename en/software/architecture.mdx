@@ -1,0 +1,334 @@
+---
+title: "Software Architecture & Engineering"
+description: "Architectural patterns, SOLID principles, API design, scalability, reliability engineering, and software for engineering applications"
+icon: "diagram-project"
+---
+
+## What is Software Architecture?
+
+Software architecture is the set of fundamental, high-level structures of a software system — the components, their relationships to each other and to the environment, and the principles governing their design and evolution. An architect's decisions are the ones that are hard to change later: whether to build a monolith or microservices, which database engine to use, whether to adopt an event-driven or request-response communication model.
+
+Architecture is not about getting everything right on day one. It is about making reversible decisions where possible, making irreversible decisions consciously and explicitly, and creating structures that allow the system to evolve as requirements change.
+
+<Note>
+Full French content is available at [/genie-logiciel/architecture](/genie-logiciel/architecture).
+</Note>
+
+---
+
+## Architectural Drivers — Quality Attributes
+
+The right architecture for a system depends on its **architectural drivers** — the quality attributes (non-functional requirements) that matter most. Common quality attributes:
+
+| Attribute | Definition | Typical Trade-offs |
+|---|---|---|
+| **Performance** | Response time, throughput, resource utilization | Often conflicts with maintainability (caching, pooling add complexity) |
+| **Reliability** | Probability of correct operation over time | Redundancy costs money and adds complexity |
+| **Scalability** | Ability to handle increasing load | Horizontal scaling requires stateless design, which constrains architecture |
+| **Maintainability** | Ease of understanding, modifying, and testing the system | Abstraction layers add indirection and runtime overhead |
+| **Security** | Protection against unauthorized access, data leakage, attacks | Security controls add latency and operational friction |
+| **Interoperability** | Ability to exchange data and work with other systems | Open standards vs. proprietary protocols trade-off |
+| **Observability** | Ability to understand internal state from external outputs | Instrumentation adds code overhead |
+
+The **Architecture Tradeoff Analysis Method (ATAM)** provides a structured process for evaluating architectural decisions against quality attribute requirements.
+
+---
+
+## Key Architectural Patterns
+
+### Layered (N-Tier) Architecture
+
+The most widely understood pattern. The system is divided into horizontal layers, each with a distinct responsibility. Classic three-tier:
+
+```
+┌─────────────────────────────────────┐
+│  Presentation Layer (UI / API)       │  HTTP, HTML, JSON
+├─────────────────────────────────────┤
+│  Business Logic Layer (Domain)       │  Rules, workflows, calculations
+├─────────────────────────────────────┤
+│  Data Access Layer (Repository)      │  SQL queries, ORM, external APIs
+└─────────────────────────────────────┘
+```
+
+**Strengths**: familiar, easy to reason about, good separation of concerns.
+**Weaknesses**: tends toward coupling — a change in the data model ripples up through all layers. Can become a "big ball of mud" as applications grow.
+
+### Hexagonal Architecture (Ports and Adapters)
+
+Proposed by Alistair Cockburn, hexagonal architecture places the **domain model** at the center, isolated from all external concerns (databases, HTTP, message queues) via ports (interfaces) and adapters (implementations).
+
+```
+              ┌──────────────────────┐
+ HTTP Adapter →│                      │← DB Adapter
+ CLI Adapter  →│   Domain / Use Cases │← Email Adapter  
+ MQ Adapter   →│                      │← External API Adapter
+              └──────────────────────┘
+```
+
+**Key insight**: The domain should have zero dependencies on frameworks, databases, or delivery mechanisms. Tests can drive the domain directly without starting a web server or connecting to a database.
+
+### Microservices Architecture
+
+Microservices decomposes an application into small, independently deployable services, each owning its own data and exposing its capabilities via well-defined APIs.
+
+**Core concepts:**
+
+- **Bounded Context** (from Domain-Driven Design): a cohesive subdomain with its own model, language, and team ownership — the natural boundary for a microservice
+- **API Gateway**: single entry point for clients — routes requests, handles cross-cutting concerns (auth, rate limiting, SSL termination)
+- **Service Mesh** (Istio, Linkerd): infrastructure layer that handles service-to-service communication — mTLS, load balancing, circuit breaking, observability — without application code changes
+- **Container orchestration**: Docker containers packaged and managed by Kubernetes (K8s) — declarative deployment, health checks, horizontal pod autoscaling
+
+**When microservices are appropriate:**
+- Large teams that need to deploy independently
+- Different services have fundamentally different scaling needs
+- High organizational complexity benefits from strong ownership boundaries
+
+**When microservices are premature:**
+- Small teams (the distributed systems overhead outweighs the benefits)
+- Unclear domain boundaries (wait until the domain model stabilizes)
+- Initial development (start with a modular monolith, extract services when justified)
+
+<Warning>
+Microservices introduce significant distributed systems complexity: network latency, partial failures, eventual consistency, distributed tracing, and operational overhead. Sam Newman's *Building Microservices* and Chris Richardson's *Microservices Patterns* are essential reading before committing to this path. Many successful systems start as well-structured monoliths and extract services only where warranted.
+</Warning>
+
+### Event-Driven Architecture
+
+Systems communicate by publishing and consuming events rather than making direct calls. This decouples producers from consumers — a service publishes an event without knowing which (if any) services consume it.
+
+**Message brokers:**
+- **Apache Kafka**: distributed, durable, ordered log — high throughput, replays, stream processing. Used for event streams requiring durability and ordering guarantees.
+- **RabbitMQ**: traditional message queue with flexible routing (exchanges, bindings). Better for task queues and point-to-point messaging with rich routing requirements.
+- **AWS SQS/SNS, Azure Service Bus, Google Pub/Sub**: managed cloud message brokers — reduce operational burden.
+
+### CQRS and Event Sourcing
+
+**CQRS** (Command Query Responsibility Segregation) separates the write model (commands that change state) from the read model (queries that return data). This allows independent optimization and scaling of reads and writes, and enables purpose-built read models (materialized views) for different query patterns.
+
+**Event Sourcing** stores the history of state changes as an immutable sequence of events, rather than storing current state. Benefits: full audit trail, temporal queries ("what was the state at time T?"), event replay for new projections. Costs: eventual consistency, complexity of event versioning, steep learning curve.
+
+---
+
+## SOLID Principles
+
+SOLID is a mnemonic for five design principles that guide object-oriented software design toward systems that are easier to understand, maintain, and extend.
+
+### S — Single Responsibility Principle
+
+A class should have one and only one reason to change. A class that handles both database access and business logic will need to change both when the database schema changes and when business rules change — these are two independent reasons.
+
+```python
+# Violation: class handles both validation and persistence
+class UserService:
+    def create_user(self, email, password):
+        if "@" not in email:           # Validation concern
+            raise ValueError("Invalid email")
+        self.db.insert(email, password)  # Persistence concern
+
+# Better: separate concerns
+class UserValidator:
+    def validate_email(self, email): ...
+
+class UserRepository:
+    def save(self, user): ...
+
+class UserService:
+    def __init__(self, validator, repository): ...
+```
+
+### O — Open/Closed Principle
+
+Software entities should be **open for extension but closed for modification**. Adding new behavior should not require modifying existing, tested code. Achieved through abstraction (interfaces, abstract classes) and polymorphism.
+
+### L — Liskov Substitution Principle
+
+Subtypes must be substitutable for their base types without altering the correctness of the program. If code works correctly with an abstract `Shape`, it must work correctly when given any `Circle` or `Rectangle`. Violations: a subclass that throws when the parent wouldn't, or a subclass that weakens postconditions (returns less than promised).
+
+### I — Interface Segregation Principle
+
+Clients should not be forced to depend on interfaces they do not use. Large "fat" interfaces should be split into smaller, more specific ones — a class implementing a logging interface should not be forced to implement an unrelated alerting method it doesn't use.
+
+### D — Dependency Inversion Principle
+
+High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details — details should depend on abstractions.
+
+In practice: business logic should depend on interfaces (ports), not concrete database drivers or HTTP clients. This makes business logic testable in isolation and makes infrastructure swappable.
+
+---
+
+## API Design Best Practices
+
+### RESTful API Design
+
+**Resource naming:**
+- Use nouns for resources, not verbs: `/users` not `/getUsers`
+- Plural nouns: `/orders/{id}`, not `/order/{id}`
+- Hierarchical for related resources: `/projects/{id}/tasks`
+- Use kebab-case for multi-word resources: `/build-reports`
+
+**HTTP methods:**
+
+| Method | Idempotent | Safe | Typical Use |
+|---|---|---|---|
+| GET | Yes | Yes | Retrieve a resource or collection |
+| POST | No | No | Create a new resource |
+| PUT | Yes | No | Replace a resource completely |
+| PATCH | No | No | Partially update a resource |
+| DELETE | Yes | No | Delete a resource |
+
+**HTTP status codes (key ones):**
+- 200 OK, 201 Created, 204 No Content
+- 400 Bad Request (invalid input), 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 422 Unprocessable Entity
+- 500 Internal Server Error, 503 Service Unavailable
+
+**Versioning strategies:**
+- URL versioning: `/v1/users` — simple, cache-friendly, widely used
+- Header versioning: `Accept: application/vnd.company.v1+json` — cleaner URLs but less visible
+- Query parameter: `/users?version=1` — simple but mixes versioning with query params
+
+### GraphQL Trade-offs
+
+GraphQL allows clients to request exactly the fields they need, avoiding over-fetching and under-fetching. Well-suited for:
+- Mobile applications with bandwidth constraints
+- APIs serving diverse clients with different data needs
+- Rapid product iteration (schema evolution without versioning)
+
+Costs: N+1 query problem (requires DataLoader batching), more complex caching, introspection can expose schema to attackers.
+
+### OpenAPI/Swagger
+
+OpenAPI 3.0 provides a machine-readable contract for REST APIs, enabling:
+- Automatic client SDK generation
+- Interactive API documentation (Swagger UI, Redoc)
+- Request/response validation
+- Mock server generation for frontend development
+
+### API Security
+
+- **OAuth 2.0 + OIDC**: the standard for delegated authorization and authentication. Authorization Code Flow with PKCE for web/mobile apps; Client Credentials for machine-to-machine.
+- **JWT (JSON Web Tokens)**: stateless tokens signed by the authorization server. Validate signature, expiry (`exp`), audience (`aud`), and issuer (`iss`). Use short expiry + refresh tokens.
+- **Rate limiting**: protect APIs from abuse — sliding window, token bucket, or leaky bucket algorithms. Implement at the API gateway level.
+- **HTTPS everywhere**: never transmit tokens or sensitive data over HTTP.
+
+---
+
+## Scalability Patterns
+
+### Horizontal vs. Vertical Scaling
+
+| Approach | Description | When to Use |
+|---|---|---|
+| **Vertical scaling** | Bigger server (more CPU, RAM) | Simple, no code changes — but has a ceiling and creates a SPOF |
+| **Horizontal scaling** | More servers behind a load balancer | Requires stateless application design — scales without ceiling |
+
+### Load Balancing
+
+- **Round-robin**: equal distribution — good when all requests are similar cost
+- **Least connections**: route to the server with fewest active connections — better for variable request duration
+- **IP hash / sticky sessions**: route the same client to the same server — required for stateful applications (avoid this for scalable design)
+- **Health checks**: load balancers remove unhealthy servers from rotation automatically
+
+### Caching Strategies
+
+| Strategy | Description | Example |
+|---|---|---|
+| **Cache-aside (lazy loading)** | Application checks cache first; on miss, fetches from DB and populates cache | Redis with application-controlled TTL |
+| **Write-through** | Write to cache and DB simultaneously — cache always has current data | Fewer stale reads, but write latency increased |
+| **Write-behind (write-back)** | Write to cache only; async write to DB — fast writes, risk of data loss | High-write applications with tolerable loss window |
+| **CDN caching** | Static assets (JS, CSS, images) served from edge nodes globally | CloudFront, Fastly — reduces origin load and latency |
+
+**Redis** is the industry standard for application-level caching. Key considerations: eviction policies (LRU, LFU), key expiration, serialization format, and clustering for high availability.
+
+### Database Scaling
+
+- **Read replicas**: primary handles writes; replicas handle reads — effective when reads >> writes
+- **Sharding**: partition data across multiple database instances by a shard key — complex but necessary at extreme scale
+- **CQRS with separate read/write stores**: read models optimized for query patterns (denormalized), write models normalized
+
+---
+
+## Reliability Engineering
+
+### SLOs, SLAs, and SLIs
+
+- **SLI** (Service Level Indicator): the metric — e.g., "95th percentile latency of successful requests"
+- **SLO** (Service Level Objective): the target — e.g., "SLI < 200ms for 99.9% of requests over a 30-day window"
+- **SLA** (Service Level Agreement): the contract with consequences — e.g., "if SLO is breached, customer receives credits"
+- **Error budget**: 100% - SLO = acceptable downtime/errors — the budget for new feature risk
+
+### Circuit Breaker Pattern
+
+The circuit breaker prevents cascading failures when a downstream service is slow or unavailable. States:
+- **Closed**: requests flow normally; failures counted
+- **Open**: all requests immediately rejected (fail fast) after failure threshold exceeded
+- **Half-open**: a probe request tests if the service has recovered
+
+Implemented in code libraries (**Resilience4j** for Java, **Polly** for .NET) or service meshes (Istio).
+
+### Bulkhead Pattern
+
+Isolates resources (thread pools, connection pools) for different consumers so that one consumer's failures do not exhaust resources for others. Named after ship compartments that contain flooding to one section.
+
+### Retry with Exponential Backoff
+
+Transient failures (network blips, brief overload) can be recovered by retrying. Exponential backoff avoids thundering herd:
+
+```
+wait = min(cap, base * 2^attempt + random_jitter)
+```
+
+Always combine with a **jitter** component (random spread) to prevent all retrying clients hitting the recovering service simultaneously.
+
+### Chaos Engineering
+
+Deliberately injecting failures into production systems to discover weaknesses before they cause unplanned outages. Pioneered by Netflix (Chaos Monkey). Principles:
+1. Build a hypothesis about steady state
+2. Vary real-world events (kill instances, inject latency, exhaust disk)
+3. Compare experimental vs. control group
+4. Automate to run continuously in production
+
+Tools: **Chaos Monkey** (Netflix, AWS), **Gremlin**, **LitmusChaos** (Kubernetes).
+
+---
+
+## Software for Engineering Applications
+
+### Digital Twins in Manufacturing
+
+A digital twin is a virtual model of a physical asset, synchronized in real time from sensor data, used for monitoring, simulation, and optimization. Industrial applications:
+
+- **Predictive maintenance**: vibration, temperature, and current sensors feed ML models that predict bearing failure weeks in advance, enabling planned maintenance vs. unplanned breakdowns
+- **Process optimization**: a live simulation model of a chemical plant or manufacturing line, calibrated to real sensor data, tests control strategy changes virtually before implementing them on the physical plant
+- **Energy optimization**: real-time energy consumption models identify opportunities to shift loads, optimize utility consumption, and reduce peak demand charges
+
+**Platforms**: **Siemens Mindsphere**, **PTC ThingWorx**, **GE Predix**, **AWS IoT TwinMaker**, **Azure Digital Twins**.
+
+### SCADA Software
+
+SCADA (Supervisory Control and Data Acquisition) systems provide real-time monitoring and control of industrial processes. Architecture:
+- **Field devices** (sensors, actuators) connect via fieldbus protocols (Modbus, PROFIBUS, Foundation Fieldbus, HART)
+- **PLCs / RTUs** provide local control logic
+- **HMI** provides operator visualization and manual control
+- **SCADA server** aggregates, archives, and reports on process data
+- **Historian** (OSIsoft PI, InfluxDB) archives time-series data at high resolution
+
+**Software**: **Ignition** (Inductive Automation — web-based, subscription), **Wonderware (AVEVA System Platform)**, **GE iFIX / Cimplicity**, **Siemens WinCC**.
+
+---
+
+## See Also
+
+<CardGroup cols={2}>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Development tools including Python, MATLAB, and frameworks used in engineering software development.
+  </Card>
+  <Card title="Industrial Engineering" icon="chart-line" href="/en/industrial/optimization">
+    Lean, Six Sigma, and discrete event simulation — areas where software tools are central to analysis.
+  </Card>
+  <Card title="Project Management" icon="calendar-check" href="/en/project-management/planning">
+    Managing software engineering projects — Agile frameworks and hybrid approaches.
+  </Card>
+  <Card title="Software Engineering — French" icon="code" href="/genie-logiciel/architecture">
+    Full French content on software architecture for engineering applications.
+  </Card>
+</CardGroup>

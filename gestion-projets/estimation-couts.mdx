@@ -1,0 +1,221 @@
+---
+title: "Estimation des coûts en génie"
+description: "Types d'estimations (AACE Classes 1-5), méthodes analogique et ascendante, simulation Monte Carlo, analyse du cycle de vie, gestion de la valeur acquise (EVM) et logiciels spécialisés."
+icon: "dollar-sign"
+---
+
+L'estimation des coûts est l'une des compétences les plus critiques et les plus difficiles à maîtriser en génie. Une estimation inexacte peut condamner un projet dès le départ : trop élevée, elle fait perdre des appels d'offres; trop basse, elle génère des dépassements qui nuisent à la rentabilité et à la réputation. Ce guide couvre l'ensemble du spectre, de l'ordre de grandeur initial jusqu'au suivi en cours de réalisation.
+
+## Types d'estimations selon la classe AACE
+
+L'Association for the Advancement of Cost Engineering (AACE International) a standardisé cinq classes d'estimations selon la maturité de la définition du projet.
+
+| Classe | Nom usuel | Définition projet | Précision | Usage typique |
+|--------|-----------|------------------|-----------|---------------|
+| **Classe 5** | Ordre de grandeur | 0 à 2 % | −50 % à +100 % | Étude d'opportunité, décision d'investir ou non |
+| **Classe 4** | Estimation d'étude | 1 à 15 % | −30 % à +50 % | Étude de préfaisabilité, sélection de concept |
+| **Classe 3** | Estimation budgétaire | 10 à 40 % | −20 % à +30 % | Autorisation budgétaire, financement bancaire |
+| **Classe 2** | Contrôle | 30 à 70 % | −15 % à +20 % | Appel d'offres, négociations contractuelles |
+| **Classe 1** | Estimation définitive | 50 à 100 % | −10 % à +15 % | Offre ferme, contrôle budgétaire serré |
+
+<Note>
+La précision d'une estimation ne dépend pas de l'effort du consultant mais de la maturité des informations disponibles. Exiger une estimation Classe 1 sur un projet en phase conceptuelle est impossible — et payer pour l'illusion de précision est un gaspillage. Définissez d'abord, estimez ensuite.
+</Note>
+
+## Méthodes d'estimation
+
+### Méthode analogique (paramétrique)
+Utilise des données historiques d'installations similaires, ajustées par des facteurs d'échelle et de localisation. Méthode rapide et économique, mais limitée par la qualité des données de référence.
+
+**Bases de données de référence** :
+- **RSMeans** (Gordian) : données de coûts de construction nord-américains, mis à jour annuellement, par ville et type de travaux
+- **Hanscomb** : coûts de construction canadiens, forte présence au Québec et Ontario
+- **Richardson Process Plant Construction Estimating Standards** : usines de procédés, industrie chimique et pétrolière
+- **Means Facilities Construction** : bâtiments industriels et commerciaux
+
+**Méthode de l'exposant** (loi de Williams) pour l'extrapolation d'échelle :
+$$C_2 = C_1 \times \left(\frac{S_2}{S_1}\right)^n$$
+Où *n* est l'exposant d'échelle (typiquement 0,6 à 0,7 pour les installations chimiques — « règle des 0,6 » ou facteur de six-dixièmes).
+
+### Méthode ascendante (bottom-up)
+La méthode la plus précise : décomposer le projet en livrables élémentaires via la Structure de Répartition du Travail (WBS — Work Breakdown Structure), estimer chaque élément indépendamment, puis agréger.
+
+**Processus** :
+1. Élaborer la WBS jusqu'au niveau des packages de travail (work packages)
+2. Estimer les quantités (volumes, surfaces, longueurs, masse)
+3. Appliquer des taux unitaires (coût/m³, coût/m de tuyauterie, coût/kg d'acier)
+4. Calculer les coûts de main-d'œuvre (heures × taux horaire)
+5. Additionner les coûts directs, puis appliquer les facteurs indirects
+
+**Avantage** : précision élevée, traçabilité complète des hypothèses.
+**Inconvénient** : long et coûteux — réservé aux phases avancées (Classe 1-2).
+
+### Monte Carlo pour la contingence
+
+La simulation Monte Carlo génère des milliers de scénarios en faisant varier les paramètres d'entrée selon leurs distributions de probabilité, produisant une distribution des coûts totaux.
+
+**Distribution triangulaire (PERT)** pour chaque poste de coût :
+$$\mu = \frac{Optimiste + 4 \times Probable + Pessimiste}{6}$$
+$$\sigma = \frac{Pessimiste - Optimiste}{6}$$
+
+**Lecture des résultats** :
+- **P50** : coût médian (50 % de probabilité d'être atteint ou dépassé) — base de l'estimation
+- **P80** : coût avec 80 % de chances de ne pas être dépassé — budget recommandé
+- **P90** ou **P95** : contingence pour projets à haut risque ou engagement contractuel ferme
+
+**Logiciels** : @RISK (Palisade), Crystal Ball (Oracle), RiskyProject (Intaver), Primavera Risk Analysis (Oracle).
+
+<Tip>
+La distribution de probabilité des coûts totaux est presque toujours asymétrique (queue longue vers la droite) car les dépassements de coûts sont plus fréquents que les économies. Le P50 est toujours inférieur à la somme des valeurs probables — la corrélation entre risques amplifie l'incertitude totale.
+</Tip>
+
+## Structure de répartition des coûts (CBS — Cost Breakdown Structure)
+
+Pour les projets industriels et d'infrastructure, la CBS typique comprend quatre grandes catégories :
+
+### Ingénierie (Engineering — E)
+- Études conceptuelles et préliminaires
+- Ingénierie détaillée (procédé, civil, mécanique, électrique, instrumentation)
+- Gestion de l'ingénierie, assurance qualité
+- Typiquement **5 à 15 %** du coût total installé (TIC) pour les grands projets
+
+### Approvisionnement (Procurement — P)
+- Équipements majeurs (réacteurs, compresseurs, échangeurs, pompes)
+- Matériaux en vrac (tuyauterie, câblage, instrumentation, béton, acier de structure)
+- Logistique, inspection, droits de douane
+- Typiquement **30 à 50 %** du TIC en industrie de procédés
+
+### Construction (Construction — C)
+- Main-d'œuvre directe de construction (charpenterie, plomberie, électricité, mécanique)
+- Frais généraux de chantier (supervision de chantier, équipement lourd, installations temporaires)
+- Sous-traitance spécialisée
+- Typiquement **30 à 50 %** du TIC
+
+### Gestion de projet (Project Management — M)
+- Direction de projet, contrôle de coûts et de calendrier
+- Gestion des risques, HSE chantier, communication
+- Démarrage (commissioning), tests de performance
+- Typiquement **8 à 15 %** du TIC
+
+## Coûts directs vs indirects
+
+**Coûts directs** : attribuables directement à un livrable spécifique (béton d'une semelle, câble d'un moteur particulier, heures de soudage d'un joint précis).
+
+**Coûts indirects (overhead)** :
+- **Frais généraux de chantier** (General Conditions) : supervision de chantier, bureau temporaire, toilettes, clôtures, sécurité, coût de la grue commune
+- **Frais généraux d'entreprise** : administration du siège, R&D, marketing — typiquement 8-15 % des coûts directs
+- **Profit** : marge bénéficiaire de l'entrepreneur ou du consultant
+- **Contingence technique** : réserve pour les éléments connus mais non entièrement définis (5-15 % selon la maturité de la définition)
+- **Contingence de gestion** : réserve pour les risques identifiés mais dont l'occurrence est incertaine
+
+## Indexation et escalade des coûts
+
+Les projets pluriannuels doivent tenir compte de l'inflation des coûts de construction.
+
+### Indices de référence
+- **ENR Construction Cost Index (CCI)** : indice publié par Engineering News-Record (ENR), base américaine, historique depuis 1913. Composé de coûts de main-d'œuvre qualifiée et de matériaux (acier, ciment, bois).
+- **Indice des prix à la production (IPP)** : Statistique Canada publie des IPP sectoriels pour les matériaux de construction (acier, cuivre, aluminium, bois d'œuvre).
+- **Indices RICS / Turner & Townsend** : coûts de construction par ville internationale, utiles pour les projets hors Canada.
+
+### Clause d'escalade dans les contrats
+Pour les contrats de longue durée, inclure une clause d'escalade automatique indexée sur un indice convenu. Formule typique :
+$$P_{ajusté} = P_0 \times \left[\alpha + \beta \times \frac{I_t}{I_0}\right]$$
+Où α est la partie fixe du prix (non soumise à l'inflation) et β la partie variable.
+
+## Analyse du cycle de vie (LCA / LCC)
+
+L'analyse du coût du cycle de vie (Life Cycle Cost — LCC) considère tous les coûts sur la durée de vie de l'actif, pas seulement le coût d'investissement initial.
+
+$$LCC = CAPEX + \sum_{t=1}^{N} \frac{OPEX_t}{(1+r)^t} + \frac{C_{démantèlement}}{(1+r)^N}$$
+
+Où **r** est le taux d'actualisation (coût du capital de l'organisation, typiquement 6-12 %).
+
+### Indicateurs de rentabilité pour la comparaison d'alternatives
+
+**Valeur Actuelle Nette (VAN)** :
+$$VAN = -I_0 + \sum_{t=1}^{N} \frac{F_t}{(1+r)^t}$$
+Si VAN > 0 : projet rentable à ce taux d'actualisation.
+
+**Taux de Rendement Interne (TRI)** : taux *r* pour lequel la VAN = 0. Comparer au taux d'actualisation de l'organisation : si TRI > r → projet acceptable.
+
+**Délai de récupération (Payback)** : temps pour que les flux de trésorerie cumulés remboursent l'investissement initial. Simple, mais ignore la valeur temporelle de l'argent — utiliser le payback actualisé.
+
+**Analyse de sensibilité** : faire varier chaque paramètre clé (prix de l'énergie, débit, coûts de maintenance) et observer l'impact sur la VAN. Identifier les hypothèses qui ont le plus d'influence sur la décision.
+
+## Gestion de la valeur acquise (EVM — Earned Value Management)
+
+L'EVM est la méthode standard pour mesurer l'avancement réel d'un projet et prévoir le coût et le délai à l'achèvement, en intégrant simultanément l'avancement physique, les coûts réels et le budget planifié.
+
+### Trois indicateurs de base
+
+| Indicateur | Acronyme ACNOR/PMI | Description |
+|-----------|-------------------|-------------|
+| Budget planifié | **VP** (Valeur Planifiée / PV) | Coût budgété du travail planifié à date |
+| Valeur acquise | **VA** (Valeur Acquise / EV) | Coût budgété du travail réellement accompli |
+| Coût réel | **CR** (Coût Réel / AC) | Coûts réellement engagés à date |
+
+### Indices et prévisions
+
+**Indice de performance des coûts (IPC / CPI)** :
+$$IPC = \frac{VA}{CR}$$
+- IPC = 1,00 : performance budgétaire parfaite
+- IPC < 1,00 : dépassement de coûts (coûte plus que prévu)
+- IPC > 1,00 : sous les coûts (coûte moins que prévu)
+
+**Indice de performance des délais (IPA / SPI)** :
+$$IPA = \frac{VA}{VP}$$
+- IPA < 1,00 : retard par rapport au calendrier
+- IPA > 1,00 : avance sur le calendrier
+
+**Prévision à l'achèvement (PAA / EAC)** — méthode la plus courante si la tendance actuelle se maintient :
+$$PAA = \frac{BAC}{IPC}$$
+Où **BAC** (Budget at Completion) est le budget total du projet.
+
+**Coût pour compléter (CPC / ETC)** :
+$$CPC = PAA - CR$$
+
+**Écart à l'achèvement (EAC vs BAC)** :
+$$EAC\_écart = BAC - PAA$$
+Un écart négatif indique un dépassement prévu.
+
+<Warning>
+L'EVM est un outil puissant mais qui exige une définition préalable rigoureuse du périmètre (WBS), un calendrier de référence (baseline) et une méthode d'avancement cohérente (règle des 0-100 %, milestones, % physique). Sans ces fondations, l'EVM produit des résultats trompeurs.
+</Warning>
+
+## Logiciels d'estimation et de gestion de coûts
+
+<CardGroup cols={2}>
+  <Card title="CostX (Exactal)" icon="calculator">
+    Logiciel de quantification et d'estimation par mesure numérique sur plans PDF ou CAO. Extraction automatique des quantités, bibliothèques de taux, rapports détaillés. Très utilisé en construction et génie civil.
+  </Card>
+  <Card title="Sage Estimating (ex-Timberline)" icon="building">
+    Logiciel d'estimation paramétrique et ascendante pour entrepreneurs généraux. Bibliothèques de coûts régionaux, intégration comptabilité Sage. Dominant en construction commerciale et institutionnelle en Amérique du Nord.
+  </Card>
+  <Card title="HCSS HeavyBid" icon="truck">
+    Spécialisé pour les travaux publics et infrastructure lourde (routes, ponts, terrassement, services souterrains). Analyse de soumissions, historique de productivité de l'entreprise, gestion des équipements.
+  </Card>
+  <Card title="Procore (Cost Management)" icon="hard-hat">
+    Plateforme de gestion de construction intégrée avec module de contrôle de coûts en temps réel. Intégration sur chantier (mobile), gestion des ordres de changement, rapports d'avancement. Leader du marché SaaS construction.
+  </Card>
+</CardGroup>
+
+**Pour les projets industriels / procédés** : **ARES PRISM**, **Oracle Primavera P6** (planification + coûts), **Cleopatra Enterprise** (Capex Group), **ACCE** (AspenTech) pour l'industrie chimique et pétrolière.
+
+**Pour la gestion de valeur acquise** : **Microsoft Project** (basique), **Primavera P6** (standard industrie lourde), **Deltek Cobra** (gouvernement et défense), **Ecosys** (énergie et infrastructure).
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Contrats et appels d'offres en ingénierie" icon="file-signature" href="/gestion-projets/contrats-appels-offres">
+    Types de contrats, partage des risques de coûts et clauses d'escalade.
+  </Card>
+  <Card title="Optimisation des procédés industriels" icon="chart-line" href="/genie-industriel/optimisation-procedes">
+    Analyse de la valeur et réduction des coûts par les approches Lean.
+  </Card>
+  <Card title="Logistique et chaîne d'approvisionnement" icon="truck" href="/genie-industriel/logistique-chaine">
+    EOQ, analyse ABC et coûts logistiques dans l'estimation globale des projets.
+  </Card>
+  <Card title="Développement professionnel" icon="trophy" href="/leadership/developpement-professionnel">
+    Certifications PMP et outils de gestion de projets pour l'ingénieur-gestionnaire.
+  </Card>
+</CardGroup>
