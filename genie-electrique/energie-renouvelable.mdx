@@ -1,0 +1,140 @@
+---
+title: "Énergie renouvelable"
+description: "Solaire photovoltaïque, éolien, hydroélectricité, stockage d'énergie et intégration au réseau"
+icon: "sun"
+---
+
+Les énergies renouvelables représentent aujourd'hui la source de nouvelles capacités de production électrique la plus économique dans la plupart des régions du monde. L'ingénieur doit maîtriser leur dimensionnement, leurs contraintes et leur intégration dans les systèmes énergétiques existants.
+
+## Énergie solaire photovoltaïque
+
+### Ressource solaire
+L'irradiance solaire au sol varie entre 800 et 2 500 kWh/(m²·an) selon la latitude et le climat. On exprime la ressource en **heures de soleil de pointe (HSP)** : nombre d'heures équivalentes à une irradiance de 1 000 W/m².
+
+Exemples : Montréal ≈ 1 300 kWh/m²/an (3,6 HSP/j); Los Angeles ≈ 2 200 kWh/m²/an.
+
+### Technologie PV
+- **Silicium monocristallin** : rendement 20-24%; meilleure performance par faible lumière
+- **Silicium polycristallin** : rendement 15-20%; coût légèrement inférieur
+- **Couche mince (CdTe, CIGS)** : rendement 10-15%; moins sensible à la température
+
+Coefficient de température : rendement chute d'environ 0,35-0,40%/°C au-delà de 25°C (STC).
+
+### Dimensionnement d'un système PV connecté au réseau
+1. Déterminer la production annuelle cible `E_prod = Consommation / (1 - taux d'autoconsommation cible)`
+2. Puissance crête requise : `Pc = E_prod / (HSP·365·PR)`
+3. Performance ratio `PR` (rendement système) : pertes câblage (2%), onduleur (3-5%), saleté (2-5%), température (4-6%), dégradation (0,5%/an) → PR typique 0,75-0,85
+4. Nombre de modules : `N = Pc / Pmodule`
+
+<Tip>Pour les systèmes connectés au réseau, un PR de 0,80 est une valeur de conception prudente. Un suivi du PR en exploitation permet de détecter les défauts (ombrage, modules défectueux, problèmes d'onduleur).</Tip>
+
+### Onduleurs
+- **Onduleur central** : pour grands systèmes; gestion MPPT globale
+- **Microonduleurs** : par module; meilleure gestion de l'ombrage partiel
+- **Optimiseurs de puissance** : MPPT au module, onduleur central; compromis
+
+## Énergie éolienne
+
+### Puissance extractible
+La puissance théorique disponible dans le vent :
+
+`P_vent = 0,5·ρ·A·v³`
+
+La puissance extractible par une turbine (loi de Betz) :
+
+`P = Cp·0,5·ρ·A·v³`
+
+Le coefficient de Betz limite théorique : `Cp_max = 16/27 ≈ 0,593`
+
+En pratique : `Cp` des meilleures turbines modernes ≈ 0,45-0,50.
+
+### Courbe de puissance
+- **Vitesse de démarrage** : 2,5-4 m/s
+- **Vitesse nominale** : 12-15 m/s (puissance nominale atteinte)
+- **Vitesse de coupure** : 25 m/s (arrêt de sécurité)
+
+### Facteur de capacité
+`FC = E_produite_annuelle / (P_nominale × 8 760 h)`
+
+Valeurs typiques : éolien terrestre 25-40%; éolien en mer 40-50%; solaire 10-25%.
+
+<Note>Le facteur de capacité est un indicateur économique clé. Un site éolien avec FC = 35% produit sur 10 ans autant d'énergie qu'un fonctionnement à pleine charge pendant 3,5 ans.</Note>
+
+### Estimation de la production annuelle
+`E_annuelle = FC × P_nominale × 8 760` (kWh)
+
+La distribution de Weibull (paramètres k et c) modélise la distribution des vitesses de vent et permet une estimation précise de la production.
+
+## Hydroélectricité
+
+### Équation de base
+`P = η·ρ·g·Q·H` (W)
+
+Où :
+- `η` = rendement global de la centrale (turbine + alternateur + transformateur ≈ 0,85-0,92)
+- `Q` = débit turbiné (m³/s)
+- `H` = hauteur de chute nette (m)
+
+### Classification par puissance
+- **Pico-hydroélectricité** : < 5 kW (applications rurales isolées)
+- **Micro** : 5-100 kW
+- **Mini** : 100 kW - 1 MW
+- **Petite** : 1-10 MW
+- **Grande** : > 10 MW (avec réservoir)
+
+### Choix de la turbine
+La vitesse spécifique `Ns = N·√P / H^(5/4)` (en tr/min, kW, m) oriente le choix :
+- Pelton : basse Ns, haute chute
+- Francis : moyenne Ns, chutes moyennes
+- Kaplan : haute Ns, basse chute, fort débit
+
+## Stockage d'énergie
+
+### Batteries lithium-ion
+- Densité d'énergie : 150-250 Wh/kg (cellule); 100-200 Wh/kg (système)
+- Tension nominale : ≈ 3,6 V/cellule (LFP : 3,2 V; NMC : 3,6 V)
+- Durée de vie : 1 500-4 000 cycles à 80% de profondeur de décharge (DoD)
+- Coût 2024 : 100-150 $/kWh (cellule), 200-300 $/kWh (système BESS)
+
+<Warning>Les batteries lithium-ion exigent un système de gestion de batterie (BMS) pour contrôler la tension, le courant et la température de chaque cellule. Une surcharge ou une surchauffe peut provoquer une emballement thermique irréversible.</Warning>
+
+### Stockage par pompage-turbinage (STEP)
+La technologie de stockage massif la plus mature : `E = η·ρ·g·V·H`
+- η total (pompage + turbinage) ≈ 75-80%
+- Durée de stockage : heures à semaines
+- Puissance : de quelques MW à plusieurs GW
+
+### Hydrogène vert
+Électrolyse de l'eau par électrolyseur PEM (efficacité ≈ 65-70% : kWh électrique → kWh H₂ PCS). Stockage (comprimé à 350-700 bar, liquide à -253°C, ou matériaux) et reconversion en électricité (pile à combustible η ≈ 50-60% ou turbine à gaz). Rendement aller-retour total ≈ 30-40%.
+
+## Intégration au réseau électrique
+
+### Défis de l'intermittence
+Le solaire et l'éolien sont variables et non dispatchables. L'intégration à grande échelle nécessite :
+- **Flexibilité de la demande** (demand response) : déplacer la consommation aux périodes de production abondante
+- **Stockage** : batteries, STEP, hydrogène
+- **Interconnexions** : lissage par la diversification géographique
+- **Centrales pilotables** (gaz, hydro) : rôle de réserve et de régulation de fréquence
+
+### Réponse fréquentielle
+La fréquence du réseau (50 ou 60 Hz) est un indicateur instantané de l'équilibre offre-demande. Les onduleurs PV et éoliens modernes peuvent fournir une réponse inertielle synthétique et une régulation primaire de fréquence.
+
+### Tarification et marchés de l'électricité
+- **Énergie** ($/MWh) : prix horaire sur les marchés de gros (OQMD, PJM, ERCOT)
+- **Capacité** ($/MW-an) : disponibilité garantie en période de pointe
+- **Services auxiliaires** : régulation de fréquence, réserve tournante
+
+<CardGroup cols={2}>
+  <Card title="Circuits électriques" icon="bolt" href="/genie-electrique/circuits">
+    Onduleurs, convertisseurs AC/DC et raccordement
+  </Card>
+  <Card title="Systèmes de contrôle" icon="sliders" href="/genie-electrique/systemes-controle">
+    Régulation des systèmes d'énergie renouvelable
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    Normes de raccordement réseau et sécurité électrique
+  </Card>
+  <Card title="Thermodynamique" icon="temperature-high" href="/genie-mecanique/thermodynamique">
+    Cycles thermodynamiques dans les centrales hybrides
+  </Card>
+</CardGroup>

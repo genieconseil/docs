@@ -1,0 +1,117 @@
+---
+title: "Analyse structurale"
+description: "Charges, méthodes d'analyse, formules essentielles pour poutres et colonnes, systèmes de contreventement"
+icon: "building"
+---
+
+L'analyse structurale vise à déterminer les efforts internes (moments, efforts tranchants, charges axiales) dans les membres d'une structure sous l'effet des charges appliquées, afin d'en vérifier la résistance et la rigidité.
+
+## Charges de conception
+
+### Classification des charges (NBC 2020)
+Le Code national du bâtiment du Canada (NBC) définit les charges de la façon suivante :
+
+- **Charges permanentes D** : poids propre des éléments structuraux, superstructures, équipements fixes
+- **Charges d'exploitation L** : charges d'occupation variables dans le temps (planchers, toits, véhicules)
+- **Charge de neige S** : dépend de la zone climatique; `S = Is·[Ss·(Cb·Cw·Cs·Ca) + Sr]`
+- **Charge de vent W** : pression dynamique de référence `q = 0,5·ρ·V²`; coefficients de forme et d'exposition
+- **Charge sismique E** : spectre de réponse selon la localisation géographique
+
+### Combinaisons d'actions (états limites ultimes)
+La combinaison gouvernante est généralement :
+
+`1,4D` ou `1,25D + 1,5L + 0,5S` ou `1,25D + 1,5S + 0,5L`
+
+<Note>Les combinaisons incluant le séisme utilisent : 1,0·D ± 1,0·E + 0,5·L + 0,25·S</Note>
+
+## Méthodes d'analyse
+
+### Analyse statique linéaire
+Applicable pour les structures régulières sous charges statiques ou quasi-statiques. Les hypothèses incluent :
+- Petites déformations
+- Comportement élastique linéaire des matériaux
+- Équilibre en configuration non déformée
+
+### Méthode des éléments finis (MEF)
+Outil numérique incontournable permettant de modéliser des géométries complexes, des conditions aux limites variées et des comportements matériaux non linéaires. Les logiciels courants incluent ETABS, SAP2000, RISA-3D.
+
+### Analyse dynamique
+Requise pour les structures hautes ou irrégulières en zone sismique :
+- **Analyse modale spectrale** : superposition des modes propres de vibration
+- **Analyse temporelle** : intégration pas à pas sous accélérogrammes
+
+<Tip>Pour les bâtiments courants de moins de 60 m en zone de sismicité modérée, la méthode pseudo-statique équivalente du NBC est généralement suffisante.</Tip>
+
+## Poutres : formules essentielles
+
+### Moments fléchissants et efforts tranchants
+
+| Cas de chargement | Moment max | Effort tranchant max |
+|---|---|---|
+| Poutre simple, charge uniformément répartie w | `wL²/8` (en travée) | `wL/2` (aux appuis) |
+| Poutre simple, charge concentrée P en milieu | `PL/4` | `P/2` |
+| Poutre encastrée-libre, charge uniformément répartie w | `wL²/2` (à l'encastrement) | `wL` (à l'encastrement) |
+| Poutre continue (approximation) | `wL²/10` en travée, `wL²/12` sur appui | `wL/2` |
+
+### Déflexion
+Pour une poutre simple sous charge uniformément répartie :
+
+`δmax = 5wL⁴ / (384EI)` (en milieu de travée)
+
+Pour une charge concentrée en milieu de portée :
+
+`δmax = PL³ / (48EI)`
+
+<Warning>Toujours vérifier que la déflexion respecte les limites de service : L/360 pour les planchers avec revêtement fragile, L/240 pour les toits sans cloison fragile (NBC).</Warning>
+
+## Colonnes et stabilité
+
+### Charge critique d'Euler
+`Pcr = π²·E·I / (KL)²`
+
+Où `K` est le facteur de longueur effective :
+- Colonne bi-articulée : K = 1,0
+- Colonne bi-encastrée : K = 0,5
+- Colonne encastrée-libre : K = 2,0
+- Colonne encastrée-articulée : K = 0,7
+
+### Élancement
+`λ = KL/r` où `r = √(I/A)` est le rayon de giration
+
+Les colonnes élancées (λ > 100) sont contrôlées par la résistance au flambement; les colonnes courtes (λ < 30) par la résistance en compression.
+
+## Systèmes de contreventement
+
+Le contreventement reprend les charges latérales (vent, séisme) et assure la stabilité d'ensemble :
+
+- **Murs de refend** : murs en béton ou maçonnerie, très rigides, action de cisaillement
+- **Cadres contreventés** (CBF/EBF) : diagonales en acier, économiques
+- **Cadres à nœuds rigides** (SMRF) : reprennent les charges latérales par flexion, ductiles
+- **Noyaux en béton** : systèmes de corridors et cages d'ascenseur encastrés
+
+<Tip>Les systèmes combinés (murs + cadres) permettent d'optimiser la rigidité à la base et la ductilité en hauteur pour les tours.</Tip>
+
+## Déformations admissibles
+
+| Élément | Limite de service |
+|---|---|
+| Planchers (revêtement rigide) | L/360 |
+| Planchers (usage général) | L/300 |
+| Toiture (ponding à éviter) | L/240 |
+| Dérives d'étage (vent) | H/400 |
+| Dérives d'étage (séisme) | 2,5% × hs (NBC) |
+
+<CardGroup cols={2}>
+  <Card title="Fondations" icon="layer-group" href="/genie-civil/fondations">
+    Géotechnique, capacité portante et tassements
+  </Card>
+  <Card title="Béton armé" icon="chess-rook" href="/genie-civil/beton-arme">
+    Dimensionnement des éléments en béton armé
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    NBC, CSA S16, ASCE 7 et autres références
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Logiciels d'analyse structurale
+  </Card>
+</CardGroup>

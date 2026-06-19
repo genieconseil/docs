@@ -1,0 +1,260 @@
+---
+title: "Mécanique des sols"
+description: "Classification des sols, propriétés d'index, contrainte effective, consolidation de Terzaghi, résistance au cisaillement, compactage et perméabilité"
+icon: "layer-group"
+---
+
+La mécanique des sols est la branche de la géotechnique qui étudie le comportement physique et mécanique des matériaux granulaires et argileux. Elle constitue le fondement de la conception des fondations, des ouvrages de soutènement, des remblais et de tout ouvrage interagissant avec le sol.
+
+## Classification des sols
+
+### Système USCS (Unified Soil Classification System)
+
+Le système USCS, adopté dans ASTM D2487, classe les sols selon leur granulométrie et leur plasticité. Les groupes principaux sont :
+
+| Symbole | Description | Critère |
+|---------|-------------|---------|
+| GW | Grave bien graduée | Cu ≥ 4 et 1 ≤ Cc ≤ 3 |
+| GP | Grave mal graduée | Ne satisfait pas GW |
+| GM | Grave limoneuse | Fines non plastiques > 12 % |
+| GC | Grave argileuse | Fines plastiques > 12 % |
+| SW | Sable bien gradué | Cu ≥ 6 et 1 ≤ Cc ≤ 3 |
+| SP | Sable mal gradué | Ne satisfait pas SW |
+| ML | Limon peu plastique | LL < 50, sous la ligne A |
+| CL | Argile peu plastique | LL < 50, au-dessus de la ligne A |
+| MH | Limon très plastique | LL ≥ 50, sous la ligne A |
+| CH | Argile très plastique | LL ≥ 50, au-dessus de la ligne A |
+| PT | Tourbe | Sols organiques fibreux |
+
+Les coefficients d'uniformité (Cu = D60/D10) et de courbure (Cc = D30²/(D60·D10)) caractérisent la granulométrie.
+
+### Système AASHTO
+
+Le système AASHTO (AASHTO M 145) est utilisé principalement pour la classification des matériaux de chaussée. Il va de A-1 (matériaux granulaires excellents) à A-7 (argiles expansives), avec un indice de groupe (IG) variant de 0 à 20 pour les sols fins.
+
+## Propriétés d'index des sols
+
+### Limites d'Atterberg
+
+Les limites d'Atterberg définissent les états de consistance des sols fins :
+
+- **Limite de liquidité (LL)** : teneur en eau à partir de laquelle le sol se comporte comme un liquide (ASTM D4318 — méthode à la coupelle de Casagrande ou pénétromètre à cône)
+- **Limite de plasticité (LP)** : teneur en eau minimale pour former un boudin de 3 mm sans craqueler
+- **Indice de plasticité (IP = LL - LP)** : amplitude du domaine plastique
+- **Indice de liquidité (IL = (w - LP)/IP)** : position de la teneur en eau naturelle dans le domaine plastique
+
+<Note>Un IL > 1 indique un sol naturel à l'état liquide — sol très sensible et susceptible de liquéfaction lors de perturbations.</Note>
+
+### Granulométrie
+
+L'analyse granulométrique combine :
+- **Tamisage** (ASTM D6913) pour les particules > 0,075 mm
+- **Hydromètre (sédimentométrie)** (ASTM D7928) pour les particules fines (limons et argiles)
+
+Les diamètres caractéristiques D10, D30 et D60 sont extraits de la courbe granulométrique cumulative.
+
+### Densité des grains (Gs)
+
+La densité des grains solides se mesure au pycnomètre (ASTM D854). Pour la plupart des sols minéraux : Gs ≈ 2,65 à 2,72. Les sols organiques ont Gs < 2,5.
+
+Relations fondamentales des phases :
+- Indice des vides : `e = Vv/Vs`
+- Porosité : `n = Vv/V = e/(1+e)`
+- Degré de saturation : `Sr = Vw/Vv`
+- Teneur en eau : `w = Mw/Ms`
+- Poids volumique saturé : `γsat = (Gs + e)·γw/(1+e)`
+
+## Principe de la contrainte effective
+
+### Loi de Terzaghi
+
+La contrainte effective, introduite par Karl Terzaghi en 1923, est le concept fondamental de la mécanique des sols :
+
+`σ' = σ - u`
+
+Où :
+- `σ'` = contrainte effective (kPa) — gouverne le comportement mécanique du sol
+- `σ` = contrainte totale (kPa) — due au poids des terres et aux charges appliquées
+- `u` = pression interstitielle (kPa) — pression de l'eau dans les vides
+
+La contrainte totale verticale à la profondeur z :
+`σv = Σ(γi · hi)`
+
+La pression interstitielle hydrostatique :
+`u = γw · hw`
+
+<Warning>La surpression interstitielle (u > hydrostatique) réduit la contrainte effective et peut provoquer des ruptures de pente, des soulèvements ou la liquéfaction. La surveillance piézométrique est essentielle lors de la construction de remblais sur argile molle.</Warning>
+
+## Théorie de la consolidation de Terzaghi
+
+### Tassement de consolidation
+
+Pour un sol normalement consolidé (σ'v0 < σ'vp), le tassement de consolidation primaire est :
+
+`Sc = Cc/(1+e0) · H · log[(σ'v0 + Δσ'v)/σ'v0]`
+
+Pour un sol surconsolidé (σ'v0 + Δσ'v ≤ σ'vp) :
+
+`Sc = Cs/(1+e0) · H · log[(σ'v0 + Δσ'v)/σ'v0]`
+
+Où :
+- `Cc` = indice de compression (pente de la courbe vierge en e-log σ')
+- `Cs` = indice de gonflement/recompression (Cs ≈ Cc/5 à Cc/10)
+- `e0` = indice des vides initial
+- `H` = épaisseur de la couche compressible (m)
+- `σ'vp` = contrainte de préconsolidation (déterminée par la méthode de Casagrande)
+
+### Cinétique de consolidation
+
+Le coefficient de consolidation `cv` gouverne la vitesse de dissipation des pressions interstitielles :
+
+`cv = k/(mv·γw)`
+
+Le degré de consolidation moyen U(%) en fonction du facteur temps Tv = cv·t/H²dr :
+
+| Tv | U (%) |
+|----|-------|
+| 0,008 | 10 |
+| 0,031 | 20 |
+| 0,071 | 30 |
+| 0,126 | 40 |
+| 0,197 | 50 |
+| 0,287 | 60 |
+| 0,403 | 70 |
+| 0,848 | 90 |
+
+Hddr = distance de drainage (H pour drainage unilatéral, H/2 pour drainage bilatéral).
+
+<Tip>La consolidation secondaire (fluage) se produit après la dissipation des pressions interstitielles. Elle est significative dans les tourbes et argiles organiques : Ss = Cα/(1+ep) · H · log(t2/t1), où Cα est l'indice de fluage secondaire.</Tip>
+
+## Résistance au cisaillement
+
+### Critère de Mohr-Coulomb
+
+L'enveloppe de rupture de Mohr-Coulomb en contraintes effectives :
+
+`τf = c' + σ'n · tan(φ')`
+
+Où :
+- `τf` = résistance au cisaillement (kPa)
+- `c'` = cohésion effective (kPa) — nulle pour les sables propres, 0–30 kPa pour les argiles
+- `σ'n` = contrainte normale effective sur le plan de rupture (kPa)
+- `φ'` = angle de frottement interne effectif (degrés)
+
+### Essais de cisaillement
+
+| Essai | Norme | Paramètres obtenus | Remarques |
+|-------|-------|-------------------|-----------|
+| Cisaillement direct | ASTM D3080 | c', φ' | Simple, mais plan de rupture imposé |
+| Triaxial CU | ASTM D4767 | c', φ' + u | Paramètres effectifs avec mesure de u |
+| Triaxial UU | ASTM D2850 | cu (cohésion non drainée) | Conditions non drainées à court terme |
+| Triaxial CD | ASTM D7181 | c', φ' | Long terme, drainage assuré |
+| Essai au scissomètre | ASTM D2573 | Su in situ | Argiles molles, résultats corrigés μ·Su |
+
+La résistance non drainée Su est liée au rapport Su/σ'v0 ≈ 0,22 à 0,25 pour les argiles normalement consolidées (corrélation de Skempton).
+
+## Compactage des sols
+
+### Essai Proctor
+
+L'essai Proctor détermine la relation entre la teneur en eau et la densité sèche obtenue sous un effort de compactage donné :
+
+- **Proctor Standard** (ASTM D698) : énergie de 594 kJ/m³ — pour remblais courants
+- **Proctor Modifié** (ASTM D1557) : énergie de 2 695 kJ/m³ — pour subgrades de chaussées et barrages
+
+La courbe Proctor présente un maximum de densité sèche (γdmax) à la teneur en eau optimale (wopt). Les spécifications requièrent généralement ≥ 95 % ou 98 % du Proctor Modifié.
+
+<Note>La courbe de saturation à 100 % (S = 100 %) constitue une borne supérieure théorique impossible à dépasser, servant de référence sur le graphe Proctor.</Note>
+
+### Contrôle en place
+
+- **Densimètre nucléaire** (ASTM D6938) : rapide, mesure directe de γd et w
+- **Méthode au sable** (ASTM D1556) : référence, mais plus lente
+- **Méthode au ballon** (ASTM D2167) : applicable aux sols fins
+
+## Perméabilité des sols
+
+### Loi de Darcy
+
+La loi de Darcy décrit l'écoulement laminaire dans les sols saturés :
+
+`v = k · i = k · (Δh/L)`
+
+`Q = k · i · A`
+
+Où :
+- `v` = vitesse de Darcy (m/s)
+- `k` = conductivité hydraulique (m/s)
+- `i` = gradient hydraulique (sans dimension)
+- `Q` = débit (m³/s)
+- `A` = section de passage (m²)
+
+### Valeurs typiques de conductivité hydraulique
+
+| Type de sol | k (m/s) |
+|-------------|---------|
+| Grave propre | 10⁻² à 1 |
+| Sable grossier | 10⁻⁴ à 10⁻² |
+| Sable fin | 10⁻⁶ à 10⁻⁴ |
+| Limon | 10⁻⁸ à 10⁻⁶ |
+| Argile | < 10⁻⁹ |
+| Bentonite compactée | 10⁻¹² à 10⁻¹¹ |
+
+La loi de Darcy s'applique pour Re = v·d10/ν < 1 (écoulement laminaire). Dans les graves grossières, l'écoulement peut être turbulent et la loi de Darcy devient invalide.
+
+## Essais in situ
+
+### SPT — Standard Penetration Test
+
+L'essai SPT (ASTM D1586) mesure le nombre de coups N pour enfoncer un carottier standard de 300 mm. La valeur corrigée N60 (pour efficacité de 60 %) :
+
+`N60 = N · Em/(0,6 · Er_ref)`
+
+La valeur normalisée à σ'v0 = 100 kPa :
+
+`(N1)60 = CN · N60`, où `CN = (Pa/σ'v0)^0,5 ≤ 2`
+
+Corrélations courantes : φ' ≈ 28 + 15·(N1)60^0,5 (sables); Su ≈ 6·N (kPa) pour les argiles.
+
+### CPT — Cone Penetration Test
+
+L'essai CPT (ASTM D5778) mesure en continu la résistance en pointe qc, le frottement latéral fs et la pression interstitielle u2. Le rapport de frottement Rf = fs/qc × 100 % permet la classification du sol. La valeur normalisée :
+
+`qc1N = (qc/Pa) · (Pa/σ'v0)^0,5`
+
+Le CPT est préférable au SPT pour les corrélations liquéfaction et la caractérisation continue des profils.
+
+## Tableau récapitulatif des formules clés
+
+| Paramètre | Formule | Unité |
+|-----------|---------|-------|
+| Contrainte effective | σ' = σ - u | kPa |
+| Tassement consolidation | Sc = Cc/(1+e0)·H·log(σ'f/σ'i) | m |
+| Degré consolidation | Tv = cv·t/Hdr² | — |
+| Résistance Mohr-Coulomb | τ = c' + σ'·tan(φ') | kPa |
+| Loi de Darcy | v = k·i | m/s |
+| Poids volumique saturé | γsat = (Gs+e)·γw/(1+e) | kN/m³ |
+| Indice de plasticité | IP = LL - LP | % |
+| Teneur en eau critique | wopt (Proctor) | % |
+
+<CardGroup cols={2}>
+  <Card title="Stabilité des pentes" icon="mountain" href="/geotechnique/stabilite-pentes">
+    Méthodes de Bishop, Janbu et analyse des pentes à l'infini
+  </Card>
+  <Card title="Mécanique des roches" icon="circle-dot" href="/geotechnique/mecanique-roches">
+    Classification RMR, Q-system et excavations souterraines
+  </Card>
+  <Card title="Eaux souterraines" icon="water" href="/hydrogeologie/eaux-souterraines">
+    Aquifères, essais de pompage et équation de Theis
+  </Card>
+  <Card title="Fondations" icon="layer-group" href="/genie-civil/fondations">
+    Capacité portante, pieux et tassements différentiels
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : ASTM D2487 (USCS), ASTM D4318 (Atterberg), ASTM D698/D1557 (Proctor), ASTM D1586 (SPT), ASTM D5778 (CPT)
+- **Logiciels** : GeoSlope (SIGMA/W, SEEP/W), PLAXIS, RS2 (Rocscience), SETTLE3
+- **Organismes** : Ordre des ingénieurs du Québec (OIQ), Canadian Geotechnical Society (CGS), ISSMGE
+- **Références** : Coduto et al. — *Foundation Design*; Das — *Principles of Geotechnical Engineering*; Leroueil & Tavenas — travaux sur les argiles marines du Québec

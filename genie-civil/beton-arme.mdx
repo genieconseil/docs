@@ -1,0 +1,115 @@
+---
+title: "Béton armé"
+description: "Dimensionnement des poutres, dalles et colonnes en béton armé selon CSA A23.3 et ACI 318"
+icon: "chess-rook"
+---
+
+Le béton armé combine la résistance en compression du béton et la résistance en traction de l'acier d'armature. Sa conception repose sur la méthode des états limites (résistance et service).
+
+## Propriétés des matériaux
+
+### Béton
+- **Résistance caractéristique** `f'c` : mesurée sur cylindres 150×300 mm à 28 jours (MPa)
+- **Module d'élasticité** : `Ec = 4500√f'c` (MPa) selon CSA A23.3
+- **Déformation ultime en compression** : `εcu = 0,0035` (CSA) ou `0,003` (ACI)
+- **Résistance à la traction** (approximation) : `fr = 0,6λ√f'c` (MPa)
+
+Valeurs courantes de f'c : 25 MPa (béton courant), 30 MPa (structural), 40-50 MPa (haute performance)
+
+### Acier d'armature
+- **Limite d'élasticité** `fy` : 400 MPa (barres 400R/400W au Canada), 420 MPa (Grade 60 USA)
+- **Module d'élasticité** : `Es = 200 000 MPa`
+- **Déformation de fluage** : `εy = fy/Es = 0,002`
+
+<Note>Les barres au Canada sont désignées par leur diamètre nominal : 10M (11,3 mm), 15M (16 mm), 20M (19,5 mm), 25M (25,2 mm), 30M (29,9 mm), 35M (35,7 mm).</Note>
+
+## Poutres en flexion simple
+
+### Hypothèses de la théorie des sections
+1. Les sections planes restent planes (hypothèse de Bernoulli)
+2. La résistance en traction du béton est négligée
+3. La distribution des contraintes de compression est représentée par un bloc rectangulaire équivalent (Whitney)
+
+### Profondeur du bloc de compression
+`a = As·fy / (0,85·α₁·f'c·b)`
+
+Où `α₁ = 0,85 - 0,0015·f'c ≥ 0,67` (CSA A23.3)
+
+### Moment résistant
+`Mr = φs·As·fy·(d - a/2)`
+
+Avec `φs = 0,85` (acier) et `φc = 0,65` (béton) selon CSA A23.3.
+
+### Taux d'armature
+- **Minimum** : `ρmin = 0,2√f'c / fy` ou `1,4/fy` (CSA)
+- **Maximum** : conditionné par la ductilité, généralement `ρmax ≈ 0,75·ρb` où `ρb` est le taux balancé
+
+`ρb = (α₁·β₁·φc·f'c / φs·fy) × (700/(700+fy))`
+
+<Warning>Ne jamais surpasser ρmax sans vérification rigoureuse de la ductilité. Les sections sur-armées produisent une rupture fragile par écrasement du béton sans avertissement.</Warning>
+
+## Cisaillement et armature transversale
+
+### Résistance au cisaillement du béton seul
+`Vc = φc·λ·β·√f'c·bw·dv`
+
+Où `λ` dépend du type de béton (normal, léger) et `β` dépend de la déformation longitudinale et de l'espacement des étriers (méthode MCFT selon CSA A23.3).
+
+### Armature transversale (étriers)
+`Vs = φs·Av·fy·dv·cotθ / s`
+
+Espacement max des étriers : `0,7·dv ≤ 600 mm`
+
+<Tip>En pratique, utiliser l'espacement standard de d/2 pour une première estimation, puis vérifier avec la méthode MCFT pour les éléments critiques.</Tip>
+
+## Dalles et planchers
+
+### Dalles à une voie
+Calculées comme des poutres de largeur unitaire (1 m). Épaisseur minimale recommandée : L/20 pour acier 400 MPa.
+
+### Dalles à deux voies
+Analysées par la méthode directe (NBC/ACI) ou la méthode des cadres équivalents :
+- Panneaux intérieurs : moment en travée `Mf = 0,35·wu·l²·ln`
+- Distribution entre bandes sur colonne et bandes en travée
+
+### Dalles champignons (sans poutres)
+Vérification au poinçonnement (cisaillement bidirectionnel) :
+`vr = (1 + 2/βc) × 0,19·λ·φc·√f'c / bo·d` mais ≤ `0,38·λ·φc·√f'c`
+
+## Colonnes en béton armé
+
+### Colonnes soumises à la compression axiale pure
+`Pr = φc·[α₁·f'c·(Ag-Ast) + fy·Ast]`
+
+En pratique, le NBC exige une excentricité minimale `emin = 0,1h` pour les colonnes rectangulaires.
+
+### Diagramme d'interaction M-N
+Le dimensionnement des colonnes bi-chargées (N + M) fait appel au diagramme d'interaction, tracé pour plusieurs positions de l'axe neutre. Le point de chargement `(Mf, Nf)` doit se trouver à l'intérieur de la courbe.
+
+### Armature longitudinale
+- Minimum : `0,01·Ag`
+- Maximum : `0,08·Ag` (CSA A23.3, clause 10.9)
+
+## Normes de référence
+
+| Norme | Portée |
+|---|---|
+| CSA A23.3-19 | Calcul des ouvrages en béton (Canada) |
+| ACI 318-19 | Building Code Requirements for Structural Concrete (USA) |
+| CSA A23.1/A23.2 | Béton et granulats — production et essais |
+| NBC 2020 | Charges de conception, pondérations |
+
+<CardGroup cols={2}>
+  <Card title="Structures" icon="building" href="/genie-civil/structures">
+    Analyse des charges et méthodes d'analyse structurale
+  </Card>
+  <Card title="Fondations" icon="layer-group" href="/genie-civil/fondations">
+    Dimensionnement des fondations en béton
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    CSA A23.3, ACI 318 et autres codes
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Logiciels de modélisation en béton armé
+  </Card>
+</CardGroup>

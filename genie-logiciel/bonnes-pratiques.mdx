@@ -1,0 +1,145 @@
+---
+title: "Bonnes pratiques de développement"
+description: "Clean Code, tests automatisés, CI/CD, Git Flow, revue de code et documentation technique"
+icon: "code"
+---
+
+Les bonnes pratiques de développement logiciel améliorent la qualité du code, réduisent la dette technique et permettent aux équipes de livrer de la valeur de façon fiable et durable. Elles s'appliquent quelle que soit la taille de l'équipe ou la technologie utilisée.
+
+## Code propre (Clean Code)
+
+### Nommage significatif
+Le nom doit révéler l'intention, pas l'implémentation :
+
+- **Variables** : `tempsCycle` plutôt que `tc`; `listeUtilisateursActifs` plutôt que `lst`
+- **Fonctions** : verbe + complément descriptif : `calculerDebitPointe()`, `validerIdentifiants()`
+- **Classes** : nom commun décrivant la responsabilité : `CalculateurDecharge`, `RepositoireProjet`
+- **Constantes** : majuscules avec underscores : `DEBIT_MAX_CONDUITE = 5.0  # m³/s`
+
+Éviter les abréviations cryptiques, les variables à une lettre (sauf indices de boucles i, j, k), les noms génériques (`data`, `info`, `temp`).
+
+### Fonctions courtes et focalisées
+Une fonction = une tâche. Idéalement moins de 20 lignes. Si vous avez besoin de commenter les sections d'une fonction, c'est qu'elle devrait être découpée.
+
+Règle de Robert Martin : les fonctions doivent faire une chose, la faire bien, et ne faire qu'elle.
+
+**Arguments** : idéalement 0-2 arguments. À 3 arguments, envisager un objet de paramètres. Éviter les arguments booléens (`calculer(true)` — que fait le `true`?).
+
+### Commentaires utiles vs inutiles
+Bon commentaire : expliquer le POURQUOI, pas le QUOI (le code lui-même dit quoi).
+
+```
+# Formule de Darcy-Weisbach — voir NBN EN ISO 4064-2 §6.3
+pertes_charge = facteur_frot * (longueur / diametre) * (vitesse**2 / (2 * G))
+```
+
+Mauvais commentaire : redonder ce que le code dit clairement ou laisser du code commenté.
+
+<Warning>Le code commenté est une dette technique. Utilisez le contrôle de version (git) pour conserver l'historique. Supprimez le code mort au lieu de le commenter.</Warning>
+
+## Tests automatisés
+
+### Tests unitaires
+Vérifient une unité de code (fonction, méthode) en isolation. Structure AAA :
+- **Arrange** : configurer l'état de départ
+- **Act** : appeler la fonction testée
+- **Assert** : vérifier le résultat
+
+Frameworks populaires : pytest (Python), JUnit 5 (Java), Jest (JavaScript/TypeScript), NUnit/xUnit (C#).
+
+Bonnes pratiques :
+- Un test = une assertion logique (peut avoir plusieurs `assert` sur le même résultat)
+- Noms explicites : `test_calcul_debit_donne_zero_si_section_nulle`
+- Tests rapides (< 100 ms), déterministes, indépendants les uns des autres (pas d'ordre d'exécution implicite)
+
+### Tests d'intégration
+Testent l'interaction entre plusieurs composants (ex : service + base de données). Utiliser Testcontainers pour démarrer une vraie base de données dans Docker pendant les tests.
+
+Les mocks et stubs remplacent les dépendances externes pour isoler le composant testé.
+
+### Tests de bout en bout (E2E)
+Simulent un utilisateur réel dans un navigateur. Outils : Cypress (JavaScript), Playwright (multi-langages). Plus lents et plus fragiles — les réserver aux parcours utilisateur critiques.
+
+### Développement piloté par les tests (TDD)
+Cycle Red-Green-Refactor :
+1. Écrire un test qui échoue (Red)
+2. Écrire le minimum de code pour le faire passer (Green)
+3. Améliorer le code sans casser le test (Refactor)
+
+**Couverture de code** : viser 70-80% de couverture des branches pour le code métier critique. Une couverture de 100% n'est pas nécessairement utile si les tests ne vérifient pas les bons comportements.
+
+<Tip>La couverture de code mesure ce qui est exécuté par les tests, pas ce qui est correctement vérifié. Préférez des tests bien pensés à une couverture exhaustive de tests triviaux.</Tip>
+
+## Intégration et déploiement continus (CI/CD)
+
+### Pipeline CI typique
+1. **Lint** : vérification du style de code (ESLint, Pylint, Checkstyle)
+2. **Build** : compilation et packaging
+3. **Tests unitaires** : rapides, exécutés à chaque commit
+4. **Tests d'intégration** : contre une base de données de test
+5. **Analyse de sécurité** : SAST (analyse statique), scan des dépendances (Dependabot, Snyk)
+6. **Tests E2E** : sur environnement de staging
+7. **Déploiement** : automatisé en staging; manuel ou automatique en production
+
+Outils : GitHub Actions, GitLab CI/CD, Jenkins, CircleCI, Azure DevOps Pipelines.
+
+### Stratégies de déploiement
+- **Déploiement bleu-vert** : deux environnements identiques; bascule le trafic instantanément avec rollback immédiat possible
+- **Déploiement canary** : déploiement progressif (5% du trafic → 25% → 100%) avec surveillance des métriques à chaque étape
+- **Feature flags** : activer/désactiver des fonctionnalités sans nouveau déploiement; découplage déploiement/mise en production
+
+<Note>Un pipeline CI/CD bien configuré peut réduire le temps de déploiement de plusieurs jours à quelques minutes et multiplier par 10 la fréquence de livraison. C'est un investissement avec un retour mesurable.</Note>
+
+## Gestion des versions avec Git
+
+### Git Flow
+- **main** : code en production, toujours déployable
+- **develop** : intégration des nouvelles fonctionnalités
+- **feature/xxx** : développement d'une fonctionnalité (depuis develop)
+- **release/x.y.z** : préparation d'une version (gel des fonctionnalités, corrections de bugs)
+- **hotfix/xxx** : correctif urgent directement depuis main
+
+### Commits conventionnels
+Format : `type(portée): description courte`
+
+Types : `feat` (nouvelle fonctionnalité), `fix` (correction), `docs` (documentation), `refactor`, `test`, `chore` (maintenance)
+
+Exemple : `feat(hydraulique): ajouter le calcul de Manning pour canaux trapézoïdaux`
+
+Ces conventions permettent de générer automatiquement des changelogs et de versionner sémantiquement (SemVer).
+
+### Rebase vs merge
+- **merge** : préserve l'historique exact avec un commit de fusion; historique moins linéaire
+- **rebase** : rejoue les commits sur la branche cible; historique linéaire et propre mais réécrit l'historique public (ne jamais rebaser des branches partagées)
+
+## Revue de code et documentation
+
+### Checklist de revue de code
+- [ ] Le code fait ce que la description de la PR dit?
+- [ ] Les cas limites sont-ils gérés?
+- [ ] Les tests couvrent-ils les nouveaux comportements?
+- [ ] Y a-t-il des problèmes de sécurité (injection, exposition de secrets)?
+- [ ] La performance est-elle acceptable?
+- [ ] Le code est-il lisible et bien nommé?
+- [ ] La documentation est-elle mise à jour?
+
+### Documentation technique
+- **ADR** (Architecture Decision Records) : journal des décisions architecturales importantes, format : contexte → options → décision → conséquences
+- **Docstrings** : documentation des fonctions publiques (paramètres, valeur de retour, exceptions)
+- **OpenAPI/Swagger** : contrat d'API lisible par les humains et les machines; générer depuis le code ou code depuis la spec
+- **Wiki d'équipe** : guides d'onboarding, conventions d'équipe, runbooks opérationnels
+
+<CardGroup cols={2}>
+  <Card title="Architecture logicielle" icon="diagram-project" href="/genie-logiciel/architecture">
+    SOLID, patrons de conception et styles architecturaux
+  </Card>
+  <Card title="Planification de projets" icon="calendar-check" href="/gestion-projets/planification">
+    Méthodologies agile et gestion d'équipe
+  </Card>
+  <Card title="Gestion des risques" icon="shield-halved" href="/gestion-projets/gestion-risques">
+    Gestion des risques techniques et de sécurité
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Environnements de développement et outils DevOps
+  </Card>
+</CardGroup>

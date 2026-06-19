@@ -1,0 +1,150 @@
+---
+title: "Thermodynamique appliquée"
+description: "Lois de la thermodynamique, cycles thermodynamiques, transfert de chaleur et dimensionnement des échangeurs"
+icon: "temperature-high"
+---
+
+La thermodynamique étudie les échanges d'énergie sous forme de chaleur et de travail. En ingénierie, ses applications couvrent les moteurs, turbines, réfrigérateurs, échangeurs de chaleur et systèmes de climatisation.
+
+## Les lois de la thermodynamique
+
+### Loi zéro — Équilibre thermique
+Si deux systèmes sont chacun en équilibre thermique avec un troisième, ils sont en équilibre thermique entre eux. Ce principe fonde la notion de température et le fonctionnement des thermomètres.
+
+### Premier principe — Conservation de l'énergie
+Pour un système fermé :
+
+`ΔU = Q - W`
+
+Où `ΔU` est la variation d'énergie interne (J), `Q` la chaleur reçue (J) et `W` le travail produit (J).
+
+Pour un système ouvert en régime permanent (bilan enthalpique) :
+
+`Q - W = Δh + ΔKE + ΔPE`
+
+En négligeant les variations d'énergie cinétique et potentielle : `Q - Ws = h₂ - h₁`
+
+### Deuxième principe — Entropie
+Tout processus spontané accroît l'entropie totale de l'univers :
+
+`ΔStotal = ΔSsystème + ΔSenvironnement ≥ 0`
+
+L'inégalité de Clausius : `∮ dQ/T ≤ 0` (égalité pour un cycle réversible)
+
+Le rendement maximal entre deux réservoirs est donné par le cycle de Carnot :
+
+`η_Carnot = 1 - TL/TH`
+
+Avec les températures absolues en Kelvin (K = °C + 273,15).
+
+### Troisième principe
+L'entropie d'un cristal parfait tend vers zéro lorsque la température tend vers le zéro absolu : `S → 0` quand `T → 0 K`.
+
+## Cycles thermodynamiques
+
+### Cycle de Carnot
+Cycle réversible à rendement maximal théorique. Composé de deux isothermes et deux adiabatiques. Impossible à réaliser en pratique mais sert de référence pour évaluer d'autres cycles.
+
+### Cycle de Rankine (centrales à vapeur)
+1. **Pompe** (1→2) : compression isentropique du liquide saturé
+2. **Chaudière** (2→3) : apport de chaleur à pression constante (vaporisation)
+3. **Turbine** (3→4) : détente isentropique avec production de travail
+4. **Condenseur** (4→1) : rejet de chaleur à pression constante
+
+Rendement thermique : `η = (h₃ - h₄ - (h₂ - h₁)) / (h₃ - h₂)`
+
+Améliorations : surchauffe, resurchauffe, soutirage (régénération), cycle combiné.
+
+### Cycle de Brayton (turbines à gaz)
+1. **Compresseur** : compression isentropique de l'air
+2. **Chambre de combustion** : apport de chaleur à pression constante
+3. **Turbine** : détente isentropique
+4. Rejet à l'atmosphère (cycle ouvert)
+
+Rendement idéal : `η = 1 - 1/r^((γ-1)/γ)` où `r` est le rapport de pression et `γ = Cp/Cv ≈ 1,4` pour l'air.
+
+<Tip>Les turbines à gaz modernes atteignent des températures d'entrée de 1400-1600°C grâce aux revêtements barrière thermique et au refroidissement interne des aubes. Le rendement électrique des cycles combinés (Brayton + Rankine) dépasse 60%.</Tip>
+
+## Transfert de chaleur
+
+### Conduction (loi de Fourier)
+`q = -k·A·dT/dx` (W)
+
+En régime permanent, mur plan :
+`q = k·A·(T₁ - T₂)/L = (T₁ - T₂)/Rcond`
+
+Résistance thermique de conduction : `Rcond = L/(k·A)` (K/W)
+
+Conductivités thermiques typiques : cuivre 385, aluminium 205, acier 50, verre 1,0, béton 1,5-2,0, laine de verre 0,04-0,05 W/(m·K)
+
+### Convection (loi de Newton)
+`q = h·A·(Ts - T∞)` (W)
+
+Résistance convective : `Rconv = 1/(h·A)`
+
+Coefficients h typiques : convection naturelle dans l'air 2-25, forcée dans l'air 25-250, dans l'eau 500-10 000, ébullition 5 000-100 000 W/(m²·K)
+
+### Rayonnement (loi de Stefan-Boltzmann)
+`q = ε·σ·A·T⁴` (W)
+
+σ = 5,67 × 10⁻⁸ W/(m²·K⁴); émissivité ε : corps noir 1,0; acier poli 0,05-0,15; béton 0,85-0,95.
+
+Entre deux surfaces : `q = σ·F₁₂·A₁·(T₁⁴ - T₂⁴)` avec facteur de forme F₁₂.
+
+### Résistances thermiques en série et en parallèle
+Pour un mur composite (comme une paroi isolée) :
+
+`Rtotal = Rcond,1 + Rcond,2 + ... + Rconv,i + Rconv,e`
+
+`U = 1/(Rtotal·A)` = coefficient global de transmission thermique (W/(m²·K))
+
+<Warning>Toujours inclure les résistances de contact entre matériaux dans les calculs précis — elles peuvent être significatives (ex. : deux surfaces métalliques sans graisse thermique).</Warning>
+
+## Calcul des échangeurs de chaleur
+
+### Méthode DTLM (Différence de Température Logarithmique Moyenne)
+`Q = U·A·ΔTlm·F`
+
+`ΔTlm = (ΔT₁ - ΔT₂) / ln(ΔT₁/ΔT₂)`
+
+Le facteur de correction F dépend de la géométrie (courant croisé, multi-passes); F = 1 pour échangeur à courants parallèles purs ou contre-courants purs.
+
+### Méthode NTU-ε (efficacité)
+Utile quand les températures de sortie sont inconnues.
+
+`ε = Q / Qmax = Q / (Cmin·(Th,in - Tc,in))`
+
+`NTU = U·A / Cmin`
+
+Pour un échangeur contre-courant : `ε = (1 - exp(-NTU·(1-Cr))) / (1 - Cr·exp(-NTU·(1-Cr)))` où `Cr = Cmin/Cmax`
+
+## Réfrigération et pompes à chaleur
+
+Cycle à compression de vapeur (inverse du Rankine) :
+1. Compresseur : compression isentropique
+2. Condenseur : rejet de chaleur QH
+3. Détendeur (vanne de laminage)
+4. Évaporateur : absorption de chaleur QL
+
+**COP en mode froid** : `COP_froid = QL/W = QL/(QH - QL)`
+
+**COP en mode chauffage** : `COP_chaud = QH/W = QH/(QH - QL)`
+
+COP Carnot (maximum théorique) : `COP_froid,Carnot = TL/(TH - TL)`
+
+<Info>Un système de climatisation à COP = 3 signifie qu'il déplace 3 kWh de chaleur pour chaque kWh d'électricité consommé. Les pompes à chaleur géothermiques atteignent des COP de 4 à 6.</Info>
+
+<CardGroup cols={2}>
+  <Card title="Mécanique des fluides" icon="wind" href="/genie-mecanique/mecanique-fluides">
+    Pertes de charge, pompes et turbines hydrauliques
+  </Card>
+  <Card title="Science des matériaux" icon="atom" href="/genie-mecanique/materiaux">
+    Traitements thermiques et propriétés des matériaux
+  </Card>
+  <Card title="Énergie renouvelable" icon="sun" href="/genie-electrique/energie-renouvelable">
+    Cycles thermodynamiques dans les centrales renouvelables
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Logiciels de simulation thermique et CFD
+  </Card>
+</CardGroup>

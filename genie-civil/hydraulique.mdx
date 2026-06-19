@@ -1,0 +1,128 @@
+---
+title: "Hydraulique et hydrologie"
+description: "Équation de continuité, Bernoulli, écoulement en conduite, hydrogrammes de crue et assainissement pluvial"
+icon: "droplet"
+---
+
+L'hydraulique est la branche de la mécanique des fluides appliquée à l'eau en mouvement. Elle est fondamentale pour la conception des réseaux d'égout, des ouvrages de drainage, des barrages et des infrastructures de gestion des eaux pluviales.
+
+## Principes fondamentaux
+
+### Équation de continuité
+Pour un écoulement incompressible en régime permanent, le débit volumique est conservé :
+
+`Q = A₁·V₁ = A₂·V₂`
+
+Où `Q` est le débit (m³/s), `A` la section transversale (m²) et `V` la vitesse moyenne (m/s).
+
+### Équation de Bernoulli
+Entre deux sections d'un écoulement idéal (sans pertes) :
+
+`P₁/γ + V₁²/2g + z₁ = P₂/γ + V₂²/2g + z₂ = H (charge totale)`
+
+Où `γ = ρg` est le poids volumique du fluide (9 810 N/m³ pour l'eau), `g = 9,81 m/s²`, `z` la cote altimétrique et `P/γ` la hauteur de pression.
+
+<Note>La charge totale H demeure constante le long d'une ligne de courant en écoulement idéal. Les pertes de charge réelles réduisent H entre deux sections.</Note>
+
+## Écoulement en conduite sous pression
+
+### Pertes de charge régulières — Darcy-Weisbach
+`hf = f · (L/D) · (V²/2g)`
+
+Où `f` est le facteur de frottement de Darcy (sans dimension), `L` la longueur du tuyau (m) et `D` le diamètre intérieur (m).
+
+Le facteur `f` se détermine par le diagramme de Moody à partir du nombre de Reynolds et de la rugosité relative `ε/D` :
+- Régime laminaire (Re < 2 000) : `f = 64/Re`
+- Régime turbulent : équation de Colebrook-White (implicite) ou approximation de Swamee-Jain
+
+### Formule de Hazen-Williams (eau potable)
+`V = 0,849·C·R^0,63·S^0,54`
+
+Où `C` est le coefficient de rugosité Hazen-Williams (C = 130-140 pour PVC neuf, 100-110 pour fonte) et `S` la pente de la ligne piézométrique (m/m).
+
+### Pertes de charge singulières
+`hs = K · V²/2g`
+
+Coefficients K typiques : coude 90° (K ≈ 0,9), vanne pleinement ouverte (K ≈ 0,2), élargissement brusque `K = (1 - A₁/A₂)²`.
+
+<Warning>Les pertes singulières peuvent dépasser les pertes régulières dans les réseaux courts avec nombreux raccords. Ne pas les négliger dans les bilans hydrauliques.</Warning>
+
+## Écoulement à surface libre — Manning
+
+### Formule de Manning
+`V = (1/n) · R^(2/3) · S^(1/2)`
+
+Où `n` est le coefficient de rugosité de Manning, `R = A/P` le rayon hydraulique (m) et `S` la pente du radier (m/m).
+
+Valeurs typiques de n : béton lisse n = 0,012; béton brut n = 0,015; rivière naturelle n = 0,025-0,05.
+
+### Débit et sections courantes
+Pour un canal trapézoïdal de base `b` et de talus `m:1` (H:V), la section est `A = (b + m·y)·y` et le périmètre mouillé `P = b + 2·y·√(1+m²)`.
+
+La profondeur normale s'obtient par itération ou abaques. La profondeur critique correspond à `Fr = V/√(gy) = 1` (nombre de Froude unitaire).
+
+<Tip>Utiliser un tableur ou un outil dédié (HEC-RAS, CulvertMaster) pour les calculs itératifs de profondeur normale — les essais manuels successifs sont fastidieux et sources d'erreurs.</Tip>
+
+## Hydrologie et hydrogrammes de crue
+
+### Méthode rationnelle (petits bassins)
+Pour des bassins versants de moins de 25 km² :
+
+`Q = C · i · A / 360`
+
+Où `Q` est le débit de pointe (m³/s), `C` le coefficient de ruissellement (0,1-0,9 selon l'imperméabilisation), `i` l'intensité des précipitations (mm/h) et `A` l'aire du bassin (ha).
+
+L'intensité `i` est lue sur les courbes IDF (Intensité-Durée-Fréquence) pour la période de retour choisie (T = 2, 5, 10, 25, 50 ou 100 ans) à la durée égale au temps de concentration `tc`.
+
+### Temps de concentration
+Méthode de Kirpich : `tc = 0,0195 · L^0,77 · S^(-0,385)` (minutes)
+
+Où `L` est la longueur hydraulique du bassin (m) et `S` la pente moyenne (m/m).
+
+### Hydrogramme unitaire
+Pour les bassins plus grands, l'hydrogramme unitaire synthétique (SCS/CN, Snyder) permet de simuler la forme temporelle de la crue. Le numéro de courbe SCS CN (0-100) quantifie le potentiel de ruissellement en fonction du type de sol et de l'occupation des terres.
+
+## Dimensionnement des ouvrages d'assainissement
+
+### Réseau d'égout pluvial
+Les conduites sont dimensionnées en écoulement à pleine section mais non sous pression :
+1. Calculer le débit de pointe par bassin contributif (méthode rationnelle)
+2. Sélectionner le diamètre et la pente pour obtenir `V_pleine ≥ 0,6 m/s` (auto-curage) et `V_pleine ≤ 3,0 m/s` (éviter l'érosion)
+3. Vérifier le rapport Q/Q_pleine (Manning) ≤ 1,0 avec freeboard
+
+### Ponceau et buse (culvert)
+Régime à entrée contrôlée ou à sortie contrôlée selon le rapport amont/aval. La hauteur d'eau amont ne doit pas dépasser la cote du terre-plein naturel pour la crue de conception.
+
+### Bassin de rétention
+Le volume de stockage nécessaire pour écrêter un débit de pointe `Qp` à un débit de sortie autorisé `Qs` :
+
+`V ≈ (Qp - Qs) · tp / 2`
+
+Où `tp` est la durée de la montée de l'hydrogramme.
+
+<Info>Au Québec, la politique de protection des rives et du littoral impose souvent une limite de rejet équivalente au débit naturel pré-développement pour la récurrence de 2 ans.</Info>
+
+## Gestion des eaux pluviales à la source
+
+Les approches modernes privilégient les infrastructures vertes (IVE) :
+
+- **Toits verts** : rétention de 50-70 mm de précipitations, réduction thermique du bâtiment
+- **Jardins pluviaux** : infiltration et filtration par le sol et la végétation
+- **Chaussées perméables** : infiltration directe, réduction du ruissellement de 80-95 %
+- **Noues enherbées** : ralentissement du ruissellement, sédimentation et infiltration
+- **Bassins secs** : stockage temporaire, fond perméable
+
+<CardGroup cols={2}>
+  <Card title="Fondations" icon="layer-group" href="/genie-civil/fondations">
+    Gestion des eaux souterraines et stabilité des sols
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    Normes CSA, normes municipales et guides de conception
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    HEC-RAS, SWMM, EPA-NET et autres logiciels hydrauliques
+  </Card>
+  <Card title="Structures" icon="building" href="/genie-civil/structures">
+    Conception des ouvrages de franchissement et de retenue
+  </Card>
+</CardGroup>

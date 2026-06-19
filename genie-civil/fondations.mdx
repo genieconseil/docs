@@ -1,0 +1,111 @@
+---
+title: "Fondations et géotechnique"
+description: "Types de fondations, capacité portante des sols, études géotechniques et tassements"
+icon: "layer-group"
+---
+
+Les fondations constituent l'interface entre la structure et le sol. Un dimensionnement adéquat requiert une bonne compréhension du comportement des sols et des charges transmises.
+
+## Types de fondations
+
+### Fondations superficielles
+Les fondations superficielles reposent directement sur le sol à faible profondeur (généralement D/B < 1). On distingue :
+
+- **Semelles isolées** : sous chaque poteau, économiques quand le sol est résistant
+- **Semelles filantes** : sous les murs porteurs, répartissent la charge linéaire
+- **Radiers (dalles sur sol)** : couvrent toute la surface du bâtiment, utilisés quand le sol est faible ou les charges élevées
+
+<Note>La règle empirique veut que les fondations superficielles soient utilisées quand la capacité portante nette qnet ≥ 100 kPa.</Note>
+
+### Fondations profondes
+Lorsque les couches superficielles sont insuffisantes, on recourt à :
+
+- **Pieux battus** : acier ou béton préfabriqué, installés par battage
+- **Pieux forés** : béton coulé en place dans un forage
+- **Puits de fondation** : grand diamètre, reprise de charges très élevées
+- **Micropieux** : diamètre < 300 mm, utilisés en reprise en sous-œuvre
+
+## Capacité portante des sols
+
+### Formule de Terzaghi
+Pour une semelle filante sur sol homogène :
+
+`qu = c·Nc + q·Nq + 0.5·γ·B·Nγ`
+
+Où :
+- `c` = cohésion du sol (kPa)
+- `q = γ·D` = contrainte verticale effective à la base de la fondation
+- `γ` = poids volumique du sol (kN/m³)
+- `B` = largeur de la fondation (m)
+- `Nc, Nq, Nγ` = facteurs de capacité portante (dépendent de φ)
+
+La capacité portante nette admissible s'obtient avec un facteur de sécurité FS = 3 :
+
+`qadm = (qu - q) / FS + q`
+
+<Warning>Ne jamais réduire le facteur de sécurité en dessous de 2,5 sans justification géotechnique rigoureuse et données de sol fiables.</Warning>
+
+### Pieux — capacité portante
+La résistance totale d'un pieu combine frottement latéral et résistance en pointe :
+
+`Qu = Qs + Qp = fs·As + qp·Ap`
+
+Où `fs` est le frottement unitaire moyen le long du fût et `qp` la résistance unitaire en pointe.
+
+## Études de sol et reconnaissance géotechnique
+
+Une campagne géotechnique typique comprend :
+
+1. **Sondages carottés** : prélèvement d'échantillons intacts pour essais en laboratoire
+2. **Essai SPT (Standard Penetration Test)** : nombre de coups N60 pour enfoncer un carottier standard de 300 mm; corrélé à φ, Dr et qc
+3. **Essai CPT (Cone Penetration Test)** : pénétromètre statique, mesure qc et fs en continu — plus précis que le SPT
+4. **Essais pressiométriques** : mesure Em et pL pour le calcul des tassements et de la capacité portante
+
+<Tip>Pour les projets importants, combinez au moins deux méthodes de reconnaissance (ex. : SPT + CPT) pour valider les données et interpoler entre les sondages.</Tip>
+
+### Densité minimale de sondages recommandée
+- Bâtiments courants : 1 sondage par 250 à 500 m² d'emprise
+- Ouvrages linéaires (routes, pipelines) : tous les 50 à 150 m
+- Ouvrages spéciaux (ponts, barrages) : selon étude site spécifique
+
+## Tassements
+
+### Tassement immédiat (élastique)
+`Si = q·B·(1-ν²)·Iw / Es`
+
+Où `Iw` est un facteur de forme, `Es` le module de déformation et `ν` le coefficient de Poisson du sol.
+
+### Tassement de consolidation (sols argileux)
+`Sc = Cc/(1+e0) · H · log[(σ'v0 + Δσ'v)/σ'v0]`
+
+La consolidation primaire peut prendre des années ou des décennies dans les argiles à faible perméabilité.
+
+<Warning>Les tassements différentiels sont plus dommageables que les tassements uniformes. Limiter le tassement différentiel à L/600 pour les structures rigides et L/300 pour les structures flexibles (référence NBC).</Warning>
+
+## Drainage et stabilisation des sols
+
+### Techniques de drainage
+- **Drains verticaux** (préfabriqués) : accélèrent la consolidation des argiles molles
+- **Géotextiles de drainage** : filtration et séparation des couches
+- **Pompage de rabattement** : pour excavations sous la nappe phréatique
+
+### Amélioration des sols
+- **Compactage dynamique** : chutes de masse lourde, densifie les sables lâches
+- **Colonnes ballastées** (stone columns) : renforcement des argiles molles
+- **Injection de coulis** (grouting) : comblement des vides, imperméabilisation
+- **Chaux et ciment** : stabilisation chimique des argiles
+
+<CardGroup cols={2}>
+  <Card title="Structures" icon="building" href="/genie-civil/structures">
+    Analyse structurale et dimensionnement des éléments porteurs
+  </Card>
+  <Card title="Béton armé" icon="chess-rook" href="/genie-civil/beton-arme">
+    Dimensionnement selon CSA A23.3 et ACI 318
+  </Card>
+  <Card title="Hydraulique" icon="droplet" href="/genie-civil/hydraulique">
+    Gestion des eaux souterraines et de surface
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    CNN, CSA et autres normes géotechniques
+  </Card>
+</CardGroup>

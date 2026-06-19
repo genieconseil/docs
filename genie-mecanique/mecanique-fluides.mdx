@@ -1,0 +1,130 @@
+---
+title: "Mécanique des fluides"
+description: "Propriétés des fluides, régimes d'écoulement, pertes de charge, pompes et turbines hydrauliques"
+icon: "wind"
+---
+
+La mécanique des fluides étudie le comportement des liquides et des gaz au repos ou en mouvement. Elle est fondamentale pour le dimensionnement des réseaux de tuyauterie, des systèmes de ventilation, des turbomachines et des ouvrages hydrauliques.
+
+## Propriétés des fluides
+
+### Masse volumique et poids spécifique
+- **Masse volumique** `ρ` (kg/m³) : masse par unité de volume — eau à 20°C : 998 kg/m³; air à 20°C, 101,3 kPa : 1,204 kg/m³
+- **Poids spécifique** `γ = ρ·g` (N/m³) — eau : 9 790 N/m³
+- **Densité relative** `SG = ρ/ρ_eau`
+
+### Viscosité
+- **Viscosité dynamique** `μ` (Pa·s ou mPa·s) : résistance au cisaillement — eau à 20°C : 1,002 mPa·s; huile moteur 10W-40 à 20°C : ≈ 150 mPa·s
+- **Viscosité cinématique** `ν = μ/ρ` (m²/s) — eau à 20°C : 1,004 × 10⁻⁶ m²/s
+
+La viscosité des liquides diminue avec la température (comportement inverse des gaz).
+
+### Compressibilité
+Le module de compressibilité volumique `K = -V·dP/dV` mesure la résistance à la compression. L'eau est quasi-incompressible (`K ≈ 2,2 GPa`); les gaz sont compressibles (coups de bélier dans les conduites, chocs hydrauliques).
+
+## Équation de Navier-Stokes
+
+L'équation de Navier-Stokes décrit le mouvement d'un fluide visqueux newtonien incompressible :
+
+`ρ·(∂V/∂t + V·∇V) = -∇P + μ·∇²V + ρ·g`
+
+Termes : inertie = gradient de pression + viscosité + gravité
+
+En pratique, des formes simplifiées sont utilisées selon le régime :
+- Fluide parfait : `ρ·DV/Dt = -∇P + ρ·g` → équation d'Euler
+- Régime rampant (faible Re) : `∇P = μ·∇²V` → solution analytique possible
+- Turbulence : modèles k-ε, k-ω, LES pour la simulation numérique
+
+<Info>Navier-Stokes n'a pas de solution analytique générale. Les problèmes pratiques sont résolus numériquement (CFD) ou par des corrélations empiriques validées expérimentalement.</Info>
+
+## Nombre de Reynolds et régimes d'écoulement
+
+`Re = ρ·V·D/μ = V·D/ν`
+
+- **Re < 2 300** : écoulement laminaire (profil parabolique de Poiseuille, f = 64/Re)
+- **2 300 < Re < 4 000** : zone de transition (instable)
+- **Re > 4 000** : écoulement turbulent (profil plus aplati, f selon Colebrook-White)
+
+<Tip>En pratique, concevoir les réseaux hydrauliques pour Re > 10 000 (turbulence établie) permet d'utiliser des corrélations stables. Les conduites d'eau potable ont typiquement Re de 10 000 à 500 000.</Tip>
+
+## Pertes de charge
+
+### Pertes régulières (Darcy-Weisbach)
+`hf = f · (L/D) · V²/(2g)`
+
+Facteur de frottement de Darcy `f` :
+- Régime laminaire : `f = 64/Re`
+- Régime turbulent (Colebrook-White) : `1/√f = -2·log(ks/(3,7·D) + 2,51/(Re·√f))`
+- Approximation de Swamee-Jain explicite : `f = 0,25/[log(ks/(3,7D) + 5,74/Re^0,9)]²`
+
+Rugosités absolues ks : acier commercial 0,046 mm; fonte 0,26 mm; PVC < 0,002 mm; béton 0,3-3 mm
+
+### Pertes singulières
+`hm = K · V²/(2g)`
+
+| Accessoire | K approximatif |
+|---|---|
+| Coude 90° standard | 0,9 |
+| Coude 90° à grand rayon | 0,4 |
+| Té (dérivation) | 1,0 |
+| Vanne-opercule ouverte | 0,2 |
+| Clapet anti-retour | 2,0 |
+| Entrée droite | 0,5 |
+| Sortie (perte totale) | 1,0 |
+
+<Warning>Dans les réseaux complexes, les pertes singulières peuvent représenter 20-50% des pertes totales. Ne pas les négliger dans les calculs de dimensionnement.</Warning>
+
+## Pompes hydrauliques
+
+### Courbe caractéristique
+La courbe H-Q d'une pompe centrifuge exprime la hauteur manométrique totale (HMT) en fonction du débit :
+
+`HMT = H₀ - K·Q²` (parabole descendante)
+
+La courbe de réseau est également une parabole croissante :
+`Hréseau = Hstatique + R·Q²`
+
+**Point de fonctionnement** : intersection des deux courbes.
+
+### Lois de similitude (lois des ventilateurs/pompes)
+À vitesse de rotation variable :
+
+`Q₂/Q₁ = N₂/N₁`
+
+`H₂/H₁ = (N₂/N₁)²`
+
+`P₂/P₁ = (N₂/N₁)³`
+
+La variation de vitesse est très efficace énergétiquement : réduire la vitesse de 20% réduit la puissance de 49%.
+
+### NPSH (Net Positive Suction Head)
+Pour éviter la cavitation :
+
+`NPSH_disponible = (Patm/γ) + z_aspiration - (Pv/γ) - hf_aspiration ≥ NPSH_requis + 0,5 m (marge)`
+
+Où `Pv` est la pression de vapeur saturante du liquide à la température de service.
+
+<Warning>La cavitation détruit rapidement les roues de pompe par érosion et choc hydraulique. Vérifier systématiquement le bilan NPSH lors de la conception.</Warning>
+
+## Turbines hydrauliques
+
+- **Turbine Pelton** : action, haute chute (> 300 m), faible débit; η ≈ 90-92%
+- **Turbine Francis** : réaction, chutes moyennes (10-600 m); η ≈ 88-93%
+- **Turbine Kaplan** : réaction, basse chute (2-40 m), aubes réglables; η ≈ 88-93%
+
+Puissance hydraulique disponible : `P = η·ρ·g·Q·H`
+
+<CardGroup cols={2}>
+  <Card title="Thermodynamique" icon="temperature-high" href="/genie-mecanique/thermodynamique">
+    Pompes à chaleur, échangeurs et cycles de vapeur
+  </Card>
+  <Card title="Hydraulique" icon="droplet" href="/genie-civil/hydraulique">
+    Hydraulique à surface libre et réseaux d'assainissement
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    OpenFOAM et logiciels de simulation CFD
+  </Card>
+  <Card title="Science des matériaux" icon="atom" href="/genie-mecanique/materiaux">
+    Matériaux pour applications hydrauliques et corrosion
+  </Card>
+</CardGroup>

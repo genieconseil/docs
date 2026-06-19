@@ -1,0 +1,137 @@
+---
+title: "Systèmes de contrôle-commande"
+description: "Boucle ouverte et fermée, fonctions de transfert, diagrammes de Bode, régulateur PID et critères de stabilité"
+icon: "sliders"
+---
+
+La théorie des systèmes de contrôle-commande fournit les outils mathématiques pour analyser et concevoir des systèmes qui se comportent de manière désirée malgré les perturbations et les variations des paramètres. Elle est au cœur de l'automatisation industrielle.
+
+## Boucle ouverte vs boucle fermée
+
+### Système en boucle ouverte
+La commande est calculée sans mesurer la sortie. Simple mais sensible aux perturbations et aux variations des paramètres du procédé.
+
+Exemples : minuterie de four, commande de machine à laver simple, rampe de trafic à cycle fixe.
+
+**Avantages** : simplicité, coût réduit, pas de risque d'instabilité
+**Inconvénients** : aucune correction d'erreur, sensible aux perturbations
+
+### Système en boucle fermée (asservissement)
+La sortie est mesurée et comparée à la consigne. L'erreur `e(t) = r(t) - y(t)` pilote le correcteur.
+
+Schéma typique : `Consigne → [+] → Correcteur C(s) → Procédé G(s) → Sortie`
+                                 `↑← Capteur H(s) ←←←←←←←←←←←←←←←←←↓`
+
+**Avantages** : correction automatique, robustesse aux perturbations, précision
+**Inconvénients** : complexité, risque d'instabilité si mal réglé
+
+<Note>Pratiquement tous les systèmes industriels critiques (régulation de température, de pression, de débit, de position, de vitesse) utilisent la boucle fermée. La boucle ouverte est réservée aux applications où la perturbation est négligeable et la précision non critique.</Note>
+
+## Fonctions de transfert et diagramme de blocs
+
+### Transformée de Laplace
+La transformée de Laplace convertit les équations différentielles en équations algébriques. Les principales propriétés :
+- Dérivation : `sX(s) - x(0⁻)`
+- Intégration : `X(s)/s`
+
+### Fonction de transfert
+`G(s) = Y(s)/U(s)` (rapport sortie/entrée, conditions initiales nulles)
+
+Exemple : processus du premier ordre : `G(s) = K/(τs + 1)`
+- K = gain statique (gain DC)
+- τ = constante de temps (s); à t = τ, la réponse atteint 63,2% de sa valeur finale
+
+Processus du second ordre : `G(s) = ωn²/(s² + 2ζωn·s + ωn²)`
+- ωn = pulsation naturelle
+- ζ = amortissement (sur-amorti ζ > 1; critique ζ = 1; sous-amorti ζ < 1)
+
+### Fonction de transfert en boucle fermée
+Pour retour unitaire H(s) = 1 :
+
+`T(s) = G(s) / (1 + G(s))`
+
+Erreur en régime permanent pour une consigne en échelon : `ess = 1/(1 + Kp)` où `Kp = G(0)` est le gain de position.
+
+## Diagramme de Bode
+
+Le diagramme de Bode représente la réponse fréquentielle de la fonction de transfert en boucle ouverte `L(jω) = C(jω)·G(jω)` :
+
+- **Module** (dB) : `|L(jω)|dB = 20·log₁₀|L(jω)| vs log(ω)`
+- **Phase** (°) : `∠L(jω) vs log(ω)`
+
+### Marges de stabilité
+- **Marge de gain (Mg)** : valeur de `|L(jω)|dB` à la fréquence de coupure de phase (où phase = -180°). Mg ≥ 6 dB recommandé.
+- **Marge de phase (Mp)** : `180° + ∠L(jω)` à la fréquence de coupure en gain (où `|L(jω)| = 0 dB`). Mp ≥ 45° recommandé pour une bonne stabilité.
+
+<Warning>Des marges trop élevées donnent un système trop lent (sur-amorti). Des marges insuffisantes causent des oscillations ou l'instabilité. Viser Mg ≈ 8-12 dB et Mp ≈ 45-60° pour un bon compromis performance/stabilité.</Warning>
+
+## Régulateur PID
+
+Le PID (Proportionnel-Intégral-Dérivé) est le régulateur industriel le plus utilisé (> 90% des boucles industrielles).
+
+### Structure et rôle des termes
+`u(t) = Kp·e(t) + Ki·∫e(t)dt + Kd·de(t)/dt`
+
+En termes de paramètres pratiques :
+`u(t) = Kp·[e(t) + (1/Ti)·∫e(t)dt + Td·de(t)/dt]`
+
+- **Terme P** (proportionnel) : action immédiate, réduction de l'erreur; erreur résiduelle en régime permanent
+- **Terme I** (intégral) : élimine l'erreur en régime permanent; risque d'emballement intégral (wind-up) si le système est saturé
+- **Terme D** (dérivé) : amortit les oscillations, améliore la rapidité; amplifie le bruit du signal mesuré
+
+<Tip>En pratique, commencer par un PI (sans dérivée). N'ajouter la dérivée que si la rapidité ou l'amortissement est insuffisant, et toujours avec un filtre sur la dérivée (temps de filtre = Td/5 à Td/10).</Tip>
+
+### Méthode de réglage Ziegler-Nichols (boucle fermée)
+1. Passer en mode P seul (I et D désactivés)
+2. Augmenter Kp jusqu'aux oscillations soutenues → gain ultime `Ku`, période `Tu`
+3. Utiliser le tableau :
+
+| Type de régulateur | Kp | Ti | Td |
+|---|---|---|---|
+| P | 0,5·Ku | — | — |
+| PI | 0,45·Ku | Tu/1,2 | — |
+| PID | 0,6·Ku | Tu/2 | Tu/8 |
+
+<Warning>La méthode Ziegler-Nichols donne un réglage de départ souvent agressif (Mp ≈ 25%). Un ré-ajustement manuel est généralement nécessaire pour les procédés industriels critiques.</Warning>
+
+## Critères de stabilité
+
+### Critère de Routh-Hurwitz
+Système stable si et seulement si tous les coefficients du polynôme caractéristique `D(s)` sont positifs ET tous les termes de la première colonne du tableau de Routh sont positifs.
+
+Permet de déterminer le gain maximal avant instabilité sans résoudre les racines.
+
+### Critère de Nyquist
+Le nombre d'encerclements du point critique `(-1 + 0j)` par le lieu de Nyquist de `L(jω)` détermine la stabilité. Pour un système à boucle ouverte stable : zéro encerclement = stabilité en boucle fermée.
+
+### Lieu des racines
+Trace le lieu des pôles de la boucle fermée lorsque le gain K varie de 0 à ∞. Outil puissant pour choisir le gain et visualiser l'impact sur la stabilité et la dynamique.
+
+## Applications industrielles
+
+### Automates programmables industriels (API/PLC)
+Les API exécutent des programmes en cycle scan (typiquement 1-100 ms). Langages normalisés IEC 61131-3 : Ladder Logic (LD), Blocs fonctionnels (FBD), Texte structuré (ST).
+
+### Systèmes SCADA
+Supervision, contrôle et acquisition de données pour des systèmes géographiquement distribués (réseaux d'eau, pipelines, centrales). Communication via Modbus, DNP3, OPC-UA.
+
+### Boucles de régulation typiques
+- **Régulation de température** : fours industriels, CVAC; souvent PI ou PID avec filtre D
+- **Régulation de pression** : compresseurs, réseaux de gaz; PI
+- **Régulation de débit** : procédés chimiques; PI rapide
+- **Régulation de niveau** : réservoirs, digesteurs; P ou PI selon les besoins de précision
+
+<CardGroup cols={2}>
+  <Card title="Circuits électriques" icon="bolt" href="/genie-electrique/circuits">
+    Fondements des circuits pour les systèmes de contrôle
+  </Card>
+  <Card title="Architecture logicielle" icon="diagram-project" href="/genie-logiciel/architecture">
+    Systèmes embarqués et logiciels de contrôle
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    MATLAB/Simulink pour la simulation de systèmes de contrôle
+  </Card>
+  <Card title="Gestion des risques" icon="shield-halved" href="/gestion-projets/gestion-risques">
+    Sécurité fonctionnelle des systèmes de contrôle (SIL)
+  </Card>
+</CardGroup>

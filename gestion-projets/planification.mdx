@@ -1,0 +1,171 @@
+---
+title: "Planification de projets d'ingénierie"
+description: "Phases d'un projet, diagramme de Gantt, chemin critique (CPM/PERT), estimation des coûts et outils de planification"
+icon: "calendar-check"
+---
+
+La planification est le fondement d'un projet d'ingénierie réussi. Elle permet d'organiser les travaux, d'allouer les ressources, de contrôler les coûts et les délais, et de livrer un produit conforme aux attentes du client.
+
+## Phases d'un projet d'ingénierie
+
+Un projet d'ingénierie type suit les phases suivantes, chacune se terminant par une revue de jalon (gate review) :
+
+### 1. Initiation et faisabilité
+- Définition du besoin client et des objectifs du projet
+- Analyse de faisabilité technique, économique, environnementale et légale
+- Estimation préliminaire des coûts et du calendrier (précision ±50%)
+- Décision de poursuivre (go/no-go)
+
+### 2. Conception préliminaire (avant-projet)
+- Sélection du concept retenu
+- Définition des grandes fonctions et des interfaces entre systèmes
+- Estimation des coûts améliorée (±30%)
+- Plan d'exécution du projet (PEP) initial
+
+### 3. Conception détaillée (ingénierie)
+- Calculs de dimensionnement détaillés
+- Plans et devis de construction (drawings & specifications)
+- Appels d'offres et sélection des entrepreneurs/fournisseurs
+- Estimation des coûts ±10-15%
+
+### 4. Approvisionnement et construction/exécution
+- Achat des équipements à long délai
+- Mobilisation du chantier, excavation, construction
+- Gestion des modifications (change orders)
+- Contrôle de la qualité et inspections
+
+### 5. Mise en service et clôture
+- Tests fonctionnels et performance
+- Formation du personnel d'exploitation
+- Documentation des ouvrages construits (as-built)
+- Retour d'expérience (REX) et clôture administrative
+
+<Note>Dans la pratique, des chevauchements entre phases sont fréquents (fast-tracking). Par exemple, l'approvisionnement des équipements à long délai peut commencer avant la fin de la conception détaillée.</Note>
+
+## Diagramme de Gantt
+
+Le diagramme de Gantt représente graphiquement le calendrier du projet :
+- **Barres horizontales** : durée de chaque activité
+- **Jalons** (losanges) : dates clés et livrables
+- **Dépendances** : liens entre activités (début-à-fin, début-à-début, fin-à-fin)
+- **% avancement** : barre de progression pour le suivi
+
+Il permet une lecture visuelle rapide de l'état du projet mais devient difficile à lire pour plus de 50-100 activités. Dans ce cas, utiliser une hiérarchie WBS avec des sous-Gantts.
+
+## Méthode du chemin critique (CPM)
+
+Le CPM (Critical Path Method) détermine la durée minimale du projet et identifie les activités sans marge.
+
+### Calcul des dates au plus tôt (Forward Pass)
+- `ES(i)` = date de début au plus tôt de l'activité i
+- `EF(i) = ES(i) + durée(i)`
+- `ES(i) = max(EF(j))` pour tous les prédécesseurs j
+
+### Calcul des dates au plus tard (Backward Pass)
+- `LF(i)` = date de fin au plus tard
+- `LS(i) = LF(i) - durée(i)`
+- `LF(i) = min(LS(k))` pour tous les successeurs k
+
+### Flottant (marge totale)
+`Float(i) = LS(i) - ES(i) = LF(i) - EF(i)`
+
+Les activités avec flottant = 0 appartiennent au **chemin critique**. Tout retard sur ces activités retarde la fin du projet.
+
+<Warning>Il peut exister plusieurs chemins critiques de même longueur. Dans ce cas, tous méritent une surveillance renforcée. Le chemin quasi-critique (flottant ≤ 5 jours) doit aussi être suivi attentivement.</Warning>
+
+## Méthode PERT
+
+La méthode PERT (Program Evaluation and Review Technique) introduit l'incertitude sur les durées :
+
+`te = (to + 4·tm + tp) / 6`
+
+Où :
+- `to` = durée optimiste (meilleur cas — probabilité 1%)
+- `tm` = durée la plus probable (mode)
+- `tp` = durée pessimiste (pire cas — probabilité 1%)
+
+Variance d'une activité : `σ² = ((tp - to) / 6)²`
+
+Variance du chemin critique (somme des variances des activités critiques) :
+
+`σ²_projet = Σσ²_i`
+
+La probabilité d'achever le projet avant une date cible D :
+
+`Z = (D - T_esperé) / √σ²_projet` → consulter table Z (loi normale)
+
+## Estimation des coûts
+
+### Méthode analogique (ordre de grandeur)
+Basée sur des projets similaires réalisés. Facteurs de correction appliqués pour la taille, la localisation, l'inflation.
+
+Précision : ±30 à 50% | Utilisation : phase d'initiation
+
+### Méthode paramétrique
+Utilise des modèles mathématiques corrélant le coût à des paramètres mesurables (superficie en m², capacité en MW, débit en m³/s).
+
+Exemple : coût de construction d'une station d'épuration = `a × (capacité)^b` (loi puissance)
+
+Précision : ±15 à 30% | Utilisation : avant-projet
+
+### Méthode détaillée (bottom-up)
+Décomposition complète des travaux en items élémentaires, estimation unitaire de chaque item puis sommation.
+
+Éléments : main-d'oeuvre (heures × taux horaire), matériaux (quantité × prix unitaire), sous-traitance, équipements.
+
+Précision : ±5 à 15% | Utilisation : conception détaillée
+
+### Réserves de contingence
+- **Réserve de contingence** : pour les risques identifiés mais incertains (10-20% en avant-projet, 5-10% en conception détaillée)
+- **Réserve de gestion** : pour les inconnues (risques non identifiés, décision de gestion) — 5-10% du budget de base
+
+## Gestion des ressources
+
+### Structure de découpage du projet (SDP/WBS)
+Décomposition hiérarchique de l'ensemble des travaux du projet en livrables et activités gérables. La WBS est la base de l'estimation des coûts et de l'attribution des responsabilités.
+
+### Matrice RACI
+Définit les rôles pour chaque activité :
+- **R** (Responsible) : réalise le travail
+- **A** (Accountable) : responsable final, signe l'approbation
+- **C** (Consulted) : consulté, fournit des informations
+- **I** (Informed) : tenu informé de l'avancement
+
+### Gestion de la valeur acquise (EVA)
+Mesure objective de la performance du projet :
+
+| Indicateur | Formule | Interprétation |
+|---|---|---|
+| Valeur planifiée (VP) | Budgétisé à date | Ce qu'on devait faire |
+| Valeur acquise (VA) | Budgétisé pour le fait | Ce qu'on a fait |
+| Coût réel (CR) | Dépensé à date | Ce qu'on a dépensé |
+| Indice de performance coût | IPC = VA/CR | > 1 = sous budget |
+| Indice de performance délai | IPD = VA/VP | > 1 = en avance |
+
+<Tip>Un IPC < 0,9 en milieu de projet est un signal d'alarme sérieux. Statistiquement, les projets qui dépassent ce seuil à mi-parcours terminent rarement dans le budget initial.</Tip>
+
+## Outils de planification
+
+<CardGroup cols={2}>
+  <Card title="MS Project" icon="microsoft" href="https://www.microsoft.com/fr-fr/microsoft-365/project">
+    Gestion de projet avancée : Gantt, ressources, EVA. Standard dans les grandes organisations.
+  </Card>
+  <Card title="Primavera P6" icon="building" href="https://www.oracle.com/ca-fr/industries/construction-engineering/primavera-p6/">
+    Oracle P6 — standard pour les grands projets d'infrastructure et de construction.
+  </Card>
+  <Card title="ProjectLibre" icon="code" href="https://www.projectlibre.com">
+    Alternative open source à MS Project. Compatible avec les fichiers .mpp.
+  </Card>
+  <Card title="Jira / Linear" icon="diagram-project" href="https://www.atlassian.com/fr/software/jira">
+    Outils agiles pour les projets logiciels : backlogs, sprints, kanban.
+  </Card>
+</CardGroup>
+
+<CardGroup cols={2}>
+  <Card title="Gestion des risques" icon="shield-halved" href="/gestion-projets/gestion-risques">
+    Identification, évaluation et réponse aux risques du projet
+  </Card>
+  <Card title="Bonnes pratiques logiciel" icon="code" href="/genie-logiciel/bonnes-pratiques">
+    Méthodologies agile et CI/CD pour les équipes techniques
+  </Card>
+</CardGroup>

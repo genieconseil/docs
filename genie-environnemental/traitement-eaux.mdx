@@ -1,0 +1,215 @@
+---
+title: "Traitement des eaux"
+description: "Procédés de traitement de l'eau potable et des eaux usées, normes canadiennes et conception d'ouvrages"
+icon: "droplet"
+---
+
+Le traitement de l'eau constitue l'un des domaines les plus critiques du génie environnemental, touchant directement à la santé publique et à la protection des écosystèmes aquatiques. Au Canada, les ingénieurs doivent maîtriser à la fois les procédés physico-chimiques et biologiques, tout en se conformant aux normes fédérales et provinciales en constante évolution.
+
+## Traitement de l'eau potable
+
+### La filière de traitement
+
+La filière classique de traitement de l'eau potable comprend plusieurs étapes séquentielles, chacune ciblant des contaminants spécifiques.
+
+#### Coagulation et floculation
+
+La coagulation vise à déstabiliser les particules colloïdales en suspension (charge négative) en ajoutant des coagulants cationiques. Les coagulants couramment utilisés au Canada sont :
+
+- **Sulfate d'aluminium (alun)** — Al₂(SO₄)₃·18H₂O : dosage typique de 5 à 50 mg/L, pH optimal entre 6,5 et 7,5
+- **Sulfate ferrique** — Fe₂(SO₄)₃ : plus efficace à pH plus large (4–9), meilleure élimination du phosphore
+- **Chlorure ferrique** — FeCl₃ : réagit rapidement, formation de flocs denses
+- **Polymères organiques (polyélectrolytes)** : utilisés en aide-coagulant ou seuls pour des eaux peu turbides
+
+Le **test en jarre (jar test)** est la méthode standard pour optimiser les doses de coagulant en laboratoire avant mise en service. Il simule les gradients de vitesse (G) de mélange rapide (G = 300–1000 s⁻¹, durée < 1 min) et de floculation (G = 10–100 s⁻¹, durée 20–40 min).
+
+La floculation lente permet l'agglomération des microflocs en macroflocs (> 0,5 mm) par collisions orthocinétiques favorisées par une agitation douce.
+
+#### Décantation (sédimentation)
+
+La décantation par gravité élimine les flocs formés lors de l'étape précédente. Les paramètres de conception clés sont :
+
+- **Taux de débordement superficiel (TDS)** : 1 à 4 m³/(m²·h) pour la décantation conventionnelle, < 1 m/h pour les eaux chargées en algues
+- **Temps de séjour hydraulique** : généralement 2 à 8 heures
+- **Décanteurs à lamelles (settlers)** : augmentent la surface de décantation effective par facteur 5 à 10, permettent des TDS jusqu'à 10 m/h
+
+La boue produite (environ 0,5–3% des solides totaux en masse) est soutirée par racleurs de fond et envoyée vers le traitement des résidus.
+
+#### Filtration
+
+Plusieurs technologies de filtration sont utilisées selon la qualité de l'eau brute :
+
+**Filtration rapide sur sable (RSF)** : taux de filtration de 5 à 15 m/h, profondeur du lit 0,6–1,2 m, granulométrie d10 = 0,5–0,8 mm, coefficient d'uniformité < 1,5. Le rétrolavage (backwash) est déclenché lorsque la perte de charge atteint 1,5–3 m.
+
+**Filtration bicouche (dual media)** : anthracite (d10 = 1,0 mm) sur sable (d10 = 0,5 mm) — meilleure capacité de rétention des solides en profondeur, cycles de filtration plus longs.
+
+**Filtration lente sur sable (SSF)** : taux de 0,1–0,4 m/h, formation d'une couche biologique active (schmutzdecke) en surface — élimination excellente des pathogènes sans désinfection chimique, mais grande emprise au sol.
+
+**Filtration sous pression** : réservoirs fermés opérant à 200–500 kPa, adaptés aux petites collectivités.
+
+#### Désinfection
+
+<Warning>
+La désinfection est l'étape la plus critique pour la protection de la santé publique. Un défaut de désinfection peut entraîner des épidémies de maladies d'origine hydrique (cryptosporidiose, giardiase, choléra, typhoïde).
+</Warning>
+
+**Chloration** : Le chlore gazeux (Cl₂), l'hypochlorite de sodium (NaOCl) ou l'hypochlorite de calcium Ca(OCl)₂ sont dosés pour maintenir un résidu de chlore libre de 0,2–0,5 mg/L au point de livraison. Le concept **CT** (concentration × temps) quantifie l'inactivation microbienne :
+
+- CT pour 3 log d'inactivation de Giardia à pH 7, 15°C : ~55 mg·min/L
+- CT pour 4 log d'inactivation des virus : ~6 mg·min/L (Cl₂ libre)
+- Formation de sous-produits de désinfection (SPD) : trihalométhanes (THM, limite : 100 μg/L), acides haloacétiques (AHA, limite : 80 μg/L) selon Santé Canada
+
+**Désinfection UV** : Efficace contre Cryptosporidium et Giardia (résistants au chlore). La dose UV est le produit de l'irradiance (mW/cm²) par le temps d'exposition (s) :
+
+$$D_{UV} = E \times t \quad [mJ/cm^2]$$
+
+Dose minimale requise : **40 mJ/cm²** pour 3-log d'inactivation de Cryptosporidium. Les systèmes à lampes UV à basse pression (LP) opèrent à 254 nm (longueur d'onde d'absorption maximale de l'ADN). La transmittance UV à 254 nm (UVT₂₅₄) doit être mesurée régulièrement ; une UVT₂₅₄ < 75% nécessite une préfiltration adéquate.
+
+**Ozonation** : L'ozone (O₃) est un oxydant puissant (E° = 2,07 V) généré sur site par décharge corona dans l'air sec ou l'oxygène pur. Dosage typique : 2–5 mg/L. L'ozone inactive efficacement les virus et bactéries, oxyde les composés organiques traces (CEC, goût et odeur) mais ne maintient pas de résidu en réseau — une post-chloration est nécessaire.
+
+### Filtration membranaire
+
+Les membranes représentent une technologie de barrière physique de plus en plus utilisée :
+
+| Procédé | Seuil de coupure | Pression | Éléments éliminés |
+|---------|-----------------|----------|-------------------|
+| Microfiltration (MF) | 0,1–10 μm | 10–100 kPa | Bactéries, protozoaires, turbidité |
+| Ultrafiltration (UF) | 0,01–0,1 μm | 100–500 kPa | Virus, macromolécules, colloïdes |
+| Nanofiltration (NF) | 1–10 nm | 500–1500 kPa | Dureté, pesticides, NOM |
+| Osmose inverse (OI) | < 1 nm | 1500–8000 kPa | Sels dissous, TDS > 99% rejet |
+
+<Tip>
+Les membranes UF utilisées en eau potable offrent une barrière absolue contre Cryptosporidium et Giardia, souvent équivalente à une filtration rapide + désinfection UV. Leur intégration dans les petites usines simplifie l'exploitation.
+</Tip>
+
+## Traitement des eaux usées
+
+### Traitement préliminaire
+
+Le traitement préliminaire protège les équipements mécaniques en aval :
+
+- **Dégrillage grossier** (espacement 25–150 mm) puis **dégrillage fin** (3–25 mm) : élimination des déchets grossiers (chiffons, plastiques)
+- **Dessablage** : bassins à circulation hélicoïdale ou aérés pour séparer les particules > 200 μm (densité 2,65 g/cm³), temps de séjour 2–5 min à débit de pointe
+- **Déshuilage et dégraissage** : flottation à air dissous (DAF) ou bassins de surface à flux horizontal
+
+### Traitement primaire
+
+La décantation primaire élimine par gravité les matières en suspension sédimentables :
+
+- Élimination de **50–65% des MES** et **25–35% de la DBO₅**
+- Temps de séjour hydraulique : 1,5–2,5 heures
+- Taux de débordement : 25–50 m³/(m²·j)
+- Production de boues primaires : environ 1,0–1,5 L/habitant·j (à 3–5% de siccité)
+
+### Traitement secondaire — Boues activées
+
+Le procédé à boues activées est le plus répandu pour le traitement biologique secondaire au Canada.
+
+**Paramètres fondamentaux :**
+
+- **MLSS (Mixed Liquor Suspended Solids)** : concentration en biomasse active dans le bassin d'aération, typiquement **2000–4000 mg/L** (boues activées conventionnelles), jusqu'à 8000–12000 mg/L pour les bioréacteurs à membranes (MBR)
+- **Âge des boues (SRT — Sludge Retention Time)** : θc = 5–15 jours pour la nitrification, 20–30 jours pour la stabilisation aérobie des boues
+- **Rapport F/M (Food to Microorganism)** : 0,1–0,5 kg DBO₅/(kg MLVSS·j) pour le procédé conventionnel — plus faible = meilleure qualité d'effluent mais plus de boues
+- **Indice volumique des boues (IVB)** : < 150 mL/g pour une bonne décantabilité
+- **Apport en oxygène** : 1,0–1,5 kg O₂/kg DBO₅ éliminée, diffuseurs à fines bulles (efficacité de transfert OTE : 20–35%)
+
+**Effluent secondaire typique :** DBO₅ < 20 mg/L, MES < 25 mg/L, réduction globale de 85–95% de la DBO₅.
+
+### Traitement tertiaire et élimination biologique des nutriments (BNR)
+
+<Info>
+La prolifération d'algues (eutrophisation) dans les lacs et cours d'eau récepteurs est directement liée aux rejets de nutriments (azote et phosphore). Les exigences de rejet sont de plus en plus sévères au Canada, notamment au Québec où les normes du Règlement Q-2, r.12 imposent des limites strictes pour les systèmes municipaux.
+</Info>
+
+**Procédé A²O (Anaérobie-Anoxique-Oxique)** pour l'élimination biologique de l'azote et du phosphore :
+
+1. **Zone anaérobie** : libération du phosphore par les bactéries accumulatrices de polyphosphates (PAO) — absorption d'AGV
+2. **Zone anoxique** : dénitrification — réduction du NO₃⁻ en N₂ gazeux par des bactéries hétérotrophes en absence d'O₂, utilisant les nitrates comme accepteur d'électrons (C-source : DBO influente par recirculation ou méthanol)
+3. **Zone oxique** : nitrification (NH₄⁺ → NO₂⁻ → NO₃⁻ par Nitrosomonas et Nitrobacter), luxe du phosphore (absorption intensive par les PAO)
+
+**Dénitrification** : η = 70–80% d'élimination d'azote total, effluent NT < 10 mg/L possible
+
+**Déphosphatation chimique** (alternative ou appoint) : ajout de sels métalliques (alun ou chlorure ferrique) pour précipiter le phosphore sous forme d'AlPO₄ ou FePO₄. Effluent PT < 0,5 mg/L possible avec dosage adéquat.
+
+## Paramètres clés de qualité
+
+| Paramètre | Unité | Eau brute typique | Eau potable (max) | Effluent secondaire (objectif) |
+|-----------|-------|-------------------|-------------------|-------------------------------|
+| Turbidité | NTU | 1–100+ | ≤ 1 NTU (≤ 0,3 recommandé) | — |
+| DBO₅ | mg/L | 100–300 (EU) | — | ≤ 20 |
+| DCO | mg/L | 200–600 (EU) | — | ≤ 125 |
+| MES | mg/L | 50–200 (EU) | — | ≤ 25 |
+| E. coli | UFC/100 mL | variable | 0 (eau traitée) | ≤ 200 (rejet) |
+| Coliformes totaux | UFC/100 mL | variable | 0 dans 95% échantillons | — |
+| Phosphore total | mg/L | 4–10 (EU) | — | ≤ 1,0 (≤ 0,5 sensible) |
+| Azote ammoniacal | mg/L | 20–50 (EU) | — | ≤ 3,0 (nitrification) |
+| pH | — | 6–9 | 7,0–10,5 | 6–9 |
+
+## Réglementation canadienne
+
+### Lignes directrices de Santé Canada
+
+Les **Recommandations pour la qualité de l'eau potable au Canada** (Santé Canada, mise à jour continue) établissent les concentrations maximales acceptables (CMA) pour les contaminants chimiques, microbiologiques et radiologiques. Ces recommandations ne sont pas réglementaires au niveau fédéral mais sont adoptées par les provinces. Exemples de CMA :
+
+- Trihalométhanes totaux (THMT) : 100 μg/L
+- Nitrates (NO₃⁻) : 45 mg/L (≈ 10 mg/L en N-NO₃)
+- Arsenic : 10 μg/L
+- Plomb : 5 μg/L (2019, réduit de 10 μg/L)
+- E. coli : 0 UFC/100 mL (eau distribuée)
+
+### Réglementation provinciale
+
+**Québec** : Le **Règlement sur la qualité de l'eau potable** (RQEP, MELCCFP) encadre la production et la distribution d'eau potable. Le **Règlement sur les ouvrages municipaux d'assainissement des eaux usées** (Q-2, r.12, en vigueur depuis 2013) impose des limites de rejet pour les stations d'épuration municipales selon la taille et le milieu récepteur. La surveillance des sites de captage est régie par le **Règlement sur le prélèvement des eaux et leur protection** (RPEP).
+
+**Ontario** : Le **Règlement de l'Ontario 170/03** (eau potable) et le **Règlement 347** (déchets) établissent les normes de traitement et de rejet. L'Environmental Compliance Approval (ECA) délivrée par le **MECP (Ministry of the Environment, Conservation and Parks)** est obligatoire pour tout ouvrage de traitement.
+
+<Note>
+Le MELCCFP (anciennement MDDELCC) du Québec publie régulièrement des guides de conception et des fiches techniques pour les ingénieurs praticiens. Consultez le "Guide de conception des installations de production d'eau potable" (MENV, 2002, révisé) comme référence de conception incontournable au Québec.
+</Note>
+
+## Gestion des boues et biosolides
+
+La gestion des boues représente typiquement 30–50% du coût d'exploitation d'une station d'épuration.
+
+**Épaississement** : gravité (bassin d'épaississement) ou flottation à air dissous (DAF) — objectif : 4–8% de siccité
+
+**Digestion anaérobie (DA)** : Température mésophile (35°C) ou thermophile (55°C), SRT de 20–30 jours, production de biogaz (~0,5–0,7 m³ CH₄/kg SVS ajoutés), réduction de 40–60% des matières volatiles (MV). La DA est privilégiée pour les grandes stations (> 20 000 équivalents-habitants) pour la valorisation énergétique.
+
+**Digestion aérobie** : Plus simple mais moins économique en énergie, efficace pour les petites stations.
+
+**Déshydratation mécanique** : Presses à bande, centrifugeuses, filtres presses — objectif 20–30% de siccité avant compostage ou épandage.
+
+**Épandage agricole (biosolides)** : Les **Lignes directrices du CCME pour les biosolides** fixent les concentrations maximales en métaux lourds et pathogènes. Classe A (traitement thermophile) : < 1000 UFC/g de coliformes fécaux, Classe B : traitement moins rigoureux avec restrictions d'accès.
+
+<Warning>
+Les biosolides contenant des concentrations élevées de contaminants émergents (PFAS, microplastiques) font l'objet d'une réglementation croissante. Vérifier les exigences provinciales les plus récentes avant toute planification d'épandage.
+</Warning>
+
+---
+
+## Comparaison des procédés de traitement
+
+| Procédé | MES (%) | DBO₅ (%) | Pathogènes (log) | Coût CAPEX | Complexité |
+|---------|---------|----------|-----------------|------------|------------|
+| Traitement primaire | 50–65 | 25–35 | < 1 | Faible | Faible |
+| Boues activées (secondaire) | 85–95 | 85–95 | 1–2 | Moyen | Moyen |
+| Filtration tertiaire | 95–99 | 95–99 | 2–3 | Élevé | Élevé |
+| Désinfection UV (40 mJ/cm²) | — | — | 3–4 | Moyen | Faible |
+| Chloration résiduelle | — | — | 2–4 | Faible | Faible |
+| Osmose inverse (OI) | > 99 | > 99 | > 6 | Très élevé | Très élevé |
+| Ultrafiltration (UF) | > 99 | 60–80 | 4–6 | Élevé | Moyen |
+
+<CardGroup cols={2}>
+  <Card title="Qualité de l'air" icon="wind" href="/genie-environnemental/qualite-air">
+    Polluants atmosphériques, normes CAAQS, technologies de contrôle des émissions et modélisation de la dispersion gazeuse.
+  </Card>
+  <Card title="Gestion des déchets" icon="trash-can" href="/genie-environnemental/gestion-dechets">
+    Hiérarchie des déchets, conception d'enfouissement, valorisation énergétique et réglementation canadienne.
+  </Card>
+  <Card title="Réhabilitation de sites" icon="seedling" href="/genie-environnemental/rehabilitation-sites">
+    Caractérisation environnementale, évaluation des risques et technologies de décontamination des sols.
+  </Card>
+  <Card title="Génie civil — Hydraulique" icon="water" href="/genie-civil/hydraulique">
+    Hydraulique des conduites, conception de réseaux d'eau et ouvrages hydrauliques.
+  </Card>
+</CardGroup>

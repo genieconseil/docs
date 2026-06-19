@@ -1,0 +1,126 @@
+---
+title: "Architecture logicielle"
+description: "Principes SOLID, patrons de conception, architecture en couches et hexagonale, API REST et GraphQL, scalabilité"
+icon: "diagram-project"
+---
+
+L'architecture logicielle définit la structure d'un système : ses composants, leurs responsabilités et la façon dont ils interagissent. Un bon choix architectural facilite la maintenance, l'évolution et la scalabilité du logiciel sur toute sa durée de vie.
+
+## Principes SOLID
+
+Les principes SOLID sont cinq directives de conception orientée objet pour produire un code maintenable et extensible.
+
+### S — Responsabilité unique (Single Responsibility)
+Une classe doit avoir une seule raison de changer. Exemple : une classe `Facture` ne devrait pas contenir la logique d'impression PDF — déléguer à une classe `GenerateurPDF`.
+
+### O — Ouvert/fermé (Open/Closed)
+Les entités logicielles doivent être ouvertes à l'extension mais fermées à la modification. Utiliser l'héritage et les interfaces pour étendre le comportement sans modifier le code existant.
+
+### L — Substitution de Liskov
+Les sous-types doivent être substituables à leurs types de base sans altérer le comportement correct du programme. Un `Carré` ne devrait pas hériter de `Rectangle` si cela viole les invariants.
+
+### I — Ségrégation des interfaces (Interface Segregation)
+Préférer plusieurs interfaces spécifiques à une interface générale. Un client ne devrait pas être forcé de dépendre d'interfaces qu'il n'utilise pas.
+
+### D — Inversion des dépendances (Dependency Inversion)
+Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau. Tous deux doivent dépendre d'abstractions (interfaces). Exemple : injecter un `IRepositoryUtilisateur` plutôt qu'un `PostgreSQLUtilisateurRepository` concret.
+
+<Tip>En pratique, commencer par S et D — la responsabilité unique et l'injection de dépendances donnent le plus grand retour sur investissement en termes de testabilité et de maintenabilité.</Tip>
+
+## Patrons de conception
+
+### Patrons de création
+- **Singleton** : une seule instance; risque de couplage global — préférer l'injection de dépendances
+- **Factory Method / Abstract Factory** : déléguer la création d'objets à des sous-classes ou des fabriques
+- **Builder** : construction d'objets complexes étape par étape; très utile pour les objets avec de nombreux paramètres optionnels
+
+### Patrons structurels
+- **Adapter** : adaptateur entre deux interfaces incompatibles
+- **Facade** : interface simplifiée pour un sous-système complexe
+- **Decorator** : ajouter dynamiquement des comportements sans modifier la classe originale
+
+### Patrons comportementaux
+- **Observer** : abonnement aux événements; base des systèmes réactifs et event-driven
+- **Strategy** : encapsuler des algorithmes interchangeables dans des classes séparées
+- **Command** : encapsuler une requête comme objet; utile pour l'annulation (undo) et les files de commandes
+
+### MVC et MVVM
+- **MVC** (Modèle-Vue-Contrôleur) : le Contrôleur reçoit les entrées, manipule le Modèle, met à jour la Vue; adapté aux applications web côté serveur
+- **MVVM** (Modèle-Vue-VueModèle) : liaison de données bidirectionnelle; naturel pour les frameworks UI modernes (Vue.js, Angular, WPF)
+
+## Styles d'architecture
+
+### Monolithique
+Toute l'application est déployée comme une seule unité. Simple à développer et déployer initialement, mais devient rigide avec la croissance. La séparation en modules internes (modulith) peut prolonger sa durée de vie.
+
+### Architecture en couches (N-tiers)
+Séparation en couches horizontales :
+1. **Présentation** : interface utilisateur, API controllers
+2. **Application** : orchestration des cas d'utilisation, services applicatifs
+3. **Domaine** : logique métier, entités, règles de gestion
+4. **Infrastructure** : base de données, cache, messagerie, services externes
+
+La dépendance va toujours vers le bas (couches supérieures → couches inférieures).
+
+### Architecture hexagonale (Ports et Adaptateurs)
+Le domaine est au centre. Les ports (interfaces) définissent comment le domaine communique avec l'extérieur. Les adaptateurs implémentent ces ports pour des technologies concrètes.
+
+**Avantage clé** : le domaine est totalement isolé des détails techniques — testable sans base de données, sans framework, sans réseau.
+
+### Microservices
+Chaque service est déployable indépendamment, possède sa propre base de données et communique via API ou messagerie asynchrone.
+
+**Avantages** : déploiement indépendant, scalabilité granulaire, technologies hétérogènes
+**Défis** : complexité opérationnelle, transactions distribuées, latence réseau, débogage distribué
+
+<Warning>Les microservices ne sont pas une solution universelle. Un monolithe bien structuré peut être plus approprié pour une équipe de moins de 20 développeurs. Éviter le "microservices prématuré" qui ajoute de la complexité sans bénéfice réel.</Warning>
+
+## API REST et GraphQL
+
+### REST
+Principes fondamentaux :
+- **Ressources** comme noms (pas de verbes dans l'URL) : `/utilisateurs/123` pas `/getUtilisateur`
+- **Verbes HTTP** : GET (lire), POST (créer), PUT (remplacer), PATCH (modifier), DELETE (supprimer)
+- **Codes de statut** : 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 422 Unprocessable Entity, 500 Internal Server Error
+- **Versionnement** : via URL (`/v1/`) ou header Accept
+- **Pagination** : offset/limit ou cursor-based pour les grandes collections
+- **Réponse d'erreur standardisée** : format RFC 7807 (Problem Details)
+
+### GraphQL
+Langage de requête où le client spécifie exactement les données dont il a besoin.
+- **Schéma** : définit les types, requêtes, mutations et abonnements
+- **Requêtes** : lecture de données; le client contrôle le shape de la réponse
+- **Mutations** : modifications de données
+- **Problème N+1** : une requête peut déclencher N requêtes sous-jacentes; résoudre avec DataLoader (batching)
+
+Quand choisir GraphQL vs REST : GraphQL excelle quand les clients ont des besoins très variés (app mobile vs web vs partenaires). REST est plus simple à cacher et à monitorer.
+
+## Scalabilité et haute disponibilité
+
+### Scalabilité
+- **Verticale** (scale-up) : plus de CPU/RAM sur la même machine; limites physiques et coût
+- **Horizontale** (scale-out) : plus de machines; nécessite load balancing et état partagé
+
+Stratégies : load balancing (round-robin, least connections, consistent hashing), caching à plusieurs niveaux (navigateur, CDN, cache applicatif Redis, cache de requêtes DB), sharding de la base de données, réplication en lecture.
+
+### Haute disponibilité
+- **Réplication** : primaire + secondaires avec basculement automatique (failover)
+- **Circuit Breaker** : coupe les appels vers un service défaillant pour éviter les effets en cascade
+- **Bulkhead** : isolation des ressources (thread pools séparés par service appelé)
+- **Retry avec backoff exponentiel** : attente croissante entre tentatives avec jitter aléatoire
+- **Health checks** : endpoints `/health` et `/ready` pour l'orchestrateur (Kubernetes)
+
+<CardGroup cols={2}>
+  <Card title="Bonnes pratiques" icon="code" href="/genie-logiciel/bonnes-pratiques">
+    Clean Code, tests, CI/CD et revue de code
+  </Card>
+  <Card title="Planification de projets" icon="calendar-check" href="/gestion-projets/planification">
+    Gestion de projet pour les équipes logicielles
+  </Card>
+  <Card title="Systèmes de contrôle" icon="sliders" href="/genie-electrique/systemes-controle">
+    Architecture des systèmes industriels et SCADA
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Outils de modélisation et d'architecture logicielle
+  </Card>
+</CardGroup>

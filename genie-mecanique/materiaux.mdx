@@ -1,0 +1,139 @@
+---
+title: "Science des matériaux"
+description: "Métaux et alliages, polymères, composites, courbe contrainte-déformation, fatigue, fracture et traitements thermiques"
+icon: "atom"
+---
+
+La science des matériaux établit la relation entre la structure des matériaux (atomique, microstructurale) et leurs propriétés mécaniques, thermiques et chimiques. Le choix du matériau est une décision d'ingénierie fondamentale qui détermine la performance, la durée de vie et le coût d'un composant.
+
+## Métaux et alliages courants
+
+### Aciers
+L'acier est un alliage fer-carbone (C < 2,1%). Les propriétés dépendent fortement de la teneur en carbone et des éléments d'alliage :
+
+| Grade | Fy (MPa) | Fu (MPa) | Applications typiques |
+|---|---|---|---|
+| ASTM A36 | 250 | 400-550 | Structures générales |
+| ASTM A572 Gr.50 | 345 | 450 | Charpentes haute résistance |
+| ASTM A992 | 345 | 450 | Profilés W pour bâtiments |
+| 304 Inox | 205 | 515 | Alimentaire, chimique |
+| 316 Inox | 210 | 520 | Milieux corrosifs, marins |
+
+### Aluminium
+Léger (ρ = 2 700 kg/m³), non magnétique, bonne résistance à la corrosion. La désignation XXXX identifie le principal élément d'alliage :
+
+- **6061-T6** : E = 69 GPa; Fy = 276 MPa; Fu = 310 MPa — profilés extrudés, structures légères
+- **7075-T6** : E = 71 GPa; Fy = 503 MPa; Fu = 572 MPa — aéronautique, haute performance
+- **5052** : bonne résistance à la corrosion marine; soudabilité
+
+### Titane
+- Ti-6Al-4V (Grade 5) : ρ = 4 430 kg/m³; E = 114 GPa; Fy = 880 MPa; excellent rapport résistance/masse
+- Applications : aéronautique, implants biomédicaux, équipements offshore
+
+<Note>Le module de Young de l'acier (E ≈ 200 GPa) est environ 3× celui de l'aluminium (69 GPa) et 1,75× celui du titane (114 GPa). Pour une rigidité équivalente, l'aluminium doit avoir une section plus grande.</Note>
+
+## Polymères et composites
+
+### Thermoplastiques
+Fondent à la chaleur et peuvent être remoulés :
+- **HDPE** : résistance chimique, conduits, réservoirs; T service ≤ 80°C
+- **PEEK** : haute performance, T service jusqu'à 260°C; industrie aéronautique et médicale
+- **Nylon (PA66)** : bonne résistance à l'abrasion, engrenages, paliers
+
+### Thermodurcissables
+Réticulés irréversiblement à la chaleur :
+- **Époxy** : excellent pour matrices de composites, colles structurales; Tg ≈ 120-180°C
+- **Phénolique** : résistance thermique élevée, faible coût
+
+### Matériaux composites
+- **CFRP** (carbone-époxy) : E ≈ 70-150 GPa; résistance > 1 000 MPa; ρ = 1 500-1 600 kg/m³ — meilleur rapport rigidité-masse
+- **GFRP** (verre-époxy) : E ≈ 20-45 GPa; ρ ≈ 2 000 kg/m³; moins cher, moins rigide
+
+Règle des mélanges (fibres unidirectionnelles) : `Ec = Vf·Ef + Vm·Em`
+
+<Tip>Les composites CFRP ont des propriétés très anisotropes. Un stratifié quasi-isotrope [0/45/90/-45]s approche l'isotropie dans le plan mais avec des propriétés interlaminaires faibles — toujours vérifier les contraintes hors plan.</Tip>
+
+## Courbe contrainte-déformation
+
+La courbe σ-ε est obtenue par un essai de traction (ISO 6892-1, ASTM E8) :
+
+1. **Zone élastique** : `σ = E·ε` (loi de Hooke); pente = module de Young E
+2. **Limite d'élasticité** (Rp0,2 ou Fy) : déformation permanente de 0,2%
+3. **Écrouissage** : résistance qui croît avec la déformation plastique jusqu'à la résistance ultime `Rm` (Fu)
+4. **Striction et rupture** : réduction locale de la section, chute de la charge nominale
+
+Propriétés importantes :
+- **Module de Young E** : rigidité élastique (GPa)
+- **Coefficient de Poisson ν** : contraction latérale; acier ν ≈ 0,30; élastomères ν ≈ 0,50
+- **Allongement à la rupture A%** : ductilité
+- **Résilience** `Ur = Fy²/(2E)` : énergie stockée élastiquement par unité de volume
+- **Ténacité** : aire sous la courbe σ-ε (énergie avant rupture)
+
+## Fatigue des matériaux
+
+La fatigue est la rupture sous contraintes cycliques bien inférieures à la résistance statique.
+
+### Courbe S-N (courbe de Wöhler)
+Représente la contrainte alternée Sa en fonction du nombre de cycles à rupture Nf. Pour les aciers, une **limite d'endurance** `Se` existe (≈ 0,5·Fu pour Fu < 1 400 MPa) en dessous de laquelle aucune rupture en fatigue ne se produit. Les aluminiums n'ont pas de limite d'endurance réelle.
+
+### Correction de la limite d'endurance
+`Se = ka·kb·kc·kd·ke·S'e`
+
+- `ka` : facteur de surface (poli 1,0; usiné 0,8-0,9; forgé 0,7-0,8)
+- `kb` : facteur de taille (d < 8 mm : 1,0)
+- `kc` : facteur de chargement (flexion 1,0; torsion 0,59)
+- `kd` : facteur de température
+- `ke` : facteur de fiabilité
+
+### Concentrations de contraintes
+`Kt` = facteur de concentration de contrainte géométrique (entailles, trous, congés).
+
+`Kf = 1 + q·(Kt - 1)` où `q` est la sensibilité à l'entaille (0 à 1).
+
+<Warning>En fatigue, les entailles et changements de section brusques sont des points d'amorçage privilégiés des fissures. Toujours privilégier des rayons de congé généreux (r/d ≥ 0,1) dans les pièces soumises à la fatigue.</Warning>
+
+## Mécanique de la rupture
+
+### Facteur d'intensité de contrainte
+`KI = σ·√(π·a)·F(a/W)` (MPa·√m)
+
+Où `a` est la longueur de la fissure et `F` un facteur de forme géométrique.
+
+Condition de rupture : `KI ≥ KIc` (ténacité en mode I, propriété du matériau)
+
+| Matériau | KIc (MPa·√m) |
+|---|---|
+| Acier haute résistance 4340 | 50-60 |
+| Acier doux A36 | 200+ |
+| Aluminium 7075-T6 | 24-30 |
+| Aluminium 6061-T6 | 29-35 |
+| Béton | 0,2-1,5 |
+
+### Critère fuite avant rupture
+Pour les réservoirs sous pression, on cherche à s'assurer qu'une fissure traversante (détectable) n'atteint pas la taille critique de rupture : `KI(ac) < KIc`, avec `ac = (KIc/σ·F)²/π`.
+
+## Traitements thermiques des aciers
+
+| Traitement | Description | Effet |
+|---|---|---|
+| Recuit complet | Chauffage > Ac3, refroidissement lent au four | Adoucissement, élimination des contraintes |
+| Normalisation | Chauffage > Ac3, refroidissement à l'air | Microstructure uniforme, grain fin |
+| Trempe | Chauffage > Ac3, refroidissement rapide (eau, huile) | Martensite — dureté maximale |
+| Revenu | Chauffe à 150-650°C après trempe | Réduction fragilité, augmentation ténacité |
+| Cémentation | Enrichissement en C de la surface, trempe | Dureté de surface + cœur ductile |
+| Nitruration | Enrichissement en N à basse T (500-570°C) | Dureté de surface sans déformation |
+
+<CardGroup cols={2}>
+  <Card title="Thermodynamique" icon="temperature-high" href="/genie-mecanique/thermodynamique">
+    Traitements thermiques et propriétés à haute température
+  </Card>
+  <Card title="Structures" icon="building" href="/genie-civil/structures">
+    Sélection des aciers de construction
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    Normes de matériaux (ASTM, CSA, ISO)
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Simulation par éléments finis des matériaux
+  </Card>
+</CardGroup>

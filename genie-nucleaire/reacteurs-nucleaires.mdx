@@ -1,0 +1,178 @@
+---
+title: "Réacteurs nucléaires"
+description: "Types de réacteurs, fonctionnement du CANDU et physique des réacteurs"
+icon: "radiation"
+---
+
+## Fission nucléaire : principes fondamentaux
+
+La fission nucléaire est le processus par lequel un noyau lourd (typiquement l'uranium-235 ou le plutonium-239) se divise en deux fragments plus légers après absorption d'un neutron. Cette réaction libère une quantité d'énergie considérable sous forme de chaleur cinétique des fragments, de rayonnements gamma et d'énergie emportée par les neutrons émis.
+
+La réaction de fission de l'uranium-235 s'écrit schématiquement :
+
+`²³⁵U + ¹n → produits de fission (ex. : ⁹²Kr + ¹⁴¹Ba) + ~2,5 neutrons + ~200 MeV`
+
+Cette énergie de ~200 MeV par fission peut sembler modeste, mais elle est colossale à l'échelle atomique : elle représente environ 50 millions de fois l'énergie libérée par la combustion d'un atome de carbone. À titre de comparaison, 1 kg d'uranium-235 entièrement fissionné libère autant d'énergie que la combustion d'environ 3 000 tonnes de charbon.
+
+Les produits de fission sont des noyaux de taille intermédiaire (numéros atomiques typiquement entre 30 et 65), la plupart fortement radioactifs. Les neutrons émis sont dits « rapides » (énergie de l'ordre de 1 à 2 MeV). Pour maintenir la réaction en chaîne dans un réacteur thermique, ces neutrons doivent être ralentis à des énergies thermiques (~0,025 eV à température ambiante) par un modérateur.
+
+<Info>
+L'uranium naturel contient 99,28 % d'uranium-238 (non fissile) et seulement 0,71 % d'uranium-235 (fissile). Seul le réacteur CANDU utilise cet uranium naturel directement. Les autres types de réacteurs thermiques nécessitent un enrichissement de la teneur en U-235 à 3–5 % pour maintenir la criticité.
+</Info>
+
+## Comparaison des types de réacteurs
+
+| Type | Modérateur | Caloporteur | Combustible | Pays principaux |
+|---|---|---|---|---|
+| **CANDU** | Eau lourde (D₂O) | Eau lourde (D₂O) | UO₂ naturel (0,71 % U-235) | Canada, Corée du Sud, Roumanie, Inde, Argentine, Chine |
+| **PWR (REP)** | Eau légère (H₂O) | Eau légère sous pression | UO₂ enrichi (3–5 % U-235) | États-Unis, France, Chine, Corée du Sud, Japon |
+| **BWR (REB)** | Eau légère (H₂O) | Eau légère (ébullition directe) | UO₂ enrichi (3–5 % U-235) | États-Unis, Japon, Suède, Allemagne |
+| **VVER** | Eau légère (H₂O) | Eau légère sous pression | UO₂ enrichi (3–5 % U-235) | Russie, Europe de l'Est, Finlande, Inde |
+| **RBMK** | Graphite | Eau légère (ébullition) | UO₂ enrichi (1,8–2,8 %) | Russie (anciens réacteurs soviétiques — type Tchernobyl) |
+| **GCR / AGR** | Graphite | CO₂ (dioxyde de carbone) | UO₂ naturel / faiblement enrichi | Royaume-Uni |
+| **HTGR** | Graphite | Hélium (gaz) | UO₂ très enrichi (jusqu'à 20 %), particules TRISO | Chine, États-Unis (expérimental) |
+
+<Note>
+Le RBMK (Reaktor Bolshoy Moshchnosti Kanalnyy — réacteur à haute puissance à canaux) présente un coefficient de vide positif à faible puissance, ce qui signifie qu'une augmentation de la vapeur dans le cœur augmente la réactivité. C'est l'une des caractéristiques qui a contribué à l'accident de Tchernobyl en 1986. Cette conception n'est pas exportée et n'est plus construite.
+</Note>
+
+## Fonctionnement du réacteur CANDU
+
+### Architecture du cœur
+
+Le CANDU est un réacteur à canaux horizontaux, ce qui le distingue fondamentalement des réacteurs à cuve sous pression (PWR, BWR, VVER). Son cœur est constitué d'un cylindre horizontal appelé **calandre** (calandria), rempli d'eau lourde froide (D₂O) à basse pression qui sert de modérateur. À travers cette calandre passent **380 tubes de force horizontaux** (dans un réacteur CANDU-6 standard), chacun contenant des grappes de combustible baignées dans un caloporteur d'eau lourde sous pression (~10 MPa, ~310 °C).
+
+Cette architecture bizonale — caloporteur sous haute pression dans les tubes, modérateur à basse pression dans la calandre — est une caractéristique essentielle du CANDU. Elle permet notamment :
+
+- D'isoler thermiquement le modérateur froid du caloporteur chaud, améliorant l'économie neutronique
+- De réaliser le rechargement en puissance (voir ci-dessous)
+- De disposer d'un grand volume de modérateur froid comme puits thermique passif en cas d'accident
+
+### Grappes combustibles
+
+Le combustible du CANDU-6 se présente sous forme de **grappes à 37 crayons** (certaines conceptions utilisent des grappes à 28, 37 ou 43 crayons). Chaque crayon est une gaine en alliage de zirconium (Zircaloy-4) contenant des pastilles de dioxyde d'uranium fritté (UO₂). Une grappe CANDU-6 mesure environ 50 cm de long pour 10 cm de diamètre et pèse environ 24 kg. Chaque canal de combustible contient 12 grappes en série, pour un total de 380 × 12 = **4 560 grappes** dans le cœur.
+
+L'avantage de l'uranium naturel est double : il n'est pas nécessaire de disposer d'installations d'enrichissement (coûteuses et sensibles du point de vue de la non-prolifération), et le combustible irradié contient proportionnellement moins d'actinides mineurs que le combustible enrichi.
+
+### Rechargement en puissance (on-power fuelling)
+
+L'une des caractéristiques les plus distinctives du CANDU est sa capacité à être rechargé **sans arrêt du réacteur**. Deux machines à combustible (fuel machines) mobiles, une à chaque extrémité du réacteur, s'accouplent aux canaux de combustible pendant le fonctionnement à pleine puissance. L'une insère de nouvelles grappes, l'autre récupère les grappes irradiées en sens opposé. Ce rechargement continu permet :
+
+- Un facteur de capacité élevé (pas d'arrêts planifiés pour le rechargement, contrairement aux REP qui s'arrêtent tous les 12 à 18 mois)
+- Une gestion optimale du combustible (retrait des grappes les plus irradiées au moment optimal)
+- Le maintien d'une réactivité plus stable dans le cœur
+
+<Tip>
+Le rechargement en puissance permet également au CANDU de fonctionner sans uranium enrichi. Dans un REP, la haute réactivité initiale du cœur neuf (due à l'enrichissement) compense la déplétion du combustible sur toute la durée d'un cycle de 12 à 18 mois. Le CANDU maintient la criticité en renouvelant continuellement le combustible.
+</Tip>
+
+## Physique des réacteurs
+
+### Ralentissement des neutrons (modération)
+
+Les neutrons émis lors de la fission ont des énergies de l'ordre de 1 à 2 MeV. Pour maximiser la probabilité de fission de l'U-235, il faut les ralentir à des énergies thermiques (~0,025 eV, correspondant à l'agitation thermique à température ambiante, soit ~2 200 m/s). Ce processus de ralentissement s'appelle la **modération**.
+
+Le ralentissement se fait par collisions élastiques avec les noyaux du modérateur. L'efficacité d'un modérateur dépend de deux critères :
+1. **Pouvoir de ralentissement :** capacité à absorber l'énergie cinétique des neutrons (meilleur pour les noyaux légers — l'hydrogène ordinaire est optimal)
+2. **Faible absorption neutronique :** le modérateur ne doit pas capturer les neutrons qu'il ralentit
+
+L'eau ordinaire (H₂O) est un excellent modérateur pour le premier critère mais absorbe significativement les neutrons, ce qui explique pourquoi les REP nécessitent de l'uranium enrichi. L'eau lourde (D₂O) ralentit moins vite les neutrons (deutérium plus lourd que l'hydrogène) mais en absorbe beaucoup moins, ce qui explique la supériorité neutronique du CANDU et sa capacité à fonctionner avec l'uranium naturel.
+
+### Formule des quatre facteurs
+
+La multiplication des neutrons dans un milieu infini est décrite par la **formule des quatre facteurs** :
+
+`k∞ = η × ε × p × f`
+
+Où :
+- `η` (êta) = facteur de reproduction : nombre de neutrons de fission émis par neutron absorbé dans le combustible (~2,07 pour l'U-235)
+- `ε` (epsilon) = facteur de fission rapide : fissions supplémentaires dues aux neutrons rapides (~1,03–1,07)
+- `p` = facteur antitrappe (probabilité d'éviter la résonance) : fraction des neutrons qui s'échappent à la capture par résonance pendant le ralentissement (~0,75–0,90)
+- `f` = facteur d'utilisation thermique : fraction des neutrons thermiques absorbés dans le combustible (~0,70–0,85)
+
+Pour un réacteur de dimensions finies, on introduit des facteurs de non-fuite (P_NL) :
+
+`k_eff = k∞ × P_NL`
+
+### Criticité et contrôle de la réactivité
+
+Un réacteur est dit **critique** lorsque `k_eff = 1`, c'est-à-dire lorsque chaque génération de neutrons produit exactement autant de fissions que la précédente. La réactivité ρ est définie par :
+
+`ρ = (k_eff - 1) / k_eff`
+
+La réactivité est nulle au point critique, positive pour un réacteur surcritique (puissance croissante) et négative pour un réacteur sous-critique (puissance décroissante).
+
+Le contrôle de la réactivité dans le CANDU est assuré par plusieurs mécanismes :
+- **Barres d'adjuster (absorpteurs) :** ajusteurs en acier inoxydable ou en cobalt, normalement insérés dans le cœur, qui absorbent l'excès de réactivité du cœur neuf
+- **Barres de contrôle de zone :** partitions remplies d'eau légère (absorbante) ou vides pour contrôle fin
+- **Neutrons différés :** ~0,65 % des neutrons de fission sont émis avec retard (de 0,2 à 55 secondes), ce qui donne aux systèmes de contrôle le temps nécessaire pour réguler le réacteur
+
+### Coefficients de réactivité
+
+Les coefficients de réactivité décrivent comment la réactivité évolue en réponse aux changements de conditions physiques du réacteur :
+
+**Coefficient de température du modérateur (CANDU) :** négatif — une augmentation de la température du D₂O modérateur augmente son absorption neutronique et réduit sa densité, diminuant la réactivité. Effet stabilisant.
+
+**Coefficient de température du combustible (effet Doppler) :** toujours négatif dans tout réacteur thermique — l'élargissement des résonances d'absorption de l'U-238 avec la température augmente la capture par résonance. C'est un mécanisme de rétroaction négatif fondamental pour la sûreté.
+
+**Coefficient de vide du caloporteur (CANDU) :** légèrement positif dans le CANDU — si le caloporteur D₂O se vaporise partiellement, son pouvoir d'absorption diminue et la réactivité augmente modestement. Cet effet est compensé par des systèmes de sûreté dédiés et est limité en amplitude.
+
+<Warning>
+Le coefficient de vide positif du caloporteur dans le CANDU est une caractéristique de conception importante qui est soigneusement prise en compte dans les analyses de sûreté. Il est limité en amplitude et compensé par des systèmes de sûreté indépendants (SDS1 et SDS2). Son amplitude est beaucoup plus faible que celle du coefficient de vide du RBMK, qui était l'un des facteurs contributifs de l'accident de Tchernobyl.
+</Warning>
+
+## Petits réacteurs modulaires (PRM) au Canada
+
+Les petits réacteurs modulaires (PRM, ou SMR en anglais — Small Modular Reactors) représentent la prochaine génération de réacteurs nucléaires, caractérisés par une puissance inférieure à 300 MWe (certaines définitions retiennent 300 MWe comme seuil) et une conception modulaire permettant une fabrication en usine. Le Canada est l'un des pays les plus actifs dans le développement des PRM, avec une Feuille de route sur les PRM publiée en 2018 et une stratégie nationale mise à jour en 2022.
+
+**ARC-100 (ARC Clean Technology) :** Réacteur rapide refroidi au sodium (Sodium-cooled Fast Reactor — SFR) de 100 MWe. Développé pour être déployé au Nouveau-Brunswick. Les réacteurs rapides peuvent utiliser du combustible usé des réacteurs actuels comme combustible, réduisant le volume de déchets à long terme. L'ARC-100 fait l'objet d'un examen de conception préalable (ECP) auprès de la CCSN.
+
+**Moltex SSR-W (Stable Salt Reactor — Wasteburner) :** Réacteur à sels fondus de 300 MWe développé à Saint-Jean, Nouveau-Brunswick. Brûle le plutonium et les actinides mineurs du combustible CANDU usé dissous dans des sels fondus. Concept innovant pour la réduction des déchets à longue durée de vie.
+
+**Réacteur micro-modulaire (MMR) — USNC / Global First Power :** Réacteur à haute température refroidi à l'hélium de 5 MWe (15 MWth), utilisant du combustible en particules TRISO (Tri-structural ISOtropic). Un projet pilote est en développement sur le site des LNC à Chalk River, Ontario. Les particules TRISO encapsulent le combustible dans plusieurs couches céramiques, offrant une rétention des produits de fission même à très haute température.
+
+**IMSR (Integrated Molten Salt Reactor) — Terrestrial Energy :** Réacteur à sels fondus de 195 MWe, conçu pour être une unité intégrée de remplacement de cœur tous les 7 ans. En cours d'examen de conception préalable à la CCSN.
+
+**BWRX-300 (GE Hitachi) :** Réacteur à eau bouillante simplifié de 300 MWe, technologie dérivée du ESBWR. OPG et Saskatchewan Power Corporation ont exprimé un intérêt pour ce design. Également considéré par la Pologne, les pays baltes et d'autres.
+
+<Info>
+La CCSN offre un processus d'examen de conception préalable (ECP) aux fournisseurs de PRM, permettant un examen technique des nouveaux designs avant le dépôt d'une demande de permis officielle. Cet examen volontaire réduit l'incertitude réglementaire et accélère le processus d'autorisation.
+</Info>
+
+## Cycle du combustible nucléaire
+
+Le cycle du combustible nucléaire décrit le parcours de l'uranium depuis son extraction jusqu'à la gestion finale des déchets :
+
+1. **Extraction minière :** mines d'uranium (Saskatchewan — Cigar Lake, McArthur River — parmi les plus riches au monde avec des teneurs > 10 % d'U₃O₈)
+2. **Raffinage et conversion :** production d'UO₃ puis de UF₆ (pour enrichissement) ou UO₂ direct (pour CANDU)
+3. **Enrichissement (non requis pour le CANDU) :** séparation isotopique par centrifugation gazeuse pour les réacteurs REP/BWR
+4. **Fabrication du combustible :** frittage de pastilles d'UO₂, assemblage des crayons et des grappes ou assemblages
+5. **Utilisation en réacteur :** irradiation pendant 1 à 3 ans (REP) ou rechargement continu (CANDU)
+6. **Stockage intermédiaire :** piscines de stockage humide (premiers 5 à 10 ans) puis stockage sec en conteneurs
+7. **Gestion à long terme :** dépôt géologique profond (en développement au Canada par la SGDN)
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card
+    title="Introduction au génie nucléaire"
+    icon="radiation"
+    href="/genie-nucleaire/introduction"
+  >
+    Aperçu du secteur, applications et organisations clés
+  </Card>
+  <Card
+    title="Sûreté nucléaire"
+    icon="shield-halved"
+    href="/genie-nucleaire/surete-nucleaire"
+  >
+    Défense en profondeur, systèmes de sûreté CANDU et leçons des accidents
+  </Card>
+  <Card
+    title="Gestion des déchets radioactifs"
+    icon="biohazard"
+    href="/genie-nucleaire/dechets-radioactifs"
+  >
+    Classification, stockage et gestion à long terme au Canada
+  </Card>
+</CardGroup>

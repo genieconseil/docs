@@ -1,0 +1,131 @@
+---
+title: "Circuits électriques"
+description: "Lois de Kirchhoff, théorèmes de Thévenin et Norton, circuits AC, filtres passifs et transformateurs"
+icon: "bolt"
+---
+
+Les circuits électriques constituent la base de toute l'ingénierie électrique. La maîtrise des lois fondamentales, des théorèmes de simplification et de l'analyse en régime alternatif est indispensable pour concevoir et analyser tout système électrique.
+
+## Lois de Kirchhoff
+
+### Loi des mailles (KVL — Kirchhoff's Voltage Law)
+La somme algébrique des tensions autour de toute maille fermée est nulle :
+
+`ΣV = 0`
+
+En pratique : la somme des chutes de tension (résistances, inductances, capacités) égale la somme des forces électromotrices (sources de tension).
+
+### Loi des noeuds (KCL — Kirchhoff's Current Law)
+La somme algébrique des courants entrant et sortant de tout noeud est nulle :
+
+`ΣI = 0`
+
+En pratique : la somme des courants arrivant à un noeud égale la somme des courants qui en partent.
+
+### Méthode des mailles et méthode des noeuds
+- **Méthode des mailles** : choisir des courants de maille, appliquer KVL à chaque maille → système de n équations pour n mailles indépendantes
+- **Méthode des noeuds** : définir les tensions de noeud par rapport à une référence (masse), appliquer KCL → système réduit de (n-1) équations
+
+<Tip>La méthode des noeuds est généralement plus efficace pour les circuits avec de nombreuses branches en parallèle; la méthode des mailles est préférable pour les circuits avec peu de mailles.</Tip>
+
+## Théorèmes de simplification
+
+### Théorème de Thévenin
+Tout circuit linéaire bipolaire peut être remplacé par une source de tension `Vth` en série avec une résistance `Rth` :
+
+- `Vth` = tension à vide aux bornes de sortie (circuit ouvert)
+- `Rth` = résistance vue depuis les bornes, toutes sources indépendantes éteintes (sources de tension court-circuitées, sources de courant ouvertes)
+
+### Théorème de Norton
+Équivalent à Thévenin mais avec une source de courant `In` en parallèle avec `Rn = Rth` :
+
+`In = Vth / Rth`
+
+Transformation source : `Vth = In·Rn`
+
+### Théorème de superposition
+Dans un circuit linéaire avec plusieurs sources, la réponse totale est la somme des réponses obtenues avec chaque source activée séparément (les autres éteintes).
+
+<Note>La superposition ne s'applique qu'aux circuits linéaires. Elle ne s'applique pas aux puissances (P = I²R est non-linéaire).</Note>
+
+## Circuits AC — Régime sinusoïdal permanent
+
+### Représentation phasorielle
+Un signal sinusoïdal `v(t) = Vm·cos(ωt + φ)` est représenté par le phaseur `V = Vm∠φ` (amplitude et phase).
+
+La pulsation `ω = 2π·f` (rad/s); en Amérique du Nord f = 60 Hz, en Europe f = 50 Hz.
+
+### Impédances
+- **Résistance** : `ZR = R` (réelle, pas de déphasage)
+- **Inductance** : `ZL = jωL = jXL` où `XL = 2πfL` (Ω) — courant en retard de 90°
+- **Capacité** : `ZC = 1/(jωC) = -jXC` où `XC = 1/(2πfC)` (Ω) — courant en avance de 90°
+
+Impédance totale : `Z = R + j(XL - XC)` (Ω)
+
+Module : `|Z| = √(R² + (XL - XC)²)`, Phase : `φ = arctan((XL - XC)/R)`
+
+### Puissances en AC
+- **Puissance active** `P = V·I·cos(φ)` (W) — énergie dissipée par effet Joule
+- **Puissance réactive** `Q = V·I·sin(φ)` (VAR) — énergie stockée/restituée par inductances et capacités
+- **Puissance apparente** `S = V·I = √(P² + Q²)` (VA)
+- **Facteur de puissance** `fp = cos(φ) = P/S`
+
+Un facteur de puissance proche de 1 est idéal. Les charges inductives (moteurs) ont un fp en retard (lagging); les charges capacitives en avance (leading).
+
+<Warning>Un facteur de puissance faible (fp < 0,85) augmente le courant pour une même puissance active, ce qui surcharge les câbles et les transformateurs. Les distributeurs pénalisent souvent les industriels avec un faible fp.</Warning>
+
+### Correction du facteur de puissance
+Compenser les charges inductives avec des condensateurs en parallèle :
+
+`Qc = P·(tan(φ₁) - tan(φ₂))`
+
+Capacité requise : `C = Qc / (ω·V²)`
+
+## Filtres passifs
+
+### Filtre passe-bas RC
+`Vout/Vin = 1/(1 + jωRC)`
+
+Fréquence de coupure : `fc = 1/(2πRC)` — atténuation à -3 dB à fc, -20 dB/décade au-delà
+
+### Filtre passe-haut RC
+`Vout/Vin = jωRC/(1 + jωRC)`
+
+Même fréquence de coupure, pente +20 dB/décade sous fc.
+
+### Filtre passe-bande et coupe-bande RLC
+Résonance à `ω₀ = 1/√(LC)`, facteur de qualité `Q = ω₀·L/R = 1/(ω₀·RC)`.
+
+Bande passante : `BW = ω₀/Q`
+
+Un Q élevé donne un filtre très sélectif (bande étroite); utile pour les filtres de radiofréquence.
+
+## Transformateurs
+
+### Rapport de transformation
+`n = N₁/N₂ = V₁/V₂ = I₂/I₁`
+
+Un transformateur abaisseur avec n = 10 convertit 1 000 V en 100 V et multiplie le courant par 10 (conservation de la puissance apparente en cas idéal).
+
+### Transformateur réel
+Pertes à considérer :
+- **Pertes fer** (pertes à vide) : hystérésis et courants de Foucault dans le noyau — constantes quel que soit le chargement
+- **Pertes cuivre** (pertes en charge) : `Pcu = I²·R` dans les enroulements — proportionnelles au carré du courant
+
+### Transformateurs triphasés
+Couplages courants : Dyn11 (delta-étoile) pour les transformateurs de distribution; Dd0 pour les transformateurs de puissance. L'angle de déphasage (0°, 30°, etc.) est important pour la mise en parallèle.
+
+<CardGroup cols={2}>
+  <Card title="Systèmes de contrôle" icon="sliders" href="/genie-electrique/systemes-controle">
+    Régulation et automatisation des systèmes électriques
+  </Card>
+  <Card title="Énergie renouvelable" icon="sun" href="/genie-electrique/energie-renouvelable">
+    Onduleurs, convertisseurs et raccordement au réseau
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    Code canadien de l'électricité (CCÉ), NEC, CEI
+  </Card>
+  <Card title="Outils de calcul" icon="calculator" href="/ressources/outils-calcul">
+    Logiciels de simulation de circuits (SPICE, MATLAB)
+  </Card>
+</CardGroup>

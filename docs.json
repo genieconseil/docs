@@ -1,68 +1,349 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "GénieConseil",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1E3A8A",
+    "light": "#3B82F6",
+    "dark": "#0F172A"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Accueil & Communauté",
         "groups": [
           {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
+            "group": "Portail GénieConseil",
+            "pages": ["index"]
           },
           {
-            "group": "Customization",
+            "group": "Communauté mondiale",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "communaute/index",
+              "communaute/questions-reponses",
+              "communaute/evenements",
+              "communaute/formation",
+              "communaute/reseautage"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Génie Civil & Géosciences",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Structures & Béton",
             "pages": [
-              "api-reference/introduction"
+              "genie-civil/structures",
+              "genie-civil/beton-arme",
+              "genie-civil/charpente-metallique"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Géotechnique & Fondations",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "genie-civil/fondations",
+              "geotechnique/mecanique-sols",
+              "geotechnique/stabilite-pentes",
+              "geotechnique/mecanique-roches"
+            ]
+          },
+          {
+            "group": "Hydraulique & Hydrologie",
+            "pages": [
+              "genie-civil/hydraulique",
+              "hydrogeologie/eaux-souterraines",
+              "hydrogeologie/aquiferes"
+            ]
+          },
+          {
+            "group": "Transport & Infrastructures",
+            "pages": [
+              "genie-civil/transport-routes",
+              "genie-civil/ponts-ouvrages"
+            ]
+          },
+          {
+            "group": "Géomatique & Arpentage",
+            "pages": [
+              "geomatique/introduction",
+              "geomatique/sig-teledetection"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Génie Mécanique & Matériaux",
+        "groups": [
+          {
+            "group": "Sciences fondamentales",
+            "pages": [
+              "genie-mecanique/thermodynamique",
+              "genie-mecanique/mecanique-fluides",
+              "genie-mecanique/mecanique-solides"
+            ]
+          },
+          {
+            "group": "Conception & Fabrication",
+            "pages": [
+              "genie-mecanique/conception-mecanique",
+              "genie-mecanique/fabrication-procedes",
+              "genie-mecanique/maintenance-fiabilite"
+            ]
+          },
+          {
+            "group": "Matériaux & Métallurgie",
+            "pages": [
+              "genie-mecanique/materiaux",
+              "genie-metallurgique/introduction",
+              "genie-metallurgique/traitements-thermiques",
+              "genie-metallurgique/corrosion"
+            ]
+          },
+          {
+            "group": "Domaines spécialisés",
+            "pages": [
+              "genie-aerospatial/introduction",
+              "genie-aerospatial/aerodynamique",
+              "genie-maritime/introduction"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Génie Électrique & Numérique",
+        "groups": [
+          {
+            "group": "Électrotechnique",
+            "pages": [
+              "genie-electrique/circuits",
+              "genie-electrique/electronique",
+              "genie-electrique/machines-electriques"
+            ]
+          },
+          {
+            "group": "Systèmes & Automatisation",
+            "pages": [
+              "genie-electrique/systemes-controle",
+              "genie-industriel/automatisation-plc",
+              "genie-industriel/robotique"
+            ]
+          },
+          {
+            "group": "Énergie & Réseaux",
+            "pages": [
+              "genie-electrique/energie-renouvelable",
+              "genie-electrique/reseaux-electriques",
+              "genie-electrique/telecommunications"
+            ]
+          },
+          {
+            "group": "Génie Logiciel & IA",
+            "pages": [
+              "genie-logiciel/architecture",
+              "genie-logiciel/bonnes-pratiques",
+              "genie-logiciel/intelligence-artificielle",
+              "genie-logiciel/cybersecurite"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Génie Chimique & Procédés",
+        "groups": [
+          {
+            "group": "Fondamentaux",
+            "pages": [
+              "genie-chimique/introduction",
+              "genie-chimique/operations-unitaires",
+              "genie-chimique/thermodynamique-chimique"
+            ]
+          },
+          {
+            "group": "Procédés industriels",
+            "pages": [
+              "genie-chimique/genie-reacteurs",
+              "genie-chimique/procedes-industriels",
+              "genie-chimique/securite-procedes"
+            ]
+          },
+          {
+            "group": "Domaines spécialisés",
+            "pages": [
+              "genie-chimique/pharmaceutique-biotech",
+              "genie-petrolier/introduction",
+              "genie-petrolier/forage-production"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Génie Minier & Nucléaire",
+        "groups": [
+          {
+            "group": "Génie Minier",
+            "pages": [
+              "genie-minier/introduction",
+              "genie-minier/exploration-evaluation",
+              "genie-minier/extraction-traitement",
+              "genie-minier/securite-environnement"
+            ]
+          },
+          {
+            "group": "Génie Nucléaire",
+            "pages": [
+              "genie-nucleaire/introduction",
+              "genie-nucleaire/reacteurs-nucleaires",
+              "genie-nucleaire/surete-nucleaire",
+              "genie-nucleaire/dechets-radioactifs"
+            ]
+          },
+          {
+            "group": "Génie Agricole",
+            "pages": [
+              "genie-agricole/introduction",
+              "genie-agricole/irrigation-drainage"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Génie Biomédical & Env.",
+        "groups": [
+          {
+            "group": "Génie Biomédical",
+            "pages": [
+              "genie-biomedical/introduction",
+              "genie-biomedical/dispositifs-medicaux",
+              "genie-biomedical/biomecanique",
+              "genie-biomedical/imagerie-medicale"
+            ]
+          },
+          {
+            "group": "Génie Environnemental",
+            "pages": [
+              "genie-environnemental/traitement-eaux",
+              "genie-environnemental/qualite-air",
+              "genie-environnemental/gestion-dechets",
+              "genie-environnemental/rehabilitation-sites"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Gestion & Carrière",
+        "groups": [
+          {
+            "group": "Gestion de projets",
+            "pages": [
+              "gestion-projets/planification",
+              "gestion-projets/gestion-risques",
+              "gestion-projets/estimation-couts",
+              "gestion-projets/contrats-appels-offres"
+            ]
+          },
+          {
+            "group": "Leadership & Éthique",
+            "pages": [
+              "leadership/ethique-ingenierie",
+              "leadership/communication-technique",
+              "leadership/developpement-professionnel"
+            ]
+          },
+          {
+            "group": "Génie Industriel",
+            "pages": [
+              "genie-industriel/optimisation-procedes",
+              "genie-industriel/logistique-chaine",
+              "genie-industriel/qualite-six-sigma"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Ressources",
+        "groups": [
+          {
+            "group": "Outils & Logiciels",
+            "pages": [
+              "ressources/outils-calcul",
+              "ressources/logiciels-par-discipline"
+            ]
+          },
+          {
+            "group": "Normes & Réglementation",
+            "pages": [
+              "ressources/normes-codes",
+              "ressources/normes-canadiennes",
+              "ressources/normes-internationales"
+            ]
+          },
+          {
+            "group": "Formation & Publications",
+            "pages": [
+              "ressources/publications-revues",
+              "ressources/organismes-professionnels"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "English",
+        "groups": [
+          {
+            "group": "Welcome",
+            "pages": ["en/index"]
+          },
+          {
+            "group": "Civil Engineering & Geosciences",
+            "pages": [
+              "en/civil-engineering/foundations",
+              "en/civil-engineering/structures",
+              "en/civil-engineering/hydraulics"
+            ]
+          },
+          {
+            "group": "Mechanical Engineering",
+            "pages": [
+              "en/mechanical/thermodynamics",
+              "en/mechanical/materials"
+            ]
+          },
+          {
+            "group": "Electrical & Digital Engineering",
+            "pages": [
+              "en/electrical/circuits",
+              "en/electrical/control-systems"
+            ]
+          },
+          {
+            "group": "Chemical & Mining Engineering",
+            "pages": [
+              "en/chemical/introduction",
+              "en/mining/introduction",
+              "en/nuclear/introduction"
+            ]
+          },
+          {
+            "group": "Biomedical & Environmental",
+            "pages": [
+              "en/biomedical/introduction",
+              "en/environmental/water-treatment"
+            ]
+          },
+          {
+            "group": "Software & Industrial",
+            "pages": [
+              "en/software/architecture",
+              "en/industrial/optimization"
+            ]
+          },
+          {
+            "group": "Management & Career",
+            "pages": [
+              "en/project-management/planning",
+              "en/resources/calculation-tools"
             ]
           }
         ]
@@ -71,14 +352,19 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Forum Q&R",
+          "href": "https://genieconseil.com/forum",
+          "icon": "comments"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "YouTube",
+          "href": "https://youtube.com/@genieconseil",
+          "icon": "youtube"
+        },
+        {
+          "anchor": "Infolettre",
+          "href": "https://genieconseil.com/newsletter",
+          "icon": "envelope"
         }
       ]
     }
@@ -90,33 +376,25 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "English",
+        "href": "/en/index"
+      },
+      {
+        "label": "Forum",
+        "href": "https://genieconseil.com/forum"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Rejoindre la communauté",
+      "href": "https://genieconseil.com/inscription"
     }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/genieconseil",
+      "linkedin": "https://linkedin.com/company/genieconseil",
+      "youtube": "https://youtube.com/@genieconseil"
     }
   }
 }

@@ -1,0 +1,151 @@
+---
+title: "Dispositifs médicaux — Conception et réglementation"
+description: "Classification, réglementation canadienne et internationale, gestion de la qualité et de la sécurité"
+icon: "stethoscope"
+---
+
+## Introduction à la réglementation des dispositifs médicaux
+
+Un dispositif médical est tout instrument, appareil, équipement, matière ou article — qu'il soit utilisé seul ou en combinaison — destiné par le fabricant à être utilisé chez l'être humain à des fins de diagnostic, de prévention, de surveillance, de traitement ou d'atténuation d'une maladie ou d'une blessure. Cette définition large, issue du *Règlement sur les instruments médicaux* (DORS/98-282) de Santé Canada, englobe aussi bien le bandage adhésif que le défibrillateur implantable ou le scanner IRM.
+
+La conception d'un dispositif médical ne peut jamais être dissociée de son cadre réglementaire. La réglementation n'est pas une contrainte imposée a posteriori : elle structure le processus de développement dès les premières phases de définition des spécifications. Un ingénieur biomédical travaillant dans ce domaine doit maîtriser simultanément les aspects techniques, qualité et réglementaires du cycle de vie du produit.
+
+## Classification des dispositifs médicaux au Canada
+
+### Système de classification selon DORS/98-282
+
+Santé Canada classe les dispositifs médicaux en quatre catégories selon leur niveau de risque potentiel pour le patient et l'utilisateur. Le niveau de risque est déterminé en fonction de la durée d'utilisation, du caractère invasif, de la source d'énergie, du contact avec le corps humain (externe, peau lésée, muqueuses, vaisseaux sanguins, système nerveux central) et du type de diagnostic ou de thérapie.
+
+| Classe | Niveau de risque | Exemples | Exigences réglementaires |
+|--------|-----------------|----------|--------------------------|
+| Classe I | Risque faible | Bandages, béquilles, instruments chirurgicaux réutilisables non stériles | Déclaration d'établissement uniquement |
+| Classe II | Risque modéré | Aiguilles hypodermiques, seringues, certains cathéters, logiciels de diagnostic non critiques | Homologation simplifiée, liste de contrôle |
+| Classe III | Risque élevé | Prothèses orthopédiques, implants mammaires, pompes à perfusion implantables | Examen approfondi du dossier technique, données cliniques |
+| Classe IV | Risque très élevé | Stimulateurs cardiaques, valves cardiaques, défibrillateurs implantables, dispositifs neurologiques actifs | Homologation complète, données cliniques exhaustives, inspections |
+
+<Note>
+Les logiciels utilisés comme dispositifs médicaux (SaMD, *Software as a Medical Device*) font l'objet d'une attention réglementaire croissante. Santé Canada suit les lignes directrices de l'IMDRF (*International Medical Device Regulators Forum*) pour leur classification et leur évaluation. Un algorithme d'IA utilisé pour le diagnostic d'une pathologie peut être classé comme dispositif de classe III ou IV selon son niveau d'autonomie décisionnelle et la gravité des conséquences d'une erreur.
+</Note>
+
+## Règlement sur les instruments médicaux — DORS/98-282
+
+Le *Règlement sur les instruments médicaux* constitue le texte réglementaire fondamental régissant les dispositifs médicaux au Canada. Il définit les exigences relatives à :
+
+- **L'homologation** : les fabricants de dispositifs de classe II, III et IV doivent obtenir une homologation de Santé Canada avant de pouvoir vendre leurs produits au Canada. Le numéro d'homologation (DIN pour les médicaments, ou numéro d'identification de l'instrument pour les dispositifs) doit figurer sur l'étiquetage.
+- **L'étiquetage** : les dispositifs doivent porter toutes les informations requises par le règlement (nom du dispositif, nom et adresse du fabricant, numéro de lot, date de péremption le cas échéant, instructions d'utilisation, mise en garde et précautions).
+- **Les déclarations d'établissement** : tout importateur ou distributeur canadien de dispositifs médicaux doit déposer une déclaration d'établissement annuelle auprès de Santé Canada.
+- **La distribution et les rappels** : les fabricants et distributeurs sont tenus de maintenir des dossiers de distribution permettant une traçabilité complète et de signaler à Santé Canada tout incident grave et tout rappel de dispositif.
+
+<Warning>
+Depuis la mise à jour des règlements en 2021, les fabricants de dispositifs médicaux de classe II, III et IV doivent démontrer qu'ils disposent d'un système de gestion de la qualité conforme à ISO 13485. Les inspections de Santé Canada peuvent survenir à tout moment, et les non-conformités peuvent mener à la suspension ou au retrait de l'homologation, avec obligation de rappel des produits du marché.
+</Warning>
+
+## ISO 13485 — Système de management de la qualité
+
+La norme ISO 13485:2016 (*Dispositifs médicaux — Systèmes de management de la qualité — Exigences à des fins réglementaires*) est la référence mondiale pour les systèmes qualité dans l'industrie des dispositifs médicaux. Contrairement à ISO 9001, elle n'adopte pas une approche d'amélioration continue basée sur la satisfaction du client, mais privilégie la cohérence et la conformité aux exigences réglementaires applicables.
+
+Les éléments clés du système de management de la qualité selon ISO 13485 comprennent :
+
+- **La maîtrise des documents et des enregistrements** : procédures de création, révision, approbation et archivage de tous les documents qualité
+- **La planification du produit** : définition des activités de vérification, validation, surveillance, mesure, inspection et tests spécifiques au produit
+- **Les processus relatifs aux clients** : exigences réglementaires applicables, retour d'information post-commercialisation
+- **La maîtrise de la conception et du développement** : planification, éléments d'entrée, éléments de sortie, revue, vérification, validation et maîtrise des modifications
+- **La maîtrise des achats** : qualification et surveillance des fournisseurs critiques
+- **La maîtrise de la production et de la préparation du service** : validation des procédés spéciaux, traçabilité, conservation du produit
+- **La surveillance et le mesurage** : audits internes, surveillance et mesurage des processus et du produit
+
+## Maîtrise de la conception et Dossier d'historique de conception (DHF)
+
+Le *Design History File* (DHF), ou dossier d'historique de conception, est l'ensemble documentaire qui retrace toutes les activités de conception et de développement d'un dispositif médical. Exigé par la FDA (21 CFR Part 820) et implicitement par ISO 13485, il constitue la preuve que le dispositif a été conçu et développé conformément aux plans de conception approuvés.
+
+Un DHF complet comprend typiquement :
+
+- **Le plan de développement** : phases, jalons, responsabilités, ressources
+- **Les éléments d'entrée de conception** (*Design Inputs*) : spécifications des exigences du dispositif (performance, sécurité, biocompatibilité, stérilisation, emballage, étiquetage, exigences réglementaires)
+- **Les éléments de sortie de conception** (*Design Outputs*) : dessins techniques, spécifications de matériaux, instructions de fabrication, procédures de test
+- **Les revues de conception** : comptes-rendus de réunions aux jalons clés du développement
+- **Les rapports de vérification** : preuves que les éléments de sortie satisfont aux éléments d'entrée (tests de banc, simulations)
+- **Les rapports de validation** : preuves que le dispositif satisfait aux besoins de l'utilisateur et aux exigences d'utilisation prévue (études cliniques, tests d'utilisabilité)
+- **Les modifications de conception** : toutes les modifications apportées après la conception initiale, avec justification et réévaluation des risques
+
+<Tip>
+Il est fortement recommandé de commencer la construction du DHF dès le premier jour du projet de développement, et non pas de le reconstituer a posteriori avant la soumission réglementaire. Les inspecteurs de la FDA et de Santé Canada examinent en priorité la cohérence temporelle des documents et les signatures d'approbation datées. Un DHF reconstitué après coup présente des incohérences facilement détectables.
+</Tip>
+
+## Gestion des risques selon ISO 14971
+
+La norme ISO 14971:2019 (*Dispositifs médicaux — Application de la gestion du risque aux dispositifs médicaux*) définit le processus de gestion des risques applicable tout au long du cycle de vie d'un dispositif médical. Elle est exigée par pratiquement toutes les autorités réglementaires mondiales comme condition d'autorisation de mise sur le marché.
+
+### Processus de gestion des risques
+
+**1. Analyse des dangers (*Hazard Analysis*)** : identification de toutes les situations dangereuses pouvant résulter de l'utilisation du dispositif, en tenant compte de l'utilisation prévue mais aussi des utilisations raisonnablement prévisibles non prévues (mauvais usage raisonnable).
+
+**2. Estimation du risque** : pour chaque danger identifié, estimation de la probabilité d'occurrence du dommage et de la gravité du dommage. La combinaison de ces deux paramètres définit le niveau de risque estimé.
+
+**3. Évaluation du risque** : comparaison du risque estimé aux critères d'acceptabilité définis dans le plan de gestion des risques (matrice de risques). Un risque peut être jugé acceptable, tolérable sous condition, ou inacceptable.
+
+**4. Maîtrise du risque** : pour les risques non acceptables, mise en œuvre de mesures de maîtrise selon la hiérarchie suivante : (a) sécurité inhérente par la conception, (b) mesures de protection intégrées au dispositif ou au processus de fabrication, (c) information de sécurité (étiquetage, notices d'utilisation, formation).
+
+**5. Évaluation du risque résiduel** : après mise en œuvre des mesures de maîtrise, réévaluation du risque résiduel et détermination si le bénéfice clinique l'emporte sur le risque résiduel.
+
+**6. Rapport de gestion des risques** : synthèse de l'ensemble du processus, conclusion sur l'acceptabilité du profil risques/bénéfices du dispositif.
+
+## Biocompatibilité selon la série ISO 10993
+
+La série de normes ISO 10993 (*Évaluation biologique des dispositifs médicaux*) définit les exigences d'évaluation de la biocompatibilité des matériaux en contact avec le corps humain. Le choix des tests à effectuer dépend de la nature du contact (surface externe, muqueuse, peau lésée, sang, implant) et de la durée d'exposition (transitoire < 24h, court terme 24h–30 jours, long terme > 30 jours).
+
+Les tests biologiques typiques selon ISO 10993-1 comprennent : cytotoxicité (ISO 10993-5), sensibilisation cutanée (ISO 10993-10), irritation (ISO 10993-23), toxicité systémique aiguë (ISO 10993-11), génotoxicité (ISO 10993-3), implantation (ISO 10993-6), hémocompatibilité (ISO 10993-4) et caractérisation chimique (ISO 10993-18).
+
+<Info>
+L'évaluation de la biocompatibilité ne se réduit pas à une batterie de tests biologiques. ISO 10993-1 préconise une approche par étapes commençant par une évaluation des données existantes sur les matériaux utilisés (fiches de données de sécurité, littérature publiée, données d'antécédents cliniques). Les tests biologiques ne sont requis que si les données existantes sont insuffisantes ou ne permettent pas de conclure sur la biocompatibilité.
+</Info>
+
+## Méthodes de stérilisation et validation
+
+Les dispositifs médicaux entrant en contact avec des tissus stériles ou le système vasculaire doivent être stérilisés. Le choix de la méthode de stérilisation est conditionné par les matériaux du dispositif, sa géométrie et les exigences de performance post-stérilisation.
+
+### Principales méthodes de stérilisation
+
+- **Oxyde d'éthylène (EO)** : méthode la plus répandue pour les dispositifs en polymère thermosensibles. Processus à basse température (37–63°C). Nécessite un dégazage prolongé pour éliminer les résidus toxiques. Validation selon ISO 11135.
+- **Chaleur humide (autoclave)** : méthode de référence pour les instruments chirurgicaux en métal et les dispositifs capables de supporter des températures de 121°C ou 134°C. Validation selon ISO 17665.
+- **Rayonnements ionisants (gamma ou faisceau d'électrons)** : idéal pour les dispositifs préemballés, offre une stérilité garantie sans résidus. Les rayonnements peuvent dégrader certains polymères. Validation selon ISO 11137.
+- **Peroxyde d'hydrogène vaporisé (VHP)** : stérilisation à basse température utilisée notamment pour la re-stérilisation des dispositifs réutilisables et la décontamination des locaux.
+
+La validation d'une méthode de stérilisation comprend la qualification de l'installation (QI), la qualification opérationnelle (QO) et la qualification des performances (QP), conformément aux normes ISO applicables. La dose de stérilisation est établie pour garantir un niveau d'assurance de stérilité (SAL, *Sterility Assurance Level*) de 10⁻⁶.
+
+## Évaluation clinique
+
+L'évaluation clinique est le processus continu de collecte, d'analyse et d'évaluation des données cliniques relatives à un dispositif médical afin de vérifier la sécurité et les performances cliniques du dispositif. Elle est exigée par Santé Canada pour les dispositifs de classe III et IV, et par le règlement européen MDR 2017/745 pour tous les dispositifs.
+
+L'évaluation clinique peut s'appuyer sur : des données de littérature clinique (études publiées sur le dispositif ou des dispositifs équivalents), des données provenant d'études cliniques menées par le fabricant, et des données post-commercialisation (registres, études de surveillance post-mise sur le marché, retours d'expérience cliniques).
+
+## Règlement européen sur les dispositifs médicaux — MDR 2017/745
+
+Le règlement européen MDR 2017/745, pleinement applicable depuis mai 2021, a considérablement renforcé les exigences pour la mise sur le marché des dispositifs médicaux en Europe. Parmi les changements majeurs par rapport à la directive précédente (MDD 93/42/CEE) :
+
+- **Exigences cliniques renforcées** : données cliniques directes plus souvent requises, limitation des démonstrations d'équivalence
+- **Surveillance post-commercialisation (PMS) proactive** : plan PMS, rapport de synthèse PMS (PMSR) pour les classes I/IIa, rapport périodique actualisé de sécurité (PSUR) pour les classes IIb/III
+- **Traçabilité renforcée** : obligation d'identification unique des dispositifs (UDI, *Unique Device Identification*) et enregistrement dans la base de données EUDAMED
+- **Organismes notifiés** : sélection restreinte d'organismes notifiés accrédités, rôle de l'ECRI désignée, contrôles aléatoires accrus
+- **Durée de vie du certificat CE** : réduite à 5 ans maximum, avec renouvellement avant expiration
+
+<Warning>
+La transition vers le MDR 2017/745 a provoqué une pénurie d'organismes notifiés certifiés, entraînant des délais de certification pouvant dépasser 18 à 24 mois. Les fabricants planifiant un accès au marché européen doivent intégrer ces délais très en amont dans leur stratégie de mise sur le marché et contacter les organismes notifiés (BSI, TÜV SÜD, SGS, Bureau Veritas) dès les premières phases de développement.
+</Warning>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Introduction au génie biomédical" icon="heart-pulse" href="/genie-biomedical/introduction">
+    Définition, champs d'application et perspectives de carrière en génie biomédical au Canada
+  </Card>
+  <Card title="Biomécanique" icon="person-running" href="/genie-biomedical/biomecanique">
+    Mécanique du système musculo-squelettique, analyse de la marche et conception d'implants orthopédiques
+  </Card>
+  <Card title="Imagerie médicale" icon="x-ray" href="/genie-biomedical/imagerie-medicale">
+    Principes physiques et d'ingénierie derrière les modalités d'imagerie médicale modernes
+  </Card>
+  <Card title="Gestion des risques ISO 14971" icon="shield" href="/genie-biomedical/dispositifs-medicaux">
+    Processus d'analyse des dangers, estimation et maîtrise des risques pour les dispositifs médicaux
+  </Card>
+</CardGroup>

@@ -1,0 +1,163 @@
+---
+title: "Gestion des risques en ingénierie"
+description: "Identification des risques, matrice probabilité-impact, stratégies de réponse et surveillance des risques"
+icon: "shield-halved"
+---
+
+La gestion des risques est le processus systématique d'identification, d'analyse et de réponse aux risques d'un projet. En ingénierie, les risques non gérés sont la principale cause de dépassements de coûts et de délais.
+
+## Identification des risques
+
+### Techniques d'identification
+
+**Brainstorming structuré** : réunion multidisciplinaire (ingénieur, chef de projet, acheteur, constructeur) pour identifier librement les risques. Utiliser des checklists sectorielles pour stimuler la réflexion.
+
+**Analyse SWOT** : Forces, Faiblesses, Opportunités, Menaces appliquées au projet.
+
+**Analyse des hypothèses et contraintes** : chaque hypothèse de planification est un risque potentiel si elle ne se réalise pas.
+
+**Diagramme d'Ishikawa (causes-effets)** : identification des causes racines des risques majeurs (retard, dépassement de coût, défaut de qualité).
+
+**Entrevues d'experts** : consulter les spécialistes techniques, les chefs de projet expérimentés, les entrepreneurs.
+
+### Registre des risques
+Le registre des risques est le document central de la gestion des risques. Colonnes typiques :
+
+| Champ | Description |
+|---|---|
+| ID | Identifiant unique du risque |
+| Catégorie | Technique, externe, organisationnel, gestion de projet |
+| Description | Énoncé clair : "Si X survient, alors Y se produira" |
+| Probabilité | Score 1-5 ou % |
+| Impact (coût/délai/qualité) | Score 1-5 |
+| Score de risque | Probabilité × Impact |
+| Propriétaire | Responsable de la surveillance et de la réponse |
+| Stratégie de réponse | Éviter / Transférer / Atténuer / Accepter |
+| Actions planifiées | Mesures préventives et correctives |
+| Statut | Ouvert / En cours / Fermé |
+| Réserve de contingence | Budget/délai associé |
+
+<Tip>Maintenir le registre des risques comme un document vivant — le mettre à jour à chaque revue de projet et lors de tout événement significatif. Un registre non mis à jour n'a aucune valeur.</Tip>
+
+## Matrice probabilité-impact
+
+La matrice 5×5 permet de classer rapidement les risques par priorité :
+
+**Échelle de probabilité** :
+- 1 = Très improbable (< 10%)
+- 2 = Peu probable (10-25%)
+- 3 = Possible (25-50%)
+- 4 = Probable (50-75%)
+- 5 = Très probable (> 75%)
+
+**Échelle d'impact** :
+- 1 = Négligeable (< 1% du budget/délai)
+- 2 = Mineur (1-5%)
+- 3 = Modéré (5-10%)
+- 4 = Majeur (10-20%)
+- 5 = Catastrophique (> 20%)
+
+**Score = Probabilité × Impact**
+
+| Zones | Score | Couleur | Action |
+|---|---|---|---|
+| Critique | 15-25 | Rouge | Réponse immédiate obligatoire |
+| Élevé | 8-14 | Orange | Plan de réponse requis |
+| Modéré | 4-7 | Jaune | Surveillance active |
+| Faible | 1-3 | Vert | Acceptation possible |
+
+<Warning>La matrice probabilité-impact est un outil de priorisation, pas de quantification précise. Pour les risques majeurs (score ≥ 15), effectuer une analyse quantitative (Monte Carlo, arbres de décision) pour estimer les impacts financiers réels.</Warning>
+
+## Stratégies de réponse aux risques
+
+### Éviter
+Modifier le plan de projet pour éliminer la menace ou protéger les objectifs de son impact.
+
+Exemples :
+- Changer la technologie pour éliminer un risque technique inconnu
+- Modifier le calendrier pour éviter une période à risque climatique
+- Réduire la portée du projet pour écarter les éléments trop risqués
+
+### Transférer
+Déplacer les conséquences financières du risque vers un tiers, sans éliminer le risque lui-même.
+
+- **Assurances** : tous risques chantier (ARC), responsabilité civile, erreurs et omissions (E&O)
+- **Contrats à prix fixe** (EPC/lump sum) : l'entrepreneur assume les risques de coût et de délai
+- **Garanties de performance** : le fournisseur d'équipement garantit les paramètres de performance
+
+### Atténuer
+Réduire la probabilité d'occurrence et/ou l'impact d'un risque à un seuil acceptable.
+
+Exemples :
+- Réaliser des essais de sol supplémentaires pour réduire l'incertitude géotechnique
+- Former le personnel pour réduire le risque d'erreur humaine
+- Utiliser des matériaux de qualité supérieure pour réduire le risque de défaillance
+- Construire une redondance dans les systèmes critiques
+
+### Accepter
+Décider de ne pas modifier le plan de projet pour faire face au risque.
+
+- **Acceptation active** : prévoir une réserve de contingence (budget et/ou délai)
+- **Acceptation passive** : documenter et surveiller, sans action préemptive
+
+<Info>L'acceptation est une stratégie valide pour les risques à faible score (vert). Elle est inappropriée pour les risques critiques (rouge) sauf si aucune autre réponse n'est viable.</Info>
+
+## Risques spécifiques aux projets de génie
+
+### Risques géotechniques et environnementaux
+- Conditions de sol différentes des études de faisabilité (le risque géotechnique numéro un)
+- Découverte de contamination environnementale sur le site
+- Espèces à statut précaire nécessitant des mesures d'atténuation
+
+**Stratégie** : investir dans des études de sol détaillées avant engagement de budget de construction (prix de la certitude vs. coût du risque).
+
+### Risques climatiques et météorologiques
+- Précipitations exceptionnelles bloquant les travaux d'excavation
+- Gel précoce affectant le bétonnage
+- Canicule et restrictions sur les travaux extérieurs
+
+**Stratégie** : planifier avec des calendriers prudents incluant des jours tampons saisonniers; souscrire à des assurances climatiques.
+
+### Risques de conception et d'interface
+- Modifications de conception en cours de construction (change orders)
+- Incompatibilités entre disciplines (structure vs. mécanique vs. électrique)
+- Interprétation ambiguë des documents contractuels
+
+**Stratégie** : revues de coordination interdisciplinaire (ICR), modélisation BIM, définition claire des interfaces contractuelles.
+
+### Risques d'approvisionnement
+- Délais de livraison des équipements à long délai (transformateurs, pompes spéciales)
+- Fluctuations des prix des matériaux (acier, béton, cuivre)
+- Défaillance d'un sous-traitant ou d'un fournisseur clé
+
+**Stratégie** : identification précoce des équipements à long délai, clauses d'indexation dans les contrats, qualification de fournisseurs alternatifs.
+
+## Surveillance et contrôle des risques
+
+### Revues périodiques des risques
+- Revue hebdomadaire des risques critiques (rouge)
+- Revue mensuelle du registre complet en phase de construction
+- Revue à chaque jalon de projet (gate review)
+
+### Seuils de déclenchement (triggers)
+Pour chaque risque majeur, définir des indicateurs précoces (early warning signs) qui déclenchent la mise en oeuvre du plan de réponse :
+
+Exemple : risque de retard du fournisseur X → déclencheur : aucune confirmation d'expédition 6 semaines avant la date requise → action : activer le fournisseur alternatif Y.
+
+### Capitalisation des retours d'expérience
+Documenter les risques qui se sont matérialisés, l'efficacité des réponses et les leçons apprises. Alimenter la bibliothèque de risques organisationnelle pour les projets futurs.
+
+<CardGroup cols={2}>
+  <Card title="Planification de projets" icon="calendar-check" href="/gestion-projets/planification">
+    CPM, PERT, estimation des coûts et gestion de la valeur acquise
+  </Card>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    ISO 31000 — Management du risque
+  </Card>
+  <Card title="Fondations" icon="layer-group" href="/genie-civil/fondations">
+    Gestion des risques géotechniques
+  </Card>
+  <Card title="Bonnes pratiques logiciel" icon="code" href="/genie-logiciel/bonnes-pratiques">
+    Risques techniques dans les projets logiciels
+  </Card>
+</CardGroup>
