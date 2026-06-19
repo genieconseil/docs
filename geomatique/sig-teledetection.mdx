@@ -1,0 +1,222 @@
+---
+title: "SIG et télédétection"
+description: "Fondements des SIG, données vecteur et raster, analyse spatiale, télédétection satellitaire, LiDAR, drone photogrammétrie et applications en ingénierie"
+icon: "satellite"
+---
+
+Les systèmes d'information géographique (SIG) et la télédétection constituent deux piliers complémentaires de la géomatique moderne. Ensemble, ils permettent d'acquérir, de traiter, d'analyser et de visualiser des données spatiales à toutes les échelles — du bâtiment au bassin versant. Ces outils sont devenus indispensables dans pratiquement toutes les branches de l'ingénierie contemporaine.
+
+## Fondements des SIG
+
+### Modèles de données géospatiales
+
+Les SIG représentent le monde réel selon deux paradigmes principaux :
+
+**Données vectorielles** : représentent les entités géographiques comme des objets discrets
+- **Points** : puits, bornes, arbres, stations de mesure
+- **Lignes (polylignes)** : routes, rivières, pipelines, câbles
+- **Polygones** : parcelles, bassins versants, zones réglementées, bâtiments
+
+Chaque entité vectorielle est associée à une table d'attributs. Les formats courants sont : Shapefile (.shp), GeoPackage (.gpkg), GeoJSON, KML, GDB (geodatabase).
+
+**Données raster** : représentent le monde comme une grille de cellules régulières (pixels). Chaque cellule possède une valeur numérique. Les applications incluent :
+- Modèles numériques de terrain (MNT/DEM)
+- Orthophotographies et imagerie satellitaire
+- Cartes d'occupation du sol
+- Grilles de paramètres environnementaux (précipitations, températures)
+
+### Projections et systèmes de coordonnées
+
+Une projection cartographique transforme la surface sphérique de la Terre en un plan bidimensionnel. Toute projection introduit des distorsions (angles, distances, superficies). Les principales familles :
+
+| Projection | Conservation | Utilisation typique |
+|-----------|-------------|---------------------|
+| UTM (Transverse Mercator) | Angles locaux | Levés locaux/régionaux, Canada (MTM) |
+| Lambert Conique Conforme | Angles | Cartographie de provinces allongées E-O |
+| Mercator | Angles (navigation) | Navigation maritime et aérienne |
+| Albers Conique Égale-surface | Superficies | Calculs de superficie, statistiques |
+| Géographique (lat/long) | Aucune | Échange de données, échelle mondiale |
+
+<Note>Pour les projets au Québec, les systèmes MTM3 (Modified Transverse Mercator, fuseaux de 3°) en NAD83(CSRS) sont préconisés pour minimiser les distorsions de distance. Pour les analyses à l'échelle provinciale, le Lambert NAD83 est souvent utilisé.</Note>
+
+## Logiciels SIG
+
+### ArcGIS Pro (Esri)
+
+ArcGIS Pro est la solution SIG bureautique la plus répandue dans l'industrie et les gouvernements canadiens. Il offre :
+- Analyse spatiale avancée (géotraitement, ModelBuilder)
+- Support des données 2D, 3D et 4D (temps)
+- Intégration avec ArcGIS Online et les portails d'entreprise
+- Extensions spécialisées : Spatial Analyst, Network Analyst, 3D Analyst, Image Analyst
+
+### QGIS (open source)
+
+QGIS est la principale alternative open source à ArcGIS. Il est complet, puissant et gratuitement disponible. Il intègre GRASS GIS et SAGA via le Processing Framework et possède un large écosystème de plugins. Il est de plus en plus adopté dans les organismes gouvernementaux et universités canadiennes.
+
+### ArcGIS Online et plateformes cloud
+
+ArcGIS Online (Esri) et ses équivalents (Google Earth Engine, Microsoft Planetary Computer) permettent le traitement et le partage de données SIG directement dans le navigateur, sans installation locale. Google Earth Engine est particulièrement puissant pour le traitement à grande échelle d'imagerie satellitaire.
+
+## Analyse spatiale
+
+### Opérations de base
+
+- **Superposition** : intersection, union, différence de polygones (ex. : zones inondables intersectées avec le cadastre)
+- **Zone tampon (buffer)** : zone d'influence à distance fixe (ex. : zone de protection de 100 m autour d'un lac)
+- **Découpage (clip/erase)** : extraction de données pour une zone d'intérêt
+- **Sélection par attribut et par localisation**
+- **Jointures spatiales** : attribution d'informations entre couches selon la position relative
+
+### Analyse de réseau
+
+L'analyse de réseau (Network Analyst) résout des problèmes de transport et de proximité :
+- **Calcul de plus court chemin** : itinéraires routiers optimaux
+- **Zone de service** (Service Area) : détermine l'étendue accessible en X minutes depuis un point
+- **Problème du voyageur de commerce** (TSP) : optimisation de tournées
+- **Allocation des demandes** : assignation de clients à des entrepôts ou hôpitaux
+
+### Géostatistique
+
+La géostatistique permet l'interpolation et l'analyse de la variabilité spatiale de données ponctuelles :
+- **Krigeage** : interpolation optimale utilisant le variogramme (ex. : cartes de contamination des sols)
+- **IDW** (Inverse Distance Weighting) : interpolation simple basée sur la distance
+- **Spline** : surface lisse passant par les points de données
+- **Analyse de variogramme** : caractérisation de la corrélation spatiale (portée, palier, pépite)
+
+## Fondements de la télédétection
+
+### Le spectre électromagnétique
+
+Les capteurs de télédétection détectent le rayonnement électromagnétique réfléchi ou émis par les objets dans différentes gammes spectrales :
+
+| Domaine spectral | Longueur d'onde | Applications |
+|-----------------|----------------|-------------|
+| Visible (R, V, B) | 400–700 nm | Cartographie standard, orthophotos |
+| Proche infrarouge (PIR) | 700–1300 nm | Végétation (NDVI), eau |
+| Infrarouge à ondes courtes (SWIR) | 1300–2500 nm | Minéralogie, neige vs nuages |
+| Infrarouge thermique (TIR) | 8–14 µm | Température, fuites thermiques |
+| Micro-ondes (radar) | 1 mm–1 m | Pénètre les nuages, InSAR |
+
+Le **NDVI** (Normalized Difference Vegetation Index) est l'indice le plus utilisé pour caractériser la végétation :
+
+`NDVI = (PIR - Rouge) / (PIR + Rouge)`
+
+Valeurs de -1 à +1 : végétation dense (> 0,6), végétation clairsemée (0,2–0,5), sol nu (0–0,2), eau (< 0).
+
+### Résolutions des capteurs
+
+| Type de résolution | Définition | Exemples |
+|-------------------|-----------|---------|
+| **Spatiale** | Taille du pixel au sol | 30 cm (Pléiades) à 1000 m (MODIS) |
+| **Spectrale** | Nombre et largeur des bandes | Panchromatique (1), multispectral (4–12), hyperspectral (> 100) |
+| **Temporelle** | Fréquence de revisite | 1 jour (MODIS) à 26 jours (Landsat) |
+| **Radiométrique** | Profondeur de bit (niveaux de gris) | 8 bits (256 niveaux) à 16 bits |
+
+## Imagerie satellitaire
+
+### Landsat
+
+La série Landsat (NASA/USGS) constitue la plus longue archive d'images satellitaires du monde (depuis 1972). Landsat 8 et 9 offrent 11 bandes spectrales à 30 m de résolution (15 m panchromatique), avec une revisite de 16 jours. Les archives complètes sont gratuitement accessibles.
+
+### Sentinel (ESA/Programme Copernicus)
+
+Les satellites Sentinel (programme Copernicus de l'Union européenne) fournissent des données gratuites et ouvertes :
+- **Sentinel-2** : multispectral 10–60 m, revisite 5 jours (2 satellites combinés) — idéal pour la végétation et l'occupation du sol
+- **Sentinel-1** : radar SAR, revisite 6–12 jours — actif par tous les temps, jour et nuit
+- **Sentinel-3** : température de surface océanique et terrestre, couleur de l'eau
+
+### RADARSAT-2 et Mission de la constellation RADARSAT (MCR/RCM)
+
+RADARSAT-2 (MDA Space) et la Mission de la constellation RADARSAT (3 satellites, depuis 2019) sont des missions phares de l'Agence spatiale canadienne (ASC) :
+- Radar SAR en bande C (5,6 cm), tout-temps jour et nuit
+- Résolutions de 1 à 100 m selon le mode
+- Applications clés : surveillance de la glace de mer (Arctique), inondations, déplacements de sol (InSAR), agriculture
+
+<Tip>Pour la surveillance des inondations au Canada, la MCR est l'outil privilégié des gestionnaires d'urgence (Sécurité publique Canada) car ses images radar traversent les nuages présents lors des crues. Les données sont distribuées par MDA Space et l'ASC.</Tip>
+
+## Traitement des données LiDAR
+
+### Types de données LiDAR
+
+Le LiDAR (Light Detection And Ranging) produit des nuages de points 3D denses (ex. : 4–50 points/m² pour le LiDAR aéroporté) :
+
+- **Nuage de points brut** : tous les retours (premier, dernier, multiples)
+- **DTM (Digital Terrain Model) / MNT** : surface du sol nu, après filtrage de la végétation et des bâtiments
+- **DSM (Digital Surface Model) / MNS** : surface la plus haute de tous les objets (végétation, bâtiments)
+- **nDSM (normalized DSM)** = DSM - DTM : hauteur des objets au-dessus du sol (modèle de hauteur de canopée)
+
+### Logiciels de traitement de nuages de points
+
+| Logiciel | Type | Fonctions |
+|----------|------|-----------|
+| LAStools (rapidlasso) | Commercial/gratuit partiel | Traitement LiDAR haute performance |
+| CloudCompare | Open source | Visualisation, segmentation, comparaison |
+| PDAL (C++) | Open source | Pipeline de traitement Python/CLI |
+| Trimble Business Center | Commercial | Levés terrestres et aériens intégrés |
+| Agisoft Metashape | Commercial | Photogrammétrie + traitement nuage de points |
+
+## Cartographie par drone — Photogrammétrie et SfM
+
+### Structure from Motion (SfM)
+
+L'algorithme SfM reconstitue la géométrie 3D d'une scène à partir de séquences d'images 2D avec des recouvrements importants (80 % latéral, 60–70 % frontal). Le processus :
+
+1. **Détection de points clés** (SIFT, ORB) dans chaque image
+2. **Mise en correspondance** des points entre images
+3. **Ajustement de faisceaux** (bundle adjustment) — calcul simultané des positions caméra et des points 3D
+4. **Densification** du nuage de points (Multi-View Stereo)
+5. **Génération** du MNT, orthomosaïque, modèle 3D
+
+Les logiciels leaders : **Agisoft Metashape**, **Pix4Dmapper**, **DJI Terra**, **RealityCapture**.
+
+## Applications en ingénierie
+
+### Infrastructure et transport
+
+- **Inventaire d'actifs** : cartographie des routes, ponts, viaducs depuis des images aériennes ou drones
+- **Détection de défauts** : fissures dans les chaussées (imagerie haute résolution), affaissement (InSAR)
+- **Modélisation BIM à partir du LiDAR** (scan-to-BIM) pour les projets de réhabilitation
+
+### Exploitation minière
+
+- **Suivi des volumes** de stériles et de minerai (levés LiDAR drones mensuels)
+- **Surveillance de la stabilité** des talus miniers (InSAR, cibles rétro-réflectrices, LiDAR)
+- **Cartographie géologique** par imagerie hyperspectrale des parements de fosse
+
+### Évaluation environnementale
+
+- **Cartographie des milieux humides** (imagerie multispectrale, classification supervisée)
+- **Suivi de la déforestation et des perturbations** (Landsat, Sentinel-2)
+- **Modélisation des zones inondables** (MNT LiDAR + modèle hydraulique HEC-RAS 2D)
+- **Érosion côtière** (comparaison temporelle de nuages de points LiDAR)
+
+### Cartographie des inondations
+
+La cartographie des plaines inondables combine :
+- MNT LiDAR haute précision (< 15 cm)
+- Modélisation hydraulique 2D (HEC-RAS 2D, MIKE FLOOD)
+- Validation par télédétection (Sentinel-1 SAR lors des crues)
+- Production de cartes de risque pour la gestion des urgences et l'urbanisme
+
+<CardGroup cols={2}>
+  <Card title="Géomatique et arpentage" icon="map" href="/geomatique/introduction">
+    Méthodes de mesure terrain, GPS/GNSS et datums canadiens
+  </Card>
+  <Card title="Eaux souterraines" icon="water" href="/hydrogeologie/eaux-souterraines">
+    Cartographie hydrogéologique et modélisation spatiale
+  </Card>
+  <Card title="Génie environnemental" icon="leaf" href="/genie-environnemental/introduction">
+    Évaluation environnementale et surveillance de milieux
+  </Card>
+  <Card title="Stabilité des pentes" icon="mountain" href="/geotechnique/stabilite-pentes">
+    Surveillance des versants par géomatique
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : OGC (Open Geospatial Consortium) standards (WMS, WFS, GeoTIFF), ISO 19100 series (métadonnées géospatiales), ASPRS LiDAR standards
+- **Logiciels** : ArcGIS Pro (Esri), QGIS, Google Earth Engine, Agisoft Metashape, Pix4D, CloudCompare, PDAL, LAStools
+- **Données ouvertes** : USGS Earth Explorer, Copernicus Open Access Hub, Données ouvertes du gouvernement du Canada (open.canada.ca), GeoBase (RNCan), Données LiDAR du Québec (MRNF)
+- **Organismes** : RNCan (Centre canadien de télédétection), Agence spatiale canadienne (ASC), CCOG, OGC
+- **Références** : Jensen — *Introductory Digital Image Processing*; Lillesand et al. — *Remote Sensing and Image Interpretation*; Longley et al. — *Geographic Information Systems and Science*

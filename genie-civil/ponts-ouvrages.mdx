@@ -1,0 +1,175 @@
+---
+title: "Ponts et ouvrages d'art"
+description: "Types de ponts, charges, lignes d'influence, matériaux, inspection et code canadien CSA S6-19"
+icon: "archway"
+---
+
+Les ponts constituent des ouvrages d'art essentiels à la mobilité des personnes et des marchandises. Le Canada compte plus de 20 000 ponts sur son réseau routier national. La norme **CSA S6-19** (*Code canadien sur le calcul des ponts routiers*) régit leur conception, leur évaluation et leur réhabilitation.
+
+## Types de ponts
+
+### Ponts à poutre simplement appuyée
+
+La configuration la plus simple : poutres posées entre deux appuis, portée typique 10–40 m. Faible coût, construction rapide, mais moments de flexion maximaux et nécessité de joints de dilatation à chaque travée.
+
+### Ponts à poutres continues
+
+Poutres s'étendant sur plusieurs appuis intermédiaires, portée typique jusqu'à 100 m par travée. Moments positifs réduits, moins de joints de dilatation, meilleure résistance sismique.
+
+### Ponts en arc
+
+La structure en arc transfère les charges principalement en compression. Deux types : arc à deux rotules, arc encastré. Portée possible jusqu'à 500 m. Esthétique et économique en béton (ex. pont de Québec — treillis, 1917, 549 m).
+
+### Ponts en treillis
+
+Assemblage de membrures en acier formant des triangles. Membrures supérieure (compression) et inférieure (traction). Efficaces pour les portées de 50 à 200 m. Exemples historiques : ponts de chemin de fer au Canada.
+
+### Ponts à câbles : haubané vs suspendu
+
+**Pont à haubans** : le tablier est directement soutenu par des câbles inclinés depuis des pylônes. Portée 200–1 000 m. Exemples : Pont Samuel de Champlain (Montréal, 2019), spans jusqu'à 240 m.
+
+**Pont suspendu** : les câbles principaux forment une courbe en chaînette entre les pylônes, avec des suspentes verticales. Portées jusqu'à 2 000 m. Exemple : Golden Gate, Lions Gate (Vancouver, 472 m de portée principale).
+
+| Type | Portée typique | Avantages | Inconvénients |
+|------|----------------|-----------|---------------|
+| Poutre simplement appuyée | 10–40 m | Simple, économique | Joints, moments élevés |
+| Poutre continue | 20–100 m | Moins de joints | Effets différentiels de tassement |
+| Arc | 50–500 m | Esthétique, compression | Poussée horizontale aux fondations |
+| Haubané | 100–1 000 m | Léger, esthétique | Pylônes coûteux |
+| Suspendu | 500–2 000 m | Très grandes portées | Sensibilité au vent, coût |
+
+## Charges sur les ponts
+
+### Charge permanente (D)
+
+Poids propre de la structure, des barrières, de l'asphalt de la surface de roulement, des accessoires (glissières, luminaires, conduites). Pour le béton : 24 kN/m³, acier : 78,5 kN/m³, asphalte : 23 kN/m³.
+
+### Charge vive de camion CL-625 (CSA S6-19)
+
+La charge de camion normalisée au Canada est le **CL-625** (anciennement CL-W). Ce camion fictif à 5 essieux a un poids total de 625 kN et une configuration spécifique d'espacement d'essieux.
+
+- Essieu tandem avant : 2 × 62,5 kN
+- Groupe de 3 essieux : 3 × 125 kN
+- Essieu arrière : 125 kN
+
+La charge d'essieu est majorée par un **facteur d'amplification dynamique (FAD / Dynamic Load Allowance)** selon CSA S6 :
+
+```
+FAD = 0,25 + 15/L (pour les charges de camion)
+```
+
+Où L est la longueur de la portée déterminante. Le FAD diminue avec l'augmentation de la portée.
+
+### Autres charges
+
+**Vent** : pression de vent dynamique de 0,5 kPa à 3,0 kPa selon l'emplacement (Carte des vents du Canada, CNRC) et la hauteur du tablier.
+
+**Séisme** : spectres de réponse selon l'Annexe A6 du CNB 2020 et les cartes de l'aléa sismique du Canada (CNGSC). Catégories de performance sismique du pont (A à D).
+
+**Glaces** : pression de glaçage latéral sur les piles en milieu fluvial et maritime. Critique pour les ponts du fleuve Saint-Laurent et des Grands Lacs.
+
+**Température** : variation uniforme (ex. −40 °C à +50 °C au Québec) et gradient thermique dans le tablier.
+
+**Retrait et fluage** : importants pour les ponts en béton précontraint, pris en compte dans la conception des appareils d'appui et des joints.
+
+## Lignes d'influence
+
+La **ligne d'influence** d'un effet structurel (réaction, moment, cisaillement, déflexion) donne la valeur de cet effet lorsqu'une charge unitaire se déplace sur la structure.
+
+**Théorème de Müller-Breslau** : la ligne d'influence d'une réaction/effort interne est proportionnelle à la déformée de la structure quand on enlève la liaison correspondante et qu'on impose un déplacement unitaire.
+
+### Utilisation pour le chargement des ponts
+
+Pour obtenir l'effet maximal d'une charge mobile, on place les charges aux endroits où la ligne d'influence est la plus défavorable (positive pour les maxima, négative pour les minima).
+
+**Enveloppe des moments** : combinaison des charges permanentes et des positions les plus défavorables des charges mobiles pour chaque section du tablier.
+
+## Matériaux courants
+
+### Béton armé
+
+Utilisé pour les tabliers (dalles), les piles, les culées, les garde-fous. Exigences CSA S6 : fc' ≥ 30 MPa, rapport E/C ≤ 0,40, enrobage minimal de 60–70 mm pour les éléments exposés aux sels de déglaçage.
+
+### Béton précontraint
+
+Poutres en I précontraintes (CPCI standards : CPCI 900, 1200, 1400, 1600, 1800) et tabliers à dalles pleines précontraintes. La précontrainte (câbles mono-torons ou multi-torons fPu = 1 860 MPa) compense la traction due aux charges de service, permettant des portées plus longues avec moins de profondeur de section.
+
+**Perte de précontrainte** : recul d'ancrage, friction des gaines, retrait, fluage du béton, relaxation des aciers — typiquement 15–25 % de la précontrainte initiale.
+
+### Acier structural
+
+Profils W, poutres composées, acier à haute performance ASTM A709. Les ponts métalliques sont particulièrement utilisés pour les grandes portées et pour les réhabilitations (ajout de travées).
+
+**Acier Corten (A588)** : acier patinant qui développe naturellement une patine protectrice d'oxydes stables, éliminant le besoin de peinture dans certains environnements.
+
+## Inspection et état des ponts
+
+### Systèmes de gestion des ponts (BMS / PONTIS)
+
+Au Canada, les ministères des transports utilisent des systèmes informatisés de gestion des ponts :
+
+- **Québec** : Système de gestion des structures (SGS) — MTQ
+- **Ontario** : OBMS (Ontario Bridge Management System)
+- **Fédéral** : SMSI (Système de Gestion des Structures d'Infrastructure) — Ponts fédéraux
+
+### Inspection selon les éléments (Element-Level Inspection)
+
+L'inspection AASHTO/FHWA évalue chaque élément de pont selon une condition :
+
+| Condition | Code | Description |
+|-----------|------|-------------|
+| Bonne | 1 | Aucune défaillance |
+| Passable | 2 | Légère détérioration |
+| Mauvaise | 3 | Deterioration avancée |
+| Critique | 4 | Défaillance imminente |
+
+### Méthodes d'inspection spécialisées
+
+- **Essai au marteau (sounding)** : détection du délaminage du béton par percussion
+- **Radar géologique (GPR)** : localisation des armatures, détection des vides
+- **Potentiel de demi-cellule (half-cell potential)** : évaluation du risque de corrosion des armatures
+- **Essais de charge** : vérification expérimentale de la capacité portante pour les ponts anciens
+- **Drones et vision artificielle** : inspection visuelle à distance des zones difficiles d'accès
+
+## Code canadien des ponts routiers (CSA S6-19)
+
+La dernière édition du code canadien (2019) comprend :
+
+- **Section 1** : Généralités et concepts de conception
+- **Section 3** : Charges et combinaisons de charges
+- **Section 4** : Fondations
+- **Section 5** : Méthodes d'analyse structurale
+- **Section 6** : Béton armé
+- **Section 7** : Béton précontraint
+- **Section 8** : Acier
+- **Section 9** : Aluminium
+- **Section 10** : Bois
+- **Section 14** : Évaluation des ponts existants
+- **Section 16** : Conception sismique
+
+<Note>
+La Section 14 de CSA S6 (Évaluation des ponts existants) utilise des facteurs de charge différents selon le niveau d'évaluation (Niveau 1, 2, 3). Une évaluation de Niveau 3 peut permettre de garder en service un pont qui ne satisferait pas aux exigences de conception pour un ouvrage neuf.
+</Note>
+
+## Stratégies de maintenance
+
+**Réhabilitation préventive** : interventions à faible coût avant que la détérioration ne devienne sévère (scellement des fissures, revêtement époxy de la dalle, remplacement des joints).
+
+**Réhabilitation majeure** : reconstruction du tablier, renforcement des poutres (plaques collées CFRP), remplacement des appareils d'appui et joints de dilatation.
+
+**Déconstruction et reconstruction** : quand la réhabilitation n'est plus économique. Coût indicatif pour un pont à deux voies : 3 000–8 000 $/m² de tablier.
+
+<CardGroup cols={2}>
+  <Card title="Charpente métallique" icon="grip-lines" href="/genie-civil/charpente-metallique">
+    Acier structural, connexions et résistance au feu
+  </Card>
+  <Card title="Génie des transports" icon="road" href="/genie-civil/transport-routes">
+    Conception des routes et analyse de la circulation
+  </Card>
+  <Card title="Normes canadiennes" icon="file-contract" href="/ressources/normes-canadiennes">
+    CSA S6, NBC et normes de transport canadiennes
+  </Card>
+  <Card title="Logiciels par discipline" icon="laptop-code" href="/ressources/logiciels-par-discipline">
+    SAP2000, RISA, ETABS pour l'analyse des ponts
+  </Card>
+</CardGroup>

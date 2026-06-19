@@ -1,0 +1,182 @@
+---
+title: "Water and Wastewater Treatment"
+description: "Drinking water and wastewater treatment processes, Canadian and US standards, and key design parameters"
+icon: "droplet"
+---
+
+Water and wastewater treatment engineering encompasses the physical, chemical, and biological processes used to produce safe drinking water and to treat municipal and industrial effluents before their return to the environment. This page covers both drinking water treatment and wastewater treatment, with a focus on Canadian and US regulatory frameworks.
+
+<Note>
+The full French-language version of this content is available at [/genie-environnemental/traitement-eaux](/genie-environnemental/traitement-eaux), which includes additional detail on Quebec-specific regulations (MELCCFP, Règlement Q-2 r.12) and provincial standards.
+</Note>
+
+## Drinking Water Treatment
+
+### Source Water and Intake
+
+Treatment begins with source water characterization. Key parameters measured at intake include turbidity (NTU), colour, pH, alkalinity, hardness, total organic carbon (TOC), microbial indicators (total coliform, E. coli, Cryptosporidium oocysts, Giardia cysts), and presence of regulated chemicals (nitrates, heavy metals, DBP precursors).
+
+Raw water quality dictates the treatment train. Surface water (rivers, lakes) generally requires full treatment (coagulation through disinfection); groundwater under the direct influence (GUDI) of surface water also requires filtration and disinfection; deep confined aquifer water may need only disinfection.
+
+### Coagulation and Flocculation
+
+Colloidal particles (0.001–1 µm) carry a negative surface charge and remain in stable suspension. Coagulation destabilizes them by charge neutralization:
+
+- **Alum** (aluminum sulphate, Al₂(SO₄)₃·18H₂O): common coagulant, optimal pH 6.5–7.5
+- **Ferric sulphate** (Fe₂(SO₄)₃) and **ferric chloride** (FeCl₃): effective over wider pH range (5–8), better colour removal
+- **Polymers** (cationic, anionic, non-ionic): used as primary coagulants or coagulant aids
+
+The jar test determines optimal coagulant dose and pH. Rapid mix (G > 300 s⁻¹, 30–60 s) followed by slow mix (G = 20–80 s⁻¹, 20–30 min) promotes floc growth. The Camp number (Gt product) is typically 10,000–100,000 for flocculation.
+
+### Sedimentation
+
+Conventional horizontal-flow clarifiers remove settled floc by gravity. Design parameters:
+
+- **Surface overflow rate (SOR)** = Q/A (m/day): typically 20–40 m/day for conventional clarifiers, 100–160 m/day for lamella (inclined plate) settlers
+- **Detention time**: 2–4 hours
+- **Weir overflow rate**: < 250 m³/m·day
+
+High-rate settlers (lamella plates, tube settlers) dramatically reduce footprint by effectively multiplying settling area.
+
+### Filtration
+
+Rapid sand filtration (RSF) is the most common polishing step:
+
+- Loading rate: 5–12 m/h (single-medium sand), up to 20 m/h (dual-media anthracite/sand)
+- Filter media: sand (effective size 0.45–0.55 mm), anthracite (ES 0.9–1.1 mm), garnet
+- Backwash at 37–50 m/h for 10–15 minutes when head loss reaches 2–3 m
+- Target effluent turbidity: < 0.1 NTU (95th percentile) for effective disinfection
+
+Slow sand filtration (SSF) uses biological activity in the **schmutzdecke** (biological mat) at 0.1–0.4 m/h — highly effective but land-intensive.
+
+### Disinfection
+
+Disinfection is the critical barrier against waterborne pathogens. The **CT concept** relates the concentration (mg/L) and contact time (minutes) needed for a given log inactivation:
+
+$$CT_{required} = C \times t$$
+
+For Giardia: 3-log (99.9%) inactivation at 5°C with free chlorine requires CT ≈ 165 mg·min/L. For Cryptosporidium, UV is far more effective than chlorine (CT > 22,000 mg·min/L required for 3-log with chlorine vs. UV dose of 10–12 mJ/cm² for 3-log).
+
+**UV disinfection**: germicidal range 200–300 nm (peak at 254 nm). Minimum dose for regulatory credit: 40 mJ/cm² for 4-log virus, 3-log Giardia, 3-log Cryptosporidium (EPA UV Guidance Manual, 2006). UV does not provide a residual — typically followed by chloramination.
+
+**Chlorination byproducts**: free chlorine reacts with natural organic matter (NOM) to form trihalomethanes (THMs) and haloacetic acids (HAAs). Health Canada maximum acceptable concentrations: THMs 0.1 mg/L, HAAs 0.08 mg/L.
+
+### Canadian and US Standards
+
+| Standard/Guideline | Jurisdiction | Scope |
+|-------------------|-------------|-------|
+| Guidelines for Canadian Drinking Water Quality (GCDWQ) | Health Canada | MACs and aesthetic objectives for all parameters |
+| Ontario Reg. 170/03 | Ontario MECP | Small and large municipal systems |
+| Drinking Water Protection Regulation | BC | Water system classification and treatment |
+| Safe Drinking Water Act (SDWA) | US EPA | National Primary/Secondary Drinking Water Regulations |
+| Surface Water Treatment Rule (SWTR) | US EPA | Filtration and disinfection requirements |
+| AWWA Standards (e.g., B100–B701) | AWWA | Design and materials standards |
+
+## Wastewater Treatment
+
+### Preliminary and Primary Treatment
+
+**Preliminary treatment** removes gross solids and grit that would damage downstream equipment:
+- Bar screens: coarse (50–100 mm), medium (6–25 mm), fine (1–6 mm); mechanically raked
+- Grit chambers: aerated grit chambers or vortex-type, designed to remove particles > 0.21 mm (200 µm) at 28 L/person/day design flow
+
+**Primary clarifiers** remove settleable solids by gravity:
+- Removal efficiency: ~50–65% TSS, ~30–35% BOD₅
+- SOR: 24–32 m/day (average flow), 48–64 m/day (peak flow)
+- Detention time: 1.5–2.5 hours
+
+### Secondary Treatment — Activated Sludge
+
+The activated sludge process uses a mixed microbial culture to biodegrade dissolved and colloidal organics. Key design parameters:
+
+| Parameter | Symbol | Typical Range |
+|-----------|--------|--------------|
+| Mixed Liquor Suspended Solids | MLSS | 2,000–4,000 mg/L |
+| Solids Retention Time | SRT (θc) | 5–15 days (aerobic) |
+| Food-to-Microorganism ratio | F/M | 0.1–0.4 kg BOD/kg MLVSS·day |
+| Dissolved oxygen | DO | ≥ 2 mg/L |
+| Hydraulic Retention Time | HRT | 6–8 hours |
+
+The SRT (sludge age) controls effluent quality and sludge production:
+
+$$SRT = \frac{V \times MLSS}{Q_w \times MLSS_w}$$
+
+where V is reactor volume (m³), Q_w the waste sludge flow rate (m³/day), and MLSS_w the waste sludge concentration (mg/L).
+
+Effluent quality goals for secondary treatment under the Canadian **Wastewater Systems Effluent Regulations (WSER, SOR/2012-139)**:
+
+| Parameter | WSER Limit |
+|-----------|-----------|
+| CBOD₅ | ≤ 25 mg/L |
+| TSS | ≤ 25 mg/L |
+| Un-ionized ammonia (as N) | ≤ 1.25 mg/L |
+| Total residual chlorine | ≤ 0.02 mg/L |
+
+<Warning>
+Facilities discharging to sensitive receiving waters (cold-water fish habitat, shellfish areas) typically face more stringent effluent limits than the WSER baseline, established through environmental impact assessment and site-specific water quality objectives.
+</Warning>
+
+### Biological Nutrient Removal (BNR)
+
+Nitrogen and phosphorus removal prevents eutrophication in receiving water bodies.
+
+**Nitrification** (aerobic, SRT > 10 days at 15°C): NH₄⁺ → NO₂⁻ → NO₃⁻ by Nitrosomonas and Nitrobacter
+
+**Denitrification** (anoxic, carbon source required): NO₃⁻ → N₂ gas — methanol or raw wastewater as carbon source
+
+**Biological phosphorus removal** (EBPR): luxury P uptake by polyphosphate-accumulating organisms (PAOs) in alternating anaerobic/aerobic zones (A²/O process)
+
+### Membrane Bioreactors (MBR)
+
+MBRs combine activated sludge with ultrafiltration membranes, eliminating secondary clarifiers:
+- MLSS 8,000–15,000 mg/L (higher than conventional)
+- Effluent TSS < 1 mg/L (essentially particle-free)
+- Pathogen removal credit: 3–4 log virus, > 4 log Giardia/Cryptosporidium
+- Higher capital and energy cost, but smaller footprint
+
+### Tertiary Treatment and Advanced Processes
+
+| Process | Removal Target | Notes |
+|---------|---------------|-------|
+| Sand/cloth filtration | TSS polishing to < 5 mg/L | Before disinfection or reuse |
+| UV disinfection | Pathogens | 40 mJ/cm² minimum |
+| Ozonation | Trace organics, EDCs | Bromate formation risk |
+| Reverse osmosis | TDS, pharmaceuticals | For water reuse applications |
+| Constructed wetlands | N, P, pathogens | Low energy, land-intensive |
+
+## Membrane Filtration Processes
+
+| Membrane Type | Pore Size | Driving Pressure | Rejects |
+|---------------|-----------|-----------------|---------|
+| Microfiltration (MF) | 0.1–10 µm | 10–200 kPa | Bacteria, protozoa, TSS |
+| Ultrafiltration (UF) | 0.01–0.1 µm | 100–500 kPa | Viruses, macromolecules |
+| Nanofiltration (NF) | 0.001–0.01 µm | 500–1,500 kPa | Divalent ions, hardness, colour |
+| Reverse Osmosis (RO) | < 0.001 µm | 1,500–8,000 kPa | Monovalent ions, TDS |
+
+## Sludge Management and Biosolids
+
+Biosolids from wastewater treatment undergo stabilization before beneficial reuse or disposal:
+
+- **Anaerobic digestion** (35–37°C mesophilic or 55°C thermophilic): 40–60% volatile solids destruction, biogas production (~0.35 m³ CH₄/kg VS destroyed at STP)
+- **Aerobic digestion**: lower VS reduction, no energy recovery
+- **Dewatering**: belt filter presses, centrifuges, screw presses → 18–35% total solids
+- **Land application**: CCME Guidelines for the Land Application of Biosolids (2010) sets limits on metal concentrations (Pb, Cd, Cu, Zn, Ni, Mo, As, Se) and loading rates. Class A biosolids (pathogen reduction to < 3 MPN Salmonella/4 g TS) vs. Class B
+
+<Tip>
+Biogas from anaerobic digestion can meet 20–50% of a wastewater plant's energy demand. Combined heat and power (CHP) systems using biogas can achieve 30–35% electrical efficiency plus heat recovery, significantly reducing the carbon footprint of wastewater treatment.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Air Quality" icon="wind" href="/en/environmental/air-quality">
+    Pollutants, Canadian standards, emission controls, and dispersion modeling
+  </Card>
+  <Card title="Site Remediation" icon="seedling" href="/en/environmental/site-remediation">
+    Environmental site assessment, contaminants, and remediation technologies
+  </Card>
+  <Card title="Version française" icon="language" href="/genie-environnemental/traitement-eaux">
+    Contenu complet en français avec les normes provinciales québécoises
+  </Card>
+  <Card title="Biomedical Engineering" icon="heart-pulse" href="/en/biomedical/introduction">
+    Introduction to biomedical engineering in a North American context
+  </Card>
+</CardGroup>

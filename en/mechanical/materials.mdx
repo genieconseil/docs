@@ -1,0 +1,146 @@
+---
+title: "Materials Science for Engineers"
+description: "Metals and alloys, stress-strain curves, fatigue, fracture mechanics, and heat treatment"
+icon: "atom"
+---
+
+Materials science connects the microstructure of materials to their engineering properties. Selecting the right material — balancing strength, ductility, corrosion resistance, weight, cost, and manufacturability — is a critical engineering decision that affects safety and lifecycle cost.
+
+## Metals and Alloys
+
+### Structural Steels
+Carbon steel (Fe + C < 2.1%) is the workhorse of structural engineering:
+
+| Grade | Fy (MPa) | Fu (MPa) | Notes |
+|---|---|---|---|
+| ASTM A36 | 250 | 400-550 | General construction, plates, angles |
+| ASTM A572 Gr. 50 | 345 | 450 | High-strength low-alloy, beams, columns |
+| ASTM A992 | 345 | 450 min | W-shapes for buildings; Fy/Fu ≤ 0.85 |
+| CAN/CSA G40.21 350W | 350 | 450 | Canadian equivalent to A572 Gr. 50 |
+
+Stainless steels (chromium ≥ 10.5%) resist corrosion but cost 3-5× more than carbon steel. Grade 304 for food service and mild environments; 316 (with Mo) for marine and chemical exposure.
+
+### Aluminum Alloys
+Aluminum (ρ = 2,700 kg/m³) is one-third the weight of steel (ρ = 7,850 kg/m³). Designation system:
+- First digit = principal alloying element: 1xxx (pure Al), 2xxx (Cu), 6xxx (Mg+Si), 7xxx (Zn)
+- Temper designation: T6 = solution heat treated and artificially aged (peak strength)
+
+**6061-T6**: E = 69 GPa; Fy = 276 MPa; Fu = 310 MPa; excellent corrosion resistance and weldability. Common for structural extrusions, marine hardware, bicycle frames.
+
+**7075-T6**: E = 71 GPa; Fy = 503 MPa; Fu = 572 MPa; highest strength aluminum alloy; aerospace, competitive cycling. Poor weldability; susceptible to stress corrosion cracking.
+
+### Titanium Alloys
+Titanium (ρ = 4,430 kg/m³) offers exceptional specific strength and corrosion resistance:
+
+**Ti-6Al-4V (Grade 5)**: E = 114 GPa; Fy = 880 MPa; Fu = 950 MPa; the most widely used titanium alloy. Applications: aerospace structures, biomedical implants, offshore equipment, marine fasteners.
+
+<Tip>When selecting between steel, aluminum, and titanium for a weight-critical application, compare the specific stiffness (E/ρ) and specific strength (Fy/ρ). Titanium and aluminum both offer significantly better specific properties than steel, justifying their higher cost in demanding applications.</Tip>
+
+## Polymers and Composites
+
+### Thermoplastics
+Soften on heating and can be re-molded. Key examples:
+- **HDPE**: excellent chemical resistance; pipes, tanks, geomembranes; service temperature ≤ 80°C
+- **PEEK (polyetheretherketone)**: high-performance; service temperature up to 260°C; aerospace, medical devices
+- **Nylon (PA66)**: good wear resistance; gears, bearings, bushings
+
+### Thermosets
+Cross-linked polymer networks that cannot be re-melted:
+- **Epoxy resins**: structural adhesives, composite matrices; glass transition temperature Tg ≈ 120-180°C depending on cure
+- **Phenolic (Bakelite)**: high heat resistance; electrical insulators, brake linings
+
+### Fiber-Reinforced Composites
+- **CFRP** (carbon fiber reinforced polymer): E ≈ 70-150 GPa (depending on fiber orientation and volume fraction); tensile strength > 1,000 MPa; ρ ≈ 1,550 kg/m³. Outstanding specific stiffness. Applications: aerospace, wind turbine blades, high-performance automotive, sporting goods.
+- **GFRP** (glass fiber reinforced polymer): E ≈ 20-45 GPa; ρ ≈ 2,000 kg/m³; much cheaper than CFRP. Applications: boat hulls, pipe liners, infrastructure repair.
+
+Rule of mixtures for unidirectional composites: `Ec = Vf·Ef + Vm·Em` (longitudinal); `1/Ec = Vf/Ef + Vm/Em` (transverse).
+
+<Warning>Composite materials have strongly anisotropic properties. A unidirectional laminate has very high longitudinal stiffness but very low transverse and shear stiffness. Always design the laminate stack specifically for the multiaxial stress state the part will experience.</Warning>
+
+## Stress-Strain Curve
+
+The uniaxial tensile test (ASTM E8, ISO 6892-1) characterizes mechanical behavior:
+
+**Elastic region**: `σ = E·ε` (Hooke's Law). The slope is Young's modulus E. Deformation is recoverable.
+
+**Yield point** (Rp0.2 or Fy): 0.2% offset proof stress. The stress at which 0.2% permanent (plastic) strain occurs. For mild steel, a distinct upper/lower yield point exists; for most alloys, the 0.2% offset method is used.
+
+**Strain hardening**: after yielding, stress continues to increase with strain as dislocations multiply and interact. The peak stress is the ultimate tensile strength Fu (or UTS or Rm).
+
+**Necking and fracture**: after UTS, localized thinning (necking) begins; engineering stress drops while true stress continues to rise until fracture.
+
+Key parameters:
+- **E** (Young's modulus): steel 200 GPa, aluminum 69 GPa, titanium 114 GPa, CFRP 70-150 GPa
+- **Poisson's ratio ν**: steel 0.30, aluminum 0.33, rubber ≈ 0.50
+- **Elongation at break A%**: measures ductility; structural steel ≥ 18-22%; high-strength steel may be < 8%
+- **Toughness**: area under the σ-ε curve = energy absorbed per unit volume before fracture
+
+## Fatigue
+
+Fatigue is the progressive crack growth under cyclic loading, leading to fracture at stresses well below the static UTS.
+
+### S-N (Wöhler) Curve
+Plots stress amplitude Sa versus cycles to failure Nf. For steels, a clear **endurance limit** Se exists (typically ≈ 0.5·UTS for UTS < 1,400 MPa); below Se, infinite life is predicted. Aluminum alloys do not exhibit a true endurance limit — fatigue strength is reported at a specific life (typically 5×10⁸ cycles).
+
+### Modified Goodman Diagram
+Accounting for mean stress σm:
+
+`Sa/Se + σm/UTS = 1` (Goodman line — conservative)
+
+Points below the Goodman line have infinite life; above it, finite life or yielding.
+
+### Stress Concentration
+Notches, holes, fillets, and keyways raise local stress by factor Kt (geometric stress concentration factor).
+
+Effective fatigue stress concentration: `Kf = 1 + q·(Kt - 1)` where `q` is the notch sensitivity (0 to 1).
+
+<Info>Most fatigue failures initiate at stress concentrations on the surface. Surface finish, residual stresses (compressive residual stresses from shot peening increase fatigue life), and environmental conditions (corrosion fatigue) are critical factors.</Info>
+
+## Fracture Mechanics
+
+Fracture mechanics quantifies the conditions for crack propagation.
+
+### Stress Intensity Factor
+`KI = σ·√(π·a)·F(a/W)` (MPa·√m)
+
+Where `a` is crack half-length and `F` is a geometry correction factor (from handbooks or FEA).
+
+**Fracture criterion**: `KI ≥ KIc` (plane strain fracture toughness — material property)
+
+Material fracture toughness KIc values:
+- High-strength steel (4340): 50-60 MPa·√m
+- Mild steel (A36): > 200 MPa·√m (very tough)
+- 7075-T6 aluminum: 24-30 MPa·√m
+- 6061-T6 aluminum: 29-35 MPa·√m
+- Ceramic (Al₂O₃): 3-5 MPa·√m
+
+**Critical crack size**: `ac = (1/π)·(KIc/(σ·F))²`
+
+### Leak-Before-Break Design
+For pressure vessels, design so that a through-thickness crack (detectable by inspection) does not reach the critical crack size for fracture. This provides warning (leakage) before catastrophic failure.
+
+## Heat Treatment of Steel
+
+| Treatment | Process | Effect |
+|---|---|---|
+| Full Anneal | Heat above Ac3, slow furnace cool | Maximum softness, relieve stress, improve machinability |
+| Normalize | Heat above Ac3, air cool | Uniform fine grain, improved toughness vs. as-cast |
+| Quench & Temper | Heat above Ac3, rapid quench (water/oil) + temper at 150-650°C | Martensite → tempered martensite; high strength + toughness balance |
+| Carburizing | Enrich surface with C at 850-950°C, quench | Hard case + ductile core; gears, shafts |
+| Nitriding | Enrich surface with N at 500-570°C | Very hard surface without distortion; tooling, valves |
+| Induction hardening | Surface heating by induction + quench | Fast, localized hardening; camshafts, crankshafts |
+
+<CardGroup cols={2}>
+  <Card title="Thermodynamics" icon="temperature-high" href="/en/mechanical/thermodynamics">
+    Heat treatment thermal cycles and temperature effects
+  </Card>
+  <Card title="Structural Analysis" icon="building" href="/en/civil-engineering/structures">
+    Material properties for structural design
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    FEA software for material simulation (ANSYS, Abaqus)
+  </Card>
+  <Card title="Matériaux (FR)" icon="atom" href="/genie-mecanique/materiaux">
+    Version française complète sur la science des matériaux
+  </Card>
+</CardGroup>
