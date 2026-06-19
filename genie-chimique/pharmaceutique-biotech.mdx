@@ -1,0 +1,352 @@
+---
+title: "Pharmaceutique & Biotechnologie"
+description: "BPF, salles blanches, bioréacteurs et conception par la qualité"
+icon: "pills"
+---
+
+## Bonnes pratiques de fabrication (BPF / cGMP)
+
+Les bonnes pratiques de fabrication (BPF, ou en anglais cGMP — current Good Manufacturing Practices) définissent les exigences minimales de qualité pour la fabrication des médicaments destinés à usage humain ou vétérinaire. Le terme "current" souligne que les pratiques doivent évoluer en continu avec les progrès technologiques et scientifiques.
+
+### Cadre réglementaire
+
+**Canada :** Santé Canada encadre les BPF via le **Règlement sur les aliments et drogues (RAD)**, notamment les articles C.02.009 à C.02.029 (fabrication des drogues), et les lignes directrices associées (Guide des BPF, inspiré des lignes directrices ICH et de la PIC/S).
+
+**États-Unis :** La FDA (Food and Drug Administration) applique :
+- **21 CFR Part 210** : BPF généraux pour les médicaments humains
+- **21 CFR Part 211** : BPF pour les médicaments finis
+- **21 CFR Part 606** : BPF pour les produits biologiques (sang, dérivés sanguins)
+
+**Lignes directrices ICH (International Council for Harmonisation) :**
+
+| Document | Titre | Portée |
+|---|---|---|
+| ICH Q7 | BPF pour les substances pharmaceutiques actives (IPA/API) | Chimie fine, intermédiaires de synthèse |
+| ICH Q8(R2) | Développement pharmaceutique (Quality by Design) | Phase de développement |
+| ICH Q9(R1) | Gestion des risques qualité | Tout le cycle de vie |
+| ICH Q10 | Système qualité pharmaceutique | Tout le cycle de vie |
+| ICH Q11 | Développement et fabrication des substances pharmaceutiques | Biologiques et chimiques |
+| ICH Q12 | Gestion du cycle de vie technique | Post-approbation |
+
+### Éléments clés des BPF
+
+Un système BPF couvre sept domaines principaux :
+
+1. **Personnel** : qualifications, formations (formation initiale + continue), habilitations, hygiène
+2. **Locaux et équipements** : conception, qualification (IQ/OQ/PQ), maintenance préventive, calibration
+3. **Documentation** : traçabilité complète (batch records, logbooks, déviations), contrôle des documents (SOP, spécifications, protocoles)
+4. **Production** : gestion des matières premières, contrôles en cours de fabrication (IPC — In-Process Controls)
+5. **Contrôle qualité (QC)** : tests analytiques, libération des lots (Certificate of Analysis)
+6. **Sous-traitance et audits fournisseurs** : qualification, accords qualité (Quality Technical Agreements)
+7. **Réclamations, rappels et gestion des non-conformités** : investigations (CAPA — Corrective and Preventive Actions)
+
+<Note>
+En Canada, toute installation fabricant des médicaments à usage humain ou vétérinaire doit détenir un **Établissement de fabrication de drogues (EFD)**, une licence délivrée par Santé Canada après inspection basée sur les BPF. Les inspections peuvent être annoncées ou inopinées.
+</Note>
+
+---
+
+## Classification des salles blanches
+
+Les salles blanches contrôlent la concentration de particules en suspension dans l'air afin d'éviter la contamination des produits, en particulier pour les médicaments stériles.
+
+### Classification ISO 14644-1
+
+| Classe ISO | Particules ≥ 0,5 μm/m³ (au repos) | Particules ≥ 5 μm/m³ (au repos) | Équivalent EU GMP |
+|---|---|---|---|
+| ISO 4 | 352 | Non défini | — |
+| ISO 5 | 3 520 | 20 | A (sous flux laminaire) |
+| ISO 6 | 35 200 | 237 | B (fond de zone A aseptique) |
+| ISO 7 | 352 000 | 2 370 | C |
+| ISO 8 | 3 520 000 | 29 300 | D |
+
+**Applications typiques par classe EU GMP :**
+- **Grade A (ISO 5)** : remplissage aseptique de flacons, préparation de solutions stériles sans filtration terminale, manipulation de produits lyophilisés ouverts
+- **Grade B (ISO 6)** : fond de zone pour les opérations Grade A en remplissage aseptique
+- **Grade C (ISO 7)** : préparation de solutions à filtrer stérilement, préparation des composants après lavage/stérilisation
+- **Grade D (ISO 8)** : zones d'habillage, préparation d'excipients non stériles, maintenance en salle propre
+
+### Systèmes HVAC critiques
+
+Le contrôle de l'environnement en salle blanche repose sur plusieurs paramètres HVAC (Heating, Ventilation, Air Conditioning) :
+
+**Pression différentielle :** Les zones plus propres doivent être à pression positive par rapport aux zones moins propres pour éviter les entrées d'air contaminé :
+- Grade A/B vs Grade C : +15 Pa minimum (recommandation EU GMP Annexe 1, 2022)
+- Grade C vs Grade D : +12,5 Pa minimum
+- Entre chaque zone adjacente : ≥ 10 Pa
+
+**Filtration HEPA :** Les filtres HEPA (High Efficiency Particulate Air) assurent l'efficacité de filtration :
+- Classe H13 : ≥ 99,95% de rétention (EN 1822)
+- Classe H14 : ≥ 99,995% de rétention — standard pour Grade A et B
+- Les filtres HEPA sont testés in situ à l'installation puis périodiquement (test DOP/PAO)
+
+**Taux de renouvellement d'air (ACH — Air Changes per Hour) :**
+- Grade A (sous LAF) : flux unidirectionnel 0,45 m/s ± 20%
+- Grade B : 40–60 ACH (recirculé + air frais)
+- Grade C : 20–40 ACH
+- Grade D : 6–20 ACH
+
+**Autres paramètres contrôlés :**
+- Température : 18–22°C (zones de production stérile), ±2°C
+- Humidité relative : 45–65% (limite croissance microbienne)
+- Surveillance particulaire et microbiologique en continu (Grade A/B) ou périodique
+
+<Tip>
+L'EU GMP Annexe 1 révisée (entrée en vigueur août 2023) introduit l'obligation d'une **stratégie de contrôle de la contamination (SCC / CCS)** documentée pour toutes les opérations aseptiques. Cette stratégie doit couvrir les risques liés aux personnes, à l'environnement, aux matières premières et aux équipements.
+</Tip>
+
+---
+
+## Conception et exploitation des bioréacteurs
+
+Les bioréacteurs sont les équipements centraux de la production de biomolécules thérapeutiques (anticorps monoclonaux, protéines recombinantes, vaccins, thérapies cellulaires et géniques).
+
+### Types de bioréacteurs
+
+| Type | Description | Applications |
+|---|---|---|
+| STR (Stirred Tank Reactor) | Cuve agitée avec turbines Rushton ou à pales inclinées | mAbs, protéines recombinantes, vaccins (cellules mammifères, bactéries, levures) |
+| Airlift | Agitation par bullage d'air, pas d'agitateur mécanique | Cultures sensibles au cisaillement |
+| Wave / Rocking bag | Poche souple à mouvement oscillatoire (N_Wave) | Inoculation, production à petit volume, thérapies cellulaires |
+| Packed bed / hollow fiber | Cellules immobilisées sur matrice | Production continue, thérapies cellulaires |
+| Bioréacteur de perfusion | Rétention des cellules + renouvellement continu du milieu | Densités cellulaires très élevées (> 100 × 10⁶ cellules/mL) |
+
+### Paramètres critiques de procédé (CPP)
+
+Pour les cellules de mammifères (CHO — Chinese Hamster Ovary, la lignée cellulaire la plus utilisée pour les mAbs) :
+
+| Paramètre | Valeur cible typique | Impact si déviation |
+|---|---|---|
+| pH | 6,8 – 7,2 | pH bas → inhibition croissance ; pH haut → apoptose |
+| Température | 35 – 37°C (ou shift à 33°C en phase de production) | Température haute → stress cellulaire ; basse → croissance ralentie mais meilleure qualité |
+| Oxygène dissous (DO) | 30 – 50% de saturation en air | DO < 20% → hypoxie, mort cellulaire ; DO > 80% → stress oxydatif |
+| CO₂ dissous (dCO₂) | 30 – 80 mmHg (5 – 10% pression partielle) | dCO₂ élevé → inhibition métabolique, effets sur glycosylation |
+| Osmolalité | 280 – 380 mOsm/kg | Osmolalité élevée (excès glucose/sel) → stress osmotique |
+| Agitation | 50 – 200 rpm selon géométrie (τ_shear < 1 Pa) | Cisaillement excessif → dommages membranaires cellulaires |
+
+### Transfert d'oxygène
+
+Le transfert de l'oxygène de la phase gazeuse vers la phase liquide est souvent le facteur limitant à grande échelle. Il est décrit par :
+
+`OTR = K_La × (C* - C_L)`
+
+Où :
+- OTR (Oxygen Transfer Rate) : mmol O₂ / (L · h)
+- K_La : coefficient volumétrique de transfert de masse (h⁻¹)
+- C* : concentration d'O₂ à saturation dans le liquide (≈ 0,21 mmol/L à 37°C, air)
+- C_L : concentration d'O₂ dissous actuelle
+
+Le K_La dépend de la puissance d'agitation (P/V) et du débit de sparging (v_s) :
+
+`K_La = α × (P/V)^β × v_s^γ`
+
+Les exposants β ≈ 0,4–0,7 et γ ≈ 0,5–0,7 varient selon la géométrie du bioréacteur.
+
+### Scale-up des bioréacteurs
+
+L'extrapolation d'échelle est l'un des défis majeurs en biotraitement. Les critères de scale-up sont souvent contradictoires :
+
+| Critère | Expression | Avantage | Inconvénient |
+|---|---|---|---|
+| Puissance par volume constante | P/V = cst | Maintient le cisaillement similaire | K_La diminue à grande échelle |
+| K_La constant | K_La = cst | Maintient le transfert O₂ | Cisaillement augmente |
+| Vitesse de pointe de l'agitateur | N × D = cst | Mixage similaire | Rarement utilisé seul |
+| Nombre de Reynolds | N × D² / ν = cst | Profil d'écoulement similaire | N trop bas à grande échelle |
+
+**Échelle de production typique pour anticorps monoclonaux (mAbs) :**
+
+Laboratoire (2 L) → Pilote (50–200 L) → Développement (500–2 000 L) → Production (5 000–20 000 L)
+
+**Densités cellulaires cibles (fed-batch optimisé) :**
+- Pic : 20–30 × 10⁶ cellules viables/mL
+- Viabilité en fin de culture : > 70%
+- Durée de culture fed-batch : 12–18 jours
+- Titre en mAb : 3–10 g/L (selon lignée et procédé)
+
+<Info>
+Le mode **fed-batch** consiste à ajouter périodiquement (ou en continu) des nutriments concentrés (glucose, acides aminés, vitamines) au cours de la culture pour maintenir un environnement nutritif optimal sans diluer le produit. C'est le mode le plus utilisé industriellement pour les mAbs. La perfusion (continuous processing) gagne en intérêt pour son rendement supérieur.
+</Info>
+
+---
+
+## Traitement en aval (Downstream Processing / DSP)
+
+Le DSP représente typiquement **50–80% du coût de fabrication** d'un médicament biologique. Son objectif est de purifier le produit à partir d'un bouillon de culture complexe contenant cellules, débris, protéines de la cellule hôte (HCP), ADN, virus potentiels et impuretés de procédé.
+
+### Clarification
+
+La clarification élimine les cellules et les débris cellulaires du bouillon de culture :
+
+1. **Centrifugation continue** (séparateurs à disques — Westfalia, Alfa Laval) : séparation densimétrique, efficacité > 99% de rétention des cellules pour 10–20 μm
+2. **Filtration en profondeur** (depth filtration) : filtres à structure tortueuse, rétention par adsorption et tamisage ; enlève les fines particules (< 1 μm), les HCP et l'ADN partiellement
+3. **Filtration tangentielle (TFF)** 0,2–0,65 μm : alternative pour volumes < 500 L
+
+### Purification par chromatographie
+
+**Train de purification typique pour un mAb (IgG1) :**
+
+**Étape 1 — Capture (Protéine A) :**
+- La résine Protéine A (MabSelect SuRe, Capto L, etc.) se lie spécifiquement aux IgG via le fragment Fc
+- Conditions de liaison : pH 7,0–7,4, tampon PBS ou Tris
+- Élution : pH 3,0–3,5 (acide acétique ou citrique)
+- Sélectivité exceptionnelle : pureté ≥ 95% après une seule étape
+- Coût de la résine : environ 8 000–15 000 $/L → gestion rigoureuse du nombre de cycles (50–200 cycles)
+
+**Inactivation virale (étape orthogonale) :**
+- pH bas (pH 3,5, 60 min à température ambiante) : inactivation des virus enveloppés (retrovirus, modèles rétrovirus)
+- Étape obligatoire réglementairement (ICH Q5A)
+
+**Étape 2 — Purification intermédiaire (polissage 1 — échange de cations, CEX) :**
+- Résine SP-Sépharose, Fractogel SO₃, POROS HS
+- Élimine les agrégats (HMW — High Molecular Weight), les variants de charge acides, les HCP résiduels
+- Mode flow-through ou mode de liaison/élution selon le profil de charge du mAb
+
+**Étape 3 — Polissage final (échange d'anions, AEX en flow-through) :**
+- Résine Q-Sépharose ou équivalent
+- Élimine l'ADN résiduel (< 10 ng/dose, limite réglementaire FDA), les endotoxines, les virus non-enveloppés
+- Le mAb passe en flow-through (non retenu à pH ~7–8) car son pI est généralement entre 7 et 9
+
+**Nanofiltration virale (filtration virus) :**
+- Filtres Planova 20N, Viresolve Pro, etc. (20 nm de coupure)
+- Élimination des virus non-enveloppés (parvovirus B19, adénovirus)
+- Abattement ≥ 4 log₁₀ requis pour chaque étape orthogonale
+
+### Ultrafiltration/Diafiltration (UF/DF)
+
+L'UF/DF permet de concentrer le mAb et d'échanger le tampon pour la formulation finale :
+
+- **Membranes** : cellulose régénérée (Ultracel) ou PES (polyéthersulfone) avec MWCO (Molecular Weight Cut-Off) de 10–30 kDa pour les mAbs (~150 kDa)
+- **Mode TFF** (Tangential Flow Filtration) : le flux tangentiel évite le colmatage des membranes
+- **TMP** (Trans-Membrane Pressure) : maintenu entre 0,5–2 bar pour maximiser le flux et minimiser la compaction de la couche de gel
+- **Facteur de diafiltration** : ≥ 7 volumes de diafiltration pour réduire le tampon initial à < 0,1% de sa concentration initiale
+
+**Rendement global DSP typique pour mAbs :**
+- Capture protéine A : 90–95%
+- Inactivation virale + neutralisation : 95–98%
+- CEX : 85–95%
+- AEX flow-through : 90–98%
+- Nanofiltration : 80–95%
+- UF/DF : 90–95%
+- **Rendement global : 60–75%**
+
+---
+
+## Quality by Design (QbD)
+
+Le QbD est une approche systématique du développement pharmaceutique, introduite par la FDA et formalisée par l'ICH Q8(R2). Elle repose sur une compréhension mécanistique approfondie du procédé plutôt que sur le contrôle empirique par analyse de produit fini.
+
+### Hiérarchie conceptuelle QbD
+
+**QTPP (Quality Target Product Profile) :** définit ce que le produit doit être pour être sûr, efficace et de qualité appropriée pour son usage prévu. Exemples pour un mAb IV :
+- Concentration protéique : 10 mg/mL ± 2 mg/mL
+- Agrégats (HMW) : < 1%
+- Pureté (monomer) : > 99% par SE-HPLC
+- Endotoxines : < 0,1 EU/mg
+- Bioactivité (ELISA ou cellulaire) : 80–120% de la référence
+
+**CQA (Critical Quality Attributes) :** attributs physiques, chimiques, biologiques ou microbiologiques qui doivent être dans des limites définies pour garantir la qualité du produit. L'identification des CQA repose sur une évaluation des risques (risk ranking) :
+
+| CQA | Criticité | Raison |
+|---|---|---|
+| Glycosylation (fucosylation, galactosylation) | Haute | Impact sur l'ADCC, la pharmacocinétique |
+| Agrégation | Haute | Risque immunogénicité |
+| Variants de charge (acides/basiques) | Moyenne | Impact potentiel sur la bioactivité |
+| Protéines de la cellule hôte (HCP) | Haute | Risque immunogénicité, activité enzymatique |
+| ADN résiduel | Haute | Risque oncogène, réglementaire |
+| Titre (concentration) | Haute | Dosage, efficacité |
+
+**CPP (Critical Process Parameters) :** paramètres de procédé dont la variation affecte un ou plusieurs CQA. Par exemple :
+- pH de la culture → glycosylation (pCO₂ affect le pH intracellulaire → galactosylation)
+- Température de la culture → ratio variants de charge (désamidation thermiquement activée)
+- DO → glycosylation, métabolisme cellulaire
+
+**Design Space :** espace multidimensionnel des CPP (et des attributs des matières premières) dans lequel les CQA restent dans leurs limites acceptables. Travailler à l'intérieur du design space ne requiert pas de notification réglementaire de changement.
+
+### PAT (Process Analytical Technology)
+
+La PAT permet des mesures en temps réel (ou quasi-réel) des attributs du procédé et du produit, réduisant la dépendance aux analyses off-line longues :
+
+| Technique | Paramètre mesuré | Principe |
+|---|---|---|
+| NIR (Near Infrared) | Glucose, lactate, titre, osmolalité | Spectroscopie vibrationnelle |
+| Raman | Glucose, glutamine, ammonium, titre | Spectroscopie Raman, sondes immergées |
+| Spectrofluorescence | Viabilité cellulaire, métabolites | Fluorescence NADH/NADPH |
+| Capteurs en ligne | pH, DO, dCO₂, température | Électrochimie, optique |
+| Cytométrie en flux (FC) | Densité cellulaire, viabilité, marqueurs surface | Analyse monoparticulaire avec fluorochrome |
+
+---
+
+## Qualification et validation
+
+### Le modèle IQ/OQ/PQ
+
+La qualification des équipements suit un cycle en V ou une approche basée sur les risques (ICH Q8, ASTM E2500) :
+
+**IQ (Installation Qualification) — Qualification de l'installation :**
+- Vérification que l'équipement est installé conformément aux spécifications du fabricant et aux exigences de l'utilisateur
+- Contrôle : codes matériaux (ex: acier 316L pour équipements en contact), finition de surface (Ra ≤ 0,8 μm pour surfaces en contact avec produit), connexions (utilités, instrumentation), documentation (plans, manuels, calibrations)
+
+**OQ (Operational Qualification) — Qualification opérationnelle :**
+- Démonstration que l'équipement fonctionne dans les limites opérationnelles définies
+- Tests des limites haute/basse de chaque paramètre critique (température, pression, vitesse d'agitation)
+- Tests des alarmes et interlocks de sécurité
+- Vérification de la reproductibilité des setpoints
+
+**PQ (Performance Qualification) — Qualification des performances :**
+- Démonstration que l'équipement, utilisé avec les matières premières réelles, produit de manière reproductible un produit conforme aux spécifications
+- Minimum 3 lots consécutifs conformes (ou approche basée sur les risques)
+- Applicable aux équipements critiques : lyophilisateurs, autoclaves, lignes de remplissage aseptique, bioréacteurs
+
+### Validation de nettoyage
+
+La validation de nettoyage démontre que les procédures de nettoyage éliminent les résidus du produit précédent, des agents de nettoyage et des agents microbiologiques en dessous de limites acceptables.
+
+**Calcul du MACO (Maximum Allowable Carryover) :**
+
+`MACO = (TDD_A × SF × BS_B) / (TDD_B_max × SF_nettoyage)`
+
+Approche simplifiée (méthode des 1/1000) :
+
+`MACO = (Dose_min_thérapeutique_A × 1/1000) / (Dose_max_du_lot_B / Lot_size_B)`
+
+Où :
+- Dose_min_thérapeutique_A : plus faible dose active quotidienne du produit précédent (mg/jour)
+- 1/1000 : facteur de sécurité (exposition accidentelle ne devant pas dépasser 0,1% de la dose thérapeutique)
+- Dose_max_du_lot_B : dose maximale journalière du produit suivant (mg/jour)
+- Lot_size_B : taille du lot suivant (unités/jour)
+
+**Critères complémentaires :**
+- Visuel : absence de résidu visible (généralement équivalent à ~4 μg/cm²)
+- Concentration maximale admissible dans le rinçage final : ≤ 10 ppm (1/10 des critères visuels)
+- **HBEL (Health Based Exposure Limits)** selon ICH Q3D : pour les médicaments à haute potentialité (hormones, cytotoxiques), le critère MACO basé sur la dose est insuffisant → calcul de l'ADE (Acceptable Daily Exposure) par toxicologie
+
+### Validation des méthodes analytiques (ICH Q2(R1))
+
+| Paramètre | Définition | Test typique |
+|---|---|---|
+| Exactitude (Accuracy) | Accord entre valeur mesurée et valeur vraie | Ajouts dosés (spike recovery), matériau de référence certifié |
+| Précision (intermédiaire/répétabilité) | Accord entre mesures répétées | ≥ 6 réplicats, % CV ≤ 2% pour HPLC |
+| Spécificité/Sélectivité | Réponse uniquement à l'analyte d'intérêt | Test de stress (dégradation forcée), mélange d'impuretés |
+| Linéarité | Relation linéaire dans la plage de travail | ≥ 5 niveaux, R² ≥ 0,999 |
+| Limite de détection (LOD) | Plus faible concentration détectable | Signal/Bruit = 3 |
+| Limite de quantification (LOQ) | Plus faible concentration mesurable avec précision | Signal/Bruit = 10, %CV < 20% |
+| Robustesse | Insensibilité aux variations délibérées mineures | Plan Plackett-Burman ou Youden |
+
+<Warning>
+Une méthode analytique non validée ou transférée sans qualification de méthode vers un autre laboratoire constitue une déviation majeure en BPF. Les données de validation doivent être documentées dans un rapport et approuvées avant utilisation en contrôle qualité de routine. Toute modification de méthode nécessite une revalidation partielle ou totale selon son impact.
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Procédés industriels" icon="industry" href="/genie-chimique/procedes-industriels">
+    Raffinage, pétrochimie, Haber-Bosch et polymères
+  </Card>
+  <Card title="Sécurité des procédés" icon="triangle-exclamation" href="/genie-chimique/securite-procedes">
+    HAZOP, LOPA, SIS et gestion des risques industriels
+  </Card>
+  <Card title="Transfert de masse" icon="droplets" href="/genie-chimique/transfert-masse">
+    Absorption, extraction, distillation, membranes
+  </Card>
+  <Card title="Génie des réactions" icon="atom" href="/genie-chimique/genie-reactions">
+    Cinétique chimique, réacteurs industriels, bilan matière
+  </Card>
+</CardGroup>

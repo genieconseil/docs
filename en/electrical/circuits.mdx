@@ -1,0 +1,149 @@
+---
+title: "Electrical Circuits"
+description: "Kirchhoff's laws, Thévenin and Norton theorems, AC circuit analysis, filters, and transformers"
+icon: "bolt"
+---
+
+Circuit analysis is the foundation of all electrical engineering. Mastering Kirchhoff's laws, network theorems, and AC analysis enables the design and evaluation of power systems, electronic devices, and control circuits.
+
+## Kirchhoff's Laws
+
+### KVL — Kirchhoff's Voltage Law
+The algebraic sum of all voltages around any closed loop is zero:
+
+`ΣV = 0` (around any closed loop)
+
+In practice: the sum of voltage drops (resistors, inductors, capacitors) equals the sum of voltage rises (voltage sources). Sign convention: define a traversal direction; voltage is positive if you traverse from − to + through a source, negative through a passive element in the direction of current.
+
+### KCL — Kirchhoff's Current Law
+The algebraic sum of all currents entering and leaving any node is zero:
+
+`ΣI = 0` (at any node)
+
+In practice: sum of currents flowing into a node = sum of currents flowing out.
+
+### Mesh Analysis
+Assign mesh currents to each independent loop. Apply KVL to each mesh. For N independent meshes, solve N simultaneous equations for N mesh currents. Branch currents are superpositions of mesh currents.
+
+### Nodal Analysis
+Define node voltages relative to a reference (ground) node. Apply KCL at each non-reference node. For N nodes (excluding reference), solve N equations. Generally more efficient for circuits with many parallel branches.
+
+<Tip>Choose mesh analysis when the circuit has few meshes but many nodes; choose nodal analysis when there are few nodes but many meshes. For circuits with voltage sources, use supermesh; for current sources, use supernode techniques.</Tip>
+
+## Network Theorems
+
+### Thévenin's Theorem
+Any linear circuit seen from two terminals A-B can be replaced by:
+- `Vth`: open-circuit voltage at A-B
+- `Rth`: equivalent resistance looking into A-B with all independent sources killed (voltage sources → short circuits; current sources → open circuits)
+
+Load current: `IL = Vth / (Rth + RL)`
+
+Maximum power transfer to load RL occurs when `RL = Rth`, giving `Pmax = Vth² / (4·Rth)`.
+
+### Norton's Theorem
+Equivalent to Thévenin but uses a current source in parallel:
+- `IN = Vth / Rth` (short-circuit current at A-B)
+- `RN = Rth`
+
+Source transformation: `Vth = IN·RN` converts between Thévenin and Norton equivalents.
+
+### Superposition
+In a linear circuit with multiple independent sources, the total response (voltage or current at any point) is the sum of responses produced by each source acting alone (others killed).
+
+<Warning>Superposition applies only to linear circuits. Power cannot be superimposed directly (P = I²R is nonlinear). Calculate total current or voltage first, then compute power from the total.</Warning>
+
+## AC Circuit Analysis
+
+### Sinusoidal Signals and Phasors
+Signal: `v(t) = Vm·cos(ωt + φ)` with angular frequency `ω = 2πf` (rad/s).
+
+Phasor representation: `V = Vm∠φ` (peak) or `V = Vrms∠φ` (RMS) where `Vrms = Vm/√2`.
+
+RMS values are used for power calculations: `P = Vrms·Irms·cos(φ)`.
+
+North American power systems: f = 60 Hz, ω = 377 rad/s. European/international: f = 50 Hz.
+
+### Impedances
+- **Resistor**: `ZR = R` (real, no phase shift)
+- **Inductor**: `ZL = jωL = jXL`; inductive reactance `XL = 2πfL` (Ω). Current lags voltage by 90°.
+- **Capacitor**: `ZC = 1/(jωC) = -jXC`; capacitive reactance `XC = 1/(2πfC)` (Ω). Current leads voltage by 90°.
+
+Series impedance: `Z = R + j(XL - XC)`; magnitude `|Z| = √(R² + X²)`; phase `φ = arctan(X/R)`
+
+### AC Power
+- **Active (real) power** P = V·I·cos(φ) (W) — consumed by resistance; useful work
+- **Reactive power** Q = V·I·sin(φ) (VAR) — stored and released by inductors/capacitors; no net energy consumed
+- **Apparent power** S = V·I (VA); complex power `S = P + jQ = Vrms·I*rms`
+- **Power factor** fp = cos(φ) = P/S
+
+Low power factor (fp < 0.85) means more current is drawn for the same active power — overloading cables and transformers. Utilities penalize industrial consumers for low fp.
+
+**Power factor correction**: add shunt capacitors to cancel inductive reactive power.
+`C = Q_cap / (ω·V²)` where `Q_cap = P·(tan φ₁ - tan φ₂)` (VAR)
+
+### Resonance in RLC Circuits
+Resonant frequency: `ω₀ = 1/√(LC)` (rad/s); `f₀ = 1/(2π√(LC))` (Hz)
+
+At resonance: XL = XC, total impedance is purely resistive (minimum for series RLC, maximum for parallel RLC).
+
+Quality factor: `Q = ω₀L/R = 1/(ω₀CR)`
+
+Bandwidth: `BW = ω₀/Q` (rad/s)
+
+## Passive Filters
+
+### First-Order Filters
+**Low-pass RC**: `Vout/Vin = 1/(1 + jωRC)`; cutoff frequency `fc = 1/(2πRC)` Hz.
+Attenuates frequencies above fc at -20 dB/decade slope.
+
+**High-pass RC**: `Vout/Vin = jωRC/(1 + jωRC)`; same fc.
+Passes frequencies above fc.
+
+**High-pass RL**: `Vout/Vin = jωL/(R + jωL)`; `fc = R/(2πL)`.
+
+### Second-Order Filters (RLC)
+Band-pass: series RLC — maximum response at ω₀, rolls off -40 dB/decade on each side.
+Band-stop (notch): parallel RLC — minimum response at ω₀.
+
+<Info>Real filter design typically uses active filters (op-amp based) for signal conditioning because they can be designed without inductors and offer gain. Passive filters are preferred at high frequencies (RF/microwave) where op-amps have insufficient bandwidth.</Info>
+
+## Transformers
+
+### Ideal Transformer
+Turns ratio: `n = N₁/N₂ = V₁/V₂ = I₂/I₁`
+
+A step-down transformer with n = 10 converts 10,000 V to 1,000 V and multiplies current by 10. Apparent power is conserved in an ideal transformer: `S₁ = S₂`.
+
+Impedance transformation: a load impedance ZL on the secondary appears as `n²·ZL` at the primary. Used for impedance matching in audio amplifiers and RF circuits.
+
+### Practical Transformer Losses
+- **Core (iron) losses**: hysteresis loss (frequency-dependent) and eddy current loss (frequency²-dependent); present at no-load; reduced by laminated silicon steel cores
+- **Copper losses**: `I²R` in primary and secondary windings; proportional to load current squared
+
+Transformer efficiency: `η = Pout/(Pin) = Pout/(Pout + Pcore + Pcopper)`
+
+Large power transformers (distribution and transmission) achieve η = 98-99.5%.
+
+### Three-Phase Transformers
+Common winding configurations:
+- **Wye-wye (Y-Y)**: same phase shift, used for high-voltage transmission
+- **Delta-wye (Δ-Y)**: provides 30° phase shift; standard for distribution (primary Δ, secondary Y with neutral)
+- **Delta-delta (Δ-Δ)**: no phase shift, continues operating with one winding open (open-delta)
+
+Phase shift notation: Dyn11 means Delta primary, wye secondary with neutral, 30° phase shift.
+
+<CardGroup cols={2}>
+  <Card title="Control Systems" icon="sliders" href="/en/electrical/control-systems">
+    Control theory and PID regulation
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Circuit simulation software (SPICE, MATLAB)
+  </Card>
+  <Card title="Circuits (FR)" icon="bolt" href="/genie-electrique/circuits">
+    Version française complète avec théorèmes et filtres
+  </Card>
+  <Card title="Renewable Energy" icon="sun" href="/genie-electrique/energie-renouvelable">
+    Power electronics for renewable energy systems
+  </Card>
+</CardGroup>
