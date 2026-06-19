@@ -1,0 +1,198 @@
+---
+title: "Fabrication et procédés de production"
+description: "Moulage, formage, usinage, soudage, fabrication additive et contrôle qualité en production"
+icon: "screwdriver-wrench"
+---
+
+Les procédés de fabrication déterminent directement les propriétés mécaniques finales, la précision dimensionnelle et le coût des pièces produites. Le choix du procédé doit intégrer la géométrie, le matériau, la série de production et les exigences fonctionnelles dès la phase de conception.
+
+## Procédés de moulage
+
+Le moulage consiste à couler un matériau liquide ou pâteux dans une empreinte qui reproduit la forme de la pièce finale.
+
+**Moulage en sable**
+
+Le moulage en sable (sable à vert ou sable chimique) est le procédé le plus polyvalent. L'empreinte est réalisée dans un mélange de sable siliceux et de liant. Ce procédé accepte tous les alliages ferreux et non ferreux, des pièces de quelques grammes à plusieurs dizaines de tonnes.
+
+- Tolérances dimensionnelles : IT14 à IT16 (± 1 à 3 mm selon la taille)
+- État de surface : Ra 6,3 à 25 µm — une reprise d'usinage est souvent nécessaire
+- Avantages : très faible coût d'outillage, flexibilité géométrique maximale, grandes pièces
+- Limites : cadences faibles, dispersion dimensionnelle élevée, moulures de joints visibles
+
+**Moulage à la cire perdue (moulage de précision / investment casting)**
+
+Le modèle en cire est recouvert de céramique réfractaire par trempage répété. La cire est ensuite fondue (d'où « perdue ») et remplacée par le métal liquide. Ce procédé permet des géométries complexes impossibles à usiner.
+
+- Tolérances : IT11 à IT13 (± 0,1 à 0,5 mm)
+- État de surface : Ra 1,6 à 3,2 µm — souvent aucune reprise nécessaire
+- Applications : aubes de turbine en superalliages (CMSX-4, IN718), implants orthopédiques, pièces aéronautiques complexes
+- Limites : coût élevé des moules en cire, tailles limitées (< 50 kg typiquement)
+
+**Moulage sous pression (die casting)**
+
+Le métal liquide est injecté à haute pression (10 à 175 MPa) dans un moule en acier outil (H13). Le procédé est réservé aux alliages à faible point de fusion : aluminium (A380, ADC12), zinc (Zamak), magnésium.
+
+- Tolérances : IT10 à IT12
+- État de surface : Ra 0,8 à 1,6 µm
+- Avantages : cadences très élevées (jusqu'à 500 cycles/h pour le zinc), excellent état de surface, parois minces possibles (< 1 mm)
+- Limites : coût d'outillage très élevé (≥ 50 000 €), uniquement alliages à bas point de fusion, microporosité résiduelle pouvant limiter l'anodisation ou la soudure
+
+<Note>
+Le moulage sous pression semi-solide (thixomoulage) permet de réduire la porosité grâce à un métal à l'état thixotrope. Des alliages de magnésium (AZ91D) sont notamment mis en forme par cette voie pour l'industrie automobile et l'électronique grand public.
+</Note>
+
+## Procédés de formage
+
+Le formage exploite la plasticité des matériaux métalliques pour leur donner une forme sans enlèvement de matière.
+
+**Forgeage**
+
+Le forgeage déforme le métal à chaud (au-dessus de la température de recristallisation) ou à froid par application d'une force de compression. Le forgeage aligne les grains suivant la forme de la pièce (fibrage), ce qui améliore considérablement les propriétés mécaniques directionnelles (résistance à la fatigue +20 à +50 % vs coulé).
+
+Types principaux : forgeage libre (ébauche, redressage), forgeage en matrice fermée (forgé matricé — vilebrequins, bielles, têtes de soupapes), forgeage à froid (boulons, vis).
+
+**Laminage**
+
+Le laminage réduit l'épaisseur d'un produit plat (tôle, bande) ou modifie la section d'un produit long (barre, profilé, rail) par passage entre deux cylindres contra-rotatifs. Le laminage à chaud produit des tolérances de l'ordre de ± 1 % de l'épaisseur ; le laminage à froid atteint ± 0,5 % avec un meilleur état de surface.
+
+**Extrusion**
+
+Le matériau est poussé ou tiré à travers une filière. L'extrusion directe (avant) convient aux alliages d'aluminium (séries 6061, 6063, 6082) pour produire des profilés de section constante complexe. Le rapport d'extrusion peut atteindre 100:1 pour l'aluminium.
+
+**Emboutissage profond**
+
+La tôle plate est transformée en une coque tridimensionnelle par action d'un poinçon et d'une matrice. La formabilité est caractérisée par :
+- Le coefficient d'emboutissage limite LDR (Limiting Drawing Ratio) = D0/Dp : acier doux ≈ 2,0–2,2 ; aluminium 1100 ≈ 2,0
+- L'allongement à la rupture et le coefficient d'anisotropie plastique r = εl/εe
+
+<Tip>
+Pour les aciers UHSS (Ultra High Strength Steel) utilisés dans l'automobile, l'emboutissage à chaud (pressage à chaud / Hot Stamping) avec refroidissement rapide dans l'outil permet d'atteindre des résistances de 1 500 MPa (22MnB5 trempé) tout en maintenant une formabilité acceptable.
+</Tip>
+
+## Usinage fondamental
+
+L'usinage enlève de la matière par formation de copeaux grâce à des outils coupants dont la géométrie est définie.
+
+**Opérations de base**
+
+| Opération | Mouvement de coupe | Surface générée |
+|-----------|-------------------|-----------------|
+| **Tournage** | Rotation de la pièce | Surfaces de révolution (cylindres, cônes, surfaces planes d'épaulement) |
+| **Fraisage** | Rotation de l'outil | Surfaces planes, poches, contours 2D et 3D |
+| **Perçage** | Rotation + avance axiale de l'outil | Trous cylindriques |
+| **Rectification** | Rotation de la meule | Surfaces finies à haute précision (Ra < 0,4 µm) |
+
+**Paramètres de coupe**
+
+La vitesse de coupe (vitesse périphérique au point de contact) est le paramètre central :
+
+$$V_c = \frac{\pi \cdot D \cdot N}{1000} \quad \text{(m/min)}$$
+
+où D est le diamètre en mm et N la vitesse de rotation en tr/min.
+
+L'avance (f en mm/tour ou fz en mm/dent) détermine l'épaisseur du copeau et donc les efforts de coupe et l'état de surface. La profondeur de passe ap (axiale) et la largeur de passe ae (radiale au fraisage) complètent les paramètres.
+
+**Matériaux d'outils coupants**
+
+| Matériau | Vitesse de coupe | Application typique |
+|----------|-----------------|-------------------|
+| ARS (Acier Rapide Supérieur M2, M35) | 20–60 m/min | Forets, tarauds, fraises HSS |
+| Carbure cémenté WC-Co (K10, P30) | 100–400 m/min | Plaquettes pour tournage, fraisage général |
+| Céramique Al2O3, Si3N4 | 300–1 000 m/min | Fonte grise, superalliages à haute vitesse |
+| CBN (Nitrure de Bore Cubique) | 100–500 m/min | Aciers trempés (60+ HRC), fonte |
+| Diamant PCD | 500–5 000 m/min | Alliages d'aluminium, matériaux non ferreux |
+
+<Warning>
+L'usinage des matériaux composites CFRP exige des outils diamant ou carbure micrograin spécifiques. L'absence de lubrification (usinage à sec recommandé) et la nécessité d'éviter la délamination imposent des vitesses de coupe élevées et des avances faibles. Des outils spéciaux (Brad point, compression router) minimisent l'arrachement des fibres.
+</Warning>
+
+## Procédés de soudage
+
+Le soudage assemble des pièces métalliques par fusion locale avec ou sans métal d'apport.
+
+**SMAW — Soudage à l'électrode enrobée (Shielded Metal Arc Welding)**
+
+L'arc électrique se forme entre l'électrode enrobée (baguette) et la pièce. L'enrobage produit un gaz protecteur et un laitier qui protège le bain de fusion. Procédé très polyvalent, utilisable sur le chantier, mais cadence faible et qualité dépendante de l'opérateur. Positions : toutes.
+
+**GMAW — MIG/MAG (Gas Metal Arc Welding)**
+
+Le métal d'apport (fil continu ∅ 0,8 à 1,6 mm) est alimenté en continu par un dévidoir motorisé. La protection est assurée par un gaz inerte (MIG : Ar pour aluminium) ou actif (MAG : CO2 ou Ar/CO2 pour aciers). Cadence élevée, semi-automatique ou robotisé. Le mode de transfert (court-circuit, globulaire, pulvérisé, pulsé) est sélectionné selon l'épaisseur et le matériau.
+
+**GTAW — TIG (Gas Tungsten Arc Welding)**
+
+L'arc se forme entre une électrode en tungstène non consommable et la pièce. Le métal d'apport est ajouté manuellement (baguette) ou automatiquement (fil froid). Protection argon pur ou argon/hélium. Procédé de haute qualité pour l'inox, l'aluminium, le titane et les alliages de nickel. Indispensable pour les passes de fond (root pass) sur tubes.
+
+**SAW — Soudage sous flux (Submerged Arc Welding)**
+
+L'arc est recouvert d'un flux granulé qui fond et forme un laitier protecteur. Procédé très productif pour les grandes épaisseurs (> 10 mm) en position à plat. Utilisé pour les structures offshore, les réservoirs et la construction navale.
+
+**Soudage laser et soudage par résistance par points**
+
+Le soudage laser (LBW) offre une zone affectée thermiquement très étroite, une haute précision et une grande vitesse. Il est largement utilisé en carrosserie automobile avec des robots 6 axes équipés de têtes de balayage (scanner welding). Le soudage par résistance par points (RSW — Resistance Spot Welding) est le procédé dominant en carrosserie automobile (≈ 4 000 à 6 000 points par véhicule).
+
+**Métallurgie du soudage et défauts**
+
+La Zone Affectée Thermiquement (ZAT) est la région adjacente au cordon de soudure dont les propriétés mécaniques sont modifiées par le cycle thermique sans fusion. Dans les aciers à haute résistance, la ZAT peut être fragilisée par la formation de martensite.
+
+Défauts courants et causes :
+- **Porosité** : humidité dans l'enrobage ou le flux, huile sur la pièce, gaz de protection contaminé
+- **Fissuration à froid** (retardée, hydrogène) : teneur en carbone élevée (CE > 0,45 %), refroidissement rapide, hydrogène diffusible
+- **Fissuration à chaud** (solidification) : teneur élevée en soufre et phosphore, rapport largeur/profondeur du cordon inadapté
+- **Déformations** : contraintes résiduelles de traction élevées — contrôlées par préchauffage, bridage, ordre de soudage et traitement thermique post-soudage (PWHT)
+
+## Fabrication additive
+
+La fabrication additive (impression 3D) construit les pièces couche par couche, ce qui permet des géométries non réalisables par les procédés conventionnels.
+
+| Procédé | Matériaux | Précision | Applications |
+|---------|-----------|-----------|--------------|
+| **FDM** (Fused Deposition Modeling) | PLA, ABS, PETG, Nylon | ± 0,3 mm | Prototypage rapide, outillage léger |
+| **SLA** (Stéréolithographie) | Résines photopolymères | ± 0,1 mm | Prototypes visuels, bijouterie, dentaire |
+| **SLS** (Selective Laser Sintering) | PA12, PA11, PA-CF | ± 0,2 mm | Pièces fonctionnelles polymère sans support |
+| **DMLS/SLM** (pour métaux) | Ti6Al4V, Inconel 718, 316L, AlSi10Mg | ± 0,05–0,1 mm | Aérospatiale, médical, outillage |
+| **DED** (Directed Energy Deposition) | Poudres et fils métalliques | ± 0,5 mm | Réparation de pièces, grandes structures |
+
+Les propriétés mécaniques des pièces DMLS sont comparables ou supérieures au coulé mais inférieures au forgé pour le Ti6Al4V (Rm ≈ 1 100 MPa après traitement thermique vs 1 170 MPa forgé). L'anisotropie (propriétés différentes selon la direction de construction) est un facteur clé à intégrer dans la conception.
+
+<Info>
+La fabrication additive hybride combine l'impression 3D et l'usinage dans la même machine (DMG Mori LASERTEC, Mazak VARIAXIS). Elle permet d'obtenir des états de surface usinés sur des géométries internes non accessibles après impression complète.
+</Info>
+
+## Contrôle qualité en production
+
+**Maîtrise Statistique des Procédés (MSP / SPC)**
+
+La MSP surveille en temps réel la stabilité et la capabilité des procédés de fabrication.
+
+Les **cartes de contrôle X̄-R** (Shewhart) tracent la moyenne et l'étendue d'échantillons prélevés à intervalles réguliers. Les limites de contrôle (UCL, LCL) sont calculées à ± 3σ. Un procédé est déclaré hors contrôle si un point dépasse les limites ou si des patterns non aléatoires apparaissent (règles de Nelson/Western Electric).
+
+**Indices de capabilité**
+
+L'indice Cpk mesure l'aptitude d'un procédé à respecter les spécifications en tenant compte du centrage :
+
+$$C_{pk} = \min\left[\frac{USL - \mu}{3\sigma} \; ; \; \frac{\mu - LSL}{3\sigma}\right]$$
+
+- Cpk ≥ 1,67 : procédé très capable (exigence automobile IATF 16949 pour caractéristiques spéciales)
+- Cpk ≥ 1,33 : procédé capable (objectif standard)
+- Cpk < 1,00 : procédé incapable — action corrective immédiate requise
+
+**Plans d'échantillonnage (NQA / AQL)**
+
+Les plans d'échantillonnage par attributs selon la norme ISO 2859 (MIL-STD-1916 aux États-Unis) définissent la taille d'échantillon n et le nombre d'acceptation Ac en fonction du Niveau de Qualité Acceptable (NQA/AQL). Le risque du producteur α (rejeter un lot bon) et le risque du consommateur β (accepter un lot mauvais) sont les paramètres clés de la négociation contractuelle.
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Conception mécanique" icon="drafting-compass" href="/genie-mecanique/conception-mecanique">
+    Processus de conception, tolérances ISO, GD&T et assemblages boulonnés
+  </Card>
+  <Card title="Maintenance et fiabilité" icon="wrench" href="/genie-mecanique/maintenance-fiabilite">
+    Stratégies de maintenance, AMDEC et surveillance de condition
+  </Card>
+  <Card title="Réseaux électriques" icon="plug" href="/genie-electrique/reseaux-electriques">
+    Systèmes de puissance et qualité de l'énergie
+  </Card>
+  <Card title="Machines électriques" icon="gear" href="/genie-electrique/machines-electriques">
+    Moteurs, variateurs et transformateurs industriels
+  </Card>
+</CardGroup>

@@ -1,0 +1,197 @@
+---
+title: "Automatisation industrielle et automates programmables"
+description: "Maîtrisez l'architecture des systèmes d'automatisation industrielle, les langages IEC 61131-3, les protocoles de communication et la sécurité fonctionnelle pour concevoir des systèmes de contrôle robustes."
+icon: "robot"
+---
+
+L'automatisation industrielle constitue le pilier de la production moderne. Des chaînes automobiles aux usines pharmaceutiques, les automates programmables (API/PLC) orchestrent des processus complexes avec fiabilité et précision. Ce guide couvre l'ensemble de l'écosystème, de la pyramide ISA-95 jusqu'aux normes de sécurité fonctionnelle.
+
+## La pyramide ISA-95 : niveaux d'automatisation
+
+La norme ISA-95 (équivalent IEC 62264) structure l'entreprise industrielle en cinq niveaux hiérarchiques, chacun ayant un rôle précis dans le flux d'information.
+
+<CardGroup cols={2}>
+  <Card title="Niveau 0 — Terrain" icon="microchip">
+    Capteurs, actionneurs, vannes, moteurs. Signaux physiques bruts : 4-20 mA, 0-10 V, contacts secs. Temps de réponse en millisecondes.
+  </Card>
+  <Card title="Niveau 1 — Contrôle" icon="sliders">
+    Automates programmables (PLC/API), régulateurs PID, entraînements à vitesse variable (EVV). Temps de cycle typique : 1 à 100 ms.
+  </Card>
+  <Card title="Niveau 2 — Supervision" icon="desktop">
+    SCADA, IHM (interfaces homme-machine), systèmes de contrôle distribué DCS. Collecte des données, alarmes, historiques.
+  </Card>
+  <Card title="Niveau 3 — MES" icon="industry">
+    Manufacturing Execution System : ordres de fabrication, traçabilité, gestion de la qualité, OEE en temps réel.
+  </Card>
+</CardGroup>
+
+Le **niveau 4** correspond aux systèmes ERP (SAP, Oracle) qui gèrent la planification stratégique, les finances et la chaîne d'approvisionnement. L'intégration des niveaux 3 et 4 via des interfaces standardisées (B2MML, OPC-UA) est l'un des défis majeurs de l'Industrie 4.0.
+
+## Architecture d'un automate programmable (API/PLC)
+
+Un PLC est un ordinateur industriel durci conçu pour fonctionner dans des environnements difficiles (vibrations, températures extrêmes, interférences électromagnétiques). Ses composantes principales :
+
+### Unité centrale (UC/CPU)
+Le processeur exécute le programme cycliquement selon le principe **scan** : lecture des entrées → exécution du programme → mise à jour des sorties. La durée d'un cycle (scan time) varie de 1 ms pour les applications rapides à 100 ms pour les processus lents.
+
+### Mémoire
+- **RAM** : données variables, état des E/S, tampons de communication
+- **ROM/Flash** : programme utilisateur, firmware
+- **NVRAM** : paramètres et valeurs à conserver lors des coupures de courant (retentive)
+
+### Modules d'entrées/sorties
+
+| Type | Exemples | Résolution typique |
+|------|----------|-------------------|
+| TOR entrée (DI) | Bouton-poussoir, fin de course, détecteur de proximité | 1 bit (0/1) |
+| TOR sortie (DO) | Contacteur, voyant, électrovanne | 1 bit — relais ou transistor |
+| Analogique entrée (AI) | Transmetteur 4-20 mA, thermocouple, encodeur | 12 à 16 bits |
+| Analogique sortie (AO) | Positionneur de vanne, variateur de fréquence | 12 à 16 bits |
+
+<Note>
+Le signal standard 4-20 mA (courant) est privilégié sur les longues distances car insensible aux chutes de tension sur le câble. Le 0 mA indique une rupture de fil (condition de défaut détectable), contrairement au signal 0-10 V.
+</Note>
+
+### Alimentation et châssis
+L'alimentation convertit le 120/240 VCA en tensions continues (24 VCC pour les E/S, 5 VCC pour la logique interne). Le châssis (backplane) permet la communication haute vitesse entre modules via un bus propriétaire.
+
+## Langages de programmation IEC 61131-3
+
+La norme IEC 61131-3 définit cinq langages standardisés, permettant la portabilité relative des programmes entre fabricants.
+
+### LD — Ladder Diagram (Schéma à contacts)
+Le langage le plus répandu, hérité des schémas électriques à relais. Lecture de gauche à droite, rung par rung.
+
+**Exemple : circuit démarrage/arrêt avec verrouillage (seal-in)**
+```
+|----[ BP_DÉMARRAGE ]----+----[ /BP_ARRÊT ]----[ /DÉFAUT ]----( MOTEUR )---|
+|                        |                                                    |
+|----[ MOTEUR ]----------+                                                    |
+```
+Le contact normalement ouvert `MOTEUR` crée la mémoire (auto-alimentation). `BP_ARRÊT` et `DÉFAUT` sont normalement fermés (NF) selon la logique de sécurité.
+
+### FBD — Function Block Diagram
+Programmation graphique par blocs fonctionnels interconnectés. Idéal pour la régulation PID, les blocs de communication, les temporisateurs. Les blocs standard (TON, TOF, CTU, PID) sont réutilisables et paramétrables.
+
+### ST — Structured Text
+Langage textuel de haut niveau similaire à Pascal. Permet des algorithmes complexes.
+
+```pascal
+(* Calcul du débit volumique corrigé à partir de la pression et température *)
+IF PT_101 > 0.0 AND TT_201 > -273.15 THEN
+    rDebitCorrige := rDebitMesure * SQRT(rPressionRef / PT_101) *
+                     ((TT_201 + 273.15) / rTemperatureRef);
+    bDebitValide := TRUE;
+ELSE
+    rDebitCorrige := 0.0;
+    bDebitValide := FALSE;
+END_IF;
+
+(* Alarme haute sur débit *)
+IF rDebitCorrige > rSeuilAlarmeHaute THEN
+    bAlarmeDebitHaut := TRUE;
+    tAlarme(IN := TRUE, PT := T#5S);
+END_IF;
+```
+
+### IL — Instruction List
+Langage assembleur bas niveau, en voie d'obsolescence dans la révision 3e édition de la norme. Encore présent dans les petits API.
+
+### SFC — Sequential Function Chart (Grafcet)
+Particulièrement adapté aux processus séquentiels (remplissage, nettoyage CIP). Structure en étapes, transitions et actions. Conforme à la norme CEI 60848 pour le Grafcet.
+
+## API courants au Canada
+
+<CardGroup cols={2}>
+  <Card title="Allen-Bradley (Rockwell)" icon="gear">
+    **CompactLogix L1/L2/L3** : applications petites à moyennes. **ControlLogix** : systèmes complexes, redondance. Environnement Studio 5000 Logix Designer. Protocole EtherNet/IP natif. Très présent dans les secteurs agroalimentaire et manufacturier.
+  </Card>
+  <Card title="Siemens SIMATIC" icon="gear">
+    **S7-300** : remplacement progressif. **S7-1500** : API haute performance, DB optimisés, TIA Portal (v17+). **Logo!** pour petites applications. PROFINET natif. Dominant dans l'automobile et la chimie.
+  </Card>
+  <Card title="Schneider Electric" icon="gear">
+    **Modicon M340** : applications moyennes. **M580** : ePAC avec Ethernet redondant. Environnement EcoStruxure Control Expert (Unity Pro). Solide présence dans l'eau/eaux usées et l'énergie.
+  </Card>
+  <Card title="Autres fabricants" icon="gear">
+    **Mitsubishi MELSEC** iQ-R, **Omron NX/NJ**, **Beckhoff TwinCAT** (PC-based), **ABB AC500**. Beckhoff gagne du terrain grâce à la flexibilité des PC industriels et EtherCAT.
+  </Card>
+</CardGroup>
+
+## Systèmes SCADA et IHM
+
+Les SCADA (Supervisory Control and Data Acquisition) assurent la supervision en temps réel, la gestion des alarmes et l'historisation.
+
+- **Ignition (Inductive Automation)** : architecture moderne basée sur Java/SQL, licences par serveur plutôt que par client, modules Vision et Perspective (responsive web/mobile). Très populaire en Amérique du Nord.
+- **Wonderware (AVEVA System Platform)** : historien OSIsoft PI, Galaxy Repository, omniprésent dans les procédés continus (pétrochimie, papeterie).
+- **GE iFIX / iFIX** : écosystème Proficy, intégration Historian. Secteur pharmaceutique et utilities.
+
+Les **IHM (écrans tactiles)** de terrain (Rockwell PanelView, Siemens KTP/TP, Schneider Magelis/HMIGXU) permettent l'interaction opérateur directement sur la machine.
+
+<Tip>
+Pour les nouvelles installations, préférez une architecture **SCADA découplée** avec OPC-UA comme couche de communication. Cela préserve l'investissement logiciel lors du changement d'API et facilite l'intégration future avec les plateformes IoT/Cloud (Azure IoT Hub, AWS IoT).
+</Tip>
+
+## Protocoles de communication industriels
+
+| Protocole | Type | Couche | Usage typique |
+|-----------|------|--------|---------------|
+| Modbus RTU | Série RS-485 | Terrain | Capteurs, petits API, équipements legacy |
+| Modbus TCP | Ethernet | Réseau | Variante IP de Modbus, universelle |
+| PROFIBUS DP | Série RS-485 | Terrain | Siemens, automation européenne |
+| PROFINET | Ethernet | Réseau | Remplacement PROFIBUS chez Siemens |
+| EtherNet/IP | Ethernet | Réseau | Rockwell/Allen-Bradley, protocole CIP |
+| OPC-UA | Ethernet | Tous | Interopérabilité universelle, sécurisé, Industrie 4.0 |
+| IO-Link | Point-à-point | Terrain | Capteurs intelligents, paramétrage à distance |
+| AS-Interface | Bifilaire | Terrain | Capteurs/actionneurs simples, économique |
+
+<Warning>
+**Sécurité des protocoles legacy** : Modbus et PROFIBUS DP n'ont aucun mécanisme d'authentification. Sur les nouvelles installations, isolez ces réseaux par des VLAN dédiés et des pare-feux industriels. Ne connectez jamais un réseau Modbus directement à Internet.
+</Warning>
+
+## Instrumentation de terrain
+
+### Transmetteurs de process
+- **Pression** : technologie piézorésistive ou capacitive, précision ±0,1 % de l'étendue de mesure. Exemples : Emerson Rosemount 3051, Endress+Hauser Cerabar.
+- **Température** : thermocouples (type K, J, T) ou résistances platine PT100/PT1000, transmetteurs avec compensation de soudure froide.
+- **Débit** : débitmètres électromagnétiques (fluides conducteurs), Coriolis (masse directe ±0,1 %), vortex, ultrasoniques clamp-on pour retrofits.
+- **Niveau** : radar à impulsion guidée (TDR), ultrasonique, hydrostatique par pression différentielle.
+
+### Signal 4-20 mA et protocoles numériques
+- **4-20 mA classique (HART) **: communication numérique superposée (1 200 baud FSK) permettant la configuration à distance, le diagnostic et les variables secondaires.
+- **Foundation Fieldbus H1** : bus numérique bifilaire complet, permettant l'exécution de blocs de contrôle dans les instruments (Function Block Architecture).
+
+## Sécurité fonctionnelle (IEC 62061 / IEC 61511)
+
+La sécurité fonctionnelle vise à réduire les risques à un niveau tolérable grâce à des systèmes instrumentés de sécurité (SIS).
+
+### Niveaux d'intégrité de sécurité (SIL)
+
+| Niveau SIL | PFD moyen (mode sollicitation rare) | Facteur de réduction du risque |
+|------------|-------------------------------------|-------------------------------|
+| SIL 1 | 10⁻¹ à 10⁻² | 10 à 100 |
+| SIL 2 | 10⁻² à 10⁻³ | 100 à 1 000 |
+| SIL 3 | 10⁻³ à 10⁻⁴ | 1 000 à 10 000 |
+| SIL 4 | 10⁻⁴ à 10⁻⁵ | 10 000 à 100 000 |
+
+La détermination du SIL requis passe par une **analyse des risques** (HAZOP, LOPA - Layer of Protection Analysis). Les équipements SIL certifiés (capteurs, API de sécurité, actionneurs) doivent avoir un taux de défaillance aléatoire suffisamment faible (λ) et une fraction de défaillances sûres (SFF) élevée.
+
+<Info>
+En pratique, la majorité des applications industrielles se situent en **SIL 1 à SIL 2**. SIL 3 est réservé aux industries à hauts risques (nucléaire, pétrochimie offshore). SIL 4 est rarissime et souvent obtenu par redondance d'architectures SIL 3 (vote 2oo3).
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Robotique industrielle" icon="robot" href="/genie-industriel/robotique">
+    Cinématique, programmation et intégration des robots industriels et collaboratifs.
+  </Card>
+  <Card title="Optimisation des procédés" icon="chart-line" href="/genie-industriel/optimisation-procedes">
+    Lean, Six Sigma et simulation pour améliorer la performance industrielle.
+  </Card>
+  <Card title="Cybersécurité des systèmes d'ingénierie" icon="shield-halved" href="/genie-logiciel/cybersecurite">
+    Protection des réseaux OT/IT, convergence industrielle et normes IEC 62443.
+  </Card>
+  <Card title="Intelligence artificielle appliquée" icon="brain" href="/genie-logiciel/intelligence-artificielle">
+    Maintenance prédictive, vision artificielle et MLOps pour l'industrie 4.0.
+  </Card>
+</CardGroup>

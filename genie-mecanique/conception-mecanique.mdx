@@ -1,0 +1,191 @@
+---
+title: "Conception mécanique"
+description: "Processus de conception, tolérances ISO, GD&T, fatigue, assemblages boulonnés, ressorts et roulements"
+icon: "drafting-compass"
+---
+
+La conception mécanique est une discipline structurée qui transforme un besoin exprimé en un produit physique fonctionnel, fiable et fabriquable. Elle mobilise simultanément des compétences en résistance des matériaux, en métrologie, en dynamique des structures et en technologie de fabrication.
+
+## Processus de conception
+
+Le processus de conception mécanique suit une démarche itérative en plusieurs phases distinctes.
+
+**Analyse des besoins (cahier des charges fonctionnel — CdCF)**
+
+La première étape consiste à traduire les besoins du client en fonctions de service mesurables. On utilise la méthode APTE pour identifier les fonctions principales (FP) et les fonctions contraintes (FC). Chaque fonction est assortie de critères et de niveaux d'exigence (flexibilité F0 à F3).
+
+**Conception conceptuelle**
+
+À ce stade, on génère plusieurs solutions de principe sans s'engager dans les détails géométriques. Les outils utilisés incluent le FAST (Function Analysis System Technique), le brainstorming structuré et les matrices de décision multicritères (méthode Pugh). L'objectif est de choisir l'architecture fonctionnelle optimale avant d'investir dans les calculs détaillés.
+
+**Conception détaillée**
+
+La conception détaillée fixe les géométries, les matériaux, les tolérances et les procédés de fabrication. C'est à ce stade que l'on produit les plans de définition conformes aux normes ISO et ASME, les nomenclatures et les dossiers techniques.
+
+**Prototypage et tests**
+
+Le prototype valide les hypothèses de calcul et révèle les défauts non anticipés. On distingue le prototype de validation de concept (Proof of Concept), le prototype fonctionnel et le prototype de présérie. Les plans d'expérience (DOE — Design of Experiments) permettent d'optimiser les paramètres avec un minimum d'essais.
+
+<Note>
+La démarche en V (V-model) est largement adoptée dans les industries automobile et aéronautique. Chaque étape de conception en descente correspond à une étape de validation en remontée, garantissant la traçabilité des exigences.
+</Note>
+
+## Conception pour la fabricabilité (DFM) et l'assemblage (DFA)
+
+Le **Design for Manufacturing (DFM)** vise à réduire les coûts de fabrication en simplifiant les géométries, en réduisant le nombre de pièces et en choisissant des procédés adaptés à la série de production. Les règles fondamentales incluent :
+
+- Éviter les usinages en contre-dépouille qui nécessitent des reprises d'usinage coûteuses
+- Standardiser les filetages, les alésages et les chanfreins selon les catalogues normalisés
+- Préférer les formes extrudées ou laminées disponibles dans le commerce
+- Minimiser les cotes fonctionnelles critiques (cotes qui influencent directement la fonctionnalité)
+
+Le **Design for Assembly (DFA)** réduit le temps et le coût d'assemblage. La méthode Boothroyd-Dewhurst attribue des indices de difficulté à chaque geste d'assemblage. Les principes clés sont :
+
+- Réduire le nombre de pièces distinctes (demander : cette pièce doit-elle se mouvoir par rapport aux autres ? Est-elle d'un matériau différent ? Doit-elle être séparable ?)
+- Concevoir pour un assemblage de haut en bas (top-down assembly) avec une pièce de base stable
+- Utiliser des poka-yoke (détrompeurs) pour empêcher l'assemblage incorrect
+
+## Tolérances et ajustements — Système ISO
+
+Le système ISO de tolérances (ISO 286) codifie les jeux et serrages en combinant un **écart fondamental** (lettre) et un **degré de qualité IT** (chiffre).
+
+**Classification des ajustements :**
+
+| Type | Caractéristique | Exemple d'usage |
+|------|----------------|-----------------|
+| **Avec jeu** | Jmin ≥ 0 | Guidages, paliers lisses, pièces démontables |
+| **Incertain (interférent)** | Jmin < 0 < Jmax | Bagues de positionnement |
+| **Avec serrage** | Jmax ≤ 0 | Assemblages permanents par frettage |
+
+**Ajustements courants H7/g6 et H7/p6 :**
+
+L'ajustement **H7/g6** est le plus utilisé pour les guidages glissants de précision (arbres dans des paliers). Pour un alésage de base H7 (φ50H7 → +0/+25 µm), l'arbre g6 présente un écart supérieur négatif, garantissant un jeu fonctionnel.
+
+L'ajustement **H7/p6** est un serrage léger utilisé pour les bagues de roulement montées à la presse. L'arbre H7 (alésage de référence) s'associe à l'écart positif p6 pour créer une interférence garantissant le maintien en service.
+
+<Tip>
+En conception industrielle, on préfère toujours le système à alésage normal (H) qui permet d'utiliser des forets et alésoirs normalisés. Le système à arbre normal (h) est réservé aux cas où l'arbre est un élément standard (barre étirée commerciale).
+</Tip>
+
+## Cotation géométrique GD&T (ASME Y14.5)
+
+La cotation géométrique et dimensionnelle (Geometric Dimensioning and Tolerancing) définit les défauts de forme et de position admissibles indépendamment des cotes dimensionnelles.
+
+**Tolérances de forme (sans référence) :**
+
+- **Planéité** ⏥ : l'ensemble des points d'une surface doit être contenu entre deux plans parallèles distants de la tolérance t. Critique pour les surfaces de joint et les plans de référence métrologique.
+- **Circularité** ○ : chaque section circulaire doit être contenue entre deux cercles concentriques. S'applique indépendamment à chaque section (≠ cylindricité).
+- **Cylindricité** ⌭ : la surface cylindrique complète doit être contenue entre deux cylindres coaxiaux. C'est la tolérance la plus contraignante pour les alésages de paliers.
+
+**Tolérances d'orientation et de position (avec référence) :**
+
+- **Perpendicularité** ⊥ : l'axe ou la surface doit être contenu dans une zone tolérancée perpendiculaire au datum. Essentielle pour les épaulements de roulements.
+- **Position vraie** ⊕ : la position réelle d'un axe ou d'un point doit être à l'intérieur d'une zone cylindrique (ou carrée) centrée sur la position théorique exacte (TED). Le bonus de tolérance MMC (Maximum Material Condition) permet d'augmenter la tolérance de position quand la pièce est au-dessous de son matière maximale.
+
+<Warning>
+La tolérance de position vraie en MMC (⊕ Ø0,1 M) est souvent mal interprétée. Le bonus de tolérance s'applique uniquement lorsque la pièce est fabriquée avec un diamètre inférieur au MMC, et non systématiquement. Vérifier toujours les simulations avec un logiciel de tolérancement 3D (CETOL, 3DCS).
+</Warning>
+
+## Conception à la fatigue
+
+La fatigue est responsable de plus de 80 % des ruptures mécaniques en service. La conception contre la fatigue nécessite une analyse rigoureuse des contraintes alternées.
+
+**Courbe S-N (Wöhler)**
+
+La courbe de Wöhler représente la contrainte alternée σa en fonction du nombre de cycles N jusqu'à rupture. On distingue :
+- La **limite de fatigue** (ou limite d'endurance) σ'e : contrainte en dessous de laquelle la pièce ne rompra jamais (aciers ferreux, plateau à partir de ≈ 10⁶ à 10⁷ cycles)
+- La **résistance à la fatigue** Sf pour un nombre de cycles donné (alliages d'aluminium, pas de plateau)
+
+**Diagramme de Goodman modifié**
+
+En présence d'une contrainte moyenne σm non nulle, la limite d'endurance est réduite selon la droite de Goodman :
+
+$$\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}} = \frac{1}{n}$$
+
+où Se est la limite d'endurance corrigée et Sut la résistance ultime à la traction. Le facteur de sécurité n doit être compris entre 1,5 et 2,5 selon la criticité.
+
+**Facteur de concentration de contraintes Kt**
+
+Les discontinuités géométriques (congés, rainures de clavette, trous) amplifient localement les contraintes. Le facteur de concentration théorique Kt (tables de Peterson) donne la contrainte maximale locale : σmax = Kt × σnom. Pour la fatigue, on utilise le facteur de sensibilité à l'entaille q pour calculer Kf = 1 + q(Kt-1).
+
+**Règle de Miner (dommage cumulatif)**
+
+Pour des chargements à amplitude variable :
+
+$$D = \sum_{i=1}^{k} \frac{n_i}{N_i} = 1$$
+
+La rupture se produit lorsque le dommage cumulé D atteint 1. En pratique, on utilise un seuil critique de 0,7 à 0,9 pour tenir compte des interactions entre niveaux de contrainte.
+
+**Correction de la limite d'endurance**
+
+La limite d'endurance corrigée tient compte de plusieurs facteurs :
+Se = ka × kb × kc × kd × ke × S'e
+
+- ka : facteur de surface (poli miroir → 1,0 ; usiné → 0,7–0,9 ; forgé → 0,5–0,7)
+- kb : facteur de taille (d < 8 mm → 1,0 ; d = 50 mm → ≈ 0,83)
+- kc : facteur de fiabilité (50 % → 1,0 ; 99,9 % → 0,75)
+- kd : facteur de température
+- ke : facteur de concentration de contrainte (1/Kf)
+
+## Assemblages boulonnés
+
+**Précontrainte et rigidités**
+
+Lors du serrage d'un boulon, la précontrainte Fi crée une compression dans les pièces et une traction dans le boulon. La répartition de la charge externe P dépend du rapport de rigidités :
+
+- Rigidité du boulon : kb = AeE/Lg (Ae : section au filetage ; E : module de Young ; Lg : longueur de serrage)
+- Rigidité des pièces : km calculée par intégration du cône de pression (≈ 3 à 10 fois kb pour des aciers)
+
+La charge dans le boulon : Fb = Fi + [kb/(kb+km)] × P
+La charge de compression résiduelle : Fm = Fi - [km/(kb+km)] × P
+
+**Critère de séparation**
+
+La séparation de l'assemblage se produit lorsque la compression résiduelle dans les pièces s'annule :
+
+P_séparation = Fi × (kb + km) / km
+
+Pour éviter la séparation, on dimensionne de sorte que la charge nominale P soit inférieure à P_séparation avec un facteur de sécurité de 1,5 à 2.
+
+## Ressorts hélicoïdaux
+
+La raideur d'un ressort hélicoïdal de compression ou de traction est donnée par :
+
+$$k = \frac{Gd^4}{8D^3N}$$
+
+où G est le module de cisaillement (80 GPa pour l'acier), d le diamètre du fil, D le diamètre moyen de l'hélice et N le nombre de spires actives.
+
+La contrainte de cisaillement correcte intègre le facteur de Wahl (ou facteur de correction de Bergsträsser) pour tenir compte de la courbure :
+
+Kw = (4C-1)/(4C-4) + 0,615/C, avec C = D/d l'indice du ressort.
+
+## Roulements
+
+La durée de vie nominale L10 (90 % de survie) d'un roulement est donnée par :
+
+$$L_{10} = \left(\frac{C}{P}\right)^p \times \frac{10^6}{n}$$
+
+où C est la charge dynamique de base (catalogue fabricant en kN), P la charge dynamique équivalente, p l'exposant (3 pour roulements à billes, 10/3 pour roulements à rouleaux) et n la vitesse en tr/min. La durée de vie s'exprime en heures de fonctionnement.
+
+La charge équivalente se calcule par : P = X×Fr + Y×Fa, où Fr est la charge radiale, Fa la charge axiale, X et Y des coefficients tabulés selon le rapport Fa/Fr.
+
+<Info>
+Les roulements modernes offrent des durées de vie à fatigue L10m ajustées selon la pureté de l'acier (facteur de matériau aISO), les conditions de lubrification (viscosity ratio κ = ν/ν1) et la contamination (facteur eC). Les logiciels SKF Bearing Calculator et NSK Load Analysis intègrent ces corrections automatiquement.
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Fabrication et procédés" icon="screwdriver-wrench" href="/genie-mecanique/fabrication-procedes">
+    Procédés de fabrication, usinage, soudage et fabrication additive
+  </Card>
+  <Card title="Maintenance et fiabilité" icon="wrench" href="/genie-mecanique/maintenance-fiabilite">
+    Stratégies de maintenance, analyse de Weibull et surveillance de condition
+  </Card>
+  <Card title="Machines électriques" icon="gear" href="/genie-electrique/machines-electriques">
+    Moteurs, transformateurs et variateurs de fréquence
+  </Card>
+  <Card title="Électronique" icon="microchip" href="/genie-electrique/electronique">
+    Composants semiconducteurs, amplificateurs et microcontrôleurs
+  </Card>
+</CardGroup>

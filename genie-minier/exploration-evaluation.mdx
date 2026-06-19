@@ -1,0 +1,217 @@
+---
+title: "Exploration et évaluation minière"
+description: "Méthodes d'exploration géophysique et géochimique, forage au diamant, estimation des ressources minérales, classification NI 43-101 et études de faisabilité"
+icon: "magnifying-glass"
+---
+
+L'exploration minière est la première étape du cycle de vie d'un projet minier. Elle consiste à identifier, délimiter et caractériser un gisement minéral afin d'évaluer son potentiel économique. Cette phase peut s'étendre sur plusieurs années et coûter des centaines de millions de dollars avant qu'une décision de construction soit prise. Au Canada, l'exploration minière est encadrée notamment par le Règlement national NI 43-101 sur la divulgation publique des résultats d'exploration et des ressources minérales des sociétés cotées en bourse.
+
+L'exploration moderne s'appuie sur une approche intégrée combinant la géologie de terrain, la géophysique, la géochimie et la géologie structurale. L'objectif est de réduire progressivement l'incertitude sur la localisation, la géométrie, la teneur et la continuité spatiale du gisement.
+
+## Méthodes d'exploration géophysique
+
+La géophysique d'exploration mesure les propriétés physiques du sous-sol (densité, susceptibilité magnétique, résistivité électrique, vitesse sismique) pour détecter des anomalies associées à la présence de minéralisations.
+
+### Magnétométrie
+
+La magnétométrie mesure l'intensité du champ magnétique terrestre. Les minéraux ferromagnétiques (magnétite, pyrrhotite) produisent des anomalies magnétiques positives (hauts magnétiques). La magnétométrie aéroportée est la méthode la plus largement utilisée dans les premières phases d'exploration régionale : un avion ou un hélicoptère équipé d'un magnétomètre (précision ~0,01 nT) survole le territoire selon un maillage de lignes de vol espacées de 100–500 m.
+
+**Applications** : détection de dykes mafiques (associés aux gisements de Ni-Cu-EGP comme Sudbury), cartographie des roches sédimentaires vs roches ignées, identification de structures géologiques (failles, contacts).
+
+### Gravimétrie
+
+La gravimétrie mesure les variations de l'accélération gravitationnelle. Les corps denses (sulfures massifs, roches ultra-mafiques, gisements d'oxyde de fer) créent des anomalies de Bouguer positives. Les mesures sont effectuées au sol avec un gravimètre à ressort ou à gravimètre absolu (précision ~0,01 mGal = 10⁻⁸ m/s²). Les corrections appliquées incluent la correction de latitude, la correction de hauteur libre (free-air), la correction de Bouguer et la correction de terrain.
+
+**Applications** : détection de sulfures massifs (VMS — Volcanogenic Massive Sulfides), cartographie de bassins sédimentaires, identification de corps intrusifs denses.
+
+### TDEM — Électromagnétisme transitoire (Time-Domain Electromagnetics)
+
+Le TDEM émet une impulsion électromagnétique primaire puis mesure le champ magnétique secondaire induit dans les conducteurs du sous-sol (corps sulfurés, eaux salines). La réponse temporelle de ce champ secondaire (décroissance en fonction du temps après coupure du courant primaire) renseigne sur la géométrie et les propriétés électriques des conducteurs.
+
+Le TDEM peut être effectué au sol (PROTEM, UTEM) ou par hélicoptère (HeliTEM, VTEM) pour une couverture régionale rapide. La profondeur d'investigation typique est de 200–600 m au sol et 100–300 m en héliporté.
+
+**Applications** : détection de sulfures massifs conducteurs (cuivre, zinc, nickel), suivi du panache de drainage minier acide, cartographie des nappes phréatiques.
+
+### IP — Polarisation induite (Induced Polarization)
+
+La méthode IP mesure la capacité des minéraux à stocker temporairement une charge électrique (effet condensateur). Les minéraux sulfurés disséminés (pyrite, chalcopyrite, molybdénite, arsenopyrite) produisent des anomalies IP élevées même à de faibles concentrations, ce qui en fait une méthode de choix pour la détection des porphyres cuprifères. La mesure s'effectue dans le domaine temporel (TDIP) ou fréquentiel (FDIP) avec des électrodes injectant du courant et d'autres mesurant la tension.
+
+**Applications** : détection des porphyres Cu-Mo-Au (Highland Valley, CB), exploration des gisements épithermaux, caractérisation des cibles de forage.
+
+<Note>
+La combinaison de plusieurs méthodes géophysiques est essentielle pour réduire l'ambiguïté d'interprétation. Une anomalie magnétique seule peut représenter une roche mafique stérile; combinée à une anomalie TDEM et IP, elle devient une cible prioritaire de forage. Ce raisonnement multi-paramètres est au cœur de la méthodologie d'exploration moderne.
+</Note>
+
+## Méthodes d'exploration géochimique
+
+La géochimie d'exploration se fonde sur la dispersion des éléments chimiques autour d'un gisement pour créer des halos ou des traînes géochimiques détectables.
+
+### Géochimie de sol
+
+Des échantillons de sol (horizon B ou C selon la pédologie locale) sont prélevés selon un maillage régulier, séchés, tamisés (fraction -80 mesh = <180 µm typiquement) et analysés par spectrométrie de masse à plasma inductif (ICP-MS) ou par absorption atomique (AA). Les anomalies géochimiques en éléments pathfinders (indicateurs associés au métal recherché) guident les travaux de forage.
+
+**Pathfinders courants** :
+- Or : As, Sb, Hg, Tl, Te
+- Cuivre : Mo, Au, Re (porphyres)
+- Nickel : Co, Cu, Cr, Pd (magmatiques)
+- Uranium : U, Th, Ra, Rn (émanométrie)
+
+### Géochimie de roc (lithogeochimie)
+
+L'analyse des roches encaissantes et altérées permet d'identifier les halos d'altération hydrothermale associés aux gisements. Les altérations typiques incluent :
+- **Séricitisation** (feldspaths → muscovite/séricite) : zones proximales aux porphyres Cu
+- **Potassification** (feldspaths potassiques secondaires, biotite) : zones propylitiques
+- **Argilisation avancée** (kaolinite, alunite, pyrophyllite) : épithermaux à haute sulfuration
+- **Chloritisation** (chlorite ± pyrite) : halos de gisements VMS
+
+### Géochimie d'eau et de sédiments de lac
+
+Au Canada, la grande abondance de lacs et de cours d'eau a permis le développement d'une géochimie lacustre systématique. L'échantillonnage de sédiments de fond de lac (lake sediment surveys) à l'échelle régionale (1 échantillon/5–10 km²) est une méthode économique de hiérarchisation des cibles, particulièrement efficace dans le Bouclier canadien.
+
+## Forage au diamant
+
+Le forage au diamant (core drilling) est l'outil fondamental de l'exploration minière avancée. Un trépan armé de diamants industriels fore dans le roc en rotation, prélevant une carotte cylindrique continue (core) qui est récupérée dans un tube carottier intérieur (inner tube).
+
+### Tailles de carottes standard
+
+| Taille | Diamètre externe (mm) | Diamètre carotte (mm) | Usage typique |
+|--------|----------------------|----------------------|---------------|
+| BQ | 36,5 | 36,5 | Forage peu profond, budget serré |
+| NQ | 44,7 | 47,6 | Standard exploration — le plus courant |
+| HQ | 63,5 | 61,1 | Géotechnique, métallurgie, grande profondeur |
+| PQ | 83,0 | 85,0 | Essais métallurgiques en vrac (bulk sampling) |
+
+### Procédures d'échantillonnage
+
+La carotte est déposée dans des boites à carottes de bois ou de plastique, photographiée, décrite géologiquement (lithologie, altération, minéralisation, structures) puis coupée en deux par une scie diamantée. Une moitié est envoyée au laboratoire, l'autre est conservée (témoin). L'intervalle d'échantillonnage est généralement de 0,5 à 2,0 m selon la variabilité de la minéralisation.
+
+<Tip>
+La récupération de carotte (core recovery) est un paramètre critique : une récupération inférieure à 90% dans les zones minéralisées compromet la représentativité des analyses. Les zones de faible récupération sont souvent associées à des roches altérées, fracturées ou friables — précisément les zones susceptibles d'être minéralisées — ce qui peut introduire un biais systématique négatif dans l'estimation des teneurs.
+</Tip>
+
+## Contrôle qualité — Assurance qualité (QAQC)
+
+Le QAQC est une composante fondamentale de tout programme de forage d'exploration. Les erreurs analytiques et d'échantillonnage peuvent conduire à des estimations de ressources erronées et à des décisions d'investissement catastrophiques.
+
+### Protocole QAQC standard
+
+**Blancs analytiques (Blanks)** : matériaux certifiés sans minéralisation (≈ 0 ppm Au), insérés à raison d'environ 1 par 20 échantillons. Détectent la contamination croisée (cross-contamination) dans les laboratoires.
+
+**Standards certifiés (Certified Reference Materials, CRM)** : matériaux certifiés avec une teneur connue et une incertitude certifiée (± 2σ). Insérés à raison d'environ 1 par 20 échantillons. Contrôlent la justesse (accuracy) du laboratoire.
+
+**Duplicatas (Duplicates)** :
+- *Duplicatas de pulpes* (pulp duplicates) : re-analyse de la même pulpe; contrôle la précision analytique
+- *Duplicatas de refus* (coarse duplicates) : re-broyage d'une fraction du refus; contrôle la préparation
+- *Duplicatas de quarts de carottes* (quarter-core duplicates) : contrôle de l'hétérogénéité naturelle du minerai
+
+**Contre-vérification (Check Assaying)** : envoi d'une sous-sélection d'échantillons à un laboratoire indépendant pour validation.
+
+## Estimation des ressources minérales
+
+L'estimation des ressources est l'étape par laquelle les données de forage sont transformées en un modèle 3D des teneurs et des tonnages d'un gisement. Elle constitue la base de l'évaluation économique et de la planification minière.
+
+### Modèle de blocs (Block Model)
+
+Le gisement est discrétisé en une grille tridimensionnelle de blocs de dimensions régulières (typiquement 5 × 5 × 5 m à 25 × 25 × 25 m selon l'espacement des forages). La teneur de chaque bloc est estimée par interpolation à partir des teneurs des échantillons de forage voisins.
+
+### Analyse variographique
+
+Avant l'estimation, une analyse variographique est réalisée pour quantifier la continuité spatiale de la teneur. Le variogramme γ(h) mesure la dissimilitude moyenne entre deux points séparés par une distance h :
+
+```
+γ(h) = (1/2N(h)) × Σ[z(xᵢ) - z(xᵢ+h)]²
+```
+
+Les paramètres clés du modèle de variogramme ajusté sont :
+- **Effet de pépite** (nugget C₀) : variabilité à très courte distance; haute pépite → métal erratique (or natif)
+- **Pallier** (sill C+C₀) : variance totale; atteint à la portée
+- **Portée** (range a) : distance au-delà de laquelle les valeurs ne sont plus corrélées
+- **Anisotropie** : différentes portées selon les directions (ex. portée plus grande le long du litage)
+
+### Krigeage ordinaire (Ordinary Kriging — OK)
+
+Le krigeage ordinaire est la méthode d'estimation géostatistique la plus utilisée en géologie minière. Il estime la teneur Z*(x₀) d'un bloc non échantillonné comme une combinaison linéaire pondérée des teneurs mesurées Z(xᵢ) dans son voisinage :
+
+```
+Z*(x₀) = Σ λᵢ · Z(xᵢ)    avec  Σ λᵢ = 1  (contrainte d'autorisation)
+```
+
+Les poids λᵢ sont déterminés en résolvant le système de krigeage qui minimise la variance d'estimation σ²K, en utilisant le modèle de variogramme. Le krigeage est un estimateur sans biais, de variance minimale (Best Linear Unbiased Estimator — BLUE).
+
+### Méthode de la distance inverse (IDW — Inverse Distance Weighting)
+
+La méthode IDW assigne à chaque bloc un poids inversement proportionnel à la puissance p de la distance au centre du bloc :
+
+```
+Z*(x₀) = Σ [Z(xᵢ)/dᵢᵖ] / Σ [1/dᵢᵖ]
+```
+
+Avec p=2 (distance inverse au carré), la méthode est simple à implémenter mais présente des artefacts (effets "bull's-eye") et n'est pas un estimateur optimal. Elle est souvent utilisée pour des vérifications préliminaires ou des études de préfaisabilité.
+
+<Warning>
+Le krigeage ne crée pas de données — il interpole et extrapole à partir des données de forage existantes. Un modèle krigeage de haute qualité repose sur la qualité du QAQC, l'espacement suffisant des forages (couverture de la zone d'influence), et la validité du modèle de variogramme. Un variogramme mal ajusté conduit à des estimations biaisées qui peuvent invalider l'ensemble du projet.
+</Warning>
+
+## Classification NI 43-101
+
+Le Règlement NI 43-101 (*Norme d'information concernant les projets miniers*) est le cadre réglementaire canadien qui régit la divulgation publique par les sociétés cotées en bourse (OCRCVM) d'informations sur leurs propriétés minières. Il exige qu'un **Ingénieur ou Géoscientifique qualifié** (Qualified Person, QP) — membre d'une association professionnelle reconnue et ayant l'expérience pertinente — supervise et certifie toute divulgation de ressources ou de réserves.
+
+### Hiérarchie des ressources minérales
+
+La classification des ressources reflète le niveau de confiance géologique croissant :
+
+```
+RESSOURCES MINÉRALES
+├── Inférées (Inferred)   — faible confiance géologique; données limites
+├── Indiquées (Indicated) — confiance suffisante pour planification préliminaire
+└── Mesurées (Measured)   — haute confiance; données denses et continues
+
+RÉSERVES MINÉRALES (sous-ensemble économiquement exploitable des ressources)
+├── Probables (Probable)  — issues des ressources Indiquées (±Mesurées)
+└── Prouvées (Proven)     — issues des ressources Mesurées uniquement
+```
+
+La conversion de ressources en réserves nécessite des études d'ingénierie qui intègrent les facteurs modificateurs : méthode d'extraction, dilution et récupération minière, traitement métallurgique, économie (prix des métaux, coûts d'exploitation), environnement, permis et aspects sociaux.
+
+<Info>
+Les définitions CIM 2014 (adoptées dans NI 43-101) précisent que les ressources **Inférées** ne peuvent pas être converties directement en réserves. Elles peuvent être utilisées dans des études économiques préliminaires (EEP) mais avec des mises en garde importantes. Seules les ressources **Indiquées** et **Mesurées** peuvent former la base des réserves **Probables** et **Prouvées** respectivement.
+</Info>
+
+### Rapport technique NI 43-101
+
+Le rapport technique NI 43-101 est un document d'ingénierie et de géologie rédigé par des QP indépendants selon 25 sections standardisées : résumé, avertissements, résumé, avertissements, introduction, exploitation antérieure et actuelle de la propriété, géologie régionale, géologie locale, description du gisement, exploration, forage, échantillonnage, QAQC, analyse et vérification des données, traitement minéral, estimation des ressources minérales, estimation des réserves minérales, méthodes d'exploitation, plans de récupération, infrastructure, environnement et permis, capital et coûts d'exploitation, analyse économique, marchés adjacents et contrats, interprétation et conclusions, recommandations.
+
+## Études de faisabilité
+
+L'évaluation économique d'un projet minier progresse par des études successivement plus détaillées :
+
+| Étude | Précision coûts | Ressources requises | Objectif |
+|-------|----------------|--------------------|-----------| 
+| **EEP** (Étude de préfaisabilité économique préliminaire / Scoping Study) | ±35–40% | Ressources Inférées suffisantes | Orienter la direction, trier les options |
+| **PFS** (Étude de préfaisabilité / Pre-Feasibility Study) | ±20–25% | Ressources Indiquées dominantes | Décision d'avancement vers la faisabilité |
+| **FS** (Étude de faisabilité définitive / Feasibility Study) | ±10–15% | Réserves Prouvées + Probables | Décision finale d'investissement (FID) |
+
+Chaque étude calcule les indicateurs économiques clés : VAN (valeur actuelle nette), TRI (taux de rendement interne), période de récupération, analyse de sensibilité aux prix des métaux.
+
+<CardGroup cols={2}>
+  <Card title="Introduction au génie minier" icon="mountain" href="/genie-minier/introduction">
+    Types de mines, régions minières canadiennes et parcours de carrière
+  </Card>
+  <Card title="Extraction et traitement" icon="gears" href="/genie-minier/extraction-traitement">
+    Méthodes d'exploitation, comminution, flottation et gestion des résidus
+  </Card>
+  <Card title="Géomatique et SIG" icon="map" href="/geomatique/sig-teledetection">
+    Cartographie géologique, SIG et télédétection en exploration
+  </Card>
+  <Card title="Sécurité et environnement" icon="leaf" href="/genie-minier/securite-environnement">
+    Réglementation, DMA, fermeture et consultation autochtone
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : NI 43-101 (OCRCVM/CSA), Définitions CIM 2014, SME Guide for Reporting Exploration Results, Resources, and Reserves (JORC Code en Australie)
+- **Logiciels géostatistiques** : Leapfrog Geo (Seequent), Datamine Studio RM, Gemcom Surpac (Dassault), Vulcan (Maptek), SGeMS (Stanford), GSLIB (géostatistiques libres)
+- **Logiciels géophysiques** : Oasis Montaj (Geosoft/Seequent), Maxwell (EMIT), EMIGMA (PetRos EiKon)
+- **Publications** : *Economic Geology*, *Exploration and Mining Geology*, *Journal of Geochemical Exploration*, *Mathematical Geosciences*
+- **Organismes** : PDAC, SEG (Society of Economic Geologists), GAC (Geological Association of Canada), Association géologique du Canada

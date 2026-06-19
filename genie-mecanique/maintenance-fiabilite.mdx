@@ -1,0 +1,213 @@
+---
+title: "Maintenance et fiabilité industrielle"
+description: "Stratégies de maintenance, courbe en baignoire, Weibull, surveillance de condition, AMDEC et GMAO"
+icon: "wrench"
+---
+
+La maintenance industrielle est passée d'une activité réactive à une discipline stratégique centrée sur la maximisation de la disponibilité des équipements, la maîtrise des coûts et la sécurité des personnes. La fiabilité est la probabilité qu'un équipement remplisse sa fonction pendant une durée donnée dans des conditions opérationnelles définies.
+
+## Stratégies de maintenance
+
+**Maintenance corrective**
+
+La maintenance corrective intervient après la défaillance de l'équipement. Elle se subdivise en :
+- **Maintenance palliative** : intervention provisoire pour remettre en service (dépannage)
+- **Maintenance curative** : remise en état durable (réparation)
+
+Elle est acceptable pour des équipements non critiques, disponibles en doublon ou dont le coût d'indisponibilité est faible. Elle génère cependant des pannes imprévues, des arrêts de production non planifiés et des coûts de main-d'œuvre majorés (urgence, heures supplémentaires).
+
+**Maintenance préventive systématique**
+
+Les interventions sont planifiées à intervalles fixes de temps ou d'utilisation (heures de marche, kilomètres, cycles), indépendamment de l'état réel de l'équipement. Elle est efficace pour les composants à mode de défaillance lié à l'usure (β > 1 dans la loi de Weibull) : filtres, courroies, joints, huiles.
+
+Le risque majeur est la **sur-maintenance** : remplacement prématuré de composants encore bons (gaspillage) et introduction de défauts lors des démontages/remontages (mortalité infantile après intervention).
+
+**Maintenance préventive conditionnelle (prédictive)**
+
+Les interventions sont déclenchées par l'atteinte d'un seuil d'alarme sur un paramètre de surveillance (température, vibration, teneur en particules d'usure). C'est la stratégie qui optimise le mieux le coût global en évitant à la fois les pannes imprévues et les remplacements inutiles.
+
+**Maintenance basée sur la fiabilité (RCM — Reliability-Centered Maintenance)**
+
+Développée initialement par United Airlines (Nowlan & Heap, 1978) pour l'aviation, la RCM détermine la stratégie optimale pour chaque mode de défaillance en répondant à sept questions structurées. L'analyse des conséquences (sécurité, environnement, opérations, économie) pilote le choix entre tâches de surveillance, remplacement systématique, révision ou acceptation de la défaillance.
+
+<Note>
+La RCM a démontré dans l'industrie pétrolière et dans la génération électrique que seulement 11 % des équipements ont un mode de défaillance bénéficiant réellement d'une maintenance préventive à intervalle fixe. Pour 89 % des équipements, la maintenance sur condition ou la maintenance corrective planifiée est plus rentable.
+</Note>
+
+## Courbe en baignoire et distribution de Weibull
+
+La courbe en baignoire (bathtub curve) représente le taux de défaillance λ(t) d'une population d'équipements au cours du temps. Elle comprend trois périodes :
+
+**1. Mortalité infantile (β < 1)**
+Le taux de défaillance est décroissant. Les défauts sont de nature : erreurs de conception, défauts de fabrication, erreurs d'installation, composants hors spécification. La mise en rodage (burn-in ou burn-in testing) permet d'éliminer ces défaillances prématurées avant la mise en service.
+
+**2. Vie utile (β ≈ 1)**
+Le taux de défaillance est approximativement constant. Les défaillances sont aléatoires, indépendantes du temps (défauts latents, surcharges accidentelles, erreurs humaines). La loi exponentielle est applicable : R(t) = e^(-λt).
+
+**3. Usure (β > 1)**
+Le taux de défaillance est croissant. Les défaillances sont liées à l'usure, à la fatigue, à la corrosion ou au vieillissement. C'est la zone cible des maintenances préventives systématiques.
+
+La **distribution de Weibull à deux paramètres** modélise les trois zones avec un seul modèle :
+
+$$f(t) = \frac{\beta}{\eta}\left(\frac{t}{\eta}\right)^{\beta-1} \exp\left[-\left(\frac{t}{\eta}\right)^\beta\right]$$
+
+- η (êta) : paramètre d'échelle (caractéristique de vie — durée à laquelle 63,2 % des unités ont défailli)
+- β (bêta) : paramètre de forme (détermine la zone de la courbe en baignoire)
+
+## Indicateurs clés de performance (KPI) de maintenance
+
+**MTBF — Mean Time Between Failures (Durée moyenne entre défaillances)**
+
+$$MTBF = \frac{\text{Temps total de fonctionnement}}{\text{Nombre de défaillances}}$$
+
+S'applique aux équipements réparables. Plus le MTBF est élevé, plus le système est fiable.
+
+**MTTR — Mean Time To Repair (Durée moyenne de réparation)**
+
+$$MTTR = \frac{\text{Temps total d'indisponibilité}}{\text{Nombre de défaillances}}$$
+
+Inclut la détection, le diagnostic, l'attente des pièces et de la main-d'œuvre, la réparation et les essais de remise en service.
+
+**Disponibilité intrinsèque**
+
+$$A = \frac{MTBF}{MTBF + MTTR}$$
+
+La disponibilité opérationnelle (ou globale) intègre également les temps de maintenance préventive planifiée et les temps d'attente logistique.
+
+**OEE — Overall Equipment Effectiveness (Taux de rendement global TRG)**
+
+$$OEE = \text{Disponibilité} \times \text{Performance} \times \text{Qualité}$$
+
+- Disponibilité : (Temps de fonctionnement) / (Temps planifié)
+- Performance : (Production réelle) / (Production théorique)
+- Qualité : (Pièces conformes) / (Pièces produites)
+
+Un OEE de 85 % est considéré comme classe mondiale (benchmark TPM). La majorité des usines se situent entre 40 et 60 %. L'analyse des Six Grandes Pertes (pannes, réglages, micro-arrêts, sous-vitesse, rebuts, démarrages) cible les gisements d'amélioration.
+
+<Tip>
+L'OEE doit être calculé sur le temps planifié (temps où la machine est censée produire), et non sur le temps total disponible (24h/7j). Une machine planifiée sur 8h avec 7h de fonctionnement effectif, 95 % de cadence et 99 % de conformité affiche un OEE de 0,875 × 0,95 × 0,99 = 82,3 %.
+</Tip>
+
+## Analyse de Weibull
+
+L'analyse de Weibull permet d'estimer les paramètres β et η à partir des données de durée de vie observées (temps jusqu'à défaillance ou données censurées — équipements encore en service).
+
+**Méthode graphique — Papier de Weibull**
+
+Les données de durée de vie sont tracées sur un papier de Weibull (échelle log-log). La régression linéaire donne β (pente de la droite) et η (durée à 63,2 % de probabilité de défaillance cumulée). Cette méthode est rapide mais moins précise pour de petits échantillons.
+
+**Méthode analytique — Maximum de vraisemblance (MLE)**
+
+La méthode MLE estime les paramètres en maximisant la probabilité d'observer les données. Elle est plus précise, supporte les données censurées et fournit des intervalles de confiance. Elle est implémentée dans les logiciels spécialisés.
+
+**Logiciels d'analyse de Weibull**
+
+- **ReliaSoft Weibull++ / BlockSim** : référence industrielle, bibliothèques de distributions, diagrammes de fiabilité système (RBD), simulation Monte-Carlo
+- **Minitab** : analyse de Weibull intégrée dans le module Reliability/Survival, accessible aux équipes qualité
+- **R (package `survival`, `fitdistrplus`)** : solutions libres pour les statisticiens
+- **Excel** : estimation graphique et MLE manuelle — acceptable pour les analyses ponctuelles
+
+## Surveillance de condition (CBM — Condition-Based Maintenance)
+
+**Analyse vibratoire**
+
+L'analyse vibratoire est la technique de surveillance la plus répandue pour les machines tournantes (moteurs, pompes, compresseurs, ventilateurs).
+
+L'**analyse spectrale FFT** (Transformée de Fourier Rapide) décompose le signal vibratoire en composantes fréquentielles. Les défauts caractéristiques génèrent des raies spectrales aux fréquences caractéristiques :
+
+- **Balourd** : raie à 1× la fréquence de rotation (1× RPM)
+- **Désalignement** : raies à 2× et 3× RPM, forte composante axiale
+- **Défaut de roulement** : fréquences BPFI, BPFO, BSF, FTF (calculées à partir de la géométrie du roulement)
+- **Engrenage** : fréquence d'engrènement GMF = nombre de dents × RPM
+
+La **détection par enveloppe** (démodulation) est spécifiquement adaptée aux défauts de roulement. Elle extrait les impulsions périodiques masquées par le bruit de fond en démodulant le signal haute fréquence.
+
+Les normes ISO 10816 et ISO 20816 définissent les seuils d'alarme en vitesse vibratoire (mm/s RMS) selon la classe de machine et la puissance.
+
+**Thermographie infrarouge**
+
+La thermographie détecte les anomalies thermiques par mesure du rayonnement infrarouge. Applications principales :
+- Connexions électriques lâches ou oxydées (points chauds sur tableaux électriques)
+- Roulements surchauffés (surcharge, manque de lubrifiant)
+- Refractaires et isolation thermique défectueux
+- Problèmes de ventilation dans les moteurs
+
+Les caméras infrarouges modernes (FLIR, Fluke) offrent des résolutions ≥ 320×240 pixels avec une sensibilité thermique (NETD) < 50 mK. La norme ISO 18434-1 encadre les procédures de thermographie sur machines tournantes.
+
+**Analyse d'huile**
+
+L'analyse physicochimique de l'huile de lubrification détecte la dégradation de l'huile et les particules d'usure avant l'apparition de la défaillance :
+
+- **Ferrographie analytique** : analyse des particules ferrugineuses (taille, morphologie, origine — usure normale, fatigue, adhésion, frottement sévère)
+- **Spectroscopie par émission atomique (ICP-OES)** : concentration en éléments d'usure (Fe, Cu, Pb, Sn, Cr) et en contaminants (Si pour la poussière, Na pour l'eau)
+- **Viscosité cinématique** : dégradation thermique de l'huile (viscosité hors limites ±15 %)
+- **Indice d'acidité TAN** : oxydation avancée
+
+**Ultrasons**
+
+Les capteurs à ultrasons aériens détectent les fuites de gaz, les arcs électriques (Corona) et les défauts de lubrification des roulements. Les capteurs à contact (ondes de structure) mesurent l'émission acoustique pour détecter les chocs répétitifs dans les roulements à très faible vitesse (< 25 RPM) où la vibration classique est inefficace.
+
+## AMDEC / FMEA (Analyse des Modes de Défaillance, de leurs Effets et de leur Criticité)
+
+L'AMDEC est une méthode d'analyse préventive des risques appliquée à la conception (AMDEC produit) ou aux procédés de fabrication (AMDEC procédé). Dans le domaine de la maintenance, l'AMDEC système analyse les modes de défaillance des équipements existants.
+
+**Tableau AMDEC**
+
+Pour chaque mode de défaillance identifié, on évalue sur une échelle de 1 à 10 :
+
+- **G — Gravité** : impact des conséquences (1 = aucun impact ; 10 = mise en danger de vie humaine)
+- **O — Occurrence** : probabilité d'occurrence du mode de défaillance (1 = très rare ; 10 = très fréquent)
+- **D — Détectabilité** : capacité à détecter la défaillance avant ses effets (1 = détection certaine ; 10 = non détectable)
+
+**Indice de Priorité de Risque (IPR / RPN)**
+
+$$IPR = G \times O \times D$$
+
+L'IPR varie de 1 à 1 000. Les modes de défaillance avec IPR élevé (seuil courant : IPR > 100 ou 200 selon le secteur) sont traités en priorité par des actions correctives qui ciblent la réduction de G, O ou D.
+
+<Warning>
+L'IPR présente des limites reconnues : deux combinaisons très différentes (G=10, O=1, D=1 → IPR=10 et G=1, O=10, D=1 → IPR=10) donnent le même score mais des priorités radicalement différentes. L'industrie automobile (AIAG-VDA FMEA 4e édition) a introduit en 2019 la notion d'Action Priority (AP : High/Medium/Low) basée sur des tableaux de correspondance qui priorisent la gravité.
+</Warning>
+
+## Logiciels GMAO (Gestion de Maintenance Assistée par Ordinateur)
+
+La GMAO centralise la gestion des équipements, des interventions, des pièces de rechange et des ressources humaines.
+
+**SAP Plant Maintenance (PM)**
+
+Module de la suite SAP ERP, intégré nativement avec la comptabilité, les achats et la gestion des stocks. Fonctions clés : ordres de travail, plans de maintenance préventive, gestion des équipements (hiérarchie FL/EQ), interfaces IoT via SAP Predictive Asset Insights.
+
+**IBM Maximo Asset Management**
+
+Solution de gestion d'actifs enterprise, très présente dans les secteurs énergie, utilities et aérospatiale. Maximo Application Suite intègre l'inspection assistée par IA et la surveillance des actifs IoT en temps réel.
+
+**Infor EAM (Enterprise Asset Management)**
+
+Déployé dans les industries de procédé (chimie, pharmacie, agro-alimentaire). Conforme aux exigences FDA 21 CFR Part 11 pour les environnements GMP. Fonctions de gestion du cycle de vie des actifs et de conformité réglementaire.
+
+**GMAO légères / PME**
+
+- **eMaint (Fluke)** : SaaS, interface intuitive, bonne intégration avec les outils de surveillance vibratoire Fluke
+- **MaintiMizer** : adapté aux petites et moyennes industries
+- **Limble CMMS** : accessible sur mobile, adoption rapide par les équipes terrain
+
+<Info>
+Les GMAO modernes s'interfacent avec les systèmes SCADA/DCS et les plateformes IIoT (Industrial IoT) pour créer des ordres de travail automatiques déclenchés par des alarmes de process. Cette intégration est le fondement de la maintenance 4.0 (Industry 4.0).
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Conception mécanique" icon="drafting-compass" href="/genie-mecanique/conception-mecanique">
+    Conception à la fatigue, roulements et assemblages boulonnés
+  </Card>
+  <Card title="Fabrication et procédés" icon="screwdriver-wrench" href="/genie-mecanique/fabrication-procedes">
+    Procédés de fabrication et contrôle qualité en production
+  </Card>
+  <Card title="Électronique" icon="microchip" href="/genie-electrique/electronique">
+    Microcontrôleurs et acquisition de données pour la surveillance
+  </Card>
+  <Card title="Réseaux électriques" icon="plug" href="/genie-electrique/reseaux-electriques">
+    Protection des réseaux et systèmes d'alimentation industriels
+  </Card>
+</CardGroup>
