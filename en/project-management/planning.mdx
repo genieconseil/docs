@@ -1,149 +1,321 @@
 ---
 title: "Engineering Project Management"
-description: "Complete guide to managing engineering projects: lifecycle phases, CPM/PERT scheduling, earned value management, risk management, and Canadian procurement context."
+description: "Project lifecycle phases, PMI PMBOK, schedule management (CPM/PERT), cost management (EVM), risk, procurement, and the Canadian infrastructure context"
 icon: "calendar-check"
 ---
 
-# Engineering Project Management
-
-Effective project management is a core competency for engineers. Whether managing a $500K building renovation or a $5B infrastructure megaproject, the fundamentals of scope, schedule, cost, and risk apply universally.
-
-<Info>
-  This page is the English version. The full French content with Canadian-specific references is available at [/gestion-projets/planification](/gestion-projets/planification).
-</Info>
-
 ## Engineering Project Lifecycle
 
-Engineering projects follow a phased approach that gates decisions and controls risk:
+Engineering projects have distinct lifecycle phases, each with its own objectives, deliverables, and cost-engineering estimate class. Understanding which phase a project is in determines what level of definition is required and what decisions are still reversible.
 
-| Phase | Also Known As | Key Deliverables | Cost Estimate Accuracy |
-|-------|---------------|------------------|----------------------|
-| Conceptual | Pre-feasibility, Screening | Project scope, order-of-magnitude cost | ±30–50% (AACE Class 5) |
-| Pre-FEED | Feasibility, Scoping | Basis of design, preliminary layout | ±20–30% (AACE Class 4) |
-| FEED | Preliminary Engineering | Process flow diagrams, equipment lists | ±10–20% (AACE Class 3) |
-| Detailed Engineering | Final Design | Construction drawings, specs, BOQ | ±5–10% (AACE Class 2) |
-| Procurement & Construction | Execution | Built asset | ±5% (AACE Class 1) |
-| Commissioning & Startup | Handover | Tested, operational facility | — |
+### Phase Overview
 
-<Tip>
-  Gate reviews (Go/No-Go decisions) at the end of each phase prevent investing detailed engineering dollars in projects that won't meet business objectives. Use AACE Class 5 estimates ruthlessly at early gates.
-</Tip>
+| Phase | Estimate Class | Accuracy | Key Deliverables |
+|---|---|---|---|
+| **Conceptual / Pre-feasibility** | Class 5 | -50% / +100% | Project definition, order-of-magnitude cost, go/no-go recommendation |
+| **Pre-FEED / Feasibility** | Class 4 | -30% / +50% | Alternatives analysis, preferred option, site selection, environmental overview |
+| **FEED / Preliminary Engineering** | Class 3 | -20% / +30% | Process design basis, major equipment list, P&IDs, project execution plan |
+| **Detailed Engineering** | Class 2 | -15% / +20% | Construction drawings, specifications, procurement packages, 3D model |
+| **Procurement** | Class 1 | -10% / +15% | Purchase orders, vendor drawings, expediting |
+| **Construction / Implementation** | Class 1 | — | Physical construction, field engineering, quality control |
+| **Commissioning** | — | — | Cold commissioning, hot commissioning, performance testing |
+| **Operations & Maintenance** | — | — | Normal production, asset management, continuous improvement |
+| **Decommissioning** | — | — | Planned end-of-life for facilities (especially relevant in nuclear, mining) |
 
-## Scheduling Techniques
+<Info>
+The **AACE International Recommended Practice 18R-97** defines the Class 1-5 estimate classification system used in capital-intensive engineering sectors (oil & gas, mining, power, infrastructure). Class 5 is the roughest (conceptual), Class 1 is the most precise (construction-ready). Each class requires a different level of project definition before the estimate can be prepared.
+</Info>
+
+---
+
+## Project Management Frameworks
+
+### PMI PMBOK 7th Edition (2021)
+
+The 7th edition of the PMBOK Guide represents a significant philosophical shift from the prescriptive process-based approach of earlier editions toward a **principles-based** framework. The 12 project management principles replace the previous 10 knowledge areas and 49 processes.
+
+**The 12 Principles (PMBOK 7th Edition):**
+
+1. Stewardship — be a diligent, respectful, and caring steward
+2. Team — create a collaborative project team environment
+3. Stakeholders — effectively engage with stakeholders
+4. Value — focus on value
+5. Systems thinking — recognize, evaluate, and respond to system interactions
+6. Leadership — demonstrate leadership behaviors
+7. Tailoring — tailor based on context
+8. Quality — build quality into processes and deliverables
+9. Complexity — navigate complexity
+10. Risk — optimize risk responses
+11. Adaptability and resiliency — be adaptable and resilient
+12. Change management — enable change to achieve the envisioned future state
+
+**The 8 Performance Domains (PMBOK 7th):**
+Stakeholders / Team / Development Approach and Life Cycle / Planning / Project Work / Delivery / Measurement / Uncertainty
+
+The **PMP certification** (Project Management Professional) from PMI is the most widely recognized project management credential in Canada. Requirements include 36 months of project management experience, 35 hours of PM education, and passing a 180-question exam.
+
+### PRINCE2 (Projects IN Controlled Environments)
+
+Popular in UK-influenced organizations and some Canadian federal government contexts. PRINCE2 is process-based and product-focused:
+
+**7 Principles**: Continued business justification, Learn from experience, Defined roles and responsibilities, Manage by stages, Manage by exception, Focus on products, Tailor to suit the project environment.
+
+**7 Themes**: Business Case, Organization, Quality, Plans, Risk, Change, Progress.
+
+**7 Processes**: Starting Up, Directing, Initiating, Controlling a Stage, Managing Product Delivery, Managing a Stage Boundary, Closing.
+
+### Agile for Engineering Projects
+
+Pure agile (Scrum, XP) works well for software development but needs adaptation for physical engineering projects. Common hybrid approaches:
+
+- **Scrum for design**: iterate on engineering design in 2-week sprints, with each sprint delivering reviewable engineering work products (drawings, calculations, specifications)
+- **Agile risk management**: weekly risk reviews rather than periodic formal risk registers
+- **Kanban for engineering support**: IT, EHS, and QA teams use Kanban boards to visualize and manage work queues
+
+**Scaled Agile Framework (SAFe)** applies agile at the program and portfolio level, relevant for large engineering organizations managing many concurrent projects.
+
+---
+
+## Schedule Management
 
 ### Work Breakdown Structure (WBS)
-Decompose the project scope into manageable work packages — typically to a level where one person or team can own the work, and duration can be estimated with confidence.
+
+The WBS decomposes the total project scope into hierarchical work packages that can be planned, scheduled, monitored, and controlled. WBS best practice:
+- The WBS is **deliverable-oriented**, not activity-oriented — each element is a noun (Engineering Report) not a verb (Write Engineering Report)
+- Each work package should take 8-80 hours of effort to complete
+- The WBS dictionary defines the scope, responsible party, and acceptance criteria for each element
 
 ### Critical Path Method (CPM)
-The critical path is the longest sequence of dependent activities — any delay on the critical path delays the project.
 
-**Forward Pass** (Early Start / Early Finish):
-- `ES = max(EF of all predecessors)`
-- `EF = ES + Duration`
+CPM calculates the earliest and latest start and finish dates for each activity, identifying the critical path — the longest chain of dependent activities that determines the minimum project duration.
 
-**Backward Pass** (Late Start / Late Finish):
-- `LF = min(LS of all successors)`
-- `LS = LF - Duration`
+**Forward pass** (calculating Early Start / Early Finish):
+- For the first activity: ES = 0, EF = ES + Duration
+- For all others: ES = maximum(EF of all predecessors), EF = ES + Duration
 
-**Total Float** = `LF - EF` = `LS - ES` (zero on critical path)
+**Backward pass** (calculating Late Start / Late Finish):
+- For the last activity: LF = EF (of the project), LS = LF - Duration
+- For all others: LF = minimum(LS of all successors), LS = LF - Duration
 
-### PERT (Program Evaluation and Review Technique)
-When activity durations are uncertain, use three-point estimates:
+**Total Float** = LF - EF = LS - ES (how much an activity can be delayed without delaying the project)
+**Free Float** = ES(successor) - EF(activity) (delay that does not affect successor early start)
 
-`Expected Duration (TE) = (Optimistic + 4 × Most Likely + Pessimistic) / 6`
+Activities on the critical path have **Total Float = 0**.
 
-`Standard Deviation (σ) = (Pessimistic - Optimistic) / 6`
+### PERT — Program Evaluation and Review Technique
+
+PERT accounts for duration uncertainty by using three-point estimates:
+
+$$T_E = \frac{O + 4M + P}{6}$$
+
+Where:
+- O = Optimistic duration (10th percentile)
+- M = Most Likely duration (mode)
+- P = Pessimistic duration (90th percentile)
+- T_E = Expected duration (weighted average)
+
+**Standard deviation of an activity:**
+$$\sigma = \frac{P - O}{6}$$
+
+**Standard deviation of the critical path** (assuming independence):
+$$\sigma_{path} = \sqrt{\sum \sigma_i^2}$$
+
+This allows calculation of the probability that the project will complete by a given target date.
+
+### Resource Leveling
+
+Resource leveling adjusts activity start dates (within float limits) to smooth resource utilization peaks. When float is insufficient, resource leveling may extend the project duration. Modern PM software (MS Project, Primavera P6) automates resource leveling algorithms.
+
+**Resource-constrained scheduling**: when resource availability limits concurrent activity, some activities must be delayed even if they have float — a hard constraint that CPM alone does not capture.
 
 ### S-Curve Tracking
-Plot cumulative planned value (PV) vs. actual cost (AC) and earned value (EV) over time. An S-curve flattening early signals schedule slippage.
 
-## Earned Value Management (EVM)
+An S-curve plots cumulative planned value (PV) over time — the characteristic S shape reflects slow start, rapid acceleration in mid-project, and deceleration near completion. By overlaying actual progress and expenditure, project managers can visually identify schedule and cost deviations.
 
-EVM integrates scope, schedule, and cost into a unified performance measurement system:
+---
 
-| Metric | Formula | Meaning |
-|--------|---------|---------|
-| **Schedule Variance (SV)** | EV − PV | Negative = behind schedule |
-| **Cost Variance (CV)** | EV − AC | Negative = over budget |
-| **Schedule Performance Index (SPI)** | EV / PV | <1.0 = behind schedule |
-| **Cost Performance Index (CPI)** | EV / AC | <1.0 = over budget |
-| **Estimate at Completion (EAC)** | BAC / CPI | Forecasted total cost |
-| **Variance at Completion (VAC)** | BAC − EAC | Projected over/under budget |
+## Cost Management
 
-<Warning>
-  A CPI below 0.85 in the first 20% of a project is a strong predictor of final cost overrun. Early corrective action is far more effective than late recovery.
-</Warning>
+### AACE Estimate Classes 1-5
 
-## Risk Management
+| Class | Level of Definition | Typical Use | Accuracy (Low/High) |
+|---|---|---|---|
+| Class 5 | 0-2% | Screening / order of magnitude | -50% to +100% |
+| Class 4 | 1-15% | Concept study / feasibility | -30% to +50% |
+| Class 3 | 10-40% | Budget authorization / control estimate | -20% to +30% |
+| Class 2 | 30-70% | Control budget / bid | -15% to +20% |
+| Class 1 | 50-100% | Check estimate / change orders | -10% to +15% |
 
-### Risk Register
-Document all identified risks with:
-- **Description** — what could happen and why
-- **Probability** — likelihood (1–5 or %)
-- **Impact** — consequence on cost/schedule/quality (1–5)
-- **Risk Score** — Probability × Impact
-- **Risk Owner** — accountable person
-- **Response Strategy** — avoid, transfer, mitigate, accept
+### Earned Value Management (EVM)
+
+EVM integrates scope, schedule, and cost into a single performance measurement framework.
+
+**Core EVM variables:**
+- **BAC** (Budget At Completion): total authorized budget for the project
+- **PV** (Planned Value): budgeted cost of work scheduled to date — what you planned to spend
+- **EV** (Earned Value): budgeted cost of work performed to date — the value of work actually done
+- **AC** (Actual Cost): actual cost incurred for work performed to date — what you actually spent
+
+**Performance indices:**
+
+$$SPI = \frac{EV}{PV} \quad \text{(Schedule Performance Index)}$$
+
+$$CPI = \frac{EV}{AC} \quad \text{(Cost Performance Index)}$$
+
+SPI > 1: ahead of schedule. CPI > 1: under budget.
+
+**Forecasting:**
+
+$$EAC = \frac{BAC}{CPI} \quad \text{(Estimate At Completion — assuming same CPI going forward)}$$
+
+$$ETC = EAC - AC \quad \text{(Estimate To Complete)}$$
+
+$$VAC = BAC - EAC \quad \text{(Variance At Completion)}$$
+
+<Tip>
+EVM is mandatory on federal contracts in Canada above certain thresholds (Public Services and Procurement Canada policy). Many provinces and major owners (SNC-Lavalin, WSP, Stantec clients) require EVM reporting on capital projects. Familiarity with EVM and its implementation in Primavera P6 is highly valued for project controls roles.
+</Tip>
+
+---
+
+## Risk Management in Engineering Projects
+
+### Risk Identification
+
+Risk identification techniques include:
+- **Brainstorming** with the project team and stakeholders
+- **Checklists**: previous project risk registers, industry-specific checklists (e.g., oil & gas, nuclear)
+- **SWOT analysis**: strengths, weaknesses, opportunities, threats
+- **Root cause analysis**: what categories of events lead to impacts?
+- **Expert interviews**: Delphi technique for anonymous convergence of expert opinions
+
+All identified risks are documented in the **Risk Register** with a description, probability, impact, triggers, and assigned owner.
+
+### Probability-Impact Matrix
+
+Each risk is scored for probability (P) and impact (I) — typically on a 1-5 or 1-10 scale. The product P × I gives a risk score for prioritization:
+
+```
+Impact
+  5 |  5  10  15  20  25
+  4 |  4   8  12  16  20
+  3 |  3   6   9  12  15
+  2 |  2   4   6   8  10
+  1 |  1   2   3   4   5
+    └──────────────────────
+       1   2   3   4   5  → Probability
+```
+
+High-score risks (upper-right quadrant) receive active risk response strategies.
 
 ### Risk Response Strategies
 
-| Strategy | Description | Example |
-|----------|-------------|---------|
-| **Avoid** | Eliminate the threat | Change scope to avoid contaminated soil |
-| **Transfer** | Shift risk to third party | Insurance, fixed-price contract |
-| **Mitigate** | Reduce probability or impact | Add geotechnical investigations early |
-| **Accept** | Acknowledge and monitor | Small-probability, low-impact risks |
+| Strategy | Threats | Opportunities |
+|---|---|---|
+| **Avoid / Exploit** | Eliminate the risk (change scope, technology) | Actively pursue the opportunity |
+| **Transfer / Share** | Insurance, contract clauses, bonding | Share the upside with a partner |
+| **Mitigate / Enhance** | Reduce probability or impact | Increase probability or impact |
+| **Accept / Accept** | Acknowledge and set aside budget (contingency) | Accept the opportunity if it occurs |
 
-### Monte Carlo Schedule Risk Analysis
-Use tools like Oracle Primavera Risk Analysis or @RISK (Palisade) to run thousands of schedule simulations with probabilistic durations. Output a P50 (most likely) and P80 (80% confidence) completion date.
+### Risk-Adjusted Schedule
 
-## Procurement & Contracting
+Monte Carlo simulation applied to the schedule model produces a risk-adjusted project completion distribution. Inputs: three-point duration estimates, discrete risk events with probability and duration impact. Output: a cumulative probability distribution (S-curve) showing the probability of completion by each date.
+
+From this output, project managers can set the deterministic project completion date at P50 (50% confidence), P80, or P90 depending on organizational risk appetite and contract requirements.
+
+---
+
+## Procurement for Engineering Projects
+
+### Procurement Documents
+
+| Document | Purpose | Typical Use |
+|---|---|---|
+| **RFI** (Request for Information) | Market sounding — no commitment | Early in project, understanding vendor capabilities |
+| **RFQ** (Request for Quotation) | Competitive price quotes for well-defined scope | Commodities, standard equipment |
+| **RFP** (Request for Proposal) | Technical and commercial proposals for complex scope | Engineering services, complex systems |
+| **ITB** (Invitation to Bid / ITT) | Formal competitive tender — sealed bids | Construction contracts, large equipment |
 
 ### Contract Types
 
-| Contract Type | Risk Bearer | Best For |
-|---------------|-------------|---------|
-| Lump Sum / Fixed Price | Contractor | Well-defined scope, low uncertainty |
-| Cost-Plus (T&M) | Owner | Poorly defined scope, R&D projects |
-| Unit Price | Shared | Civil works with variable quantities |
-| Design-Build (DB) | Contractor | Fast-track, single point of responsibility |
-| P3 (DBFMO) | Private consortium | Large infrastructure, long lifecycle |
+| Type | Owner Risk | Contractor Risk | When to Use |
+|---|---|---|---|
+| **Lump Sum (Fixed Price)** | Low | High | Well-defined scope, no unknowns — unit prices risk is with contractor |
+| **Unit Price** | Medium | Medium | Quantities uncertain but unit costs definable (earthwork, piling) |
+| **Cost Plus Fixed Fee (CPFF)** | High | Low | Scope undefined, early phase, R&D |
+| **Cost Plus Incentive Fee (CPIF)** | Medium-High | Medium | Sharing savings/overruns according to a formula — aligns incentives |
+| **GMP (Guaranteed Maximum Price)** | Medium | Medium | Owner retains savings below GMP — hybrid of lump sum protection and cost-plus flexibility |
 
-### Canadian Public Procurement
-- **Federal**: Public Services and Procurement Canada (PSPC), MERX platform, AMP/CETA thresholds
-- **Quebec**: Act Respecting Contracting by Public Bodies (Bill 12), SEAO platform, lowest compliant bidder rule (some exceptions for quality weighting)
-- **Ontario**: Infrastructure Ontario, Supply Ontario, BPS Procurement Directive
+### Bid Evaluation
 
-## Project Management Software
+Evaluating bids requires looking beyond the bottom line:
+- **Technical compliance**: does the bid meet all technical specifications? Any deviations?
+- **Commercial evaluation**: normalize bid prices to a common basis (adjust for exceptions, clarifications)
+- **Qualifications**: relevant experience, key personnel qualifications, financial capacity
+- **Weighted scoring matrix**: assign weights to technical (30-40%) and commercial (60-70%) criteria and score each bid
+
+---
+
+## Canadian Infrastructure Context
+
+### Federal Programs
+
+- **Investing in Canada Plan**: $186 billion in federal infrastructure spending over 12 years (2016-2028), flowing through provinces, municipalities, and First Nations
+- **Infrastructure Canada**: federal ministry overseeing infrastructure programs — Disaster Mitigation and Adaptation Fund (DMAF), Smart Cities Challenge
+- **PSPC** (Public Services and Procurement Canada): manages procurement of buildings, real property, and major federal projects
+
+### Ontario and Quebec Infrastructure Agencies
+
+| Agency | Province | Mandate |
+|---|---|---|
+| **Infrastructure Ontario (IO)** | Ontario | Major provincial capital projects — Alternative Financing and Procurement (AFP/P3), real estate portfolio |
+| **Metrolinx** | Ontario | Regional transit infrastructure — GO Expansion, subway extensions |
+| **Société québécoise des infrastructures (SQI)** | Quebec | Government building portfolio — construction and maintenance |
+| **Mobilité Infra Québec (MIQ)** | Quebec | Major Quebec transit projects — REM de l'Est, other large transit |
+
+### P3 (Public-Private Partnership) Projects
+
+Canada has a sophisticated P3 market, primarily in Ontario (IO-procured), BC, and Quebec. Key P3 models:
+
+- **DBFM** (Design-Build-Finance-Maintain): private consortium designs, builds, finances, and maintains the asset; government pays annual service payments over 30-35 years
+- **DBFOM** (Design-Build-Finance-Operate-Maintain): adds operations to the private scope — less common in Canada
+
+**PPP Canada** (now wound down) produced significant learning about P3 value for money and risk allocation. Infrastructure Ontario's standardized P3 templates (PA, PA-M, CDA) are widely used.
+
+---
+
+## Software Tools for Engineering Project Management
 
 <CardGroup cols={2}>
-  <Card title="Microsoft Project" icon="calendar">
-    Industry standard for schedule management. Integrates with Microsoft 365. Best for traditional CPM scheduling.
+  <Card title="Microsoft Project" icon="microsoft" href="https://www.microsoft.com/en-us/microsoft-365/project">
+    Industry-standard scheduling tool for most engineering projects. Student license available via Microsoft Education. Integrates with Teams and SharePoint for collaboration.
   </Card>
-  <Card title="Oracle Primavera P6" icon="chart-gantt">
-    Enterprise-grade for megaprojects. Used by EPC firms, mining, and oil & gas. Steep learning curve but very powerful.
+  <Card title="Primavera P6" icon="database" href="https://www.oracle.com/industries/construction-engineering/primavera-p6">
+    Oracle's enterprise project portfolio management platform — the standard for large capital projects (oil & gas, mining, nuclear, large infrastructure). Steep learning curve; P6 Professional certification valued.
   </Card>
-  <Card title="Procore" icon="building">
-    Construction management platform (RFIs, submittals, daily reports, drawings). Cloud-based, mobile-first.
+  <Card title="Procore" icon="building" href="https://www.procore.com">
+    Construction management SaaS — document control, RFIs, submittals, daily reports, and contract management. Dominant in North American construction. Integrates with P6 and BIM 360.
   </Card>
-  <Card title="Autodesk Construction Cloud" icon="cube">
-    BIM 360 integrated with project management. Best for projects with significant BIM deliverables.
+  <Card title="OpenProject" icon="chart-gantt" href="https://www.openproject.org">
+    Open-source project management platform supporting Gantt charts, Agile boards, WBS, and team collaboration. Free self-hosted option available — good for small firms and academic projects.
   </Card>
 </CardGroup>
+
+---
 
 ## See Also
 
 <CardGroup cols={2}>
-  <Card title="Cost Estimation" icon="dollar-sign" href="/en/resources/calculation-tools">
-    Tools and methodologies for engineering cost estimation.
+  <Card title="Project Management — French" icon="calendar-check" href="/gestion-projets/planification">
+    Full French content on project management, with additional coverage of Quebec infrastructure regulations and French-language PM resources.
   </Card>
-  <Card title="Risk Management (FR)" icon="shield-halved" href="/gestion-projets/gestion-risques">
-    Detailed French guide to engineering risk management.
+  <Card title="Industrial Engineering" icon="chart-line" href="/en/industrial/optimization">
+    Lean, Six Sigma, and simulation methods that complement project management in manufacturing contexts.
   </Card>
-  <Card title="Contracts & Procurement (FR)" icon="file-signature" href="/gestion-projets/contrats-appels-offres">
-    French guide to CCDC contracts and public procurement in Canada.
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Microsoft Project, Primavera P6, risk analysis tools (@RISK), and project reporting software.
   </Card>
-  <Card title="Community Forum" icon="comments" href="/communaute/questions-reponses">
-    Ask project management questions to the GénieConseil community.
+  <Card title="Canadian Standards" icon="file-contract" href="/ressources/normes-canadiennes">
+    Canadian standards for construction, engineering design, and project documentation.
   </Card>
 </CardGroup>
