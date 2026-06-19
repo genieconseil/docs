@@ -1,0 +1,220 @@
+---
+title: "Gestion de la qualité et Six Sigma"
+description: "ISO 9001:2015, coûts de la qualité, outils de base, niveaux sigma, DMAIC détaillé, analyse des systèmes de mesure, plans d'échantillonnage et certifications sectorielles."
+icon: "star"
+---
+
+La qualité n'est pas un département, c'est une culture organisationnelle. De l'ISO 9001 aux certifications sectorielles exigeantes comme l'AS9100 pour l'aérospatiale, en passant par la rigueur statistique du Six Sigma, ce guide couvre l'ensemble des outils et référentiels nécessaires à l'ingénieur qualité moderne.
+
+## Principes ISO 9001:2015
+
+La norme ISO 9001:2015 structure le système de management de la qualité (SMQ) autour de **sept principes fondamentaux** :
+
+<CardGroup cols={2}>
+  <Card title="Orientation client" icon="users">
+    Comprendre les besoins actuels et futurs du client, dépasser ses attentes. Mesurer la satisfaction client régulièrement (enquêtes NPS, réclamations, audits chez le client).
+  </Card>
+  <Card title="Leadership" icon="crown">
+    La direction établit la vision, la politique qualité et les objectifs mesurables. Elle fournit les ressources et crée un environnement d'amélioration continue.
+  </Card>
+  <Card title="Implication du personnel" icon="people-group">
+    Des personnes compétentes, habilitées et impliquées créent de la valeur. Formations, responsabilisation, reconnaissance des contributions à l'amélioration.
+  </Card>
+  <Card title="Approche processus" icon="diagram-project">
+    Identifier, cartographier et maîtriser les processus inter-reliés. Utiliser la Tortue de Crosby ou les fiches processus (entrants, sortants, ressources, indicateurs).
+  </Card>
+</CardGroup>
+
+- **Amélioration** : engagement permanent à améliorer la performance (PDCA — Planifier/Déployer/Contrôler/Agir)
+- **Décision fondée sur les preuves** : les décisions reposent sur l'analyse de données objectives, pas sur des opinions
+- **Management des relations avec les parties intéressées** : fournisseurs, sous-traitants, partenaires — relations mutuellement bénéfiques
+
+### Structure HLS et approche risques
+ISO 9001:2015 adopte la **High Level Structure (HLS)** commune à toutes les normes ISO de management, facilitant l'intégration (ISO 14001 environnement, ISO 45001 SST). La **pensée basée sur les risques** remplace les actions préventives formelles : l'organisme identifie les risques et opportunités qui pourraient affecter ses objectifs et planifie des actions proportionnées.
+
+## Coûts de la qualité (CoQ — PAF Model)
+
+Le modèle PAF (Prevention-Appraisal-Failure) classe les coûts de la qualité en quatre catégories :
+
+| Catégorie | Description | Exemples |
+|-----------|-------------|---------|
+| **Prévention (P)** | Éviter les défauts avant qu'ils surviennent | Formation, planification qualité, audits préventifs, SPC, AMDEC |
+| **Évaluation (A)** | Mesurer et vérifier la conformité | Contrôle réception, inspections en cours de fabrication, étalonnage, tests |
+| **Défaillances internes (F-)** | Non-conformités détectées avant livraison | Rebuts, reprises, retests, déclassements, temps d'arrêt qualité |
+| **Défaillances externes (F+)** | Non-conformités détectées après livraison | Garanties, rappels, pénalités contractuelles, perte de réputation |
+
+**Règle fondamentale** : 1 $ en prévention économise 10 $ en évaluation et 100 $ en défaillances externes. Investir dans la prévention (AMDEC, SPC, formation) est économiquement rationnel.
+
+Le **Coût Total de la Qualité (CTQ)** idéal se situe à l'optimum entre prévention/évaluation et coûts de défaillances. Dans les entreprises matures Six Sigma, les CoQ tombent en dessous de 1 % du CA contre 15-25 % dans les entreprises sans démarche qualité.
+
+## Les 7 outils de base de la qualité (Q7)
+
+### 1. Diagramme de Pareto
+Histogramme triant les causes par fréquence décroissante avec courbe cumulative. Identifie les "vital few" (causes critiques, environ 20 %) des "trivial many" (80 % des causes mineures). Utilisé pour prioriser les actions d'amélioration.
+
+### 2. Diagramme d'Ishikawa (cause-effet, arête de poisson)
+Structure les causes potentielles d'un problème en 5 branches (5M) :
+- **Matière** : matières premières, composants, fournitures
+- **Machine** : équipements, outillages, maintenance
+- **Méthode** : procédures, gammes, instructions de travail
+- **Main-d'œuvre** : compétences, formation, fatigue, motivation
+- **Milieu** : température, humidité, propreté, vibrations
+
+Variante : **6M** (ajout de Mesure) ou **6P** pour les services (People, Process, Product, Place, Promotion, Price).
+
+### 3. Histogramme
+Distribution de fréquences des données. Permet de visualiser la forme de la distribution (normale, bimodale, asymétrique), de comparer avec les limites de spécification et d'évaluer visuellement la capabilité.
+
+### 4. Carte de contrôle (Shewhart)
+Suivi temporel d'une caractéristique de qualité avec limites de contrôle statistiques (±3σ). Permet de distinguer les **causes communes** (variation inhérente, aléatoire) des **causes spéciales** (signaux d'anomalie à investiguer).
+
+**Règles de Western Electric (WECO)** pour détecter les causes spéciales :
+- 1 point hors des limites ±3σ
+- 2 points sur 3 hors ±2σ du même côté
+- 4 points sur 5 hors ±1σ du même côté
+- 8 points consécutifs du même côté de la ligne centrale
+
+### 5. Nuage de points (Scatter Plot)
+Visualise la corrélation entre deux variables. Le coefficient de corrélation de Pearson r (−1 à +1) quantifie la force et le sens de la relation linéaire. Attention : corrélation ≠ causalité.
+
+### 6. Feuille de relevé (Check Sheet)
+Outil structuré de collecte de données sur le terrain. Conçu à l'avance pour faciliter l'enregistrement systématique (types de défauts, localisation sur le produit, fréquence).
+
+### 7. Organigramme (Flowchart)
+Représentation graphique d'un processus. Identifie les points de décision, les boucles et les étapes sans valeur ajoutée. Outil de communication et de standardisation des processus.
+
+## Niveaux Sigma et DPMO
+
+Le niveau sigma mesure la performance d'un procédé en termes de défauts par million d'opportunités (DPMO), avec un décalage conventionnel de 1,5σ (long terme vs court terme) :
+
+| Niveau Sigma | DPMO (avec décalage 1,5σ) | Rendement | Exemple d'équivalence |
+|-------------|--------------------------|-----------|----------------------|
+| 1σ | 691 462 | 30,9 % | Inacceptable industriellement |
+| 2σ | 308 538 | 69,1 % | Tri manuel requis |
+| 3σ | 66 807 | 93,32 % | Industrie moyenne |
+| 4σ | 6 210 | 99,38 % | Bonne performance |
+| 5σ | 233 | 99,977 % | Très haute performance |
+| **6σ** | **3,4** | **99,9997 %** | **Cible Six Sigma** |
+
+**Calcul du niveau sigma** :
+$$DPMO = \frac{\text{Nombre de défauts}}{\text{Nombre d'unités} \times \text{Opportunités par unité}} \times 10^6$$
+Puis convertir le DPMO en niveau sigma via la table de la loi normale ou la formule approximative.
+
+<Info>
+Le décalage de 1,5σ reflète la dérive typique des procédés réels sur le long terme. Un procédé « à 6σ court terme » (Cpk = 2,0) présentera environ 3,4 DPMO long terme. C'est pourquoi Motorola avait fixé la cible Cpk ≥ 2,0 pour ses composants critiques.
+</Info>
+
+## DMAIC — Description détaillée par phase
+
+### Phase Définir (D)
+
+**Outils clés** :
+- **Charte de projet** : problème (quantifié), objectif (SMART), périmètre, équipe, échéancier, bénéfices financiers attendus
+- **SIPOC** : Suppliers-Inputs-Process-Outputs-Customers — cartographie macro du processus en 5 à 7 étapes
+- **Voix du Client (VOC)** → **Arbre CTQ** → **Spécifications mesurables** : traduire les besoins qualitatifs (« livraison rapide ») en CTQ mesurables (« délai ≤ 48h dans 95 % des cas »)
+- **Diagramme de parties prenantes** : impact et intérêt de chaque acteur, stratégie d'engagement
+
+### Phase Mesurer (M)
+
+**Outils clés** :
+- **MSA (Measurement System Analysis)** : voir section dédiée ci-dessous
+- **Plan de collecte de données** : qui, quoi, où, quand, comment
+- **Capabilité de base** : Cp, Cpk, Pp, Ppk sur les données actuelles
+- **Cartographie détaillée du processus** : swim lane, identificateurs de valeur ajoutée
+
+### Phase Analyser (A)
+
+**Outils statistiques** :
+- **Test de normalité** (Shapiro-Wilk, Anderson-Darling) : condition préalable aux tests paramétriques
+- **Comparaison de moyennes** : t-test à 1 ou 2 échantillons, test de Welch
+- **ANOVA** : comparaison de plus de 2 groupes, avec test de Tukey pour les comparaisons post-hoc
+- **Régression** : simple, multiple, logistique selon le type de réponse
+- **Analyse des modes de défaillance** : arbre des défauts (FTA), AMDEC processus
+
+### Phase Améliorer (I pour Improve en anglais)
+
+**Outils clés** :
+- **DOE (Design of Experiments)** : plans factoriels, Taguchi, Surface de Réponse
+- **Matrice de sélection** (Pugh) : évaluation multicritères des solutions
+- **Simulation pilote** : essai en conditions contrôlées avant déploiement
+- **AMDEC process mise à jour** : réévaluer les risques après la solution
+
+### Phase Contrôler (C)
+
+**Outils clés** :
+- **Plan de contrôle** : document vivant qui liste toutes les caractéristiques à contrôler, les méthodes, fréquences, responsables et réactions
+- **Cartes de contrôle** : déployées aux points critiques identifiés
+- **Standard Operating Procedures (SOP)** : instructions de travail révisées
+- **Plan de formation** : diffusion des nouvelles pratiques
+- **Plan de clôture** : transfert au propriétaire du processus, calcul des économies réalisées
+
+## Analyse des systèmes de mesure (MSA — Gauge R&R)
+
+Une étude Gauge R&R (Repeatability & Reproducibility) décompose la variance observée en :
+
+$$\sigma^2_{totale} = \sigma^2_{pièce} + \sigma^2_{R\&R}$$
+$$\sigma^2_{R\&R} = \sigma^2_{répétabilité} + \sigma^2_{reproductibilité}$$
+
+**Protocole standard** : 10 pièces × 3 opérateurs × 2 ou 3 répétitions = 60 ou 90 mesures
+
+**Critères d'acceptation (AIAG MSA Manual)** :
+- **%R&R < 10 %** du processus ou de la tolérance : acceptable
+- **10 % ≤ %R&R ≤ 30 %** : marginal, accepté sous conditions (risque faible, coût d'amélioration élevé)
+- **%R&R > 30 %** : inacceptable, système de mesure à revoir avant toute décision
+
+**Nombre de catégories distinctes (ndc)** : ndc = (σ_pièce / σ_R&R) × 1,41. Objectif : ndc ≥ 5 pour discriminer les pièces conformes des non-conformes.
+
+<Warning>
+Un système de mesure défaillant (%R&R élevé) invalide toutes les décisions basées sur ces mesures : acceptation/rejet de lots, capabilité calculée, cartes de contrôle. Investir dans le MSA avant de lancer un projet Six Sigma est non négociable.
+</Warning>
+
+## Plans d'échantillonnage par attributs
+
+### NQA (Niveau de Qualité Acceptable) — ISO 2859-1
+Plans d'échantillonnage pour acceptation/rejet de lots sur la base d'un nombre de défectueux. Le NQA est le pourcentage de défectueux maximum considéré acceptable comme moyenne de procédé.
+
+**Paramètres clés** :
+- **Taille de lot (N)** : détermine la lettre-code de taille de l'échantillon
+- **Niveau d'inspection** : normal (II), réduit (I), renforcé (III) selon l'historique qualité
+- **NQA** : valeur négociée contractuellement avec le client (ex. NQA 1,0 %, 0,65 %, 0,25 %)
+
+### Courbe Caractéristique Opératoire (COC / OC Curve)
+La COC représente la probabilité d'acceptation d'un lot (Pa) en fonction de la qualité réelle du lot (% défectueux p). Elle permet de visualiser :
+- **α (risque producteur)** : probabilité de rejeter un bon lot (1 - Pa au NQA)
+- **β (risque consommateur)** : probabilité d'accepter un mauvais lot (Pa au LTPD — Lot Tolerance Percent Defective)
+
+Plus la taille d'échantillon est grande, plus la courbe est discriminante (pente raide).
+
+## Certifications sectorielles
+
+<CardGroup cols={2}>
+  <Card title="AS9100 Rev D — Aérospatiale" icon="plane">
+    Basé sur ISO 9001:2015, ajoute des exigences pour la gestion des risques, configuration management, traçabilité complète, autorisation de vol et sécurité opérationnelle. Audité par organismes accréditués IAQG (OASIS). Requis pour tous les fournisseurs de Boeing, Airbus, NASA.
+  </Card>
+  <Card title="IATF 16949 — Automobile" icon="car">
+    Standard global automobile (remplace TS 16949). Exigences supplémentaires : APQP (Advanced Product Quality Planning), PPAP (Production Part Approval Process), FMEA, SPC, MSA. Plan de réaction documenté pour chaque caractéristique spéciale.
+  </Card>
+  <Card title="ISO 13485 — Dispositifs médicaux" icon="heart-pulse">
+    SMQ spécifique aux dispositifs médicaux. Exigences strictes : gestion des risques ISO 14971, traçabilité UDI, dossier technique MDR (Union Européenne), 21 CFR Part 820 (FDA USA), validation des procédés, stérilisation ISO 11135/11137.
+  </Card>
+  <Card title="ISO/IEC 17025 — Laboratoires" icon="flask">
+    Accréditation des laboratoires d'essais et d'étalonnage. Compétence technique (méthodes validées, incertitude de mesure, traçabilité métrologique) et impartialité. Reconnu mutuellement entre pays via l'ILAC MRA.
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Optimisation des procédés industriels" icon="chart-line" href="/genie-industriel/optimisation-procedes">
+    DMAIC appliqué, Lean Six Sigma et simulation de procédés de fabrication.
+  </Card>
+  <Card title="Automatisation industrielle et PLC" icon="robot" href="/genie-industriel/automatisation-plc">
+    Contrôle statistique de procédés en ligne (SPC en temps réel via OPC-UA).
+  </Card>
+  <Card title="Éthique professionnelle en ingénierie" icon="scale-balanced" href="/leadership/ethique-ingenierie">
+    Responsabilité de l'ingénieur face à la qualité des produits et la sécurité publique.
+  </Card>
+  <Card title="Communication technique" icon="comments" href="/leadership/communication-technique">
+    Rédaction de rapports d'audit qualité et présentation des résultats Six Sigma.
+  </Card>
+</CardGroup>

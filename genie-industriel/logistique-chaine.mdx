@@ -1,0 +1,219 @@
+---
+title: "Logistique et gestion de la chaîne d'approvisionnement"
+description: "Structure de la chaîne d'approvisionnement, gestion des stocks (EOQ, kanban), modes de transport, prévision de la demande, ERP logistique et stratégies contre l'effet bullwhip."
+icon: "truck"
+---
+
+La gestion de la chaîne d'approvisionnement (Supply Chain Management, SCM) englobe la planification et la maîtrise de tous les flux — matières, informations et finances — depuis les fournisseurs de matières premières jusqu'au client final. Dans un contexte de volatilité des marchés (pandémies, tensions géopolitiques, changements climatiques), la résilience de la chaîne est devenue un avantage concurrentiel majeur.
+
+## Structure de la chaîne d'approvisionnement
+
+Une chaîne d'approvisionnement typique comprend plusieurs niveaux (tiers) :
+
+```
+Fournisseurs T2 → Fournisseurs T1 (matières premières)
+    → Fabricants (transformation)
+        → Distributeurs (centres de distribution)
+            → Détaillants / Grossistes
+                → Clients finaux (B2C ou B2B)
+```
+
+### Les trois flux de la chaîne
+- **Flux de matière** : sens amont → aval (livraisons, transferts, retours)
+- **Flux d'information** : bidirectionnel — commandes (aval vers amont), prévisions, confirmations, statuts (amont vers aval)
+- **Flux financier** : paiements, crédits, conditions de règlement, risque de change
+
+### Indicateurs clés de performance (KPI SCM)
+- **Taux de service** (Fill Rate) : % des commandes livrées complètes et à temps (OTIF — On Time In Full)
+- **Rotation des stocks** : Coût des ventes / Stock moyen (objectif : maximiser)
+- **Délai de livraison** (Lead Time) : de la commande client à la réception
+- **Cash-to-Cash Cycle Time** : délai entre le paiement des fournisseurs et l'encaissement des clients
+- **Coût logistique total** : % du chiffre d'affaires (benchmark : 8-12 % en fabrication)
+
+## Gestion des stocks
+
+La gestion des stocks cherche l'équilibre entre le coût de possession (immobilisation financière, espace, risque d'obsolescence) et le coût de rupture (ventes perdues, arrêts de production, pénalités).
+
+### Modèle EOQ — Wilson (Economic Order Quantity)
+
+Le modèle EOQ détermine la quantité de commande optimale minimisant le coût total :
+
+$$Q^* = \sqrt{\frac{2DS}{H}}$$
+
+Où :
+- **D** = demande annuelle (unités/an)
+- **S** = coût de passation d'une commande ($/commande) — administratif, transport, réception
+- **H** = coût de possession unitaire annuel ($/unité/an) — typiquement 20-30 % de la valeur unitaire
+
+**Coût total annuel** : $CT = \frac{D}{Q^*} \times S + \frac{Q^*}{2} \times H$
+
+**Exemple** : D = 10 000 unités/an, S = 150 $/commande, H = 5 $/unité/an
+→ Q* = √(2 × 10 000 × 150 / 5) = √600 000 = **775 unités**
+→ Nombre de commandes/an = 10 000 / 775 = **12,9 commandes**
+
+<Note>
+L'EOQ suppose une demande constante et un réapprovisionnement instantané — hypothèses rarement vérifiées. En pratique, ajoutez un stock de sécurité et utilisez le modèle comme point de départ, à affiner selon la variabilité réelle.
+</Note>
+
+### Stock de sécurité (SS)
+
+Le stock de sécurité protège contre les variations de demande et de délai de réapprovisionnement :
+
+$$SS = z \times \sigma_D \times \sqrt{L}$$
+
+Où :
+- **z** = facteur de service (1,28 pour 90 %, 1,645 pour 95 %, 2,054 pour 98 %, 2,326 pour 99 %)
+- **σ_D** = écart-type de la demande par unité de temps
+- **L** = délai de réapprovisionnement (même unité de temps)
+
+Si la variabilité du délai est significative (σ_L > 0) :
+$$SS = z \times \sqrt{L \times \sigma_D^2 + \bar{D}^2 \times \sigma_L^2}$$
+
+### Point de commande (ROP — Reorder Point)
+
+$$ROP = \bar{D} \times L + SS$$
+
+**Exemple** : Demande moyenne = 50 unités/jour, délai = 7 jours, SS = 80 unités
+→ ROP = 50 × 7 + 80 = **430 unités**
+Quand le stock atteint 430 unités, déclencher une commande de Q* unités.
+
+### Analyse ABC (Classification par valeur)
+
+Principe de Pareto appliqué aux références :
+
+| Catégorie | % des références | % de la valeur annuelle | Stratégie |
+|-----------|-----------------|------------------------|-----------|
+| **A** | ~20 % | ~80 % | Contrôle strict, réapprovisionnement fréquent, stock de sécurité calculé |
+| **B** | ~30 % | ~15 % | Révision périodique, stock intermédiaire |
+| **C** | ~50 % | ~5 % | Commandes groupées, stock élevé acceptable, simplification |
+
+<Tip>
+Combinez l'analyse ABC avec une analyse XYZ (régularité de la demande : X=stable, Y=variable, Z=irrégulière). Les références AX (haute valeur, demande stable) sont prioritaires pour l'optimisation analytique. Les références CZ (faible valeur, demande erratique) peuvent utiliser une règle simple de stock min/max.
+</Tip>
+
+## Gestion d'entrepôt
+
+### Conception du layout (aménagement)
+- **Layout en U** : réception et expédition côte à côte — flux court, polyvalent
+- **Layout en flux traversant** : réception d'un côté, expédition de l'autre — idéal pour les grands volumes, cross-docking
+- **Zones dédiées** : réception/contrôle qualité/quarantaine, stockage vrac, picking, emballage/étiquetage, expédition
+- **Slotting** : positionnement optimal des références (articles A près des zones d'expédition, rotation rapide en zones de picking privilégiées)
+
+### Stratégies de préparation de commandes (picking)
+- **Single order picking** : un opérateur prépare une commande à la fois — précis mais peu efficace pour les petites commandes
+- **Batch picking** : un opérateur prépare simultanément plusieurs commandes — réduit les déplacements
+- **Wave picking** : regroupement des commandes par vague horaire selon les transporteurs — optimise le flux vers les quais d'expédition
+- **Zone picking** : l'entrepôt est divisé en zones, chaque opérateur ne travaille que dans sa zone — réduction des conflits
+
+### Systèmes WMS (Warehouse Management System)
+Les WMS gèrent en temps réel : réceptions (ASN — Advanced Shipping Notice), mouvements internes, emplacements, FEFO (First Expired First Out pour les denrées périssables), FIFO, préparation de commandes, expédition. Principaux : SAP Warehouse Management/Extended WM, Oracle WMS, Manhattan Associates, Blue Yonder (JDA), Körber (HighJump).
+
+Technologies habilitantes : **RFID** (identification sans contact), **lecteurs de codes-barres** (1D/2D), **pick-to-light** et **put-to-light** (systèmes lumineux guidant l'opérateur), **voice picking** (instructions vocales), **drones d'inventaire** (Gather AI, Corvus One).
+
+## Modes de transport et sélection
+
+| Mode | Coût relatif | Délai | CO₂/tonne-km | Avantages |
+|------|-------------|-------|--------------|-----------|
+| **Camion (TL/LTL)** | Moyen | Rapide | Moyen (100-200 g) | Porte-à-porte, flexibilité, fréquence |
+| **Rail** | Faible | Moyen | Très faible (20-30 g) | Grandes masses, longues distances, fiable |
+| **Maritime** | Très faible | Long | Faible (10-15 g) | Très grandes quantités, international |
+| **Aérien** | Très élevé | Très rapide | Très élevé (500+ g) | Urgences, produits à haute valeur, périssables |
+| **Intermodal** | Faible | Moyen | Faible | Conteneur maritime + rail + camion dernière mile |
+
+**Incoterms 2020** (règles CCI) définissent la répartition des responsabilités et risques vendeur/acheteur : EXW, FCA, FOB, CFR, CIF, DAP, DDP — incontournables dans les contrats d'achat internationaux.
+
+## Prévision de la demande
+
+Une prévision précise est le fondement d'une chaîne d'approvisionnement efficace. **Aucune méthode n'est universellement supérieure** — le choix dépend des données disponibles, du comportement de la demande et de l'horizon de prévision.
+
+### Méthodes quantitatives
+
+**Moyenne mobile simple (MMS)** :
+$$\hat{D}_{t+1} = \frac{1}{n}\sum_{i=t-n+1}^{t} D_i$$
+Simple, élimine les fluctuations aléatoires. Réagit lentement aux tendances. Paramètre n à optimiser (3 à 12 périodes).
+
+**Lissage exponentiel simple (Holt)** :
+$$\hat{D}_{t+1} = \alpha D_t + (1-\alpha)\hat{D}_t \quad \alpha \in ]0,1[$$
+Plus de poids aux données récentes. α élevé = réactif mais volatile, α faible = lisse mais lent.
+
+**Méthode de Holt-Winters (triple lissage)** : intègre tendance (β) et saisonnalité (γ). Idéale pour des données présentant les deux composantes simultanément. Deux versions : multiplicative (saisonnalité proportionnelle au niveau) et additive.
+
+**ARIMA** : modèles autorégressifs intégrés à moyenne mobile. Puissants pour les séries temporelles stationnaires. Nécessitent une expertise statistique et des données historiques abondantes (> 3 ans recommandé).
+
+### Méthodes modernes
+Apprentissage automatique (forêts aléatoires, gradient boosting, LSTM) surpassent souvent ARIMA sur des données complexes avec de nombreuses variables explicatives (prix, promotions, météo, concurrence). Plateformes : Amazon Forecast, Google Cloud Forecasting, Blue Yonder Luminate.
+
+**Mesure de la précision** :
+- **MAPE** (Mean Absolute Percentage Error) : |(Réel - Prévu)| / Réel × 100 % — métrique universelle
+- **MAE** (Mean Absolute Error) : valeur absolue des erreurs — robuste aux valeurs aberrantes
+- **RMSE** (Root Mean Square Error) : pénalise les grosses erreurs — sensible aux outliers
+
+## ERP pour la logistique
+
+Les ERP (Enterprise Resource Planning) intègrent les fonctions logistiques avec la comptabilité, la production et les RH.
+
+<CardGroup cols={2}>
+  <Card title="SAP S/4HANA" icon="database">
+    Leader mondial ERP. Modules MM (achats), SD (ventes), WM/EWM (entrepôt), TM (transport). In-memory HANA pour analyses temps réel. Très présent dans les grandes entreprises.
+  </Card>
+  <Card title="Oracle SCM Cloud" icon="cloud">
+    Suite complète : planification, approvisionnement, gestion des commandes, logistique. Forte en industrie manufacturière et distribution. Analytics intégrés.
+  </Card>
+  <Card title="Microsoft Dynamics 365" icon="microsoft">
+    ERP pour PME et ETI. Modules Supply Chain Management, Commerce. Intégration native Power BI pour les tableaux de bord. Accessible et implémentation plus rapide.
+  </Card>
+  <Card title="Solutions spécialisées" icon="puzzle-piece">
+    **Kinaxis RapidResponse** (S&OP et résilience), **Blue Yonder** (planification avancée APS), **Infor CloudSuite** (industries spécifiques : mode, agro).
+  </Card>
+</CardGroup>
+
+## Effet coup de fouet (Bullwhip Effect)
+
+L'effet bullwhip (fouet de cocher) décrit l'amplification progressive de la variabilité de la demande au fil des échelons de la chaîne : une variation de 10 % chez le détaillant peut se traduire par une variation de 40 % chez le fabricant et de 80 % chez le fournisseur de rang 2.
+
+**Causes principales** :
+- Actualisation des prévisions (sur-réaction aux signaux de courte durée)
+- Politiques de lotissement (commandes groupées plutôt que continues)
+- Promotions et variations de prix (achats de spéculation)
+- Rationnnement et pénuries (commandes gonflées par précaution lors de pénuries)
+
+### Stratégies d'atténuation
+
+- **Partage d'information** : transmission des données de vente point de vente (POS) en temps réel à tous les maillons de la chaîne via EDI ou plateformes SCM
+- **VMI (Vendor Managed Inventory)** : le fournisseur gère lui-même le stock chez le client selon des paramètres convenus — élimine les délais de commande et l'effet bullwhip associé
+- **CPFR (Collaborative Planning, Forecasting and Replenishment)** : processus collaboratif entre distributeur et fournisseur pour élaborer des prévisions communes et un plan d'approvisionnement partagé
+- **Réduction des délais** : délais courts réduisent l'incertitude et la nécessité de sur-stocker
+- **Prix stables (EDLP)** : élimination des promotions agressives qui génèrent des achats spéculatifs
+
+## Logistique inverse et économie circulaire
+
+La logistique inverse gère les flux retour : retours clients, produits en fin de vie, emballages consignés, remanufacturing.
+
+**Filières de valorisation** (hiérarchie des 3R) :
+1. **Réutilisation** directe (produit revendu tel quel)
+2. **Reconditionnement/Remanufacturing** (démontage, nettoyage, remplacement de pièces usées, recertification)
+3. **Recyclage** (récupération des matières premières)
+4. **Valorisation énergétique** (en dernier recours)
+
+En Canada, les **REP (Responsabilité Élargie des Producteurs)** imposent aux fabricants de gérer la fin de vie de leurs produits. Programme RPAA en Ontario, Éco Entreprises Québec (ÉEQ) pour les emballages.
+
+<Warning>
+La logistique inverse coûte souvent 2 à 3 fois plus cher que la logistique directe (coûts de manutention, tri, transport, incertitude des volumes). Intégrez ces coûts dès la conception du produit (design for disassembly) et établissez des processus clairs de triage à la réception des retours.
+</Warning>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Optimisation des procédés industriels" icon="chart-line" href="/genie-industriel/optimisation-procedes">
+    Lean, kanban et flux tirés pour optimiser la production en amont de la distribution.
+  </Card>
+  <Card title="Estimation des coûts en génie" icon="dollar-sign" href="/gestion-projets/estimation-couts">
+    Analyse du cycle de vie, TCO et justification économique des projets logistiques.
+  </Card>
+  <Card title="Intelligence artificielle appliquée" icon="brain" href="/genie-logiciel/intelligence-artificielle">
+    Prévision de la demande par apprentissage automatique et optimisation par IA.
+  </Card>
+  <Card title="Contrats et appels d'offres" icon="file-signature" href="/gestion-projets/contrats-appels-offres">
+    Types de contrats logistiques, incoterms et approvisionnement public.
+  </Card>
+</CardGroup>

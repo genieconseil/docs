@@ -1,0 +1,230 @@
+---
+title: "Optimisation des procédés industriels"
+description: "Lean manufacturing, Six Sigma, simulation de procédés, théorie des contraintes et OEE — outils et méthodes pour maximiser la performance opérationnelle des systèmes de production."
+icon: "chart-line"
+---
+
+L'optimisation des procédés industriels vise à produire plus de valeur avec moins de ressources, en éliminant systématiquement les gaspillages et en améliorant la qualité. Ce domaine emprunte aux mathématiques, à la statistique, à la mécanique et aux sciences du comportement pour transformer les opérations industrielles.
+
+## Lean Manufacturing
+
+Le Lean est une philosophie opérationnelle issue du Système de Production Toyota (TPS), popularisée en Occident par les chercheurs du MIT dans les années 1990. Son principe fondamental : identifier et éliminer tout ce qui n'ajoute pas de valeur aux yeux du client.
+
+### Les 7 gaspillages TIMWOOD (MUDA)
+
+| Lettre | Gaspillage | Exemple industriel |
+|--------|-----------|-------------------|
+| **T** | Transport | Déplacer des pièces d'un atelier à l'autre inutilement |
+| **I** | Inventaire (stocks) | Encours entre postes, matières premières en excès |
+| **M** | Mouvement | Opérateur qui cherche ses outils, posture inadaptée |
+| **W** | Attente | Machine en attente de matière, opérateur inactif |
+| **O** | Surproduction | Produire plus vite que la demande client (pire gaspillage) |
+| **O** | Surprocessing | Usinier à ±0,001 mm quand ±0,1 mm suffit |
+| **D** | Défauts | Reprises, rebuts, inspections supplémentaires |
+
+Un 8e gaspillage est souvent ajouté : **le non-usage des talents humains** (expertise non sollicitée des opérateurs).
+
+### Cartographie de la chaîne de valeur (VSM — Value Stream Mapping)
+
+Le VSM est un outil graphique qui représente l'ensemble des flux (matière et information) nécessaires pour livrer un produit au client.
+
+**Démarche VSM en 4 étapes :**
+1. **Choisir une famille de produits** : regrouper par similarité des gammes de fabrication
+2. **Cartographier l'état actuel** : chronométrer chaque étape, mesurer les stocks entre postes, identifier les temps à valeur ajoutée (TVA) vs sans valeur ajoutée (TSVA)
+3. **Identifier les gaspillages** et calculer le rapport TVA/temps de défilement total (Takt)
+4. **Concevoir l'état futur** : flux tiré, flux continu, nivelage (heijunka), boucles kanban
+
+**Takt Time** = Temps disponible net / Demande client. Par exemple : 450 min/jour ÷ 900 pièces/jour = 0,5 min/pièce. Tout poste plus lent que le Takt est un goulot potentiel.
+
+### Méthode 5S
+
+Organisation systématique du poste de travail en cinq étapes séquentielles :
+1. **Seiri (Trier)** : éliminer tout ce qui est inutile
+2. **Seiton (Ranger)** : une place pour chaque chose, chaque chose à sa place
+3. **Seiso (Nettoyer)** : nettoyage systématique = inspection
+4. **Seiketsu (Standardiser)** : procédures visuelles, standards documentés
+5. **Shitsuke (Pérenniser)** : audits réguliers, culture d'amélioration continue
+
+### Kaizen et événements kaizen
+Le Kaizen (改善, « amélioration continue ») est un état d'esprit visant des améliorations petites mais continues, impliquant tous les niveaux de l'organisation. Les **événements kaizen** (ou chantiers kaizen) sont des ateliers intensifs de 3 à 5 jours focalisés sur une problématique précise.
+
+### Flux continu et systèmes pull (tirer)
+
+**Flux continu (one-piece flow)** : les pièces se déplacent une par une d'opération en opération, éliminant les lots et réduisant les encours. Avantages : détection immédiate des défauts, délai minimal, flexibilité accrue.
+
+**Systèmes pull** : la production est déclenchée par la consommation aval, non par un programme poussé (push). Outils : kanban, supermarché, FIFO (First In First Out) contrôlé.
+
+### Kanban — Calcul du nombre de kanbans
+
+$$K = \frac{D \times L \times (1 + \alpha)}{C}$$
+
+Où :
+- **D** = taux de demande (pièces/unité de temps)
+- **L** = délai de réapprovisionnement (même unité de temps)
+- **α** = facteur de sécurité (0,10 à 0,25 selon variabilité)
+- **C** = taille du conteneur kanban (pièces)
+
+**Exemple** : D = 200 pièces/h, L = 2 h, α = 0,15, C = 50 pièces → K = (200 × 2 × 1,15) / 50 = **9,2 → 10 kanbans**
+
+<Tip>
+Le nombre de kanbans est une **variable de contrôle** du système. Réduire K progressivement expose les problèmes cachés (pannes, non-qualité) et force leur résolution. C'est la philosophie « abaisser le niveau d'eau pour voir les rochers ».
+</Tip>
+
+## Six Sigma — Démarche DMAAC (DMAIC)
+
+Six Sigma est une démarche structurée visant la réduction de la variabilité des procédés à un niveau tel que les défauts deviennent statistiquement négligeables (3,4 ppm avec le décalage de 1,5σ).
+
+### Définir — Charte de projet et CTQ
+
+La phase **Définir** formalise le projet avec une charte incluant :
+- L'énoncé du problème (quantifié, sans solution présupposée)
+- Les **CTQ** (Critical to Quality) : caractéristiques critiques du point de vue du client, dérivées via un arbre CTQ à partir de la Voix du Client (VOC)
+- Le périmètre, l'équipe, les jalons et les bénéfices attendus (COPQ — Cost of Poor Quality)
+
+### Mesurer — MSA et Cpk
+
+**Système de Mesure (MSA — Measurement System Analysis)** : avant toute collecte de données, valider que le système de mesure est capable. Étude Gauge R&R (répétabilité et reproductibilité) :
+- % **Répétabilité** : variation du même opérateur avec le même instrument
+- % **Reproductibilité** : variation entre opérateurs
+- Critère : %R&R < 10 % acceptable, 10-30 % marginalement acceptable, > 30 % inacceptable
+
+**Indices de capabilité** :
+$$C_p = \frac{USL - LSL}{6\sigma} \qquad C_{pk} = \min\left(\frac{USL - \bar{X}}{3\sigma}, \frac{\bar{X} - LSL}{3\sigma}\right)$$
+
+Cible : Cpk ≥ 1,33 pour une production courante, Cpk ≥ 1,67 pour des applications critiques.
+
+### Analyser — Outils statistiques
+
+- **Diagramme d'Ishikawa (5M)** : causes classées en Matière, Machine, Méthode, Main-d'œuvre, Milieu. Outil qualitatif de brainstorming structuré.
+- **Diagramme de Pareto** : 20 % des causes génèrent 80 % des effets. Priorisation des actions.
+- **Les 5 Pourquoi** : remonter à la cause racine par questionnement répété. Simple mais efficace pour les problèmes simples.
+- **Tests d'hypothèses** : t-test (comparaison de moyennes), test F (variances), ANOVA (multiple groupes), test du Chi-deux (données attributives), Mann-Whitney (données non normales).
+
+### Améliorer — DOE et Taguchi
+
+**Design of Experiments (DOE)** : expérimentation planifiée pour identifier les facteurs influents et optimiser le procédé.
+
+Types de plans :
+- **Factoriel complet 2k** : tous les niveaux de tous les facteurs (2k essais minimum)
+- **Factoriel fractionnaire 2k-p** : réduit le nombre d'essais au prix de confusions (aliases)
+- **Surface de réponse (RSM)** : optimisation fine autour d'un optimum, plans Box-Behnken, CCD
+
+**Plans de Taguchi** : approche robuste utilisant des plans orthogonaux (L4, L8, L9, L18) et le rapport signal/bruit (S/N ratio) pour concevoir des produits insensibles aux facteurs de bruit (variabilité environnementale, vieillissement).
+
+### Contrôler — Cartes de contrôle et plan de contrôle
+
+**Cartes de contrôle de Shewhart** :
+- Données variables : carte $\bar{X}$-R (sous-groupes) ou carte I-MR (individuels)
+- Données attributives : carte p (proportion défectueuse), carte c (nombre de défauts)
+- Limites de contrôle à ±3σ (99,73 % des points si le procédé est sous contrôle)
+
+**Plan de contrôle** : document qui spécifie pour chaque étape du procédé ce qui est mesuré, comment, avec quelle fréquence, par qui et quelle action en cas de dérive.
+
+## Simulation industrielle
+
+La simulation permet d'évaluer des scénarios sans perturber la production réelle.
+
+<CardGroup cols={2}>
+  <Card title="Simulation à événements discrets (DES)" icon="diagram-project">
+    Modélise des systèmes où l'état change à des instants précis (arrivée d'une pièce, fin d'une opération). Outils : Arena (Rockwell), FlexSim, Plant Simulation (Siemens Tecnomatix), WITNESS.
+  </Card>
+  <Card title="Simulation continue" icon="wave-square">
+    Équations différentielles pour des systèmes qui évoluent en continu (dynamique des fluides, transfert de chaleur). Outils : MATLAB/Simulink, AnyLogic (multi-paradigme).
+  </Card>
+  <Card title="Simulation multi-agents (ABS)" icon="sitemap">
+    Chaque entité (opérateur, robot, AGV) est un agent autonome avec ses propres règles. Adapté aux systèmes complexes adaptatifs. Outil principal : AnyLogic.
+  </Card>
+  <Card title="Jumeaux numériques" icon="copy">
+    Modèle virtuel synchronisé en temps réel avec le système physique via données IoT. Permet la simulation prédictive et l'optimisation continue.
+  </Card>
+</CardGroup>
+
+**Paramètres clés à modéliser** : taux de défaillance des machines (loi exponentielle ou Weibull), temps de réparation, variabilité des temps de cycle (loi normale ou log-normale), aléas de qualité, absentéisme opérateur.
+
+**Validation du modèle** : comparer les sorties du modèle avec les données historiques (test de l'hypothèse H₀ : pas de différence significative). Utiliser l'analyse de sensibilité pour identifier les paramètres influents.
+
+## Théorie des contraintes (TOC)
+
+Développée par Eliyahu Goldratt dans "Le But" (1984), la TOC postule que la performance globale d'un système est limitée par une seule contrainte à un instant donné.
+
+### Les 5 étapes de focalisation
+
+1. **Identifier** le goulot (contrainte) : la ressource dont la capacité est inférieure à la demande
+2. **Exploiter** le goulot : maximiser son utilisation (aucune perte de temps au goulot — pas de manque de matière, qualité parfaite avant le goulot)
+3. **Subordonner** toutes les autres décisions à la décision d'exploitation du goulot : le reste de l'usine travaille au rythme du goulot, pas plus vite
+4. **Élever** le goulot : investissements ciblés pour augmenter la capacité de la contrainte
+5. **Recommencer** : une fois le goulot éliminé, identifier la nouvelle contrainte et recommencer
+
+### DBR — Drum-Buffer-Rope
+La mise en œuvre opérationnelle de la TOC :
+- **Drum (tambour)** : le goulot donne le rythme de la production
+- **Buffer (tampon)** : stock de protection devant le goulot pour éviter l'arrêt
+- **Rope (corde)** : signal de libération de matière depuis le début du flux, synchronisé avec le goulot
+
+<Info>
+La TOC et le Lean semblent contradictoires (la TOC maintient des stocks tampons, le Lean les élimine), mais ils sont complémentaires. La TOC identifie où concentrer les efforts d'amélioration Lean : les ressources non-goulot ont de la capacité excédentaire — les améliorer ne change pas le débit global.
+</Info>
+
+## OEE — Rendement Synthétique des Équipements
+
+L'OEE (Overall Equipment Effectiveness) est l'indicateur de référence pour mesurer la performance des équipements de production.
+
+$$OEE = Disponibilité \times Performance \times Qualité$$
+
+### Composantes de l'OEE
+
+**Disponibilité (D)** = Temps de fonctionnement / Temps d'ouverture prévu
+- Pertes : pannes, changements de série (SMED), manque de matière, manque d'opérateur
+
+**Performance (P)** = (Temps de cycle idéal × Quantité produite) / Temps de fonctionnement
+- Pertes : micros-arrêts (< 5 min), vitesse réduite, sous-cadence
+
+**Qualité (Q)** = Quantité conforme / Quantité totale produite
+- Pertes : défauts, rebuts, retraitements, démarrages non conformes
+
+**Exemple de calcul :**
+- Disponibilité : 420 min fonctionnement / 480 min planifiées = 87,5 %
+- Performance : (0,5 min/pièce × 750 pièces) / 420 min = 89,3 %
+- Qualité : 720 conformes / 750 totales = 96,0 %
+- **OEE = 0,875 × 0,893 × 0,960 = 75,0 %**
+
+### Benchmarks OEE
+
+| Niveau | OEE | Interprétation |
+|--------|-----|----------------|
+| Classe mondiale | > 85 % | Benchmark de l'industrie manufacturière |
+| Bonne performance | 65-85 % | Acceptable, marge d'amélioration identifiable |
+| Performance faible | < 65 % | Problèmes significatifs à corriger |
+
+<Warning>
+Un OEE élevé n'est pas toujours le bon objectif. Sur une ressource non-goulot (excédent de capacité), maximiser l'OEE peut générer de la surproduction et des stocks — exactement le pire gaspillage Lean. Focalisez l'OEE sur la contrainte identifiée par la TOC.
+</Warning>
+
+## SMED — Changement rapide de série
+
+Le SMED (Single-Minute Exchange of Die — changement de matrice en moins de 10 minutes) est une méthodologie de réduction des temps de changement de série.
+
+**Étapes clés :**
+1. Observer et filmer un changement actuel complet
+2. Distinguer les opérations **internes** (machine arrêtée) des **externes** (possible machine en marche)
+3. Convertir un maximum d'opérations internes en externes
+4. Standardiser et optimiser les opérations internes restantes (outillage rapide, connecteurs standardisés)
+
+Résultats typiques : réduction de 50 à 90 % du temps de changement, permettant des séries plus courtes et une plus grande flexibilité.
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Gestion de la qualité et Six Sigma" icon="star" href="/genie-industriel/qualite-six-sigma">
+    ISO 9001, certifications sectorielles et outils avancés de contrôle statistique.
+  </Card>
+  <Card title="Automatisation industrielle et PLC" icon="robot" href="/genie-industriel/automatisation-plc">
+    Systèmes de contrôle pour soutenir la performance et la traçabilité.
+  </Card>
+  <Card title="Logistique et chaîne d'approvisionnement" icon="truck" href="/genie-industriel/logistique-chaine">
+    Gestion des flux, EOQ, kanban et systèmes pull dans la chaîne étendue.
+  </Card>
+  <Card title="Estimation des coûts en génie" icon="dollar-sign" href="/gestion-projets/estimation-couts">
+    Justifier les projets d'amélioration avec l'analyse ROI et la valeur acquise.
+  </Card>
+</CardGroup>

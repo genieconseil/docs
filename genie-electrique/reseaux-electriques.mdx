@@ -1,0 +1,202 @@
+---
+title: "Réseaux électriques et systèmes de puissance"
+description: "Structure du réseau, écoulement de puissance, protection, qualité de l'énergie et contexte canadien"
+icon: "plug"
+---
+
+Les réseaux électriques constituent l'infrastructure critique qui achemine l'électricité des centres de production vers les consommateurs industriels, commerciaux et résidentiels. Leur conception, leur exploitation et leur protection requièrent une maîtrise approfondie des circuits triphasés, de la théorie des réseaux et des techniques de mesure et de contrôle.
+
+## Structure du réseau électrique
+
+**Production**
+
+L'électricité est produite dans des centrales utilisant différentes sources d'énergie primaire :
+- **Hydraulique** : turbines Pelton (haute chute), Francis (chute moyenne), Kaplan (basse chute). Dominante au Québec (> 94 % de la production d'Hydro-Québec)
+- **Thermique** : cycle de Rankine (vapeur), turbines à gaz (cycle de Brayton), centrales à cycles combinés (CCGT) — rendement jusqu'à 60 %
+- **Nucléaire** : réacteurs CANDU (eau lourde, spécificité canadienne), PWR, BWR
+- **Éolienne et solaire PV** : production variable, connectée via onduleurs (interface AC-DC-AC)
+
+**Transport en Très Haute Tension (THT)**
+
+Le réseau de transport minimise les pertes en ligne (P_pertes = R × I²) en élevant la tension au maximum. Hydro-Québec opère à **735 kV** sur son réseau principal — la plus haute tension de transport en Amérique du Nord, permettant le transport sur de très longues distances depuis les centrales de la Baie-James. Les niveaux courants en Amérique du Nord : 735 kV (Québec), 500 kV (Colombie-Britannique, Alberta, Ontario), 345 kV, 230 kV.
+
+**Distribution Moyenne Tension (MT) et Basse Tension (BT)**
+
+La distribution abaisse la tension en plusieurs étapes via des postes de transformation :
+- Postes de réseau THT/HT (735/315 kV, 315/120 kV)
+- Postes de distribution HT/MT (120 kV/25 kV ou 120 kV/12 kV en milieu urbain)
+- Postes de livraison MT/BT (25 kV/MLBT : 347/600 V triphasé en industrie québécoise, 120/240 V résidentiel)
+
+<Note>
+Le Québec utilise un réseau de distribution principalement aérien en milieu rural, avec des fils de garde (overhead ground wire) pour la protection contre la foudre. Le standard québécois pour les clients industriels est le 600 V triphasé (347/600 V), ce qui diffère du 480 V (277/480 V) standard américain ou du 400 V (230/400 V) européen.
+</Note>
+
+## Système en valeurs relatives (per unit — pu)
+
+Le système en valeurs relatives normalise les grandeurs électriques par rapport à des valeurs de base, facilitant les calculs sur les réseaux multitenions.
+
+Pour un transformateur ou un réseau, on choisit des bases :
+- Puissance de base Sbase (typiquement 100 MVA pour les calculs système)
+- Tension de base Vbase (tension nominale à chaque niveau de tension)
+- Impédance de base : Zbase = V²base / Sbase
+- Courant de base : Ibase = Sbase / (√3 × Vbase)
+
+La valeur en pu d'une impédance réelle Z : Zpu = Z / Zbase
+
+L'avantage majeur : les transformateurs idéaux disparaissent des circuits équivalents (tension pu primaire = tension pu secondaire pour un transformateur idéal), et les impédances des différents niveaux de tension sont directement comparables.
+
+## Écoulement de puissance (Load Flow)
+
+L'écoulement de puissance calcule la distribution des tensions, courants et puissances dans le réseau en régime permanent équilibré.
+
+**Types de nœuds**
+
+| Type | Variables imposées | Variables calculées |
+|------|------------------|-------------------|
+| **Nœud de référence (slack bus)** | V, δ = 0° | P, Q |
+| **Nœud de génération (PV bus)** | P, \|V\| | Q, δ |
+| **Nœud de charge (PQ bus)** | P, Q | \|V\|, δ |
+
+**Méthode Newton-Raphson**
+
+La méthode Newton-Raphson résout le système d'équations non linéaires des nœuds de manière itérative. Le jacobien J associe les variations de puissances active (ΔP) et réactive (ΔQ) aux corrections de tension (Δδ, ΔV/V). La convergence est quadratique — généralement 3 à 5 itérations suffisent.
+
+Les équations de nœuds s'écrivent :
+
+$$P_i = V_i \sum_{k=1}^{n} V_k (G_{ik}\cos\delta_{ik} + B_{ik}\sin\delta_{ik})$$
+
+$$Q_i = V_i \sum_{k=1}^{n} V_k (G_{ik}\sin\delta_{ik} - B_{ik}\cos\delta_{ik})$$
+
+**Facteur de puissance**
+
+Le facteur de puissance cosφ = P/S représente le rapport entre la puissance active utile et la puissance apparente. Un facteur de puissance faible (cosφ < 0,9) augmente les pertes en ligne et peut entraîner des pénalités tarifaires d'Hydro-Québec pour les clients industriels. La compensation par condensateurs shunt améliore localement le facteur de puissance.
+
+## Composantes symétriques
+
+La méthode des composantes symétriques (Fortescue, 1918) décompose un système triphasé déséquilibré en trois systèmes équilibrés :
+- **Séquence directe (positive)** : rotation dans le sens normal (ABC)
+- **Séquence inverse (négative)** : rotation en sens inverse (ACB)
+- **Séquence homopolaire (zéro)** : trois composantes en phase, amplitude égale
+
+Cette décomposition est essentielle pour l'analyse des défauts asymétriques. Les réseaux de séquence sont couplés aux points de défaut par les conditions aux limites du type de court-circuit.
+
+## Analyse de courts-circuits
+
+**Court-circuit triphasé franc (défaut symétrique)**
+
+Le courant de court-circuit maximum (défaut triphasé à l'impédance nulle) :
+
+$$I_{cc} = \frac{V}{\sqrt{3} \times Z_{th}}$$
+
+où Zth est l'impédance équivalente de Thevenin vue du point de défaut (somme des impédances des sources et du réseau en pu). Le courant de court-circuit crête intègre le courant continu transitoire : Icrête = κ × √2 × Icc,rms (κ ≈ 1,02 à 2,0 selon le rapport X/R du réseau).
+
+**Court-circuit monophasé à la terre (défaut le plus fréquent)**
+
+En utilisant les composantes symétriques, le courant de défaut monophasé à la terre (phase A) :
+
+$$I_{a1} = I_{a2} = I_{a0} = \frac{V_a}{Z_1 + Z_2 + Z_0 + 3Z_f}$$
+
+où Z1, Z2, Z0 sont les impédances de séquence directe, inverse et homopolaire vues du point de défaut, et Zf l'impédance de défaut.
+
+**Court-circuit biphasé**
+
+Le courant de séquence directe : Ia1 = Va/(Z1 + Z2), le courant de séquence inverse Ia2 = -Ia1.
+
+<Tip>
+Les logiciels d'analyse de courts-circuits (ETAP, PowerFactory DIgSILENT, PSS/E) calculent automatiquement tous les types de défauts selon les normes IEC 60909 (méthode du courant de court-circuit initial symétrique) ou IEEE 141 (Red Book). La norme IEC 60909 utilise un facteur de tension c (1,0 à 1,1) pour majorer les résultats et garantir la sécurité du dimensionnement des appareillages.
+</Tip>
+
+## Protection des réseaux électriques
+
+**Relais de surintensité — courbes IDMT**
+
+Les relais de surintensité (overcurrent relay) déclenchent lorsque le courant dépasse un seuil de réglage. Les courbes IDMT (Inverse Definite Minimum Time) définissent un temps de déclenchement inversement proportionnel au courant :
+
+$$t = \frac{TMS \times \alpha}{(I/I_{set})^\beta - 1}$$
+
+Les courbes normalisées selon IEC 60255-151 sont : Standard Inverse (SI), Very Inverse (VI), Extremely Inverse (EI), Long Time Inverse. La coordination des relais en cascade garantit une sélectivité — le relais le plus proche du défaut déclenche en premier.
+
+**Relais de distance — zones 1/2/3**
+
+Le relais de distance mesure le rapport V/I au point de mesure pour estimer l'impédance jusqu'au défaut (et donc la distance au défaut). Les zones de protection sont :
+- **Zone 1** : 80 à 85 % de la ligne — déclenchement instantané
+- **Zone 2** : 120 % de la ligne (couvre la ligne plus 20 % de la ligne suivante) — déclenchement temporisé (t = 0,2 à 0,4 s)
+- **Zone 3** : protection de secours — temporisation plus longue (t = 0,6 à 1,0 s)
+
+**Protection différentielle**
+
+La protection différentielle compare les courants à l'entrée et à la sortie d'un équipement (transformateur, jeu de barres, tronçon de ligne). Toute différence supérieure au seuil indique un défaut interne et provoque un déclenchement rapide (< 1 cycle). C'est la protection principale des transformateurs et des générateurs.
+
+## Qualité de l'énergie
+
+**Harmoniques et THD**
+
+Les charges non linéaires (variateurs de fréquence, onduleurs, alimentations à découpage, redresseurs) injectent des courants harmoniques dans le réseau. Le taux de distorsion harmonique en courant :
+
+$$THD_I = \frac{\sqrt{\sum_{h=2}^{H} I_h^2}}{I_1} \times 100\%$$
+
+Les harmoniques causent des pertes supplémentaires dans les transformateurs et les câbles, des interférences avec les systèmes de télécommande, des problèmes de résonance et un vieillissement accéléré des condensateurs.
+
+**Compensation et filtres**
+
+- **Condensateurs shunt** : compensation fixe ou commandée par gradins (banques de condensateurs). Améliorent le facteur de puissance mais peuvent résonner avec les harmoniques.
+- **STATCOM** (Static Synchronous Compensator) : onduleur VSC à IGBT qui injecte ou absorbe de la puissance réactive sans condensateurs de grande taille. Réponse dynamique rapide (< 10 ms).
+- **Filtres actifs de puissance** : compensent les harmoniques en injectant des courants de compensation opposés. Solutions modernes pour les environnements très perturbés.
+- **Filtre passif accordé** : circuit LC accordé à la fréquence harmonique dominante (5e ou 7e harmonique). Solution économique mais peu flexible.
+
+**Flicker (fluctuation de luminosité)**
+
+Le flicker est une variation rapide de la tension (0,5 à 35 Hz) perceptible visuellement sous forme de fluctuation de la luminosité des lampes incandescentes. Il est mesuré par l'indice de sévérité de court terme Pst et de long terme Plt (IEC 61000-4-15). Causes typiques : fours à arc électrique, soudeuses par résistance.
+
+## Contexte canadien
+
+**Hydro-Québec**
+
+Hydro-Québec exploite le plus grand réseau hydroélectrique intégré au monde. Le réseau de transport à 735 kV relie les centrales de la Baie-James (La Grande-1 à La Grande-4, Robert-Bourassa avec ses 5 616 MW) à la charge du corridor Montréal-Québec via quatre lignes à 735 kV de plus de 1 000 km. Hydro-Québec TransÉnergie gère les interconnexions avec l'Ontario, le Nouveau-Brunswick, le Vermont et New York via le réseau NPCC (Northeast Power Coordinating Council).
+
+**Ontario — IESO (Independent Electricity System Operator)**
+
+L'IESO exploite le marché de gros de l'électricité en Ontario et coordonne la fiabilité du réseau. Le mix de production ontarien est diversifié : nucléaire (Bruce, Pickering, Darlington — environ 60 % de la production), hydraulique, gaz naturel, éolien et solaire.
+
+**Alberta — AESO (Alberta Electric System Operator)**
+
+L'Alberta opère un marché de gros déréglementé (energy-only market). Le réseau albertin n'est pas synchronisé avec le reste du Canada (réseau WECC). La production est dominée par le gaz naturel et les énergies renouvelables (éolien croissant), avec une sortie du charbon complétée en 2023.
+
+## Réseau intelligent (Smart Grid)
+
+**Compteurs intelligents AMI (Advanced Metering Infrastructure)**
+
+Les compteurs AMI communiquent bidirectionnellement avec le gestionnaire de réseau pour la lecture à distance, la gestion de la demande et la détection des pannes. Hydro-Québec a complété le déploiement de 3,8 millions de compteurs intelligents en 2012 — premier réseau de distribution entièrement équipé en Amérique du Nord.
+
+**Effacement de pointe (Demand Response)**
+
+Les programmes d'effacement permettent au gestionnaire de réseau de réduire temporairement la consommation des grands clients (interruptibilité) ou des clients résidentiels (thermostat intelligent, chauffe-eau) lors des pointes de demande hivernales. Hydro-Québec offre le tarif BT (interruptibilité) et le programme Hilo pour la gestion de la demande résidentielle.
+
+**Microréseaux (Microgrids)**
+
+Un microréseau est un groupe de charges et de sources d'énergie distribuées (panneaux solaires, batteries, génératrices diesel) capable de fonctionner en mode connecté au réseau ou en mode îloté. Applications : communautés éloignées (Nord québécois), campus, hôpitaux, bases militaires. La commande du microréseau (superviseur MGCC — Microgrid Central Controller) gère le dispatching entre les sources et la transition îlotage/reconnexion.
+
+**Stockage par batteries**
+
+Les systèmes de stockage par batteries (BESS — Battery Energy Storage System) utilisent principalement les technologies Li-ion (NMC, LFP) pour l'écrêtage des pointes, les services de fréquence (régulation primaire R1) et l'intégration des énergies renouvelables intermittentes. Des projets à grande échelle (≥ 100 MW) sont déployés en Ontario et dans les provinces de l'Ouest.
+
+<Info>
+Le Règlement sur la connexion des sources d'énergie renouvelable (IEEE 1547-2018 et son équivalent canadien) exige que les onduleurs des installations solaires et de stockage supportent les défaillances du réseau (Low Voltage Ride-Through — LVRT) et participent au soutien de tension et de fréquence, éliminant progressivement le déclenchement instantané lors des creux de tension.
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Machines électriques" icon="gear" href="/genie-electrique/machines-electriques">
+    Moteurs, transformateurs et variateurs de fréquence
+  </Card>
+  <Card title="Électronique" icon="microchip" href="/genie-electrique/electronique">
+    Convertisseurs de puissance et bus de communication industriels
+  </Card>
+  <Card title="Télécommunications" icon="tower-broadcast" href="/genie-electrique/telecommunications">
+    Communications pour les réseaux intelligents et SCADA
+  </Card>
+  <Card title="Maintenance et fiabilité" icon="wrench" href="/genie-mecanique/maintenance-fiabilite">
+    Fiabilité des équipements électriques et stratégies de maintenance
+  </Card>
+</CardGroup>

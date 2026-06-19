@@ -1,0 +1,210 @@
+---
+title: "Machines électriques"
+description: "Moteurs DC, moteurs asynchrones, moteurs synchrones, transformateurs, choix de moteur et variateurs de fréquence"
+icon: "gear"
+---
+
+Les machines électriques convertissent l'énergie électrique en énergie mécanique (moteurs) ou l'énergie mécanique en énergie électrique (génératrices). Elles constituent le cœur des systèmes d'entraînement industriels, des véhicules électriques et de la production d'électricité. La compréhension de leurs caractéristiques est indispensable pour le dimensionnement, le choix et la commande des entraînements électriques.
+
+## Moteurs à courant continu (MCC)
+
+Le moteur à courant continu transforme l'énergie électrique continue en énergie mécanique grâce à l'interaction entre le champ magnétique inducteur et les conducteurs traversés par le courant d'induit.
+
+**Types d'excitation**
+
+- **Excitation séparée** : l'inducteur est alimenté par une source indépendante. Contrôle total et indépendant du flux et du courant d'induit — la solution de référence pour la commande à vitesse variable (contrôle vectoriel de flux).
+- **Excitation shunt (dérivation)** : l'inducteur est branché en parallèle sur l'induit. Caractéristique vitesse-couple quasi plate : bon régulateur de vitesse, faible variation de vitesse à vide vs pleine charge.
+- **Excitation série** : l'inducteur est en série avec l'induit. Couple de démarrage très élevé (couple ∝ I²) et vitesse variant fortement avec la charge. Utilisé pour les tractions (locomotives anciennes, démarreurs automobiles). Danger : emballement à vide (vitesse → ∞ si Ia → 0).
+
+**Équations fondamentales**
+
+La force électromotrice (fcem) : E = Kφn (K constante de machine, φ flux inducteur, n vitesse)
+
+Le couple électromagnétique :
+
+$$T = K\phi I_a$$
+
+L'équation de circuit d'induit : V = E + Ra × Ia = Kφn + Ra × Ia
+
+La caractéristique vitesse-couple en excitation séparée : n = V/(Kφ) − (Ra/(Kφ)²) × T
+
+**Commande des MCC**
+
+La variation de vitesse se réalise par :
+- Variation de la tension d'induit V (à flux constant) : de 0 à la vitesse de base
+- Affaiblissement de flux φ (à tension nominale) : au-dessus de la vitesse de base, à puissance constante
+
+Les convertisseurs thyristors (ponts redresseurs commandés) et les hacheurs (choppers) DC-DC à IGBT/MOSFET permettent la commande électronique de la tension d'induit.
+
+<Note>
+Les moteurs DC à balais subissent une usure mécanique des balais et du collecteur — maintenance périodique obligatoire (inspection tous les 3 000 à 6 000 heures de fonctionnement). Les moteurs brushless DC (BLDC) et les PMSM (Permanent Magnet Synchronous Motor) éliminent ce problème grâce à une commutation électronique (onduleur + capteur de position Hall ou résolveur).
+</Note>
+
+## Moteurs asynchrones (moteurs à induction)
+
+Le moteur asynchrone triphasé est le moteur industriel le plus répandu au monde (environ 70 % de l'électricité consommée par les moteurs dans l'industrie).
+
+**Principe du champ tournant**
+
+Les trois enroulements statoriques alimentés par un système de tensions triphasées équilibré (déphasage de 120°) créent un champ magnétique tournant à la vitesse de synchronisme :
+
+$$n_s = \frac{60 \times f}{p}$$
+
+où f est la fréquence du réseau (50 Hz en Europe, 60 Hz en Amérique du Nord) et p le nombre de paires de pôles.
+
+**Glissement**
+
+Le rotor tourne à une vitesse n légèrement inférieure à ns. Le glissement (slip) :
+
+$$s = \frac{n_s - n}{n_s}$$
+
+- À vide : s ≈ 0 (n ≈ ns)
+- En charge nominale : s = 0,02 à 0,08 (2 à 8 %)
+- Au démarrage : s = 1 (n = 0)
+
+**Circuit équivalent de Steinmetz (par phase, rapporté au stator)**
+
+Le circuit équivalent ramène les grandeurs rotorique au stator via le rapport de transformation (N1/N2). La résistance rotorique ramenée R'2/s modélise la puissance mécanique (terme (1-s)/s × R'2) et les pertes Joule rotoriques (R'2). L'identification des paramètres du circuit (R1, X1, Rfe, Xm, R'2, X'2) est réalisée par les essais à vide et en court-circuit rotor bloqué.
+
+**Bilan des puissances**
+
+| Grandeur | Formule | Signification |
+|---------|---------|---------------|
+| P1 (puissance absorbée) | 3 × V1 × I1 × cosφ | Puissance électrique du réseau |
+| Pfer (pertes fer stator) | P1 − PCu1 | Pertes par hystérésis et courants de Foucault |
+| Pem (puissance électromagnétique) | P1 − PCu1 − Pfer | Puissance transmise au rotor |
+| PCu2 (pertes Joule rotor) | s × Pem | Pertes Joule dans les barres rotoriques |
+| Pmec (puissance mécanique) | (1-s) × Pem | Puissance mécanique disponible à l'arbre |
+| Pu (puissance utile) | Pmec − Pméca | Après pertes mécaniques (frottements, ventilation) |
+| η (rendement) | Pu / P1 | Typiquement 88 à 97 % selon la puissance |
+
+**Courbe couple-glissement**
+
+La courbe couple-glissement présente un maximum (couple critique ou couple maximal Tmax) à un glissement critique sk. Pour s < sk, le couple est quasi proportionnel au glissement (zone stable). Pour s > sk (démarrage), le couple diminue quand la vitesse diminue — zone instable. Le rapport Tmax/Tn (rapport de surcharge) est typiquement 2 à 3,5.
+
+**Méthodes de démarrage**
+
+| Méthode | Courant de démarrage | Couple de démarrage | Remarques |
+|---------|---------------------|---------------------|-----------|
+| Démarrage direct (DOL) | 5 à 8 × In | 100 % (Td direct) | Choc sur le réseau |
+| Étoile-triangle (Y/Δ) | 1,5 à 2,6 × In | 33 % du couple direct | Courant divisé par 3, couple divisé par 3 |
+| Résistances statoriques | 2 à 4 × In | 40 à 60 % | Pertes thermiques dans résistances |
+| Transformateur de démarrage | 2 à 4 × In | 40 à 64 % | Transition brusque au passage en pleine tension |
+| Démarreur progressif (soft starter) | 2 à 4 × In | 30 à 150 % (réglable) | Contrôle en tension, thyristors |
+| Variateur de fréquence (VFD) | 1 à 1,5 × In | 100 à 150 % | Meilleure solution — contrôle total |
+
+## Moteurs synchrones
+
+Le moteur synchrone tourne exactement à la vitesse de synchronisme ns = 60f/p, quelle que soit la charge (dans sa plage de fonctionnement stable).
+
+**Alternateur (génératrice synchrone)**
+
+L'alternateur constitue la source principale de production d'électricité. La fem induite dans un stator triphasé par un rotor bobiné excité en DC est : E = 4,44 × f × N × kw × Φmax (formule de la fem en régime sinusoïdal).
+
+Le **vecteur de Fresnel** (diagramme phasoriel) représente les relations entre la tension terminale V, la fém E, la chute de tension réactive jXs×I et la résistance de l'induit Ra×I. Pour un fonctionnement en génératrice : V = E − (Ra + jXs) × I.
+
+**Puissance d'un moteur synchrone**
+
+La puissance active échangée entre le stator et le champ tournant (par phase) :
+
+$$P = \frac{V \cdot E_f \cdot \sin\delta}{X_s}$$
+
+où V est la tension statorique, Ef la fém interne, Xs la réactance synchrone et δ l'angle de puissance (angle entre V et Ef). La puissance maximale est atteinte pour δ = 90°. Au-delà, le moteur décroche.
+
+**Fonctionnement en moteur / en génératrice**
+
+Le moteur synchrone peut absorber ou fournir de la puissance réactive en ajustant l'excitation :
+- **Sous-excité** (Ef < V) : le moteur absorbe de la puissance réactive (inductif — comme une inductance)
+- **Sur-excité** (Ef > V) : le moteur fournit de la puissance réactive (capacitif — comme un condensateur). C'est le fonctionnement en **compensateur synchrone** pour la correction du facteur de puissance.
+
+## Transformateurs
+
+**Équations fondamentales**
+
+Les relations entre les grandeurs primaires et secondaires d'un transformateur idéal sont :
+
+$$\frac{V_1}{V_2} = \frac{N_1}{N_2} = \frac{I_2}{I_1} = m$$
+
+où m est le rapport de transformation. La puissance apparente S = V1 × I1 = V2 × I2 est conservée (transformateur idéal sans pertes).
+
+**Circuit équivalent**
+
+Le circuit équivalent d'un transformateur réel comporte :
+- Résistances R1 et R2' (pertes Joule dans les enroulements)
+- Inductances de fuite Xl1 et Xl2' (flux ne se bouclant pas dans le noyau)
+- Branche magnétisante en parallèle (Rfe pour les pertes fer, Xm pour la magnétisation)
+
+**Essais à vide et en court-circuit**
+
+- **Essai à vide** (secondaire ouvert, alimentation au primaire à tension nominale) : mesure des pertes fer P0 ≈ Pfer et de l'admittance magnétisante Y0.
+- **Essai en court-circuit** (secondaire court-circuité, alimentation à tension réduite Vcc jusqu'à courant nominal) : mesure des pertes Joule totales PCC = PCu1 + PCu2 et de l'impédance de court-circuit Zcc = Vcc/In. La tension de court-circuit ucc (en %) est un paramètre catalogue fondamental (2 à 15 % selon la puissance).
+
+**Calcul du rendement**
+
+$$\eta = \frac{P_2}{P_2 + P_{fer} + P_{Cu}(\beta)} = \frac{\beta \cdot S_n \cdot \cos\phi_2}{\beta \cdot S_n \cdot \cos\phi_2 + P_{fer} + \beta^2 \cdot P_{Cu,n}}$$
+
+où β = S/Sn est le taux de charge. Le rendement maximal est atteint quand les pertes fer égalent les pertes Joule : β_opt = √(Pfer/PCu,n). Pour les transformateurs de distribution, ηmax ≈ 98 à 99 %.
+
+<Warning>
+Les transformateurs de distribution sont soumis aux harmoniques générés par les charges non linéaires (variateurs, onduleurs, équipements informatiques). Un facteur de déclassement K (K-factor, selon IEEE C57.110) doit être appliqué pour éviter l'échauffement excessif des enroulements. Un transformateur K-13 est dimensionné pour supporter un courant harmonique 13 fois plus élevé qu'un transformateur standard.
+</Warning>
+
+## Choix de moteur
+
+**Paramètres de sélection**
+
+Le choix d'un moteur électrique s'effectue en analysant :
+- **Puissance et couple** : couple résistant de la machine entraînée, couple de démarrage requis, cycles de charge (fonctionnement continu S1, intermittent S3, S6, etc.)
+- **Vitesse** : vitesse nominale et plage de variation requise
+- **Environnement** : température ambiante, altitude, présence de poussières ou de liquides (indice IP), atmosphères explosibles (certification ATEX, zones 1/2/21/22)
+- **Alimentation** : tension, fréquence, nombre de phases
+
+**Classes d'efficacité énergétique IE**
+
+La norme IEC 60034-30-1 définit quatre classes d'efficacité :
+
+| Classe | Désignation | Application |
+|--------|------------|-------------|
+| **IE1** | Rendement standard | Interdit dans l'UE pour la plupart des applications depuis 2011 |
+| **IE2** | Rendement haut | Admis avec variateur de fréquence |
+| **IE3** | Rendement premium | Obligatoire dans l'UE pour moteurs 0,75–375 kW depuis 2015 |
+| **IE4** | Rendement super-premium | Objectif pour les nouvelles installations — PMSM et moteurs synchrones à reluctance |
+
+Le règlement européen (UE) 2019/1781 a renforcé les exigences : IE3 obligatoire pour 0,75–1 000 kW depuis juillet 2023.
+
+## Variateurs de fréquence (VFD — Variable Frequency Drive)
+
+**Principe de fonctionnement**
+
+Un VFD convertit la tension alternative fixe du réseau en une tension alternative à fréquence et amplitude variables. La structure typique est : Redresseur (pont de diodes ou IGBT actif) → Bus DC → Onduleur (pont de 6 IGBT en commutation MLI/PWM) → Moteur.
+
+La commande U/f (Volts par Hertz) maintient le rapport V/f constant pour préserver le flux magnétique du moteur. La commande vectorielle (Field-Oriented Control — FOC) et le contrôle direct du couple (DTC — Direct Torque Control d'ABB) offrent des performances dynamiques bien supérieures.
+
+**Économies d'énergie — loi des similitudes**
+
+Pour les charges à couple variable (pompes centrifuges, ventilateurs, compresseurs), les lois d'affinité des turbomachines donnent :
+
+$$P \propto n^3$$
+
+Réduire la vitesse de 20 % (n → 0,8n) réduit la puissance à 51 % de la puissance nominale — économie de 49 %. C'est le gisement d'économies le plus important en industrie : les pompes et ventilateurs régulés par VFD consomment en moyenne 30 à 50 % de moins que les systèmes à débit régulé par vanne ou registre.
+
+<Tip>
+Le temps de retour sur investissement d'un VFD sur une pompe ou un ventilateur fonctionnant à charge partielle est généralement de 1 à 3 ans. La norme ISO 50001 (management de l'énergie) et les audits énergétiques industriels identifient systématiquement les entraînements à vitesse variable comme priorité d'investissement.
+</Tip>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Électronique analogique et numérique" icon="microchip" href="/genie-electrique/electronique">
+    Composants semiconducteurs, amplificateurs et microcontrôleurs
+  </Card>
+  <Card title="Réseaux électriques" icon="plug" href="/genie-electrique/reseaux-electriques">
+    Distribution, protection et qualité de l'énergie
+  </Card>
+  <Card title="Conception mécanique" icon="drafting-compass" href="/genie-mecanique/conception-mecanique">
+    Roulements, ressorts et assemblages mécaniques
+  </Card>
+  <Card title="Maintenance et fiabilité" icon="wrench" href="/genie-mecanique/maintenance-fiabilite">
+    Surveillance de condition des machines tournantes
+  </Card>
+</CardGroup>

@@ -1,0 +1,193 @@
+---
+title: "Robotique industrielle"
+description: "Types de robots, cinématique directe et inverse, programmation, normes de sécurité et applications industrielles — guide complet pour les ingénieurs en automatisation."
+icon: "robot"
+---
+
+La robotique industrielle transforme la fabrication depuis les années 1960. Aujourd'hui, avec l'avènement des robots collaboratifs (cobots) et des robots mobiles autonomes (AMR), le champ d'application s'élargit bien au-delà des cages de sécurité traditionnelles. Ce guide couvre l'ensemble de la discipline, de la mécanique à la programmation en passant par la sécurité.
+
+## Types de robots industriels
+
+### Robot articulé 6 axes
+La configuration la plus répandue en industrie. Six articulations rotatives (rotoïdes) permettent d'atteindre n'importe quel point dans l'espace de travail avec n'importe quelle orientation. Portées allant de 500 mm (petits robots de soudage laser) à plus de 3 m (robots de manutention lourde, capacité > 1 000 kg).
+
+**Applications** : soudage à l'arc, soudage par points, peinture, assemblage, palettisation, usinage.
+
+### Robot SCARA (Selective Compliance Assembly Robot Arm)
+Deux articulations horizontales et un axe linéaire vertical (Z) avec rotation. Très rigide verticalement, souple horizontalement — idéal pour les insertions.
+
+**Applications** : assemblage électronique, pick & place, vissage, test. Vitesses élevées pour petites charges (< 20 kg).
+
+### Robot delta/parallèle
+Trois bras parallèles reliés à une plateforme mobile. Très haute vitesse de cycle (>150 cycles/min), faibles inerties, mais espace de travail limité.
+
+**Applications** : conditionnement alimentaire (chocolats, biscuits), tri optique, médical (emballage de comprimés).
+
+### Robot cartésien/portique
+Axes linéaires orthogonaux (X, Y, Z). Grande précision, grande portée possible, mais volume d'installation important.
+
+**Applications** : découpe laser sur grandes surfaces, impression 3D grande échelle, palettisation en entrepôt.
+
+### Robots collaboratifs (cobots)
+Conçus pour travailler aux côtés des opérateurs humains sans cage de protection (sous conditions). Limiteurs de force et de vitesse intégrés, interfaces de programmation simplifiées.
+
+**Principaux fabricants** : Universal Robots (UR3e/UR5e/UR10e/UR16e/UR20), FANUC CRX, ABB YuMi/GoFa, KUKA LBR iisy, Doosan.
+
+<Note>
+Un cobot n'est pas automatiquement sûr sans évaluation des risques. L'ISO/TS 15066 exige une analyse des risques spécifique à chaque application collaborative. Un outil tranchant monté sur un cobot peut nécessiter une protection même si le robot est certifié collaboratif.
+</Note>
+
+## Anatomie d'un robot industriel
+
+### Articulations et liens
+Un robot 6 axes possède **6 articulations** (joints) séparées par **6 liens** (membres rigides). Les articulations sont notées J1 à J6 (ou A1 à A6 chez KUKA). L'articulation J1 pivote à la base (rotation horizontale), J2 et J3 contrôlent l'élévation, J4-J5-J6 forment le poignet sphérique (3 degrés de liberté rotatifs).
+
+### Effecteurs terminaux (outils)
+L'outil (End-of-Arm Tooling, EOAT) est monté sur la **bride outil** (Tool Center Point mounting flange). Types courants :
+- **Pinces** : pneumatiques (2 ou 3 doigts), électriques (Schunk, Robotiq 2F-85), à dépression (ventouses Schmalz)
+- **Pistolets de soudure** : à l'arc (torche MIG/TIG) ou par points (pince servo)
+- **Pistolets de peinture** : application électrostatique, nécessite robots Ex-proof (zone ATEX)
+- **Outils multifonctions** : changeur d'outil rapide (Schunk SWK, ATI QC)
+
+### Actionneurs — servomoteurs AC
+Moteurs AC synchrones à aimants permanents avec résolveurs ou encodeurs absolus (EnDat, BiSS-C). Couplés à des réducteurs harmoniques (Harmonic Drive) pour les axes de poignet, ou à des réducteurs planétaires/cycloidaux pour les axes principaux. Précision de répétabilité typique : ±0,02 à ±0,1 mm.
+
+## Cinématique directe et inverse
+
+### Paramètres de Denavit-Hartenberg (D-H)
+La convention D-H décrit la géométrie d'une chaîne cinématique avec 4 paramètres par articulation :
+
+| Paramètre | Symbole | Description |
+|-----------|---------|-------------|
+| Distance | $d_i$ | Déplacement le long de l'axe $z_{i-1}$ |
+| Angle d'articulation | $\theta_i$ | Rotation autour de $z_{i-1}$ (variable pour joints rotoïdes) |
+| Longueur de lien | $a_i$ | Distance entre axes $z_{i-1}$ et $z_i$ |
+| Torsion de lien | $\alpha_i$ | Angle entre $z_{i-1}$ et $z_i$ autour de $x_i$ |
+
+### Matrice de transformation homogène 4×4
+Chaque articulation est décrite par une matrice homogène $^{i-1}T_i$ combinant rotation et translation :
+
+$$^{i-1}T_i = \begin{bmatrix} \cos\theta_i & -\sin\theta_i\cos\alpha_i & \sin\theta_i\sin\alpha_i & a_i\cos\theta_i \\ \sin\theta_i & \cos\theta_i\cos\alpha_i & -\cos\theta_i\sin\alpha_i & a_i\sin\theta_i \\ 0 & \sin\alpha_i & \cos\alpha_i & d_i \\ 0 & 0 & 0 & 1 \end{bmatrix}$$
+
+La **cinématique directe** consiste à calculer la pose de l'outil (position + orientation dans l'espace cartésien) à partir des angles articulaires : $^0T_6 = ^0T_1 \cdot ^1T_2 \cdot \ldots \cdot ^5T_6$.
+
+La **cinématique inverse** — calculer les angles articulaires pour atteindre une pose cartésienne donnée — est beaucoup plus complexe. Pour les robots 6R à poignet sphérique, une solution analytique (fermée) existe, donnant jusqu'à 16 solutions possibles. Les contrôleurs modernes résolvent cela en temps réel en sélectionnant la configuration la plus proche de la position actuelle.
+
+### Espace articulaire vs espace cartésien
+- **Mouvement articulaire (Joint)** : interpolation linéaire des angles → trajectoire cartésienne imprévisible, mais rapide et sans singularité. Utilisé pour les repositionnements.
+- **Mouvement linéaire cartésien (LIN)** : l'outil se déplace en ligne droite dans l'espace → prédictible, mais risque de singularité et vitesses articulaires élevées près des limites mécaniques.
+- **Mouvement circulaire (CIRC)** : arc de cercle défini par trois points. Utilisé en soudage à l'arc pour les passes circulaires.
+
+<Warning>
+Les **singularités cinématiques** (configuration du poignet alignée, bras en extension complète) provoquent des vitesses articulaires infinies pour des vitesses cartésiennes finies. Tous les systèmes de programmation hors-ligne doivent intégrer une détection de singularités et proposer des chemins alternatifs.
+</Warning>
+
+## Programmation des robots
+
+### Boîtier d'apprentissage (teach pendant)
+Interface portable avec écran tactile, joysticks et touches de sécurité (homme-mort). L'opérateur déplace le robot manuellement point par point en mode apprentissage, enregistre les positions et les actions. Vitesse limitée à 250 mm/s en mode T1 (ISO 10218).
+
+Exemples de langages propriétaires :
+- **FANUC** : KAREL et TP (Teach Pendant) — syntaxe simple, instructions L (linéaire), J (articulaire), C (circulaire)
+- **ABB** : RAPID — structuré, modules, MoveL/MoveJ/MoveC
+- **KUKA** : KRL (KUKA Robot Language) — proche de Pascal
+- **Yaskawa** : INFORM III
+- **Universal Robots** : URScript (Python-like) + interface graphique PolyScope
+
+### Programmation hors-ligne (OLP — Offline Programming)
+Création et validation du programme dans un environnement de simulation 3D sans arrêt de la production. Logiciels : **FANUC ROBOGUIDE**, **ABB RobotStudio**, **KUKA.Sim**, **Delfoi Robotics**, **Tecnomatix Process Simulate**.
+
+Avantages : optimisation des cycles avant déploiement, détection des collisions, calcul des temps de cycle, génération automatique de trajectoires complexes (soudage de cordons 3D par CAO).
+
+### Guidage direct (Hand Guiding)
+Mode spécifique aux cobots : l'opérateur déplace physiquement le robot en tenant l'effecteur. Le robot enregistre la trajectoire. Idéal pour les applications complexes difficiles à programmer numériquement (polissage, débourrages).
+
+## Principaux fabricants mondiaux
+
+<CardGroup cols={2}>
+  <Card title="FANUC" icon="gear">
+    Leader mondial (Japon). Gamme complète : M-1 (delta) à M-2000 (2 300 kg). Fiabilité réputée, MTBF > 80 000 heures. Forte présence automobile. Contrôleur R-30iB Plus.
+  </Card>
+  <Card title="ABB Robotics" icon="gear">
+    Suisse/Suède. IRB 120 à IRB 8700. Spécialiste de la peinture (IRB 5500). YuMi : premier cobot double bras à grande diffusion. Contrôleur IRC5/OmniCore.
+  </Card>
+  <Card title="KUKA" icon="gear">
+    Allemagne (propriété Midea). Agilus (petits robots rapides), KR QUANTEC (médium), KR FORTEC (lourds). Spécialiste automobile. Contrôleur KRC4/KRC5.
+  </Card>
+  <Card title="Yaskawa Motoman" icon="gear">
+    Japon. Série GP, SIA (7 axes). Contrôleur YRC1000. Fort en manutention et assemblage. Cobots HC-series.
+  </Card>
+</CardGroup>
+
+**Universal Robots** (Danemark) domine le marché des cobots avec plus de 75 000 unités installées. Son écosystème **UR+** (plus de 300 accessoires certifiés) accélère le déploiement.
+
+## Normes de sécurité
+
+### ISO 10218-1 et 10218-2
+- **ISO 10218-1** : exigences de sécurité pour le robot lui-même (conception, freins, arrêts d'urgence)
+- **ISO 10218-2** : intégration dans la cellule robotisée (barrières, dispositifs de sécurité, validation)
+
+Catégories d'arrêt (IEC 60204-1) :
+- **Stop 0** : coupure immédiate des actionneurs (arrêt non contrôlé)
+- **Stop 1** : décélération contrôlée puis coupure (arrêt contrôlé)
+- **Stop 2** : maintien en position avec énergie (arrêt contrôlé sous puissance)
+
+### ISO/TS 15066 — Robots collaboratifs
+Définit quatre modes de collaboration :
+1. **Arrêt de sécurité contrôlé** : arrêt dès qu'un humain entre dans l'espace
+2. **Guidage manuel** (hand guiding) : opérateur guide le robot
+3. **Surveillance de la vitesse et de la séparation** : le robot ralentit selon la distance opérateur (mesurée par scanner laser ou vision)
+4. **Limitation de puissance et de force (PFL)** : limites de force de contact (tableau biomécaniques ISO/TS 15066 Annexe A)
+
+<Info>
+Les limites de force de contact ISO/TS 15066 varient selon la zone du corps : 140 N pour la main/doigt, 190 N pour le bras, 250 N pour le tronc. Ces valeurs supposent un arrêt quasi-instantané du robot au contact.
+</Info>
+
+## Capteurs avancés en robotique
+
+- **Capteur force/couple (FT-sensor)** : mesure les 6 composantes de force et moment à la bride (ATI Gamma, Robotiq FT 300). Applications : assemblage par compliance active, polissage à force contrôlée, détection de collisions.
+- **Vision 2D** : caméra + éclairage structuré pour guidage, contrôle qualité, reconnaissance de pièces. Logiciels : Cognex VisionPro, Keyence CV-X, Halcon.
+- **Vision 3D** : caméras ToF (temps de vol), stéréovision, lumière structurée. Applications : bin picking (prise dans bac en vrac), dépalettisation aléatoire.
+- **LiDAR 2D/3D** : sécurité périmétrique (SICK S300, Hokuyo), navigation AMR, cartographie SLAM.
+
+## Robots mobiles : AGV et AMR
+
+### AGV — Automated Guided Vehicle
+Navigation guidée par fil inductif, bandes magnétiques ou QR codes au sol. Trajectoires fixes, infrastructure requise. Coût d'installation élevé, peu flexible.
+
+### AMR — Autonomous Mobile Robot
+Navigation autonome par **SLAM** (Simultaneous Localization and Mapping) : le robot construit et met à jour sa carte de l'environnement en temps réel (laser SLAM ou vision SLAM). Pas d'infrastructure permanente, reconfiguration facile.
+
+**ROS (Robot Operating System)** est devenu le standard de facto pour la programmation des AMR et des robots de recherche. Basé sur une architecture pub/sub de noeuds communicants (topics, services, actions). ROS 2 (DDS middleware) améliore les performances temps réel et la sécurité.
+
+### Applications des AMR en logistique
+Transport de chariots en entrepôt, approvisionnement des postes de travail en production, gestion des flux inter-ateliers. Principaux fabricants : MiR (Mobile Industrial Robots), Omron LD, Locus Robotics, 6 River Systems.
+
+## Applications clés de la robotique industrielle
+
+| Application | Robot type | Spécificités |
+|------------|-----------|--------------|
+| Soudage à l'arc (MIG/TIG) | 6 axes + track linéaire | Capteur de couture, contrôle du cordon |
+| Soudage par points (automobile) | 6 axes lourd | Pince servo, 2 000+ points/carrosserie |
+| Peinture | 6-7 axes Ex-proof | Zone ATEX, optimisation du film |
+| Assemblage | SCARA / 6 axes compact | Force contrôlée, vision guidée |
+| Palettisation | 4 axes ou 6 axes | Haute cadence, 500-1 500 kg/h |
+| Inspection qualité | 6 axes + vision | SHM, métrologie 3D (bras + capteur CMM) |
+| Chirurgie robotique | da Vinci (Intuitive) | Télé-opération, micro-mouvements filtrés |
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Automatisation industrielle et PLC" icon="robot" href="/genie-industriel/automatisation-plc">
+    Architecture des automates, langages IEC 61131-3 et protocoles industriels.
+  </Card>
+  <Card title="Intelligence artificielle appliquée" icon="brain" href="/genie-logiciel/intelligence-artificielle">
+    Vision artificielle, apprentissage profond et maintenance prédictive pour la robotique.
+  </Card>
+  <Card title="Optimisation des procédés" icon="chart-line" href="/genie-industriel/optimisation-procedes">
+    Intégration des robots dans une démarche Lean et amélioration continue.
+  </Card>
+  <Card title="Cybersécurité des systèmes d'ingénierie" icon="shield-halved" href="/genie-logiciel/cybersecurite">
+    Sécurisation des réseaux robotiques et interfaces OT/IT.
+  </Card>
+</CardGroup>

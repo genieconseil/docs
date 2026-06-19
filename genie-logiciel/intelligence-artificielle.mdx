@@ -1,0 +1,231 @@
+---
+title: "Intelligence artificielle appliquée à l'ingénierie"
+description: "Apprentissage automatique supervisé et non supervisé, réseaux de neurones profonds, applications en maintenance prédictive et inspection qualité, écosystème Python et MLOps pour l'ingénierie."
+icon: "brain"
+---
+
+L'intelligence artificielle transforme l'ingénierie à un rythme sans précédent. De la maintenance prédictive des équipements rotatifs à l'optimisation topologique de pièces aérospatiales, les algorithmes d'apprentissage automatique deviennent des outils incontournables dans l'arsenal de l'ingénieur moderne. Ce guide couvre les fondements théoriques et les applications concrètes.
+
+## Apprentissage automatique (Machine Learning)
+
+### Apprentissage supervisé
+
+L'apprentissage supervisé entraîne un modèle sur des données étiquetées (paires entrée/sortie connues) pour prédire la sortie de nouvelles entrées.
+
+**Régression linéaire** : modélise une relation linéaire entre une variable dépendante continue et une ou plusieurs variables indépendantes.
+$$\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p + \epsilon$$
+Les coefficients sont estimés par la méthode des moindres carrés ordinaires (MCO). Indicateurs de performance : R², RMSE, MAE.
+
+**Régression logistique** : classification binaire (défaut/pas de défaut, rupture/pas de rupture). Utilise la fonction sigmoïde pour produire une probabilité.
+
+**Arbres de décision** : règles de décision hiérarchiques apprises à partir des données. Interprétables, mais sujets au surapprentissage (overfitting). Paramètres : profondeur maximale, critère de split (Gini, entropie).
+
+**Forêts aléatoires (Random Forests)** : ensemble de N arbres de décision entraînés sur des sous-échantillons aléatoires (bagging) et des sous-ensembles de variables. Très robustes, peu sensibles au réglage. Importance des variables intégrée. Particulièrement efficaces pour la détection d'anomalies en maintenance prédictive.
+
+**Machines à vecteurs de support (SVM)** : classification par hyperplan de séparation maximale dans un espace de grande dimension. Très efficaces pour les données de haute dimension (spectroscopie, signaux vibratoires après extraction de caractéristiques). Noyaux courants : linéaire, RBF (Gaussian), polynomial.
+
+**Gradient Boosting** (XGBoost, LightGBM, CatBoost) : ensemble séquentiel d'arbres, chaque arbre corrigeant les erreurs du précédent. Souvent les algorithmes les plus performants sur des données tabulaires. Vainqueurs réguliers des compétitions Kaggle.
+
+### Apprentissage non supervisé
+
+Trouve des structures cachées dans des données non étiquetées.
+
+**K-means clustering** : partitionne les données en K clusters en minimisant la variance intra-cluster. Initialisation aléatoire (K-means++ pour améliorer la convergence). Choix de K via la méthode du coude (elbow method) ou le score de silhouette. Application : segmentation de profils vibratoires pour identifier des modes de dégradation.
+
+**Clustering hiérarchique** : construit une hiérarchie de clusters (dendrogramme). Méthodes d'agglomération : Ward (minimise la variance totale), complete linkage, average linkage. Pas besoin de spécifier K a priori.
+
+**Analyse en Composantes Principales (ACP/PCA)** : réduction de dimensionnalité par projection sur les axes de variance maximale. Applications : visualisation, suppression du bruit, compression de données capteurs (salle de contrôle avec des centaines de variables).
+
+**Autoencodeurs** : réseau de neurones en forme de sablier (encodeur → goulot → décodeur) apprenant une représentation compressée. Erreur de reconstruction élevée = anomalie. Idéal pour la détection d'anomalies non supervisée.
+
+### Apprentissage par renforcement
+
+Un agent apprend à maximiser une récompense cumulative par essais et erreurs dans un environnement.
+
+- **Q-learning** : apprentissage d'une table de valeurs Q(état, action). Converge pour les espaces discrets finis.
+- **PPO (Proximal Policy Optimization)** : algorithme d'optimisation de politique par gradient. Utilisé pour le contrôle de procédés continus, la gestion de réseaux électriques, la planification robotique.
+- **Applications en ingénierie** : optimisation des paramètres de procédés chimiques en temps réel, gestion thermique de bâtiments, planification de trajectoires robotiques.
+
+## Réseaux de neurones artificiels
+
+### Perceptron multicouche (MLP)
+
+Architecture de base : couches successives de neurones artificiels (fully connected).
+
+$$z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}, \qquad a^{(l)} = f(z^{(l)})$$
+
+**Fonctions d'activation** :
+- **ReLU** (Rectified Linear Unit) : f(x) = max(0, x) — évite la saturation, entraînement rapide, standard pour les couches cachées
+- **Sigmoïde** : f(x) = 1/(1+e^{-x}) — sortie en [0,1], couche de sortie pour classification binaire
+- **Tanh** : f(x) = (e^x - e^{-x})/(e^x + e^{-x}) — sortie en [−1,1], parfois supérieure à sigmoïde pour les couches cachées
+- **Softmax** : normalisation exponentielle pour classification multiclasses (sortie = probabilités)
+
+**Rétropropagation (Backpropagation)** : calcul du gradient de la fonction de perte par rapport à tous les paramètres via la règle de dérivation en chaîne. Algorithme central de l'entraînement des réseaux de neurones.
+
+**Optimiseurs** :
+- **SGD (Stochastic Gradient Descent)** : mise à jour des poids par mini-batch. Simple mais requiert un réglage minutieux du taux d'apprentissage.
+- **Adam** (Adaptive Moment Estimation) : combine RMSprop et momentum. Standard de facto pour la plupart des applications. Paramètres typiques : lr=0.001, β₁=0.9, β₂=0.999.
+- **AdamW** : Adam avec weight decay régularisation — souvent supérieur à Adam.
+
+**Régularisation** :
+- **Dropout** : désactivation aléatoire de neurones pendant l'entraînement (taux 0,2 à 0,5). Prévient la co-adaptation et le surapprentissage.
+- **Régularisation L2 (Weight Decay)** : pénalise les grands poids, force le modèle à généraliser.
+- **Batch Normalization** : normalise les activations de chaque couche — accélère l'entraînement, réduit la sensibilité au taux d'apprentissage.
+
+## Apprentissage profond (Deep Learning)
+
+### CNN — Réseaux convolutifs pour la vision
+
+Les CNN exploitent la structure spatiale des images via des couches convolutives.
+
+**Architecture typique** :
+1. **Couches de convolution** : filtres (noyaux) apprenant des caractéristiques locales (bords, textures, formes)
+2. **Couches de pooling** (Max Pooling) : sous-échantillonnage, invariance aux translations
+3. **Couches Flatten + Dense** : classification à partir des caractéristiques extraites
+4. **Couche softmax** : probabilités par classe
+
+Architectures pré-entraînées (ImageNet) utilisées par transfer learning en ingénierie : **ResNet-50**, **EfficientNet**, **VGG-16**, **ConvNeXt**.
+
+**Transfer learning** : ré-entraîner uniquement les dernières couches d'un réseau pré-entraîné sur les données spécifiques au problème (souvent peu de données disponibles en contexte industriel). Réduit drastiquement le besoin en données étiquetées.
+
+### RNN/LSTM pour les séries temporelles
+
+Les RNN (Recurrent Neural Networks) maintiennent un état caché permettant de traiter des séquences. Les **LSTM** (Long Short-Term Memory) résolvent le problème du gradient évanescent grâce aux portes (forget, input, output gates), permettant d'apprendre des dépendances longue portée.
+
+Applications : prédiction de la dégradation d'équipements (RUL — Remaining Useful Life), prévision de la consommation énergétique, détection de défauts dans les signaux vibratoires temporels.
+
+### Architecture Transformer
+
+Introduite en 2017 (« Attention Is All You Need »), l'architecture Transformer utilise le mécanisme d'**attention multi-têtes** pour capturer les dépendances à longue portée sans récurrence.
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+Dominante en traitement du langage naturel (BERT, GPT) et de plus en plus utilisée pour les signaux (Vision Transformer ViT pour images, PatchTST/Informer pour séries temporelles).
+
+## Applications en ingénierie
+
+<CardGroup cols={2}>
+  <Card title="Maintenance prédictive (PdM)" icon="wrench">
+    Données vibratoires (accéléromètres), thermographiques (caméras IR), courant moteur (MCSA). Algorithmes : Random Forest, SVM, LSTM, autoencodeurs. Détection de roulements défectueux (FFT + ML), prédiction du RUL par réseaux de neurones récurrents.
+  </Card>
+  <Card title="Surveillance santé des structures (SHM)" icon="building">
+    Capteurs piézoélectriques, fibres optiques FBG, accéléromètres sur ponts/éoliennes/avions. Détection des dommages (fissures, délaminage composites) par comparaison de modes de vibration ou propagation d'ondes de Lamb.
+  </Card>
+  <Card title="Inspection qualité par vision" icon="eye">
+    Détection de défauts de surface (rayures, bavures, porosités) en temps réel sur ligne de production. CNN pour classification, segmentation sémantique (U-Net) pour localisation précise. Remplace l'inspection visuelle humaine à haute cadence.
+  </Card>
+  <Card title="Conception générative" icon="pencil-ruler">
+    Optimisation topologique guidée par IA : génération de géométries optimales sous contraintes de masse, rigidité, fabricabilité. Autodesk Fusion 360, Altair Inspire. Nidus (TSMC) utilise l'IA pour la conception de circuits intégrés.
+  </Card>
+</CardGroup>
+
+**Optimisation de procédés chimiques** : modèles de substitution (surrogate models) entraînés sur des simulations CFD ou données de pilotes pour guider l'optimisation des paramètres opératoires (température, pression, rapport de mélange). Réduction du temps de calcul de semaines à secondes.
+
+## Écosystème Python pour l'IA en ingénierie
+
+```python
+# Pipeline typique de maintenance prédictive
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+
+# Chargement et préparation des données
+df = pd.read_csv('vibration_data.csv')
+X = df.drop('label', axis=1)
+y = df['label']  # 0=sain, 1=roulement défectueux
+
+# Division entraînement/test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Normalisation
+scaler = StandardScaler()
+X_train_sc = scaler.fit_transform(X_train)
+X_test_sc = scaler.transform(X_test)
+
+# Modèle Random Forest
+rf = RandomForestClassifier(n_estimators=200, max_depth=10,
+                             class_weight='balanced', random_state=42)
+rf.fit(X_train_sc, y_train)
+
+# Évaluation
+print(classification_report(y_test, rf.predict(X_test_sc)))
+scores = cross_val_score(rf, X_train_sc, y_train, cv=5, scoring='f1')
+print(f"F1 Cross-validation: {scores.mean():.3f} ± {scores.std():.3f}")
+```
+
+**Bibliothèques essentielles** :
+
+| Bibliothèque | Usage | Points forts |
+|-------------|-------|-------------|
+| NumPy | Calcul numérique, algèbre linéaire | Base de tout l'écosystème |
+| Pandas | Manipulation de données tabulaires | Séries temporelles, nettoyage |
+| Scikit-learn | ML classique | API cohérente, pipelines, validation |
+| TensorFlow/Keras | Deep Learning | Production, mobile (TFLite), TFX |
+| PyTorch | Deep Learning recherche | Dynamique, flexible, dominant en R&D |
+| Hugging Face Transformers | Modèles pré-entraînés NLP/Vision | 200k+ modèles, fine-tuning facile |
+| SciPy | Traitement du signal, statistiques | FFT, filtres, stats avancées |
+| Matplotlib/Seaborn/Plotly | Visualisation | Statique et interactif |
+
+## MLOps — Déploiement et suivi des modèles
+
+Le MLOps (Machine Learning Operations) applique les pratiques DevOps au cycle de vie des modèles ML.
+
+**Gestion des expériences** :
+- **MLflow** : tracking des expériences (paramètres, métriques, artefacts), registre de modèles, déploiement. Standard de facto open-source.
+- **DVC (Data Version Control)** : versionnement des données et des pipelines ML via Git. Essentiel pour la reproductibilité.
+- **Weights & Biases (W&B)** : plateforme collaborative de suivi d'expériences, hyperparameter sweep, visualisations avancées.
+
+**Déploiement** :
+- **Flask/FastAPI** : APIs REST légères pour servir un modèle. FastAPI recommandé (async, documentation OpenAPI automatique, validation Pydantic).
+- **Docker** : conteneurisation — « ça tourne sur mon portable » devient « ça tourne partout ».
+- **Kubernetes (K8s)** : orchestration de conteneurs pour le déploiement à grande échelle, auto-scaling.
+- **ONNX** : format interopérable pour exporter des modèles PyTorch/TensorFlow vers des environnements d'inférence optimisés (C++, edge devices).
+
+**Monitoring de production** :
+- **Data drift** : dérive de la distribution des données d'entrée (Evidently AI, Arize).
+- **Model drift** : dégradation de la performance du modèle dans le temps.
+- **Alerting** : Grafana + Prometheus pour surveiller les métriques d'inférence (latence, throughput, précision).
+
+## IA générative pour la documentation technique
+
+Les modèles de langage de grande taille (LLM) ouvrent de nouvelles possibilités pour les ingénieurs.
+
+**Usages légitimes** :
+- Rédaction d'ébauches de rapports techniques à partir de données structurées
+- Génération de code de simulation ou d'analyse à valider et adapter
+- Extraction d'informations de normes et publications techniques volumineuses
+- Traduction de documentation technique
+- Génération de commentaires de code et de documentation d'API
+
+**Limites et précautions en contexte d'ingénierie** :
+- **Hallucinations** : les LLMs peuvent inventer des faits, des références ou des valeurs numériques avec confiance. Toute valeur critique doit être vérifiée dans les sources primaires.
+- **Données coupures** : connaissance limitée aux données d'entraînement — les normes récentes peuvent ne pas être connues.
+- **Confidentialité** : ne jamais soumettre de données confidentielles (designs, formulations, données clients) à des LLMs commerciaux sans accord de confidentialité et analyse des risques.
+- **Responsabilité** : l'ingénieur signataire demeure entièrement responsable de la qualité et de l'exactitude des documents, quelle que soit leur méthode de rédaction.
+
+<Warning>
+Un modèle d'IA ne remplace pas le jugement de l'ingénieur. En contexte de sécurité (structures, procédés à risque, systèmes médicaux), toute recommandation générée par IA doit être vérifiée indépendamment par un ingénieur qualifié avant toute mise en œuvre.
+</Warning>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Automatisation industrielle et PLC" icon="robot" href="/genie-industriel/automatisation-plc">
+    Intégration des modèles IA avec les systèmes SCADA via OPC-UA et plateformes IoT.
+  </Card>
+  <Card title="Cybersécurité des systèmes d'ingénierie" icon="shield-halved" href="/genie-logiciel/cybersecurite">
+    Sécurisation des déploiements ML en production et protection des données d'entraînement.
+  </Card>
+  <Card title="Optimisation des procédés industriels" icon="chart-line" href="/genie-industriel/optimisation-procedes">
+    IA pour l'optimisation des paramètres de procédés et la maintenance prédictive.
+  </Card>
+  <Card title="Développement professionnel" icon="trophy" href="/leadership/developpement-professionnel">
+    Compétences IA pour l'ingénieur du futur — formations et certifications recommandées.
+  </Card>
+</CardGroup>

@@ -1,0 +1,226 @@
+---
+title: "Extraction et traitement des minerais"
+description: "Exploitation à ciel ouvert et souterraine, fragmentation, comminution, procédés de concentration des minerais et gestion des résidus miniers"
+icon: "gears"
+---
+
+L'extraction et le traitement des minerais constituent le cœur opérationnel de l'industrie minière. Une fois le gisement délimité et les études de faisabilité complétées, la mine entre en phase de production. Les opérations minières combinent des activités d'extraction mécanique du roc, de transport, de fragmentation et de concentration chimique et physique du minerai pour en séparer les métaux d'intérêt du gangue (minéraux sans valeur économique).
+
+L'efficacité de ces opérations est mesurée par les coûts d'exploitation (C1, C2, C3 selon les conventions industrielles), les taux de récupération métallurgique et le respect des standards environnementaux. La conception intégrée des circuits d'extraction et de traitement est fondamentale pour la rentabilité d'un projet minier.
+
+## Exploitation à ciel ouvert (Open Pit Mining)
+
+### Principes de conception d'une fosse à ciel ouvert
+
+La conception d'une fosse à ciel ouvert vise à maximiser la valeur actualisée nette (VAN) de la mine tout en respectant les contraintes géotechniques de stabilité des talus. Le logiciel d'optimisation de fosse le plus utilisé est **Whittle** (Maptek), basé sur l'algorithme de Lerchs-Grossmann qui calcule la fosse de valeur actualisée maximale pour un ensemble de prix des métaux et de coûts donnés.
+
+**Angles de talus** : l'angle global des murs de la fosse (inter-ramp angle et overall slope angle) est déterminé par l'ingénieur géotechnicien en fonction des propriétés mécaniques du massif rocheux. Des angles typiques varient de 35° (roc fortement altéré ou fragile) à 55° (roc compétent et massif). Un angle trop fort risque l'éboulement catastophique; trop faible, il augmente le volume de stériles à déplacer.
+
+### Organisation en gradins (Bench Mining)
+
+La fosse est excavée par **bancs** successifs de haut en bas. Chaque banc possède :
+- **Hauteur de banc** : typiquement 10–15 m pour l'exploitation aux grands camions
+- **Largeur de berme** (catchment bench) : ≥ 6–10 m selon la réglementation et la géotechnique; accumule les blocs rocheux éboulés
+- **Angle de face de banc** (bench face angle) : 65–80° selon la résistance du roc
+
+### Forage et sautage (Drill and Blast)
+
+Le cycle d'exploitation à ciel ouvert comprend le forage, le chargement d'explosifs, le sautage, le chargement et le transport.
+
+**Forage** : Des foreuses rotary à percussion (tricône ou PDC bits) percent des trous de mine selon un maillage géométrique. Les paramètres clés sont :
+- Diamètre des trous : 100–400 mm selon la taille de la fosse
+- Espacement et sous-forage (sub-drill) : en général, l'espacement S ≈ 1,15 × le burden B (distance à la face libre)
+- Burden B est calculé selon la formule de Langefors : B = 0,012 × D × (ρe/ρr)^0,5 (approximation)
+
+**Explosifs** : L'émulsion (ANFO — Ammonium Nitrate/Fuel Oil ou émulsions à base d'eau) est pompée dans les trous forés. Les détonateurs électroniques (Electronic Detonators, E-Dets) permettent un contrôle précis du délai entre trous, optimisant la fragmentation (P80 cible) et réduisant les vibrations transmises au sol.
+
+**Vibrations et bruit** : En zone habitée ou près d'infrastructures sensibles, les vibrations au sol (mesurées en mm/s PPV — Peak Particle Velocity) et le bruit aérien (suivi en dBL) doivent respecter des normes provinciales.
+
+### Équipement
+
+| Équipement | Capacité typique | Rôle |
+|-----------|-----------------|------|
+| Foreuse rotary (Epiroc, Sandvik) | Trous Ø 150–400 mm | Forage des trous de mine |
+| Pelle hydraulique (CAT 6060, Liebherr 9800) | 40–95 m³ | Chargement du minerai et des stériles |
+| Chargeur-transporteur sur pneus (WA1200, CAT 994) | 30–50 m³ | Alternative aux pelles dans zones étroites |
+| Camion de transport (CAT 797, Komatsu 930E) | 290–400 tonnes | Transport du minerai et des stériles |
+| Bouteur (Dozer CAT D11, Komatsu D475) | — | Préparation de plateforme, pousser des stériles |
+| Niveleuse (Motor grader) | — | Entretien des routes de mine |
+
+<Note>
+Un camion minier Caterpillar 797F de 400 tonnes métriques de charge utile est l'un des plus grands véhicules terrestres au monde. Sa capacité de cuve (payload) de 363 t métriques, sa masse brute de 687 t, et ses 4 014 hp (2 993 kW) en font une machine dont l'opération et la maintenance nécessitent des compétences spécialisées d'ingénieur en maintenance et en génie électrique (moteurs AC et convertisseurs de fréquence).
+</Note>
+
+## Méthodes d'exploitation souterraine
+
+### Chambre-et-pilier (Room-and-Pillar)
+
+La méthode chambre-et-pilier est adaptée aux gisements tabulaires sub-horizontaux (couches de charbon, de potasse, de sel) dans un roc encaissant compétent. Des excavations (chambres) sont creusées en laissant en place des piliers réguliers de minerai ou de roc stérile pour supporter le toit.
+
+**Dimensionnement des piliers** : La résistance d'un pilier carré est approximée par la formule empirique de Hedley-Grant :
+```
+σp = σc × (w^0,5 / h^0,75)
+```
+Où σp est la résistance du pilier, σc la résistance uniaxiale de la roche, w la largeur et h la hauteur du pilier.
+
+**Applications au Canada** : Mines de potasse de la Saskatchewan (Nutrien — Allan, Cory, Lanigan; Mosaic — Belle Plaine, Esterhazy); mines de sel gemme.
+
+### Coupe-et-remblayage (Cut-and-Fill)
+
+La méthode coupe-et-remblayage est utilisée pour les gisements à pendage fort (>55°), de haute teneur, dans un roc de résistance variable. Le minerai est extrait par coupes horizontales successives ascendantes (underhand) ou descendantes (overhand). Après chaque coupe, le vide est remblayé (remblai hydraulique, remblai en pâte ou remblai à sec) avant d'entamer la coupe suivante.
+
+**Remblai en pâte (Paste Fill)** : Les résidus de traitement (densité en poids ≥ 70–80%) sont mélangés à du ciment (2–7% par masse) et pompés dans les chantiers vides. La résistance atteinte après 28 jours est de 0,5–3 MPa, suffisante pour servir de plateforme de travail et de soutènement latéral pour les chantiers adjacents.
+
+### Sous-niveau abattu (Sub-Level Stoping / Long-Hole Stoping)
+
+Le sous-niveau abattu est la méthode souterraine la plus productive. Des niveaux d'accès sont creusés à intervalles réguliers (sous-niveaux, espacés de 15–30 m). De longs trous de forage (>15 m) percés entre niveaux adjacents sont chargés d'explosifs et tirés en retraite, faisant tomber le minerai en tas dans un chantier vide (stope) depuis lequel il est repris par des chargeuses-navettes (LHD — Load-Haul-Dump).
+
+**Applications au Canada** : Mine Raglan (Glencore, QC), Mine Detour Lake (Agnico Eagle, ON), nombreuses mines de la Ceinture abitibienne.
+
+### Block Caving
+
+Le block caving est la méthode de masse par excellence pour des gisements de très grand tonnage (>200 Mt) mais de teneur modérée à basse, dans un roc fragile et fracturé. Un réseau d'excavations inférieures (undercut) est créé pour provoquer l'effondrement gravitaire du massif sus-jacent. Le minerai s'écoulant par gravité est repris par des points d'extraction (drawpoints) selon un protocole de tirage contrôlé.
+
+**Exemples** : Mine Resolution Copper (Arizona, en développement), mine ION Copper au Chili — cette méthode reste rare au Canada mais est étudiée pour certains gisements profonds de l'Ontario.
+
+<Tip>
+Le block caving offre les coûts d'exploitation les plus bas de toutes les méthodes souterraines (parfois <5 $/t) mais exige des investissements en capital considérables (plusieurs milliards de dollars) et nécessite de 5 à 10 ans de développement avant le premier tonnage de minerai. La gestion de la subsidance de surface est également un enjeu majeur.
+</Tip>
+
+## Fragmentation et comminution
+
+La comminution est l'ensemble des opérations de réduction granulométrique du minerai extrait, de la taille du rocher (≈500–1000 mm) jusqu'à la finesse requise pour la concentration (typiquement 75–150 µm = P80 de 75 à 150 microns). C'est l'étape la plus énergivore d'un traitement minéralurgique, représentant 30–50% de la consommation énergétique totale de la mine.
+
+### Concasseurs primaires
+
+**Concasseur à mâchoires (Jaw Crusher)** : Deux plaques convergentes (mâchoire fixe et mâchoire mobile) concassent les gros blocs par compression. Utilisé pour les minerais à grande résistance (>100 MPa). Capacité : 100–2000 t/h. Produit : -250 mm.
+
+**Concasseur giratoire (Gyratory Crusher)** : Un cône excentrique tourne à l'intérieur d'une cavité conique. Plus adapté aux grandes capacités de primaire (2000–5000 t/h). Utilisé dans les grandes mines à ciel ouvert comme Escondida (Chili) et Highland Valley (CB).
+
+### Concasseurs secondaires et tertiaires
+
+**Concasseur à cône (Cone Crusher)** : Même principe que le giratoire mais plus compact et à plus petite granulométrie de sortie (25–75 mm). Les modèles HP (Metso Outotec) et MP (Metso Outotec) sont très répandus.
+
+**Concasseur à percussion à axe vertical (VSI — Vertical Shaft Impactor)** : Projette les particules contre des enclumes à haute vitesse; produit une forme de particule cubique (favorable pour les granulats mais moins utilisé en minerai métallique).
+
+### Broyeurs
+
+**Broyeur SAG (Semi-Autogenous Grinding)** : Grand cylindre rotatif (diamètre : 8–14 m; longueur : 4–10 m) contenant le minerai lui-même (comme milieu broyant) et une charge de billes d'acier (≈6–15%). C'est le broyeur primaire de choix pour les minerais durs et abrasifs (porphyres Cu-Mo). Consommation : 5–20 kWh/t.
+
+**Broyeur à boulets (Ball Mill)** : Cylindre rotatif rempli de billes d'acier (30–100 mm de diamètre) qui broient le minerai en voie humide jusqu'à la finesse requise. Associé en circuit fermé avec des hydrocyclones (classification par centrifugation) qui renvoient les particules surdimensionnées (underflow) vers le broyeur et avancent la fraction fine (overflow) vers la concentration.
+
+**P80** : Le paramètre P80 (passing 80%, ou le tamis sur lequel passe 80% de la masse) est la mesure granulométrique de référence. Un P80 de 75 µm signifie que 80% de la masse de pulpe passe à travers un tamis de 75 µm (=200 mesh).
+
+<Info>
+Le circuit SAG-Ball Mill (circuit SAB ou SABC avec concasseur de recirculation) est le standard de l'industrie pour la plupart des mines de porphyre cuivre. L'optimisation du P80 de sortie du circuit de broyage est critique : trop grossier, les grains minéraux sont imparfaitement libérés (liberation insuffisante) et les récupérations de flottation chutent; trop fin, la consommation d'énergie explose et les problèmes de surbroyage (slimes) apparaissent.
+</Info>
+
+## Concentration des minerais
+
+### Flottation par mousse (Froth Flotation)
+
+La flottation est le procédé de concentration le plus utilisé dans le monde pour les minerais sulfurés (cuivre, zinc, nickel, molybdène, plomb). Elle exploite la différence de propriétés de surface entre les minéraux d'intérêt et le gangue.
+
+**Principe** : La pulpe (eau + minerai broyé, ≈30–40% solides en masse) est conditionnée avec des réactifs chimiques puis aérée dans des cellules de flottation. Les bulles d'air s'accrochent sélectivement aux minéraux rendus hydrophobes par les collecteurs et montent en surface pour former une mousse enrichie collectée comme concentré.
+
+**Réactifs chimiques** :
+
+| Réactif | Rôle | Exemples |
+|---------|------|---------|
+| **Collecteur** | Rend les minéraux d'intérêt hydrophobes | Xanthate d'éthyle de potassium (KEX), Xanthate d'amyle (SIBX), Aerofloat |
+| **Moussant** | Stabilise les bulles d'air | MIBC (Methyl Isobutyl Carbinol), Dowfroth 250 |
+| **Activateur** | Améliore la collecte de certains minéraux | Sulfate de cuivre (active la sphalérite — ZnS pour flottation Zn) |
+| **Déprimant** | Supprime la flottation de minéraux indésirables | NaCN (déprime pyrite, sphalérite), ZnSO₄, CMC (silicates) |
+| **Régulateur de pH** | Optimise l'environnement chimique | Chaux (CaO) : pH 10–11 pour Cu; acide sulfurique pour pH acide |
+
+**Taux de récupération et rapport de concentration** :
+- Le **taux de récupération** R (%) = (métal dans concentré / métal dans alimentation) × 100
+- Le **rapport de concentration** (enrichissement ratio) = teneur concentré / teneur alimentation
+- Ces deux paramètres sont liés par la courbe de récupération-enrichissement; il existe toujours un compromis entre récupération élevée et concentré de haute teneur
+
+**Cinétique de flottation** : La récupération cumulée R(t) suit généralement une cinétique de premier ordre :
+```
+R(t) = R∞ × (1 - e^(-k×t))
+```
+Où R∞ est la récupération maximale théorique et k la constante cinétique (min⁻¹).
+
+### Séparation gravimétrique
+
+La séparation gravimétrique exploite les différences de densité entre les minéraux d'intérêt et le gangue. Elle est utilisée pour les minerais natifs (or, platine) ou les minéraux denses (ilménite, rutile, cassitérite, scheelite) :
+
+- **Jigs (Jigging)** : pulsations hydrauliques dans un lit de particules; séparation par stratification densimétrique
+- **Tables à secousses (Shaking Tables, Wilfley)** : film d'eau mince sur plateau incliné vibrant; séparation des particules fines d'or
+- **Spirales (Spiral Concentrators)** : flux hélicoïdal autour d'un axe vertical; très efficace pour les sables minéralisés (black sands, placers)
+- **Concentrateurs centrifuges (Knelson, Falcon)** : centrifugation à haute gravité (G élevé) pour récupérer l'or libre
+
+### Lixiviation — procédés hydrométallurgiques
+
+**CIL/CIP pour l'or (Carbon-In-Leach / Carbon-In-Pulp)**
+
+Pour les minerais aurifères où l'or est finement disséminé, la lixiviation au cyanure est le procédé standard mondial :
+
+```
+4Au + 8NaCN + O₂ + 2H₂O → 4Na[Au(CN)₂] + 4NaOH
+```
+
+La pulpe est lixiviée dans des cuves en série avec du cyanure de sodium (NaCN, 0,03–0,1% en masse) à pH basique (10,5–11,5) maintenu par la chaux. En **CIL**, le charbon actif est présent dans la cuve de lixiviation simultanément; en **CIP**, les cuves de lixiviation et d'adsorption sur charbon sont séparées. L'or chargé sur le charbon est ensuite élué (Merrill-Crowe ou AARL) et récupéré par électrodéposition.
+
+**SX-EW pour le cuivre (Solvent Extraction — Electrowinning)**
+
+Pour les minerais de cuivre oxydé (malachite, azurite, chrysocolla) et les minerais secondaires à basse teneur, la lixiviation en tas (heap leach) à l'acide sulfurique est économique :
+
+```
+CuO + H₂SO₄ → CuSO₄ + H₂O
+```
+
+La solution PLS (Pregnant Leach Solution, typiquement 2–5 g/L Cu) est pompée vers l'installation SX (Solvent Extraction) où un solvant organique (LIX 984N, ACORGA M5640) extrait sélectivement le cuivre. Après ré-extraction (stripping) avec de l'acide concentré, la solution est envoyée à l'EW (Electrowinning) où le cuivre est électrodéposé en cathodes de haute pureté (99,99% Cu — Grade A London Metal Exchange). Les cathodes sont directement commercialisables sans fusion, ce qui est un avantage majeur du procédé.
+
+<Warning>
+Le cyanure de sodium utilisé dans les procédés CIL/CIP est hautement toxique. Sa gestion nécessite des procédures strictes : code ICMC (International Cyanide Management Code), décomposition du cyanure résiduel par INCO SO₂-Air process ou peroxyde d'hydrogène avant rejet, surveillance continue des eaux de ruissellement. La catastrophe de Baia Mare (Roumanie, 2000) — déversement de 100 000 m³ de solution cyanurée dans la rivière Tisza — a conduit à un renforcement mondial des réglementations.
+</Warning>
+
+## Gestion des résidus miniers
+
+Les résidus miniers (tailings) sont les matériaux finement broyés qui restent après l'extraction des métaux d'intérêt. Leur gestion est l'un des défis environnementaux les plus importants de l'industrie minière.
+
+### Parcs à résidus conventionnels (Tailings Storage Facilities, TSF)
+
+Les résidus en pulpe (30–50% solides) sont pompés vers un parc à résidus délimité par des digues construites à partir des résidus eux-mêmes (méthode montante) ou de matériaux d'emprunt. Les techniques de construction de digue incluent :
+
+- **Méthode amont (Upstream)** : économique mais moins stable; risque accru lors des séismes — cause principale des ruptures catastrophiques (Brumadinho, Brésil, 2019)
+- **Méthode aval (Downstream)** : plus coûteuse mais plus stable; la digue avance vers l'aval sur des fondations nouvelles
+- **Méthode ligne centrale (Centreline)** : compromis entre les deux
+
+La catastrophe du parc à résidus Mount Polley (CB, 2014) — rupture de digue libérant 25 millions de m³ de résidus dans le lac Polley — a conduit à une révision complète de la réglementation des TSF au Canada et à l'adoption du *Global Industry Standard on Tailings Management* (GISTM, 2020).
+
+### Densification et résidus en pâte (Paste Tailings)
+
+Les résidus épaississants (Thickened Tailings) ou en pâte (Paste, >70% solides) réduisent la superficie du parc à résidus, accélèrent la consolidation et diminuent le risque de rupture de digue liquéfactrice. La pâte s'écoule (slumps) mais ne se liquéfie pas lors d'un séisme, ce qui améliore considérablement la sécurité.
+
+**Technologie d'épaississement** : Des épaississants haute densité (Paste Thickeners, marques Outotec, DELKOR) utilisent des floculants polymériques (polyacrylamide, PAM) pour accélérer la floculation-sédimentation.
+
+### Remblai en roche stérile (Waste Rock)
+
+Les stériles (roches sans valeur économique déplacées pour accéder au minerai) sont déposés dans des haldes à stériles (Waste Rock Dumps). La gestion géochimique des stériles potentiellement acidogènes est traitée dans la section Sécurité et Environnement. Certains stériles peuvent être réutilisés comme granulats routiers ou matériaux de construction.
+
+<CardGroup cols={2}>
+  <Card title="Exploration et évaluation" icon="magnifying-glass" href="/genie-minier/exploration-evaluation">
+    Méthodes géophysiques, géochimiques et estimation des ressources NI 43-101
+  </Card>
+  <Card title="Sécurité et environnement" icon="leaf" href="/genie-minier/securite-environnement">
+    Drainage minier acide, réglementation, fermeture et consultation autochtone
+  </Card>
+  <Card title="Génie chimique" icon="flask" href="/genie-chimique/operations-unitaires">
+    Opérations unitaires — extraction, séparation, distillation et échange ionique
+  </Card>
+  <Card title="Génie métallurgique" icon="fire" href="/genie-metallurgique/introduction">
+    Pyrométallurgie, hydrométallurgie et affinerie des métaux
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : Global Industry Standard on Tailings Management (GISTM 2020), International Cyanide Management Code (ICMC), MAC e3 Plus, Règlement sur les mines du Québec
+- **Logiciels** : JKSimMet (JKTech — simulation de circuits de comminution), HSC Chemistry (Metso Outotec — thermodynamique et modélisation hydrométallurgique), Whittle (optimisation de fosse), Deswik CAD (conception minière souterraine)
+- **Publications** : *Minerals Engineering*, *Hydrometallurgy*, *International Journal of Mineral Processing*, *Mining Engineering* (SME), *Canadian Mining Journal*
+- **Équipementiers clés** : Metso Outotec (broyeurs, cellules de flottation, épaississants), Sandvik (foreuses, équipements souterrains), Epiroc (foreuses, camions miniers), Caterpillar (camions, pelles), Komatsu (camions), TAKRAF (convoyeurs, concasseurs)

@@ -1,0 +1,305 @@
+---
+title: "Aérodynamique"
+description: "Équations fondamentales, génération de portance, profils NACA, couche limite, régimes subsonique et supersonique, traînée et méthodes d'analyse numérique en aérodynamique"
+icon: "wind"
+---
+
+L'aérodynamique est la branche de la mécanique des fluides qui étudie les forces et les moments agissant sur des corps en mouvement dans un gaz (généralement l'air). Elle constitue le fondement scientifique de la conception des aéronefs, des fusées, des automobiles de course, des éoliennes et de tout système soumis à des écoulements gazeux. La maîtrise de l'aérodynamique est essentielle pour optimiser les performances, l'efficacité énergétique et la stabilité des véhicules aériens.
+
+L'aérodynamique classique repose sur des équations aux dérivées partielles décrivant la conservation de la masse, de la quantité de mouvement et de l'énergie dans les écoulements. Ces équations, dans leur forme la plus générale (équations de Navier-Stokes), n'admettent pas de solution analytique sauf pour des cas très simples; la mécanique computationnelle des fluides (CFD) permet de les résoudre numériquement pour des géométries complexes.
+
+## Équations fondamentales
+
+### Équation de continuité
+
+La conservation de la masse dans un écoulement permanent s'exprime par l'équation de continuité. Pour un écoulement unidimensionnel entre deux sections d'un tube de courant :
+
+```
+ρ₁ · A₁ · V₁ = ρ₂ · A₂ · V₂ = ṁ = constante
+```
+
+Où ρ est la masse volumique (kg/m³), A la section transversale (m²), V la vitesse (m/s) et ṁ le débit massique (kg/s).
+
+Pour un écoulement **incompressible** (ρ = constante, condition valide pour Ma < 0,3) :
+```
+A₁ · V₁ = A₂ · V₂ = Q = constante    (débit volumique, m³/s)
+```
+
+En trois dimensions, la forme différentielle de l'équation de continuité (forme générale) s'écrit :
+```
+∂ρ/∂t + ∇·(ρV⃗) = 0
+```
+En régime permanent et incompressible : ∇·V⃗ = 0 (divergence nulle de la vitesse).
+
+### Équation de Bernoulli
+
+L'équation de Bernoulli dérive de la conservation de l'énergie le long d'une ligne de courant, pour un écoulement permanent, incompressible, non visqueux (inviscide) :
+
+```
+P + ½ · ρ · V² + ρ · g · h = constante
+```
+
+Où P est la pression statique (Pa), ½ρV² la pression dynamique (Pa), et ρgh la pression hydrostatique (Pa). La somme P + ½ρV² est la **pression totale** (ou pression d'arrêt, P₀ = Pt).
+
+**Application — tube de Pitot-Prandtl** : L'instrument de mesure de vitesse des aéronefs exploite directement Bernoulli. En prenant le point d'arrêt (V=0) et la prise statique (V=Va) :
+```
+Va = √(2 × ΔP / ρ)    où ΔP = P₀ - P∞
+```
+
+<Info>
+L'équation de Bernoulli est strictement valide pour les écoulements irrotationnels non visqueux. En aéronautique pratique, elle est applicable loin des couches limites et des zones de fort cisaillement. Pour les écoulements compressibles (Ma > 0,3), l'équation de Bernoulli compressible (isentropique) doit être utilisée.
+</Info>
+
+### Équation de Bernoulli compressible (isentropique)
+
+Pour les écoulements isentropiques (adiabatiques et sans dissipation visqueuse) à nombre de Mach significatif :
+
+```
+P₀/P = (1 + (γ-1)/2 · Ma²)^(γ/(γ-1))
+T₀/T = 1 + (γ-1)/2 · Ma²
+ρ₀/ρ = (1 + (γ-1)/2 · Ma²)^(1/(γ-1))
+```
+
+Où γ = Cp/Cv = 1,4 pour l'air diatomique, Ma = V/a le nombre de Mach, a = √(γRT) la vitesse du son.
+
+## Génération de portance
+
+### Théorème de Kutta-Joukowski
+
+La portance par unité d'envergure d'un profil aérodynamique est donnée par le théorème de Kutta-Joukowski :
+
+```
+L' = ρ · V∞ · Γ    (en N/m)
+```
+
+Où Γ est la **circulation** (m²/s), définie comme l'intégrale de la vitesse tangentielle le long d'un contour fermé entourant le profil :
+```
+Γ = ∮ V⃗ · dl⃗
+```
+
+La circulation résulte de l'asymétrie entre l'écoulement sur l'extrados (dessus, plus rapide) et l'intrados (dessous, plus lent) du profil, induite par la cambrure et l'angle d'attaque.
+
+### Condition de Kutta
+
+La condition de Kutta est la condition physique qui détermine la valeur de la circulation. Elle stipule que l'écoulement doit quitter le bord de fuite (trailing edge) de manière régulière — c'est-à-dire que les lignes de courant des deux surfaces du profil se rejoignent au bord de fuite sans vitesse infinie. Cette condition sélectionne une valeur unique de Γ pour un profil à un angle d'attaque donné.
+
+Physiquement, la condition de Kutta est une manifestation de la viscosité réelle du fluide, qui empêche le contournement du bord de fuite tranchant : dès que l'aile se met en mouvement dans un fluide réel, un tourbillon de démarrage (starting vortex) se détache du bord de fuite, laissant une circulation de signe opposé liée au profil.
+
+## Nomenclature des profils NACA
+
+Le National Advisory Committee for Aeronautics (NACA), prédécesseur de la NASA, a développé dans les années 1930–1940 des séries de profils aérodynamiques systématiquement catalogués. Ces profils sont encore largement utilisés en conception aéronautique et servent de référence universelle.
+
+### Série NACA 4 chiffres
+
+La série NACA 4 chiffres (ex. NACA 2412) est la plus simple et la plus utilisée :
+
+- **1er chiffre** : cambrure maximale en % de la corde (m%)
+- **2e chiffre** : position de la cambrure maximale en dizièmes de corde (x_m / c × 10)
+- **3e et 4e chiffres** : épaisseur maximale en % de la corde (t%)
+
+**Exemple — NACA 2412** :
+- Cambrure maximale = 2% de la corde (0,02c)
+- Position de la cambrure maximale = 40% de la corde (0,4c)
+- Épaisseur maximale = 12% de la corde
+
+Un profil **symétrique** (cambrure nulle) est noté NACA 00tt; ex. NACA 0012 — utilisé pour les empennages et les gouvernes.
+
+### Comparaison des profils NACA courants
+
+| Profil | Cambrure (%) | Position (%) | Épaisseur (%) | CL max (α≈15°) | Applications typiques |
+|--------|-------------|-------------|--------------|----------------|----------------------|
+| NACA 0006 | 0 | — | 6 | ~0,7 | Empennage fin, vitesse |
+| NACA 0012 | 0 | — | 12 | ~1,1 | Empennage, gouvernes, hélicoptères |
+| NACA 2412 | 2 | 40 | 12 | ~1,3 | Avions d'entraînement, GA (Cessna 172) |
+| NACA 4412 | 4 | 40 | 12 | ~1,5 | Avions de tourisme, planeurs |
+| NACA 4415 | 4 | 40 | 15 | ~1,4 | Avions cargo, transport à basse vitesse |
+| NACA 23012 | 2,4 | 15 | 12 | ~1,6 | Aviation commerciale et militaire |
+| NACA 23015 | 2,4 | 15 | 15 | ~1,5 | Ailes épaisses, bonne tenue en décrochage |
+| NACA 6412 | 6 | 40 | 12 | ~1,6 | Drones, avions de voltige à basse vitesse |
+
+### Série NACA 5 chiffres et NACA 6 (laminaires)
+
+La **série NACA 5 chiffres** (ex. NACA 23012) déplace la position de portance maximale vers l'avant, donnant de meilleures performances de CL max mais un décrochage plus brusque.
+
+La **série NACA 6** (ex. NACA 64-412) est conçue pour maintenir un écoulement laminaire sur une portion plus longue de la corde (laminaire jusqu'à 40–60% de la corde), réduisant ainsi la traînée de frottement. Utilisée sur les ailes d'avions de performance (P-51 Mustang, avions de course).
+
+## Coefficients aérodynamiques
+
+Les forces aérodynamiques sont exprimées sans dimension par des coefficients :
+
+```
+L = ½ · ρ · V∞² · S · CL    (portance)
+D = ½ · ρ · V∞² · S · CD    (traînée)
+M = ½ · ρ · V∞² · S · c · CM    (moment de tangage, c = corde)
+```
+
+### Courbe CL–α (polaire de portance)
+
+La courbe du coefficient de portance CL en fonction de l'angle d'attaque α est quasi-linéaire dans la plage non-décrochée :
+
+```
+CL = CL,α × (α - α₀)
+```
+
+Où CL,α ≈ 2π rad⁻¹ ≈ 0,11 deg⁻¹ pour un profil mince (théorie des profils minces de Thin Airfoil Theory), et α₀ est l'angle d'attaque à portance nulle (négatif pour un profil cambré).
+
+**Angle de décrochage** (α_stall) : Au-delà d'un angle critique (typiquement 12–18° selon le profil), le décollement de la couche limite sur l'extrados provoque une chute brutale de CL et une forte augmentation de CD. Le décrochage est caractérisé par un CL,max puis une chute.
+
+<Warning>
+Le décrochage aérodynamique (stall) est indépendant de la vitesse : un profil peut décrocher à n'importe quelle vitesse si l'angle d'attaque dépasse l'angle critique. Les accidents liés au décrochage à faible altitude (décrochage en virage, décrochage à la mise en palier) restent parmi les causes d'accidents les plus fréquentes en aviation générale. Les systèmes d'avertissement de décrochage (stick shaker, angle of attack indicator) sont obligatoires sur les avions de transport.
+</Warning>
+
+## Couche limite
+
+### Définition et structure
+
+La couche limite est la mince région de l'écoulement immédiatement adjacente à la surface d'un corps, où les effets visqueux sont importants. À l'extérieur de la couche limite, l'écoulement peut être traité comme non visqueux (potentiel). La couche limite se développe depuis le bord d'attaque et croît en épaisseur vers l'aval.
+
+**Épaisseur de couche limite** δ : définie conventionnellement comme la distance à la paroi où la vitesse atteint 99% de la vitesse extérieure U∞.
+
+**Épaisseur de déplacement** δ* : représente le déplacement virtuel de la surface solide qui produirait le même débit que la couche limite réelle :
+```
+δ* = ∫₀^δ (1 - u/U∞) dy
+```
+
+### Nombre de Reynolds et transition laminaire-turbulente
+
+Le **nombre de Reynolds** Re est le paramètre sans dimension qui caractérise le rapport entre les forces inertielles et les forces visqueuses :
+
+```
+Re = ρ · V · L / μ = V · L / ν
+```
+
+Où L est la longueur caractéristique (corde c pour un profil), μ la viscosité dynamique (Pa·s) et ν = μ/ρ la viscosité cinématique (m²/s). Pour l'air à 15°C et 1 atm : ν ≈ 1,46 × 10⁻⁵ m²/s.
+
+- **Couche limite laminaire** (Re < ~500 000 sur plaque plane) : Écoulement ordonné en couches parallèles; profil de vitesse parabolique; faible frottement mais sensible au gradient de pression adverse (décollement facile)
+- **Couche limite turbulente** (Re > ~10⁶) : Écoulement désordonné avec fluctuations; profil de vitesse plus plein; frottement plus élevé mais meilleure résistance au gradient de pression adverse (décollement retardé)
+
+La **transition** entre régime laminaire et turbulent dépend de Re, de la turbulence de l'écoulement libre et du gradient de pression (gradient favorable → transition retardée, gradient adverse → transition avancée).
+
+**Turbulateurs** : dispositifs (gorge, bande rugueuse, générateurs de vortex) qui forcent la transition laminaire-turbulente à une position choisie sur le profil pour éviter le décollement laminaire (laminar bubble separation).
+
+## Traînée et ses composantes
+
+La traînée totale d'un aéronef se décompose en plusieurs contributions physiques distinctes :
+
+### Traînée induite (Di — Induced Drag)
+
+La traînée induite est la conséquence inévitable de la génération de portance sur une aile de **envergure finie**. Les tourbillons marginaux (tip vortices) générés aux extrémités de l'aile induisent une composante de vitesse descendante (downwash) qui incline le vecteur de portance vers l'arrière, créant une composante de force dans la direction de la traînée.
+
+```
+CDi = CL² / (π · e · AR)
+```
+
+Où :
+- **AR** = b²/S = envergure²/surface alaire : le **rapport d'aspect** (Aspect Ratio)
+- **e** : le facteur d'efficacité d'Oswald (0 < e ≤ 1; e=1 pour une distribution elliptique de portance)
+
+**Aile elliptique** (ex. Supermarine Spitfire) : Distribution de portance elliptique → facteur e = 1 → traînée induite minimale pour AR donné. En pratique, les winglets (ailettes verticales, ex. A320neo, B737 MAX) augmentent l'AR effectif et réduisent CDi de 3–5%.
+
+### Traînée de frottement (Cf — Skin Friction Drag)
+
+La traînée de frottement résulte des forces visqueuses tangentielles à la surface. Elle dépend fortement du caractère laminaire ou turbulent de la couche limite :
+- Couche limite laminaire (plaque plane) : Cf ≈ 1,328 / √Re_L
+- Couche limite turbulente : Cf ≈ 0,074 / Re_L^(1/5) (loi de Prandtl)
+
+Les surfaces aéronautiques sont poncées et polies pour réduire la rugosité et maintenir l'écoulement laminaire le plus longtemps possible (Natural Laminar Flow, NLF, ou Active Laminar Flow, HLFC).
+
+### Traînée de forme (Pressure Drag / Form Drag)
+
+La traînée de forme résulte du déséquilibre de pression entre l'avant et l'arrière d'un corps dû au décollement de la couche limite. Elle est minimisée par des formes aérodynamiquement profilées (fuselage elliptique, bord de fuite effilé). Un cylindre de circulaire a un CD ≈ 1,2; un profil NACA 0012 a un CD ≈ 0,006 — rapport de 200 !
+
+### Traînée d'onde (Wave Drag)
+
+La traînée d'onde apparaît en régime transsonique et supersonique, liée à la formation d'ondes de choc. Elle représente une dissipation d'énergie irréversible dans les ondes de choc (augmentation d'entropie). La **règle des aires de Whitcomb** (area rule) permet de minimiser la traînée d'onde en imposant une variation progressive de la section transversale de l'avion (fuselage "waist" — taille de guêpe visible sur le F-102 Delta Dagger).
+
+## Effets de compressibilité
+
+### Nombre de Mach et régimes d'écoulement
+
+| Régime | Nombre de Mach | Caractéristiques |
+|--------|---------------|-----------------|
+| Subsonique | Ma < 0,8 | Écoulement entièrement subsonique; Bernoulli compressible applicable |
+| Transsonique | 0,8 < Ma < 1,2 | Coexistence zones subsoniques et supersoniques; chocs locaux; traînée d'onde |
+| Supersonique | 1,2 < Ma < 5 | Écoulement entièrement supersonique; chocs attachés ou détachés |
+| Hypersonique | Ma > 5 | Effets de dissociation chimique, choc fort; capsules de rentrée |
+
+### Correction de Prandtl-Glauert
+
+En régime subsonique compressible (0,3 < Ma < 0,7), les coefficients aérodynamiques sont amplifiés par rapport aux valeurs incompressibles selon la règle de Prandtl-Glauert :
+
+```
+CL,compressible = CL,incompressible / √(1 - Ma∞²)
+CD,compressible = CD,incompressible / √(1 - Ma∞²)
+```
+
+Cette correction diverge à Ma = 1 (singularité de Prandtl-Glauert), signalant les limites de la théorie linéarisée dans le domaine transsonique.
+
+### Ondes de choc
+
+Une onde de choc est une discontinuité de très faible épaisseur (quelques libres parcours moyens moléculaires) à travers laquelle les propriétés de l'écoulement changent brutalement et irréversiblement :
+
+**Choc normal** (perpendiculaire à l'écoulement) :
+```
+Ma₂² = (Ma₁² + 5) / (7Ma₁² - 1)    (pour γ=1,4)
+P₂/P₁ = (7Ma₁² - 1) / 6
+```
+
+Après un choc normal, l'écoulement est toujours subsonique (Ma₂ < 1).
+
+**Choc oblique** : formé à un angle β par rapport à l'écoulement incident; après le choc, l'écoulement reste supersonique si le cône de demi-angle θ est inférieur à l'angle de décrochage du choc.
+
+**Cône de Mach** : En régime supersonique, les perturbations acoustiques ne peuvent se propager qu'à l'intérieur d'un cône de demi-angle µ = arcsin(1/Ma).
+
+## Essais en soufflerie
+
+La soufflerie est le principal outil expérimental de validation aérodynamique. Un modèle réduit (ou à l'échelle 1) est placé dans un écoulement contrôlé, et les forces, moments, pressions et visualisations d'écoulement sont mesurés.
+
+**Similitude** : Pour que les résultats soient transposables à la pleine échelle, il faut respecter la similitude du nombre de Reynolds (Re_modèle = Re_réel). En pratique, cela nécessite soit d'augmenter la vitesse (soufflerie haute vitesse), soit d'augmenter la densité du fluide (soufflerie sous pression, NTF — National Transonic Facility), soit d'utiliser un fluide cryogénique (azote liquide).
+
+**Types de souffleries** :
+- **Subsonique à circuit ouvert** : économique, bonne qualité d'écoulement; turbulence résiduelle 0,1–1%
+- **Transsonique à circuit fermé** : test dans la plage critique 0,7 < Ma < 1,3; parois poreuses pour éviter le blocage
+- **Supersonique à tuyère de Laval** : convergent-divergent pour accélérer l'écoulement au-delà de Ma = 1
+- **Hypersonique à choc** : très courte durée (millisecondes) mais vitesses extrêmes (Ma > 5)
+
+## Mécanique des fluides computationnelle (CFD)
+
+La CFD permet de résoudre numériquement les équations de Navier-Stokes sur des grilles discrètes. Elle est devenue un outil incontournable en conception aéronautique, complémentaire (mais non remplaçant) des essais en soufflerie.
+
+**ANSYS Fluent** : logiciel commercial de CFD parmi les plus utilisés dans l'industrie aérospatiale. Basé sur la méthode des volumes finis (FVM). Résolution des équations RANS (Reynolds-Averaged Navier-Stokes) avec modèles de turbulence (k-ε, k-ω SST, Spalart-Allmaras).
+
+**OpenFOAM** : code CFD open-source, largement utilisé en recherche académique et dans les entreprises. Très flexible mais nécessite une expertise significative en configuration.
+
+**Niveaux de modélisation** (par complexité croissante) :
+1. **Méthodes potentielles** (VLM — Vortex Lattice Method, AVL, XFOIL) : très rapides, non visqueux, linéaires — études préliminaires, planification d'ailettes
+2. **Euler** : non visqueux, conservation de la masse, quantité de mouvement et énergie — chocs, ondes de pression sans couche limite
+3. **RANS** (Reynolds-Averaged Navier-Stokes) : visqueux moyenné; modèle de turbulence requis; standard industriel
+4. **LES** (Large Eddy Simulation) : simule les grands tourbillons explicitement; très coûteux mais plus précis pour les écoulements décollés
+5. **DNS** (Direct Numerical Simulation) : résolution complète de toutes les échelles de turbulence; limité aux Re modérés pour la recherche fondamentale
+
+<Tip>
+La validation d'un modèle CFD est une étape critique et non optionnelle. Tout résultat CFD doit être comparé à des données expérimentales (soufflerie, vol d'essai) pour les conditions les plus proches possible. Les erreurs de modélisation (choix du modèle de turbulence, qualité du maillage, conditions aux limites) peuvent conduire à des erreurs significatives sur la traînée (+/- 20–30%) même pour des configurations relativement simples.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Introduction au génie aérospatial" icon="plane" href="/genie-aerospatial/introduction">
+    Histoire de l'aviation, quatre forces du vol, industrie aérospatiale canadienne et parcours de carrière
+  </Card>
+  <Card title="Mécanique des fluides" icon="water" href="/genie-mecanique/mecanique-fluides">
+    Fondements de la mécanique des fluides : écoulements internes, turbulence et rhéologie
+  </Card>
+  <Card title="Génie maritime" icon="ship" href="/genie-maritime/introduction">
+    Hydrodynamique navale : résistance à l'avancement, stabilité et propulsion marine
+  </Card>
+  <Card title="Thermodynamique" icon="fire" href="/genie-mecanique/thermodynamique">
+    Cycles thermodynamiques, tuyères, compresseurs et turbines — propulsion aérospatiale
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Logiciels** : ANSYS Fluent, OpenFOAM, XFOIL (profils 2D), AVL (Athena Vortex Lattice — ailes 3D), Pointwise/Fidelity (génération de maillage), Tecplot/ParaView (post-traitement CFD), SU2 (Stanford — code open-source adjoint)
+- **Normes et standards** : SAE ARP4761 (processus d'analyse de sécurité des systèmes aéronautiques), MIL-HDBK-1797 (performance de vol), AIAA Guide for Verification and Validation of CFD Simulations (G-077-1998)
+- **Ouvrages fondamentaux** : Anderson — *Fundamentals of Aerodynamics* (5e éd.); Abbott & Von Doenhoff — *Theory of Wing Sections*; Schlichting — *Boundary-Layer Theory*; White — *Fluid Mechanics*
+- **Références NACA/NASA** : Rapports NACA TN, NACA TR (disponibles gratuitement sur ntrs.nasa.gov)

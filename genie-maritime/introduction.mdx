@@ -1,0 +1,298 @@
+---
+title: "Introduction au génie maritime et naval"
+description: "Sous-disciplines du génie maritime, flottabilité et stabilité des navires, résistance à l'avancement, propulsion marine, contexte canadien et réglementation"
+icon: "ship"
+---
+
+Le génie maritime et naval est l'ensemble des disciplines d'ingénierie appliquées à la conception, à la construction, à l'exploitation et à la maintenance des navires, des structures marines et des infrastructures portuaires. C'est une discipline à la fois ancienne — les principes d'Archimède datent de l'Antiquité — et de pointe, avec des navires autonomes, des structures offshore en eau ultra-profonde et des technologies de propulsion à zéro émission qui redéfinissent le secteur.
+
+Le Canada, avec sa façade maritime parmi les plus longues au monde (plus de 243 000 km de côtes), son trafic sur la Voie maritime du Saint-Laurent et ses Grands Lacs, son industrie pétrolière offshore à Terre-Neuve-et-Labrador, et ses défis uniques de navigation arctique, est un pays profondément maritime. L'industrie maritime canadienne emploie directement plus de 250 000 personnes et génère des milliards de dollars en commerce annuel.
+
+## Sous-disciplines du génie maritime
+
+### Architecture navale
+
+L'architecture navale est la discipline qui se consacre à la conception de navires. Elle couvre la forme de la coque (hull form), la stabilité, la résistance à l'avancement, les performances de manœuvre, les structures du navire (scantlings), le plan de capacité (aménagement intérieur, cargaison) et les systèmes du bord. L'architecte naval est à la marine ce que l'architecte civil est au bâtiment, mais avec la complexité supplémentaire que la structure doit flotter, se déplacer efficacement et résister aux efforts dynamiques des vagues.
+
+### Propulsion et machines marines
+
+Le génie des machines marines couvre les systèmes de propulsion (moteurs, ligne d'arbre, hélices), les auxiliaires (pompes, compresseurs, séparateurs), les systèmes de production d'énergie électrique (générateurs), la tuyauterie et les systèmes de sécurité incendie. Les mécaniciens marins sont les ingénieurs de la salle des machines.
+
+### Génie offshore
+
+Le génie offshore s'applique aux structures marines fixes ou flottantes utilisées pour l'exploration et la production pétrolière et gazière en mer : plateformes jacket (structures fixées au fond), FPSO (Floating Production, Storage and Offloading), semi-submersibles, navires de forage, pipelines sous-marins. Cette discipline combine l'architecture navale, le génie civil marin et le génie pétrolier.
+
+### Génie portuaire et côtier
+
+Le génie portuaire et côtier traite de la conception et de la construction des infrastructures portuaires : quais, terminaux à conteneurs, brise-lames, digues, chenaux de navigation dragués, écluses. Il intègre l'hydrodynamique côtière (action des vagues et des marées), la géotechnique marine et le génie civil.
+
+<Info>
+L'ingénieur maritime au Canada est généralement membre de l'ordre professionnel d'ingénieurs de sa province (OIQ, PEO, EGBC, APEGA, etc.) dans sa spécialité de base (génie civil, mécanique, ou électrique). La certification spécifique comme officier mécanicien de marine est délivrée par Transports Canada, distincte du titre d'ingénieur.
+</Info>
+
+## Principe d'Archimède et flottabilité
+
+### Poussée d'Archimède
+
+Le principe d'Archimède (environ 250 av. J.-C.) stipule que tout corps plongé dans un fluide au repos subit une poussée verticale, dirigée vers le haut, égale au poids du fluide déplacé :
+
+```
+F_A = ρ_eau · g · V_immergé
+```
+
+Où ρ_eau est la masse volumique de l'eau (1025 kg/m³ pour l'eau de mer à 15°C; 1000 kg/m³ pour l'eau douce), g = 9,81 m/s² et V_immergé le volume immergé du navire.
+
+### Déplacement du navire
+
+Pour un navire en équilibre (flottant), la poussée d'Archimède est égale au poids total du navire :
+
+```
+Δ = ρ_eau · g · ∇ = W
+```
+
+Où **Δ** (Delta) est le **déplacement** du navire (en tonnes ou en kN) et **∇** (nabla) est le volume de déplacement (m³). Le déplacement est l'une des mesures de base qui caractérisent un navire.
+
+**Tonnes de déplacement** : Le déplacement est couramment exprimé en tonnes métriques (t). Par convention navale, 1 tonne de déplacement = 1 m³ d'eau de mer (approximation pour ρ_eau = 1000 kg/m³) ou 0,975 m³ (pour ρ_eau = 1025 kg/m³).
+
+### Courbe de Bonjean
+
+La **courbe de Bonjean** est le graphique représentant les surfaces des sections transversales immergées du navire en fonction du tirant d'eau, pour chaque position le long de la longueur du navire. Elle permet de calculer rapidement le volume de déplacement et son centre de carène pour n'importe quel tirant d'eau ou assiette.
+
+## Stabilité du navire
+
+La stabilité est la capacité d'un navire à revenir à sa position d'équilibre après une perturbation (action des vagues, déplacement de cargaison, embarquement d'eau). C'est l'une des propriétés les plus critiques en architecture navale.
+
+### Points de référence fondamentaux
+
+```
+K  — Quille (Keel) : point le plus bas du navire (référence verticale)
+G  — Centre de gravité : point d'application du poids total du navire
+B  — Centre de carène (Buoyancy) : centre du volume immergé, point d'application de la poussée
+M  — Métacentre : intersection de la verticale passant par B (dans la position inclinée) avec l'axe de symétrie du navire à l'état droit
+```
+
+### Hauteur métacentrique GM
+
+La **hauteur métacentrique** GM est le paramètre fondamental de la stabilité initiale :
+
+```
+GM = KB + BM - KG
+```
+
+Où :
+- **KB** : distance verticale de la quille au centre de carène (dépend de la forme de la coque et du tirant d'eau)
+- **BM** = I_T / ∇ : **rayon métacentrique transversal** (I_T = moment d'inertie de la flottaison transversal; ∇ = volume de déplacement)
+- **KG** : hauteur du centre de gravité au-dessus de la quille (dépend du chargement)
+
+**Interprétation de GM** :
+- **GM > 0** (M au-dessus de G) : navire stable — le moment de redressement (righting moment) ramène le navire à la verticale
+- **GM = 0** : stabilité neutre — aucune force de redressement
+- **GM < 0** (M en dessous de G) : navire instable — le moment chavire aggrave l'inclinaison → risque de chavirement
+
+```
+GZ = GM · sin(θ)    (pour les petits angles θ < 10°)
+```
+
+**GZ** (Bras de redressement) est le bras de levier du couple de redressement. Le moment de redressement est : RM = Δ × GZ.
+
+<Warning>
+Une valeur de GM trop élevée rend le navire "raide" (stiff) : il oscille rapidement avec de forts retours, ce qui est inconfortable pour l'équipage, fatigue les structures et peut déplacer la cargaison. Une valeur de GM trop faible rend le navire "mou" (tender) et risque le chavirement. Les normes de stabilité (IMO, TP 7301 Transport Canada) fixent des critères minimums obligatoires sur la courbe de GZ statique.
+</Warning>
+
+### Courbe de stabilité statique (courbe de Pantocarène)
+
+Pour les grands angles d'inclinaison, la relation GM × sin(θ) n'est plus linéaire car le centre de carène B se déplace de manière non linéaire. La **courbe de stabilité statique** (courbe GZ en fonction de θ) est calculée par intégration numérique pour chaque angle de gîte :
+
+- **Angle de gîte à GZ max** : idéalement > 30°
+- **Angle de disparition** (downflooding angle ou GZ = 0 after max) : idéalement > 60°
+- **Aire sous la courbe** : représente la réserve d'énergie de stabilité (kJ par tonne)
+
+Les critères minimums IMO Resolution A.749(18) (Code de stabilité intacte) exigent notamment : aire sous GZ jusqu'à 30° ≥ 3,151 m·deg; aire entre 30° et 40° ≥ 1,719 m·deg; GZ ≥ 0,20 m à θ ≥ 30°; GM₀ ≥ 0,15 m.
+
+## Résistance à l'avancement
+
+La résistance totale R_T est la force que doit vaincre la propulsion du navire pour maintenir une vitesse constante. Elle se décompose en plusieurs composantes d'origines physiques distinctes :
+
+### Composantes de la résistance
+
+**Résistance de frottement (R_F)** : résulte des forces de cisaillement visqueux entre la coque et l'eau. Elle représente 50–80% de la résistance totale à basse vitesse. Calculée selon le coefficient de frottement de la plaque plane ITTC-1957 :
+```
+Cf = 0,075 / (log₁₀(Re) - 2)²
+```
+
+**Résistance résiduelle (R_R)** : différence entre la résistance totale mesurée et la résistance de frottement de la plaque plane; elle comprend principalement la résistance de vagues et la résistance de forme (pression visqueuse).
+
+**Résistance de vagues (R_W)** : résulte de l'énergie dissipée dans la création du système de vagues de Kelvin entourant le navire en déplacement. Elle augmente fortement près de la vitesse critique de hull speed. À des vitesses élevées, la résistance de vagues peut représenter 40–60% de la résistance totale.
+
+**Résistance d'appendices (R_APP)** : résistance des appendices submergés (safran, quilles anti-roulis, stabilisateurs, etc.)
+
+**Résistance à la houle (R_AW)** : résistance ajoutée due aux vagues en mer réelle (mer formée).
+
+**Résistance aérodynamique (R_AA)** : traînée des superstructures émergées.
+
+### Nombre de Froude
+
+Le **nombre de Froude** est le paramètre sans dimension déterminant pour la résistance de vagues :
+
+```
+Fr = V / √(g · L)
+```
+
+Où V est la vitesse du navire (m/s), g = 9,81 m/s² et L la longueur à la flottaison (m).
+
+- **Fr < 0,15** : régime dominé par la résistance de frottement (navires lents : pétroliers, vraquiers)
+- **0,15 < Fr < 0,35** : régime mixte (cargos, porte-conteneurs)
+- **Fr > 0,4** : régime dominé par la résistance de vagues (navires rapides : ferries, vedettes)
+
+**Vitesse de coque** (Hull Speed) : Concept empirique selon lequel un navire à déplacement atteint une "vitesse limite" à Fr ≈ 0,40 où la longueur des vagues générées égale la longueur du navire :
+```
+V_max (nœuds) ≈ 1,34 × √(L_flottaison en pieds) = 2,43 × √(L_flottaison en mètres)
+```
+
+Au-delà de cette vitesse, la résistance de vagues augmente très rapidement pour les carènes à déplacement. Les catamarans, les trimarans et les carènes planantes permettent de dépasser cette limite.
+
+### Méthodes d'estimation de la résistance
+
+**Bassins de carènes (Towing Tanks)** : Des modèles réduits (échelle 1:10 à 1:25) sont remorqués dans un bassin long (100–300 m) pour mesurer la résistance à différentes vitesses. Les résultats sont extrapolés à la pleine échelle par similitude de Froude.
+
+**Méthodes statistiques de Holtrop-Mennen** : Méthode de régression statistique basée sur les essais de résistance de plus de 300 navires; donne une estimation préliminaire de RT avec une précision de ±10–15%.
+
+**CFD navale** : De plus en plus utilisée en conception, notamment pour l'optimisation de la forme de la bosse d'étrave (bulbe d'étrave) et des appendices.
+
+## Propulsion marine
+
+### Hélice à pas fixe (FPP — Fixed Pitch Propeller)
+
+L'hélice marine est le système de propulsion le plus commun. Elle convertit le couple du moteur en poussée (thrust) grâce à ses pales profilées qui agissent comme des ailes rotatives dans l'eau.
+
+**Paramètres géométriques clés** :
+- **Diamètre** D : typiquement 4–12 m pour les grands navires
+- **Pas** (Pitch) P : distance théorique avancée par tour si les pales ne glissaient pas
+- **Rapport pas/diamètre** P/D : 0,5–1,4 selon l'application
+- **Nombre de pales** : 4–6 pales (compromis entre efficacité, vibrations et cavitation)
+- **Ratio d'aire développée** (Expanded Area Ratio, EAR) : rapport de l'aire des pales / aire du disque
+
+**Théorie de l'hélice (Coefficients adimensionnels)** :
+```
+Coefficient de poussée :    KT = T / (ρ · n² · D⁴)
+Coefficient de couple :     KQ = Q / (ρ · n² · D⁵)
+Taux d'avance :             J  = Va / (n · D)
+```
+
+Où T est la poussée (N), Q le couple (N·m), n la vitesse de rotation (tr/s), Va la vitesse d'avance de l'hélice (= vitesse du navire corrigée du sillage w : Va = V(1-w)).
+
+**Efficacité de l'hélice en eau libre** (open-water efficiency) :
+```
+η₀ = (KT · J) / (2π · KQ)
+```
+
+Les courbes KT, KQ et η₀ en fonction de J (diagrammes KT-KQ ou "Wageningen B-Series") constituent la base du dimensionnement préliminaire des hélices. Les séries Wageningen B (publiées par le MARIN, Pays-Bas) couvrent un large spectre de nombres de pales et de EAR.
+
+**Cavitation** : La cavitation se produit lorsque la pression locale sur les pales chute en dessous de la pression de vapeur de l'eau. Des bulles de vapeur se forment et implosent violemment, causant érosion, vibrations et perte de rendement. La conception anti-cavitation impose une charge limite sur les pales (Burrill cavitation criterion).
+
+### Hélice à pas variable (CPP — Controllable Pitch Propeller)
+
+Les pales à angle variable permettent de modifier le pas en cours de route, offrant un contrôle de la poussée sans changer la vitesse du moteur. Idéal pour les navires nécessitant une grande maniabilité (ferries, navires d'ancrage dynamique). Coût plus élevé et maintenance plus complexe que les FPP.
+
+### Moteurs diesels marins
+
+**Diesel 2 temps à grande lente (2T)** : Les moteurs marins 2T à grande lente de MAN Energy Solutions (série G, S) et WinGD sont des moteurs imposants (alésage 30–100 cm, course 2–4 m, puissance unitaire jusqu'à 100 000 kW) qui fonctionnent à 60–120 tr/min et sont directement accouplés à l'hélice. Ce sont les moteurs les plus économiques en carburant (taux de consommation spécifique SFOC < 160 g/kWh). Ces colosses équipent les grands navires de transport (supertankers, porte-conteneurs géants, vraquiers).
+
+**Diesel 4 temps à moyenne lente (4T)** : Moteurs MAN B&W L/V types, Wärtsilä 32/26/31, Rolls-Royce Bergen; vitesse : 400–1200 tr/min; accouplés à l'hélice via réducteur ou utilisés en diesel-électrique. Polyvalents pour ferries, navires de ravitaillement, navires de croisière.
+
+**Propulsion diesel-électrique** : Le moteur diesel entraîne un générateur électrique; un moteur électrique (pod ou conventionnel) actionne l'hélice. Très flexible, silencieux, efficient à charge partielle; utilisé sur les navires de croisière (Queen Mary 2), les navires scientifiques, les brise-glaces.
+
+<Tip>
+La réglementation IMO MARPOL Annexe VI et le Règlement sur les émissions de soufre (teneur en soufre du carburant ≤ 0,5% global depuis 2020, ≤ 0,1% dans les zones SECA) pousse le secteur maritime vers le GNL (Gaz Naturel Liquéfié), le méthanol, l'ammoniac vert et la propulsion hydrogène. Le Canada participe activement à cette transition via Transport Canada et les programmes de recherche de Pêches et Océans Canada.
+</Tip>
+
+## Contexte maritime canadien
+
+### Voie maritime du Saint-Laurent et Grands Lacs
+
+La **Voie maritime du Saint-Laurent** (inaugurée en 1959), gérée conjointement par la Corporation de la Voie maritime du Saint-Laurent (Canada) et la Saint Lawrence Seaway Development Corporation (États-Unis), permet aux navires de mer (sealakers) d'atteindre les ports des Grands Lacs depuis l'Atlantique. Ses écluses (7 côté canadien + 8 côté américain) ont des dimensions maximales de 225 m × 24 m × 8,15 m de tirant d'eau, définissant la classe **Seaway-max**.
+
+Les **laquiers** (Lakers) — navires spécialement conçus pour les Grands Lacs — peuvent atteindre 300–360 m de longueur et 32 m de large, mais ne peuvent pas transiter par les écluses de la Voie maritime. Ils transportent principalement minerai de fer, charbon, calcaire et grain.
+
+### Offshore Terre-Neuve-et-Labrador
+
+Le champ de Hibernia (depuis 1997), Terra Nova, White Rose et Hebron constituent les quatre grands projets pétroliers offshore de Terre-Neuve. Ces structures opèrent dans un environnement exceptionnel : icebergs dérivants (jusqu'à 50 000 par an dans l'Atlantique Nord), vagues extrêmes (hauteur significative jusqu'à 14 m en condition centenaire), et risque de glace de mer.
+
+La plateforme **Hibernia** est une GBS (Gravity Based Structure) en béton armé, posée sur le fond à 80 m de profondeur, conçue pour résister au choc direct d'un iceberg de 6 millions de tonnes.
+
+### Navigation arctique
+
+Le Canada possède la plus longue côte arctique de tout pays au monde. Le passage du Nord-Ouest, longtemps congelé, est de plus en plus accessible avec le réchauffement climatique. Transport Canada applique le Code Polaire IMO (entré en vigueur le 1er janvier 2017) qui exige des **classes de glace** spécifiques pour naviguer dans les eaux arctiques canadiennes :
+
+- **Arc 4 / PC7** : navigation en glace de première année dans des conditions non critiques
+- **Arc 7 / PC5–PC4** : navigation en glace pluriannuelle — brise-glaces côtiers
+- **PC1** : brise-glaces polaire toutes saisons (ex. le futur brise-glace polaire CCGS John G. Diefenbaker)
+
+Les **brise-glaces de la Garde côtière canadienne** (MACP — Marine Auxiliaries — Classe J. G. Diefenbaker en construction, Louis S. St-Laurent, Amundsen) sont des symboles de la souveraineté arctique canadienne.
+
+### Port de Vancouver et commerce Pacifique
+
+Le **Port de Vancouver** (Port Metro Vancouver) est le plus grand port du Canada et le troisième port en Amérique du Nord par le tonnage. Il traite plus de 145 millions de tonnes de marchandises par année (charbon, potasse, grain, conteneurs, véhicules). Ses terminaux se répartissent sur plusieurs sites dans le Lower Mainland (Deltaport, Westshore Terminals, Neptune Bulk Terminals).
+
+## Réglementation et classification
+
+### Transport Canada
+
+**Transport Canada** (Direction générale de la sécurité maritime) est l'autorité de réglementation maritime canadienne. Les principaux instruments réglementaires incluent la **Loi de 2001 sur la marine marchande du Canada** (LMMC 2001) et ses règlements techniques (TP — Technical Publications). Les TP couvrent la construction des navires, les équipements de sauvetage, la stabilité, la prévention de la pollution et la certification des gens de mer.
+
+### Sociétés de classification
+
+Les sociétés de classification sont des organismes indépendants qui établissent les normes techniques de construction et de maintenance des navires et certifient la conformité (certificate of class). Sans certificat de classe, un navire ne peut être assuré ni entrer dans la plupart des ports.
+
+| Société | Pays d'origine | Marque de classe |
+|---------|---------------|-----------------|
+| **Lloyd's Register (LR)** | Royaume-Uni | +100A1 |
+| **Bureau Veritas (BV)** | France | I ✠ Hull |
+| **DNV (Det Norske Veritas)** | Norvège | + 1A1 |
+| **ABS (American Bureau of Shipping)** | États-Unis | ✠ A1 |
+| **ClassNK (Nippon Kaiji Kyokai)** | Japon | NK |
+| **RINA (Registro Italiano Navale)** | Italie | 100-A-1.1 |
+| **RMRS** | Russie | KM |
+
+Les sociétés de classification membres de l'IACS (International Association of Classification Societies) couvrent ensemble plus de 90% du tonnage mondial.
+
+### OMI (Organisation Maritime Internationale)
+
+L'OMI est l'agence spécialisée de l'ONU pour la réglementation du transport maritime international. Ses conventions majeures incluent :
+- **SOLAS** (Safety of Life at Sea) : sécurité des navires et des personnes
+- **MARPOL** (Marine Pollution) : prévention de la pollution marine
+- **STCW** (Standards of Training, Certification and Watchkeeping) : formation et certification des gens de mer
+- **COLREG** (Collision Regulations) : règles de route en mer
+
+## Construction navale au Canada
+
+L'industrie de la construction navale canadienne a connu une longue période de déclin, mais la **Stratégie nationale de construction navale (SNCN)**, lancée en 2011, a relancé les grands chantiers canadiens avec des contrats pluridécennaux :
+
+**Chantier Davie (Lévis, Québec)** : Le plus grand chantier naval du Canada, situé à Lévis en face de Québec. En 2024, Chantier Davie a été sélectionné comme troisième chantier partenaire de la SNCN. Il construit actuellement des navires de ravitaillement (Asterix) et sera responsable de navires de la Garde côtière canadienne et éventuellement de navires militaires.
+
+**Seaspan Shipyards (Vancouver, Colombie-Britannique)** : Chantier de la côte Pacifique, responsable des navires non-combattants pour la Garde côtière canadienne et la Marine royale canadienne dans le cadre de la SNCN (classe de patrouilles de l'Arctique et des Grands Lacs, navires de science, navires de soutien interarmées).
+
+**Irving Shipbuilding (Halifax, Nouvelle-Écosse)** : Chantier de la côte Atlantique, responsable des navires de combat dans le cadre de la SNCN. Il construit la nouvelle classe de frégates CSC (Canadian Surface Combatant) — 15 navires — pour remplacer les frégates de la classe Halifax.
+
+<CardGroup cols={2}>
+  <Card title="Mécanique des fluides" icon="water" href="/genie-mecanique/mecanique-fluides">
+    Équations de Navier-Stokes, dynamique des fluides et résistance hydraulique
+  </Card>
+  <Card title="Aérodynamique" icon="wind" href="/genie-aerospatial/aerodynamique">
+    Portance, traînée, couche limite — principes communs avec l'hydrodynamique
+  </Card>
+  <Card title="Génie pétrolier offshore" icon="oil-can" href="/genie-petrolier/introduction">
+    Exploration et production offshore — plateformes, FPSO et pipelines sous-marins
+  </Card>
+  <Card title="Génie civil hydraulique" icon="droplet" href="/genie-civil/hydraulique">
+    Hydraulique des ports, des écluses et des ouvrages côtiers
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes et réglementations** : LMMC 2001 (Canada), Conventions IMO (SOLAS, MARPOL, STCW, COLREG), Code Polaire IMO 2017, Règles des sociétés de classification (LR, BV, DNV, ABS)
+- **Logiciels** : MAXSURF (Bentley — conception de carènes et stabilité), NAPA (NAPA Ltd — architecture navale complète), ShipFlow (FLOWTECH — CFD navale), SESAM (DNV — structures offshore), ANSYS AQWA (comportement à la mer), Rhinoceros 3D + Orca3D (modélisation)
+- **Publications** : *Journal of Ship Research* (SNAME), *Ocean Engineering* (Elsevier), *Marine Technology and SNAME News*, *International Shipbuilding Progress*
+- **Organismes** : SNAME (Society of Naval Architects and Marine Engineers), RINA (Royal Institution of Naval Architects), IMO, Transport Canada Direction générale de la sécurité maritime, Association des armateurs du Canada
+- **Formations au Canada** : Memorial University of Newfoundland (génie de l'océan), Université du Québec à Rimouski (UQAR — génie de systèmes maritimes), Collège de la Garde côtière canadienne (CGCC — Lévis)

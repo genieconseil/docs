@@ -1,0 +1,190 @@
+---
+title: "Électronique analogique et numérique"
+description: "Semiconducteurs, amplificateurs opérationnels, logique numérique, convertisseurs, microcontrôleurs et bus de communication"
+icon: "microchip"
+---
+
+L'électronique est le fondement des systèmes de contrôle, d'instrumentation et de communication industriels modernes. La maîtrise des composants passifs et actifs, des circuits intégrés et des protocoles de communication est indispensable à l'ingénieur en systèmes embarqués, en automatisation et en télécommunications.
+
+## Composants semiconducteurs
+
+**Diodes — caractéristique I-V**
+
+La diode à jonction PN laisse passer le courant dans le sens direct (polarisation directe) et le bloque dans le sens inverse. La caractéristique courant-tension suit l'équation de Shockley :
+
+$$I = I_S \left(e^{\frac{V}{nV_T}} - 1\right)$$
+
+où IS est le courant de saturation inverse, n le facteur d'idéalité (1 à 2), et VT = kT/q la tension thermique (≈ 26 mV à 25 °C). La tension de seuil est ≈ 0,7 V pour le silicium et ≈ 0,3 V pour le germanium.
+
+**Circuits redresseurs**
+
+- **Redresseur monoalternance** : un seul cycle sur deux passe — valeur moyenne Vmoy = Vp/π. Ondulation élevée, utilisé pour les faibles puissances.
+- **Redresseur double alternance en pont de Graëtz** : les deux alternances sont redressées — Vmoy = 2Vp/π ≈ 0,637 Vp. La fréquence d'ondulation est 2× la fréquence secteur (100 ou 120 Hz). Un condensateur de filtrage de capacité C = I/(2f × ΔV) lisse la tension de sortie.
+
+**Transistor BJT (Bipolar Junction Transistor)**
+
+Le BJT amplifie le courant grâce à l'effet transistor : IC = β × IB. Les trois configurations sont :
+
+| Configuration | Entrée | Sortie | Particularité |
+|--------------|--------|--------|---------------|
+| **Émetteur Commun (EC)** | Base-Émetteur | Collecteur-Émetteur | Gain en tension élevé, inversion de phase |
+| **Base Commune (BC)** | Émetteur-Base | Collecteur-Base | Gain en courant < 1, faible impédance d'entrée |
+| **Collecteur Commun (CC)** | Base-Collecteur | Émetteur-Collecteur | Gain en tension ≈ 1, forte impédance d'entrée, buffer |
+
+La **polarisation par diviseur de tension** est la méthode la plus stable thermiquement pour la configuration EC. Les résistances R1 et R2 fixent VB ≈ VCC × R2/(R1+R2), indépendamment de β. La résistance d'émetteur RE introduit une contre-réaction qui stabilise le point de fonctionnement (Q-point).
+
+**MOSFET — canal N et P, technologie CMOS**
+
+Le MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor) est commandé en tension : la tension de grille VGS contrôle le canal conducteur entre drain et source. La tension de seuil VGS(th) (ou Vth) est le paramètre clé : pour un MOSFET canal N à enrichissement, le canal s'ouvre pour VGS > Vth.
+
+La technologie **CMOS** (Complementary MOS) associe un MOSFET canal N et un MOSFET canal P en complémentaire. La consommation statique est quasi nulle (un seul transistor conduit à la fois), ce qui explique sa domination dans les circuits logiques et les microprocesseurs. La consommation dynamique P = C × VDD² × f × α (où α est le taux d'activité) détermine la puissance dissipée dans les processeurs modernes.
+
+<Note>
+Les MOSFET de puissance (IRFP460, IPW60R045) sont caractérisés par leur résistance à l'état passant RDS(on) (qui génère les pertes par conduction) et leur temps de commutation (pertes par commutation). Les SiC-MOSFET (carbure de silicium) et GaN-HEMT permettent des fréquences de commutation ≥ 100 kHz avec des tensions de blocage de 650 à 3 300 V pour les applications de traction électrique et les convertisseurs DC-DC haute tension.
+</Note>
+
+## Amplificateurs opérationnels
+
+**Hypothèses de l'amplificateur opérationnel idéal**
+
+L'analyse des circuits à amplificateur opérationnel (AOP) idéal repose sur deux hypothèses :
+1. Gain en boucle ouverte infini → les tensions aux bornes (+) et (−) sont égales : V+ = V−
+2. Impédance d'entrée infinie → les courants d'entrée sont nuls : I+ = I− = 0
+
+**Montages fondamentaux**
+
+**Amplificateur inverseur**
+La tension d'entrée est appliquée sur l'entrée (−) via R1. L'entrée (+) est à la masse.
+
+$$A_v = -\frac{R_f}{R_1}$$
+
+Le signe négatif indique l'inversion de phase. L'impédance d'entrée est R1.
+
+**Amplificateur non-inverseur**
+La tension d'entrée est appliquée sur l'entrée (+). La contre-réaction est sur l'entrée (−).
+
+$$A_v = 1 + \frac{R_f}{R_1}$$
+
+L'impédance d'entrée est très élevée (idéalement infinie), ce qui fait de ce montage un excellent buffer de haute impédance.
+
+**Montage intégrateur**
+En remplaçant Rf par un condensateur C, la sortie est l'intégrale de l'entrée :
+
+$$V_{out} = -\frac{1}{R_1 C}\int V_{in}\, dt$$
+
+Application : filtres actifs passe-bas, convertisseurs tension-fréquence, intégration d'accéléromètres.
+
+**Montage dérivateur**
+En remplaçant R1 par un condensateur C, la sortie est la dérivée de l'entrée :
+
+$$V_{out} = -R_f C \frac{dV_{in}}{dt}$$
+
+Sensible au bruit haute fréquence — une résistance en série avec C limite la dérivation aux fréquences basses.
+
+**Comparateur et trigger de Schmitt**
+
+Le comparateur compare deux tensions et bascule la sortie (HIGH ou LOW). Sans hysterèse, il est sensible au bruit sur le signal d'entrée (oscillations au voisinage du seuil). Le **trigger de Schmitt** ajoute une contre-réaction positive qui crée deux seuils distincts (VT+ et VT−), éliminant les oscillations parasites. L'hysterèse ΔV = VT+ − VT− = 2 × (R1/R2) × Vsat.
+
+<Tip>
+Pour les applications de détection de seuil sur signaux bruités (capteurs inductifs, signaux de process), le trigger de Schmitt est systématiquement préféré au comparateur simple. Le LM393 (comparateur) et le CD40106 (Schmitt intégré) sont des solutions économiques et robustes.
+</Tip>
+
+## Logique numérique
+
+**Algèbre de Boole**
+
+Les trois opérations fondamentales sont : ET (AND = ×), OU (OR = +), NON (NOT = ¬). Les théorèmes de De Morgan permettent la transformation : ¬(A×B) = ¬A + ¬B et ¬(A+B) = ¬A × ¬B. Les tables de Karnaugh (jusqu'à 4 à 5 variables) simplifient les expressions booléennes en regroupant les mintermes adjacents.
+
+**Portes logiques et familles logiques**
+
+Les familles logiques CMOS (CD4000, 74HC, 74HCT) et TTL (74LS, 74F, 74ALS) diffèrent par leur tension d'alimentation (CMOS : 3,3 V ou 5 V voire 1,8 V ; TTL : 5 V), leur vitesse de commutation, leur consommation et leur immunité au bruit.
+
+**Multiplexeurs, démultiplexeurs et décodeurs**
+
+Le multiplexeur 2ⁿ vers 1 sélectionne une entrée parmi 2ⁿ grâce à n bits d'adresse. Applications : partage de bus, conversion parallèle-série. Le décodeur (74HC138 : 3 vers 8) active une sortie parmi 2ⁿ.
+
+**Bascules et registres**
+
+- **Bascule D** : état mémorisé sur front montant de l'horloge : Q(t+1) = D(t). Base des registres à décalage et des mémoires RAM statiques.
+- **Bascule JK** : Q(t+1) = J×¬Q + ¬K×Q. Mode toggle (J=K=1) utilisé pour les compteurs.
+- **Bascule T** : toggle sur chaque front d'horloge si T=1. Utilisée dans les compteurs binaires.
+
+**Machines à états finis (FSM)**
+
+Une FSM est définie par ses états, son alphabet d'entrée, sa fonction de transition et sa fonction de sortie. La machine de Moore génère les sorties à partir de l'état seul ; la machine de Mealy génère les sorties à partir de l'état et des entrées (plus réactive, moins de états nécessaires). Le diagramme d'état et la table de transition sont les outils de conception fondamentaux, implémentés en VHDL/Verilog sur FPGA ou en logique câblée.
+
+## Convertisseurs N/A et A/N
+
+**Théorème de Nyquist-Shannon**
+
+Pour reconstruire un signal analogique sans distorsion, la fréquence d'échantillonnage fe doit être supérieure au double de la fréquence maximale du signal :
+
+$$f_e > 2 \times f_{max}$$
+
+En pratique, on applique un filtre anti-repliement (anti-aliasing filter) passe-bas avant l'échantillonnage pour éliminer les composantes supérieures à fe/2 (fréquence de Nyquist).
+
+**Résolution et erreur de quantification**
+
+La résolution d'un convertisseur N bits est : LSB = VFS / 2ⁿ. L'erreur de quantification maximale est ± LSB/2. Un convertisseur 12 bits sur une plage de 0–5 V a une résolution de 5/4096 ≈ 1,22 mV. Pour 16 bits : 76 µV.
+
+**Types de convertisseurs A/N**
+
+- **Flash ADC** : 2ⁿ−1 comparateurs en parallèle — conversion en un seul cycle d'horloge, résolution limitée (≤ 8 bits), coût élevé. Utilisé pour les oscilloscopes et les récepteurs RF.
+- **SAR ADC** (Successive Approximation Register) : approximations successives en n cycles d'horloge — bon compromis vitesse/résolution (8 à 18 bits, jusqu'à quelques MSPS). Standard dans les microcontrôleurs.
+- **Delta-Sigma ADC** (ΔΣ) : suréchantillonnage et mise en forme du bruit — très haute résolution (16 à 24 bits) à faible fréquence. Utilisé pour l'audio, les capteurs de pression et de température.
+
+## Microcontrôleurs
+
+**Architecture générale**
+
+Un microcontrôleur intègre sur une seule puce : un processeur (cœur ARM Cortex-M pour les MCU modernes), des mémoires (Flash programme, SRAM données), et des périphériques (timers, ADC, DAC, interfaces de communication).
+
+**STM32 (STMicroelectronics)**
+
+La famille STM32 est basée sur les cœurs ARM Cortex-M0/M3/M4/M7/M33. Les variantes vont du STM32F0 (Cortex-M0, 48 MHz, 32 KB Flash) au STM32H7 (Cortex-M7 double cœur, 480 MHz, 2 MB Flash). Environnement de développement : STM32CubeIDE, HAL (Hardware Abstraction Layer), LL (Low Layer), FreeRTOS.
+
+**Arduino (microcontrôleurs AVR/ARM)**
+
+L'écosystème Arduino (AVR ATmega328P pour Uno, ARM SAMD21 pour MKR, STM32 pour Nucleo) offre une IDE simplifiée (Arduino IDE) et une bibliothèque standard étendue. Idéal pour le prototypage rapide et l'enseignement.
+
+**Périphériques essentiels**
+
+| Périphérique | Fonction | Paramètres clés |
+|-------------|----------|-----------------|
+| **GPIO** | Entrées/sorties numériques | Mode push-pull, open-drain, pull-up/down |
+| **UART** | Communication série asynchrone | Débit (baud rate), parité, bits de stop |
+| **SPI** | Bus synchrone full-duplex | CPOL, CPHA, fréquence d'horloge |
+| **I2C** | Bus multi-esclaves 2 fils | Adresse 7 ou 10 bits, vitesses 100/400 kHz/1 MHz |
+| **ADC** | Conversion analogique-numérique | Résolution 10–16 bits, vitesse d'échantillonnage |
+| **PWM** | Modulation de largeur d'impulsion | Résolution, fréquence, rapport cyclique |
+
+## Bus de communication industriels
+
+**CAN Bus (Controller Area Network)**
+
+Développé par Bosch en 1983 et standardisé ISO 11898, le CAN est le bus dominant dans l'automobile. Architecture multi-maîtres sur deux fils différentiels (CANH/CANL), débit jusqu'à 1 Mbit/s (CAN classique) et 8 Mbit/s (CAN FD — Flexible Data-rate). La gestion des priorités par CSMA/CD (accès multiple avec détection de collision et arbitrage non destructif par l'identifiant de trame) garantit un accès déterministe. Les protocoles applicatifs OBD-II, CANopen (automatisation) et SAE J1939 (véhicules lourds) s'appuient sur le CAN.
+
+**RS-485**
+
+Le RS-485 est le standard de bus série différentiel le plus répandu dans l'automatisation industrielle. Il supporte jusqu'à 32 nœuds sur une distance de 1 200 m à 100 kbit/s, ou 10 Mbit/s sur 12 m. La topologie en bus (ligne terminée à 120 Ω aux deux extrémités) minimise les réflexions. Les protocoles Modbus RTU et PROFIBUS utilisent le RS-485 comme couche physique.
+
+<Info>
+Pour les nouvelles installations industrielles, Ethernet industriel (EtherNet/IP, PROFINET, EtherCAT) tend à remplacer le RS-485 et le PROFIBUS grâce à ses débits (100 Mbit/s à 1 Gbit/s) et à l'infrastructure réseau standardisée. EtherCAT offre des latences déterministes < 100 µs grâce au traitement "à la volée" dans les esclaves.
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Machines électriques" icon="gear" href="/genie-electrique/machines-electriques">
+    Moteurs, variateurs de fréquence et transformateurs
+  </Card>
+  <Card title="Télécommunications" icon="tower-broadcast" href="/genie-electrique/telecommunications">
+    Théorie des signaux, modulations et réseaux cellulaires
+  </Card>
+  <Card title="Réseaux électriques" icon="plug" href="/genie-electrique/reseaux-electriques">
+    Protection des réseaux et qualité de l'énergie
+  </Card>
+  <Card title="Conception mécanique" icon="drafting-compass" href="/genie-mecanique/conception-mecanique">
+    Capteurs et instrumentation pour la mécanique
+  </Card>
+</CardGroup>
