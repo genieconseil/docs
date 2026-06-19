@@ -1,0 +1,202 @@
+---
+title: "Génie des transports et des routes"
+description: "Conception géométrique des routes, ingénierie de la circulation, capacité HCM, conception des chaussées et normes TAC/MTQ/MTO"
+icon: "road"
+---
+
+Le génie des transports englobe la planification, la conception, la construction et l'exploitation des infrastructures de transport (routes, autoroutes, carrefours, ronds-points). Au Canada, les normes de l'Association des transports du Canada (TAC) s'appliquent à l'échelle fédérale, tandis que le MTQ (Ministère des Transports du Québec) et le MTO (Ministry of Transportation of Ontario) publient leurs propres guides.
+
+## Conception géométrique des routes
+
+### Courbes horizontales
+
+Une courbe horizontale raccorde deux alignements droits. Les paramètres fondamentaux sont :
+
+- **Rayon (R)** : détermine la courbure
+- **Angle de déflexion (Δ)** : angle entre les deux tangentes
+- **Tangente (T)** : distance entre le PC (Point of Curvature) et le PI (Point of Intersection)
+
+```
+T = R × tan(Δ/2)
+Longueur d'arc L = R × Δ (en radians)
+```
+
+**Rayon minimal** selon la vitesse de conception et le dévers :
+
+```
+Rmin = V² / (127 × (e + f))
+```
+
+Où V = vitesse (km/h), e = dévers (m/m), f = coefficient de frottement transversal
+
+| Vitesse (km/h) | Dévers max e (%) | f max | Rmin (m) |
+|----------------|------------------|-------|----------|
+| 50 | 6 | 0,22 | 65 |
+| 80 | 6 | 0,14 | 230 |
+| 100 | 6 | 0,12 | 395 |
+| 120 | 6 | 0,10 | 670 |
+
+### Dévers (Superelevation)
+
+Le dévers est l'inclinaison transversale de la chaussée dans les courbes. Il contrebalance la force centrifuge et permet un confort de conduite adéquat. La norme TAC Geometric Design Guide for Canadian Roads prescrit les méthodes de transition de dévers.
+
+**Méthodes de transition** : la rotation se fait généralement autour de la ligne centrale ou de la rive intérieure, sur une longueur de transition L_r.
+
+### Courbes verticales
+
+**Courbe parabolique** utilisée pour raccorder deux déclivités (pentes) :
+
+```
+y = A × x² / (200 × L)
+```
+
+Où A = différence algébrique des pentes (%), L = longueur de la courbe (m), x = distance depuis le début
+
+**Types de courbes verticales :**
+- **Courbe en dos d'âne (crest)** : raccorde une montée à une descente
+- **Courbe en creux (sag)** : raccorde une descente à une montée
+
+### Distance de visibilité d'arrêt (DVA)
+
+La distance de visibilité d'arrêt est la distance minimale que doit voir un conducteur pour s'arrêter sans collision :
+
+```
+DVA = V²/254(f±g) + (V × tr/3.6)
+```
+
+Où f = coefficient de frottement longitudinal, g = déclivité en %, tr = temps de réaction (1,5 s selon TAC)
+
+| Vitesse (km/h) | DVA min (m) |
+|----------------|-------------|
+| 50 | 65 |
+| 70 | 110 |
+| 100 | 185 |
+| 120 | 250 |
+
+## Ingénierie de la circulation
+
+### Manuel de capacité des routes (HCM)
+
+Le *Highway Capacity Manual* (HCM 7e édition, TRB) est la référence mondiale pour l'analyse des débits et de la capacité. Il définit six niveaux de service (NS ou LOS) :
+
+| Niveau | Description | Rapport volume/capacité v/c |
+|--------|-------------|----------------------------|
+| A | Écoulement libre | < 0,35 |
+| B | Écoulement raisonnablement libre | 0,35–0,54 |
+| C | Écoulement stable (commercialement acceptable) | 0,54–0,77 |
+| D | Approche de l'instabilité | 0,77–0,90 |
+| E | Capacité opérationnelle limite | 0,90–1,00 |
+| F | Écoulement forcé, congestion | > 1,00 |
+
+### Analyse des autoroutes (Freeway Segments)
+
+La capacité de base d'une autoroute idéale (rampe de 2 % max, largeur de voie 3,75 m, accotement 1,8 m, conducteurs 100 % véhicules légers) :
+
+- 2 400 pce/h/voie (vitesse libre 120 km/h)
+- 2 300 pce/h/voie (vitesse libre 100 km/h)
+
+**Facteur de pointe de l'heure (FPH/PHF)** : rapport entre le débit horaire et 4 fois le débit du quart d'heure le plus chargé.
+
+### Conception des carrefours à feux
+
+L'analyse des carrefours à signalisation lumineuse suit la méthode HCM chapitre 19 :
+
+1. Détermination des groupes de voies
+2. Calcul du débit de saturation de base (s₀ = 1 900 pce/h/voie verte)
+3. Application des facteurs de correction (largeur, pente, stationnement, virages)
+4. Calcul du rapport volume/capacité (v/c) par phase
+5. Détermination du retard moyen et du niveau de service
+
+**Longueur minimale du cycle** (formule de Webster) :
+```
+Co = (1,5 × L + 5) / (1 − ΣY)
+```
+
+Où L = pertes totales par cycle, Y = rapport critique volume/saturation par phase
+
+### Ronds-points (Roundabouts)
+
+Les ronds-points remplacent avantageusement les carrefours à feux dans de nombreux cas :
+- Réduction des accidents de 40–80 % (suppression des conflits à grande vitesse)
+- Meilleure fluidité pour les faibles et moyens débits
+- Économies d'exploitation (pas de feux)
+
+**Capacité d'un rond-point** : entre 1 200 et 2 000 véh/h par entrée selon la géométrie.
+
+## Conception des chaussées
+
+### Chaussées souples (Flexible Pavements)
+
+La méthode AASHTO 1993 est la plus utilisée en Amérique du Nord. Elle utilise le **numéro structurel (SN)** :
+
+```
+SN = a₁D₁ + a₂D₂m₂ + a₃D₃m₃
+```
+
+Où aᵢ = coefficients de couche, Dᵢ = épaisseurs (pouces), mᵢ = coefficients de drainage
+
+**Équation de conception AASHTO :**
+```
+log(ÉSSAL) = ZR × S₀ + 9.36 × log(SN+1) − 0.20 + log[ΔPSI/(4.2−1.5)] / (0.40 + 1094/(SN+1)⁵·¹⁹) + 2.32 × log(Mr) − 8.07
+```
+
+**Paramètres typiques pour le Québec :**
+- Module de résilience du sol support Mr : 30–80 MPa (argile à sable)
+- Reliabilité R = 85–95 % selon la classification de la route
+- Déviation standard combinée S₀ = 0,45
+
+### Chaussées rigides (Concrete Pavements)
+
+Les chaussées en béton de ciment Portland (BCCP) sont plus durables mais plus coûteuses à construire. Conception selon AASHTO ou méthode mécaniste-empirique (AASHTOWare Pavement ME Design).
+
+**Espacement des joints de retrait** : typiquement 4,5 à 6 m pour une dalle de 200 mm d'épaisseur, pour limiter la fissuration thermique.
+
+**Transfert de charge** : goujons (dowels) en acier de 32–36 mm de diamètre placés au milieu de l'épaisseur de la dalle.
+
+### Matériaux de chaussée
+
+#### Béton bitumineux (enrobés asphaltiques)
+
+**Méthode Marshall** : éprouvettes cylindriques compactées par 50 ou 75 coups. Mesure de la stabilité Marshall et du fluage. Teneur en bitume optimale à l'intersection des courbes de densité et de stabilité.
+
+**Méthode Superpave** : système de classification Performance Grade (PG) du bitume selon le climat. Utilise le gyrateur à cisaillement giratoire (SGC). Clé au Québec : PG 64-34 (résiste à +64 °C et à -34 °C).
+
+Le MTQ publie le **Cahier des charges et devis généraux (CCDG)** et les **Normes — Ouvrages routiers (Tomes I à VIII)**.
+
+#### Béton de ciment Portland
+
+Résistance à la compression minimale f'c = 32 MPa (MTQ), rapport E/C ≤ 0,40, teneur en air 5–7 % pour la durabilité au gel-dégel.
+
+## Étude d'impact de la circulation (Traffic Impact Assessment)
+
+Une étude d'impact de circulation est requise pour les projets générant plus de 100 véhicules à l'heure de pointe. Elle comprend :
+
+1. **Inventaire** : comptages de circulation existants (TMJ, THPm, THPs)
+2. **Prévisions de génération** : utilisation des taux ITE (Institute of Transportation Engineers Trip Generation manual)
+3. **Distribution et affectation** : logiciels Emme, TransCAD, Visum
+4. **Analyse de capacité** : HCM pour les horizons horizon actuel, 5 ans, 10 ans
+5. **Mesures d'atténuation** : nouvelles voies, ajustements de signalisation
+
+## Normes et références canadiennes
+
+- **TAC** : *Geometric Design Guide for Canadian Roads* — référence principale pour la conception géométrique
+- **TAC** : *Pavement Asset Design and Management Guide*
+- **MTQ** : Normes – Ouvrages routiers (NOR), tomes I à VII
+- **MTQ** : Manuel de conception des chaussées neuves
+- **MTO** : *Ontario Traffic Manual* (OTM), *Pavement Design and Rehabilitation Manual*
+- **Guide de l'AASHTO pour la conception des chaussées** (édition 1993 et mécanique-empirique)
+
+<CardGroup cols={2}>
+  <Card title="Ponts et ouvrages d'art" icon="archway" href="/genie-civil/ponts-ouvrages">
+    Conception des ponts et code canadien CSA S6-19
+  </Card>
+  <Card title="Charpente métallique" icon="grip-lines" href="/genie-civil/charpente-metallique">
+    Conception des structures en acier selon CSA S16
+  </Card>
+  <Card title="Logiciels par discipline" icon="laptop-code" href="/ressources/logiciels-par-discipline">
+    AutoCAD Civil 3D, SWMM, HEC-RAS et autres outils
+  </Card>
+  <Card title="Normes canadiennes" icon="file-contract" href="/ressources/normes-canadiennes">
+    NBC, CSA et normes provinciales du MTQ et MTO
+  </Card>
+</CardGroup>

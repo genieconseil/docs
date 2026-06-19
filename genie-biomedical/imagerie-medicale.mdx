@@ -1,0 +1,223 @@
+---
+title: "Imagerie médicale — Principes d'ingénierie"
+description: "Principes physiques et d'ingénierie derrière les modalités d'imagerie médicale modernes"
+icon: "x-ray"
+---
+
+## Introduction à l'imagerie médicale
+
+L'imagerie médicale désigne l'ensemble des techniques permettant de visualiser l'intérieur du corps humain à des fins diagnostiques ou thérapeutiques, sans recourir à la chirurgie ouverte. Chaque modalité repose sur des principes physiques distincts — rayonnements ionisants, champs magnétiques, ondes ultrasonores, rayonnements gamma — et génère des informations complémentaires sur la morphologie, la structure et la fonction des organes.
+
+Du point de vue de l'ingénierie, le développement d'un système d'imagerie médicale mobilise des compétences en physique des rayonnements, en traitement du signal numérique, en reconstruction d'images, en conception de capteurs et de détecteurs, en cryogénie (pour l'IRM), en conception d'antennes RF et en gestion des données médicales (DICOM, PACS, HL7). L'imagerie médicale est l'un des domaines les plus interdisciplinaires du génie biomédical.
+
+## Radiographie et tomodensitométrie (CT)
+
+### Physique des rayons X
+
+Les rayons X sont des rayonnements électromagnétiques de courte longueur d'onde (0,01–10 nm), produits par des tubes radiogènes : des électrons accélérés sous haute tension (40–140 kVp en radiographie diagnostique) frappent une anode en tungstène et perdent leur énergie cinétique sous forme de rayonnement de freinage (*Bremsstrahlung*) et de rayonnement caractéristique.
+
+En traversant les tissus biologiques, les rayons X sont atténués selon la loi de **Beer-Lambert** :
+
+```
+I = I₀ · exp(-μx)
+```
+
+où :
+- I₀ = intensité du faisceau incident (photons/cm²/s)
+- I = intensité transmise
+- μ = coefficient d'atténuation linéaire du tissu (cm⁻¹)
+- x = épaisseur traversée (cm)
+
+Le coefficient d'atténuation dépend de l'énergie des photons X et de la composition atomique du tissu. L'os, riche en calcium (Z=20), atténue fortement les rayons X (μ_os ≈ 0,48 cm⁻¹ à 70 keV), tandis que les tissus mous (eau, Z effectif ≈ 7,5) atténuent beaucoup moins (μ_eau ≈ 0,19 cm⁻¹ à 70 keV), créant le contraste de l'image radiographique.
+
+### Tomodensitométrie (CT)
+
+Le scanner CT (*Computed Tomography*) acquiert des projections radiographiques à de nombreux angles autour du patient (typiquement 360°) et reconstruit mathématiquement une image 3D en coupes transversales. L'atténuation relative est exprimée en **unités Hounsfield (UH)**, normalisées par rapport à l'eau :
+
+```
+UH = 1000 × (μ_tissu - μ_eau) / μ_eau
+```
+
+L'échelle de Hounsfield permet d'identifier les tissus :
+
+| Tissu | Unités Hounsfield (UH) |
+|-------|----------------------|
+| Air | -1000 |
+| Poumon (gonflé) | -900 à -600 |
+| Graisse | -120 à -90 |
+| Eau | 0 |
+| Tissus mous | +20 à +80 |
+| Sang (coagulé) | +50 à +80 |
+| Os spongieux | +200 à +400 |
+| Os cortical | +400 à +1000 |
+
+<Warning>
+Le principe **ALARA** (*As Low As Reasonably Achievable*) gouverne toute utilisation des rayonnements ionisants en médecine. La dose efficace d'un scanner thoracique est d'environ 7 mSv, soit l'équivalent de 3,5 ans d'exposition au rayonnement naturel ambiant. Les ingénieurs développant des systèmes CT ont l'obligation de minimiser la dose tout en maintenant une qualité d'image diagnostique — compromis régi par la relation DQE (*Detective Quantum Efficiency*) et la notion de rendement dose-image (*dose efficiency*). Les algorithmes de reconstruction itérative permettent de réduire la dose de 30 à 60 % par rapport à la rétroprojection filtrée classique.
+</Warning>
+
+## Imagerie par résonance magnétique (IRM)
+
+### Physique de la RMN
+
+L'IRM exploite le phénomène de **résonance magnétique nucléaire** (RMN) des protons d'hydrogène (¹H), présents en abondance dans l'eau et les graisses biologiques. Dans un champ magnétique statique B₀, les protons s'alignent et précèdent à la **fréquence de Larmor** :
+
+```
+f = γ · B₀ / (2π)
+```
+
+où γ est le rapport gyromagnétique du proton : **γ/2π = 42,58 MHz/T**.
+
+Pour un champ B₀ de **1,5 T** (le standard clinique dominant), f = 63,87 MHz ; pour **3 T**, f = 127,74 MHz. Des systèmes de recherche à **7 T** et au-delà (7, 9,4, 10,5 T) sont disponibles, offrant un rapport signal-sur-bruit (SNR) proportionnel à B₀ au carré.
+
+Une impulsion radiofréquence (RF) à la fréquence de Larmor bascule l'aimantation dans le plan transversal. La relaxation vers l'état d'équilibre s'effectue selon deux constantes de temps :
+
+- **T1** (*spin-lattice relaxation*) : retour de l'aimantation longitudinale (dépend de la viscosité et de la mobilité moléculaire). T1 du tissu cérébral : ~1000 ms à 1,5 T.
+- **T2** (*spin-spin relaxation*) : décroissance de l'aimantation transversale (dépend des interactions entre spins voisins). T2 du tissu cérébral : ~80 ms à 1,5 T.
+
+Le contraste de l'image IRM est contrôlé par le choix des paramètres de séquence (TR, TE) permettant de pondérer l'image en T1, T2 ou densité de protons.
+
+### Gradients de champ et espace k
+
+La localisation spatiale du signal RMN est assurée par des gradients de champ magnétique linéaires superposés à B₀ dans les trois directions de l'espace (Gx, Gy, Gz). Ces gradients permettent la sélection de coupe (*slice selection*), le codage de fréquence et le codage de phase.
+
+Le signal acquis lors d'une séquence IRM peuple l'**espace k** (*k-space*) — la représentation fréquentielle de l'image. La transformée de Fourier inverse de l'espace k donne l'image IRM dans l'espace réel. Le centre de l'espace k contient les basses fréquences (contraste global), la périphérie contient les hautes fréquences (détail et contours).
+
+### Séquences d'impulsions
+
+- **Spin Echo (SE)** : séquence classique incluant une impulsion de 180° pour compenser les inhomogénéités de champ. Robuste mais lente. T1-SE (TR court, TE court), T2-SE (TR long, TE long).
+- **Gradient Echo (GRE)** : séquence rapide utilisant un gradient de renversement plutôt qu'une impulsion RF de 180°. Permet l'acquisition en apnée. Sensible aux artefacts de susceptibilité magnétique.
+- **Echo Planar Imaging (EPI)** : séquence ultra-rapide (acquisition en ~50 ms) permettant l'IRM fonctionnelle (IRMf) et la diffusion (DTI). Très sensible aux artefacts de distorsion géométrique.
+
+<Info>
+L'IRM fonctionnelle (IRMf) utilise le contraste BOLD (*Blood Oxygen Level Dependent*) pour cartographier l'activité neuronale. L'oxyhémoglobine (diamagnétique) et la déoxyhémoglobine (paramagnétique) ont des temps T2* différents. L'augmentation de l'afflux sanguin oxygéné lors d'une activation neuronale crée un signal BOLD positif. Cette technique est fondamentale en neurosciences et en planification chirurgicale pour la localisation préopératoire des zones fonctionnelles corticales (moteur, langage).
+</Info>
+
+## Ultrasonographie
+
+### Transducteurs et propagation acoustique
+
+L'ultrasonographie utilise des ondes acoustiques à haute fréquence (1–40 MHz en imagerie médicale) émises et reçues par des transducteurs piézoélectriques. La propagation des ultrasons dans les tissus est caractérisée par l'**impédance acoustique** :
+
+```
+Z = ρ · c
+```
+
+où ρ est la masse volumique (kg/m³) et c la vitesse du son dans le tissu (m/s).
+
+Les valeurs typiques sont :
+
+| Tissu | Impédance acoustique Z (MRayl) | Vitesse du son (m/s) |
+|-------|-------------------------------|---------------------|
+| Air | 0,0004 | 330 |
+| Graisse | 1,38 | 1450 |
+| Tissu mou (moyen) | 1,63 | 1540 |
+| Foie | 1,65 | 1555 |
+| Os | 7,8 | 3500 |
+
+La réflexion des ultrasons à une interface entre deux milieux d'impédances différentes est donnée par le coefficient de réflexion en intensité :
+
+```
+R = ((Z₂ - Z₁) / (Z₂ + Z₁))²
+```
+
+L'interface tissu-air (poumon, intestin) réfléchit quasi-totalement les ultrasons (R ≈ 1), rendant l'imagerie impossible en arrière. L'interface tissu-os est également très réflective (R ≈ 0,3).
+
+### Types de transducteurs
+
+- **Linéaire** (5–15 MHz) : haute résolution, faible profondeur de pénétration. Imagerie des structures superficielles (thyroïde, vaisseaux cervicaux, tendons, muscles).
+- **Convexe** (2–6 MHz) : champ de vue large, profondeur élevée. Imagerie abdominale, obstétrique.
+- **Sectoriel (phasé)** : champ de vue sectoriel obtenu par déphasage électronique, pour l'imagerie cardiaque (échocardiographie) à travers les espaces intercostaux.
+- **Endocavitaire** (transvaginale, transrectale, transœsophagienne) : haute fréquence, proximité cible.
+
+### Effet Doppler et mesure du flux sanguin
+
+L'effet Doppler permet de mesurer la vitesse du sang en mesurant le décalage de fréquence entre les ultrasons émis (f₀) et ceux réfléchis par les globules rouges en mouvement :
+
+```
+Δf = 2 · f₀ · v · cos(θ) / c
+```
+
+où v est la vitesse du sang, θ l'angle entre le faisceau ultrasonore et la direction du flux. Le **Doppler couleur** superpose une carte couleur de la vitesse sur l'image bidimensionnelle en mode B.
+
+## Médecine nucléaire : TEP et SPECT
+
+### Tomographie par émission de positons (TEP)
+
+La TEP est une modalité d'imagerie fonctionnelle et métabolique. Elle repose sur l'injection d'un **radiotraceur** émetteur de positons — le plus courant étant le fluorodésoxyglucose marqué au fluor-18 (**18F-FDG**) — qui se concentre dans les tissus à fort métabolisme glucidique (tumeurs, tissu cérébral actif, myocarde ischémié).
+
+Le positon émis (β⁺) s'annihile avec un électron du milieu en produisant deux photons gamma de 511 keV émis en **coïncidence** (dans des directions opposées à 180°). La détection simultanée de ces deux photons par la couronne de détecteurs scintillateurs (cristaux de LSO, LYSO ou BGO) permet de localiser l'événement sur la ligne de réponse (LOR, *Line Of Response*).
+
+La reconstruction 3D de la distribution du traceur est réalisée par algorithmes itératifs (OSEM, voir ci-dessous). La résolution spatiale des systèmes TEP cliniques est d'environ **4–6 mm** FWHM (*Full Width at Half Maximum*), limitée par le libre parcours moyen du positon avant annihilation.
+
+### SPECT et caméras gamma
+
+La tomographie par émission monophotonique (SPECT, *Single Photon Emission Computed Tomography*) utilise des traceurs émetteurs gamma (technétium-99m, iode-123, thallium-201). Contrairement à la TEP, la localisation est assurée par un collimateur mécanique qui ne transmet que les photons perpendiculaires à la surface du détecteur. La résolution spatiale (~7–15 mm) et la sensibilité sont inférieures à la TEP.
+
+<Note>
+Les systèmes TEP/CT et SPECT/CT combinent dans un même équipement une modalité fonctionnelle (TEP ou SPECT) et une modalité morphologique (CT), permettant la co-registration anatomofonctionnelle précise : le CT fournit la localisation anatomique et la correction d'atténuation, la TEP ou SPECT fournit l'information métabolique. Des systèmes TEP/IRM, bien que plus complexes techniquement (compatibilité avec le champ magnétique), sont disponibles pour une imagerie sans irradiation supplémentaire du CT.
+</Note>
+
+## Algorithmes de reconstruction d'images
+
+### Rétroprojection filtrée (FBP)
+
+La rétroprojection filtrée (*Filtered Back Projection*) est l'algorithme de reconstruction analytique classique utilisé en CT et en SPECT. Elle consiste à appliquer un filtre rampe (filtre de Ram-Lak ou apodisé) aux projections dans le domaine fréquentiel, puis à rétroprojeter les projections filtrées pour reconstruire l'image.
+
+La FBP est rapide et déterministe, mais amplifie le bruit des données (particulièrement problématique à faible dose de rayonnement) et produit des artefacts d'étoile (*streak artifacts*) en présence de matériaux très denses.
+
+### Reconstruction itérative (OSEM)
+
+L'algorithme OSEM (*Ordered Subsets Expectation Maximization*) est l'algorithme itératif standard en TEP et SPECT, et est de plus en plus utilisé en CT. Il part d'une estimation initiale de l'image, calcule les projections simulées (*forward projection*), compare aux projections mesurées, et met à jour l'image (*back projection* pondérée). L'utilisation de sous-ensembles ordonnés (*ordered subsets*) accélère la convergence.
+
+Les algorithmes itératifs permettent d'intégrer des modèles physiques précis (correction de diffusion, correction de volume partiel, modélisation de la résolution du détecteur) et des régularisations *a priori* (pénalité de variation totale, prior bayésien) qui améliorent la qualité d'image et permettent de réduire la dose administrée.
+
+## Standard DICOM
+
+Le standard DICOM (*Digital Imaging and Communications in Medicine*) est la norme internationale pour le stockage, la transmission et la communication des images médicales numériques. Publié conjointement par l'ACR et la NEMA, il définit :
+
+- Le **format de fichier** : en-tête (header) contenant des attributs organisés en *tags* (Group, Element) identifiant le patient, l'étude, la série et l'image ; données pixel encodées selon une syntaxe de transfert (*Transfer Syntax*) — JPEG, JPEG 2000, ou brut non compressé.
+- Les **classes SOP** (*Service-Object Pair*) : définissent les types d'objets DICOM (CT Image Storage, MR Image Storage, Digital X-Ray Storage, Radiation Therapy Dose, Structured Report, etc.) et les services applicables (Store, Query/Retrieve, Print).
+- Le **profil de conformité** DICOM : document produit par chaque fabricant décrivant les SOP classes supportées et leurs options.
+
+<Tip>
+La manipulation programmatique des fichiers DICOM est facilitée par des bibliothèques open source telles que **pydicom** (Python), **dcm4che** (Java) et **ITK/SimpleITK** (C++/Python). Ces outils permettent la lecture, la modification et la génération de fichiers DICOM, indispensables pour le développement d'applications de traitement d'image médicale, d'aide au diagnostic par IA et de visualisation 3D.
+</Tip>
+
+## Architecture PACS et intégration HL7/FHIR
+
+### PACS (Picture Archiving and Communication System)
+
+Un PACS est un système informatique de gestion, d'archivage et de distribution des images médicales numériques dans un établissement de santé. Son architecture typique comprend :
+
+- **La modalité d'acquisition** (scanner, IRM, échographe) : envoie les images au PACS via le protocole DICOM Store (C-STORE ou STOW-RS en DICOM Web)
+- **Le serveur d'archivage** : réception, validation DICOM, déduplication, stockage long terme (SAN, NAS, stockage objet cloud)
+- **Le serveur de requêtes/récupération** : répond aux requêtes DICOM Q/R (C-FIND, C-MOVE, C-GET) ou WADO-RS (DICOM Web)
+- **Les postes de lecture radiologique** (workstations) : reconstruction MPR, MIP, rendu volumique 3D, mesures quantitatives
+- **Le portail web** : accès léger pour les cliniciens non radiologues via navigateur (WADO-URI, WADO-RS, DICOMweb)
+
+### HL7 et FHIR
+
+L'interopérabilité des systèmes d'information de santé repose sur les standards HL7. **HL7 v2** (format textuel délimité par des pipes `|`) est encore très répandu pour la transmission de messages ADT (admissions, transferts, sorties), d'ordres d'imagerie (ORM) et de comptes-rendus (ORU). **HL7 FHIR** (*Fast Healthcare Interoperability Resources*, version R4 courante) est le standard modern, basé sur HTTP REST et JSON/XML, qui remplace progressivement HL7 v2 pour les nouvelles intégrations. FHIR définit des **ressources** (Patient, ImagingStudy, Observation, DiagnosticReport, ServiceRequest) manipulables via des API RESTful standardisées.
+
+L'intégration PACS-SIR (système d'information radiologique) et PACS-SIH (système d'information hospitalier) suit les profils IHE (*Integrating the Healthcare Enterprise*), notamment les profils Scheduled Workflow (SWF) et Cross-Enterprise Document Sharing (XDS).
+
+<Info>
+La sécurité des données médicales (confidentialité, intégrité, disponibilité) est une exigence légale et éthique fondamentale. Au Canada, la Loi sur la protection des renseignements personnels sur la santé (LPRPS en Ontario, Loi sur la santé et les services sociaux au Québec) impose des mesures de protection strictes. Les systèmes PACS et les flux DICOM doivent être chiffrés (TLS 1.2+), les accès authentifiés (intégration Active Directory, LDAP, authentification multifacteur) et les accès aux images journalisés (*audit trail* DICOM selon IHE ATNA).
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Introduction au génie biomédical" icon="heart-pulse" href="/genie-biomedical/introduction">
+    Définition, champs d'application et perspectives de carrière en génie biomédical au Canada
+  </Card>
+  <Card title="Dispositifs médicaux" icon="stethoscope" href="/genie-biomedical/dispositifs-medicaux">
+    Classification, réglementation canadienne et internationale, gestion de la qualité et de la sécurité
+  </Card>
+  <Card title="Biomécanique" icon="person-running" href="/genie-biomedical/biomecanique">
+    Mécanique du système musculo-squelettique, analyse de la marche et conception d'implants orthopédiques
+  </Card>
+  <Card title="Bioinformatique" icon="dna" href="/genie-biomedical/bioinformatique">
+    Analyse de séquences génomiques, pipelines bioinformatiques et médecine de précision
+  </Card>
+</CardGroup>

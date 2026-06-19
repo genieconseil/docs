@@ -1,0 +1,217 @@
+---
+title: "Caractérisation et exploitation des aquifères"
+description: "Paramètres hydrauliques des aquifères, essais de pompage, modélisation MODFLOW, rendement soutenable et interaction eaux souterraines-eaux de surface"
+icon: "droplet"
+---
+
+La caractérisation et l'exploitation durable des aquifères constituent des enjeux majeurs pour la sécurité en eau potable du Canada. Les aquifères sont soumis à des pressions croissantes liées à l'agriculture, à l'industrie et aux changements climatiques. Une gestion éclairée repose sur une connaissance approfondie des paramètres hydrauliques et l'utilisation d'outils de modélisation.
+
+## Paramètres hydrauliques fondamentaux
+
+### Transmissivité (T)
+
+La transmissivité représente la capacité de l'aquifère à transmettre de l'eau sur toute son épaisseur saturée :
+
+`T = K × b`
+
+Où :
+- `T` = transmissivité (m²/s)
+- `K` = conductivité hydraulique (m/s)
+- `b` = épaisseur saturée de l'aquifère (m)
+
+| T (m²/s) | Potentiel aquifère |
+|-----------|-------------------|
+| > 10⁻² | Très élevé — fort potentiel d'exploitation |
+| 10⁻³ à 10⁻² | Élevé — bon aquifère municipal |
+| 10⁻⁴ à 10⁻³ | Moyen — usage domestique ou agricole |
+| 10⁻⁵ à 10⁻⁴ | Faible — puits individuels limités |
+| < 10⁻⁵ | Très faible — peu exploitable |
+
+### Coefficient d'emmagasinement (S)
+
+Le coefficient d'emmagasinement est le volume d'eau libéré (ou stocké) par unité de surface d'aquifère pour une variation unitaire de charge hydraulique :
+
+**Aquifère captif :** S = Ss × b (typiquement 10⁻⁵ à 10⁻³)
+
+`Ss = ρg(α + nβ)`
+
+Où α est la compressibilité de la matrice, n la porosité et β la compressibilité de l'eau.
+
+**Aquifère libre :** S ≈ Sy (rendement spécifique = porosité de drainage), typiquement 0,05 à 0,30 pour les sables et graviers.
+
+<Note>La distinction entre S captif et Sy libre est fondamentale pour les prévisions de rabattement. Dans un aquifère libre, les volumes d'eau disponibles sont beaucoup plus importants (Sy >> S captif) pour un même rabattement, mais la réponse est plus lente.</Note>
+
+### Diffusivité hydraulique
+
+La diffusivité hydraulique D = T/S contrôle la vitesse de propagation du signal de pompage dans l'aquifère. Un D élevé signifie que les variations de charge se transmettent rapidement sur de grandes distances.
+
+## Conception et analyse des essais de pompage
+
+### Essai à débit constant
+
+Un essai de pompage standard implique :
+1. Pompage à débit constant Q (mesuré à ±2 %) pendant 24 à 72 heures (aquifère captif) ou 48 à 96 heures (aquifère libre)
+2. Mesure du rabattement s(t) dans le puits de pompage et les puits d'observation
+3. Phase de récupération (arrêt du pompage, mesure de la remontée)
+
+Les données brutes sont corrigées pour les fluctuations barométriques, les marées et les autres puits en activité.
+
+### Essai par paliers de débit (step-drawdown test)
+
+L'essai par paliers (4 à 6 paliers de 1 à 2 heures chacun) permet de déterminer :
+- La perte de charge linéaire (pertes aquifère) : BQ
+- La perte de charge quadratique (pertes puits) : CQ²
+- Le rabattement spécifique total : sw = BQ + CQ²
+
+Le rendement du puits (Well Efficiency) :
+`EW = BQ / (BQ + CQ²) × 100 %`
+
+Un puits bien développé aura EW > 80 %. Les pertes non linéaires indiquent un colmatage de la crépine ou une turbulence excessive.
+
+### Essai multi-puits
+
+Pour les grands systèmes d'aquifères et les modèles régionaux, les essais multi-puits avec plusieurs puits d'observation permettent de :
+- Caractériser l'anisotropie horizontale (Kx/Ky)
+- Identifier les limites de l'aquifère (barrières imperméables, limites de recharge)
+- Calibrer les modèles numériques
+
+L'analyse de la récupération (méthode de Theis-Jacob) utilise le temps réduit t' = t/tp et le rabattement résiduel s' :
+
+`s' = (2,303·Q / 4πT) · log(t/t')`
+
+### Logiciels d'analyse d'essais de pompage
+
+| Logiciel | Éditeur | Méthodes |
+|----------|---------|---------|
+| AquiferTest | Waterloo Hydrogeologic | Theis, Cooper-Jacob, Neuman, Hantush, Moench |
+| AQTESOLV | HydroSOLVE Inc. | > 30 solutions analytiques, automatisation |
+| WELL-A | BGS (UK) | Gratuit, usage académique |
+| GMS (PEST) | Aquaveo | Intégration MODFLOW, inversion automatique |
+
+## Modélisation des eaux souterraines — MODFLOW
+
+### Présentation de MODFLOW
+
+MODFLOW (USGS, 1984, maintenant MODFLOW 6) est le modèle numérique aux différences finies de référence mondiale pour la simulation des eaux souterraines. Il est open source et activement maintenu par l'USGS.
+
+L'équation de l'écoulement souterrain résolue par MODFLOW :
+
+`∂/∂x(Kx·∂h/∂x) + ∂/∂y(Ky·∂h/∂y) + ∂/∂z(Kz·∂h/∂z) + W = Ss·∂h/∂t`
+
+Où W représente les sources/puits (pompage, recharge, drains, rivières).
+
+### Développement d'un modèle conceptuel
+
+Les étapes de modélisation suivent le protocole standard :
+
+1. **Définir l'objectif** : prédiction, gestion, décontamination
+2. **Délimiter le domaine** : limites hydrogéologiques naturelles
+3. **Conceptualiser la stratigraphie** : nombre de couches, connexions verticales
+4. **Quantifier les flux** : recharge (infiltration), extraction (puits), interflux (rivières, lacs)
+5. **Calibrer le modèle** : ajuster K, T, S pour reproduire les niveaux observés
+6. **Valider** : tester la calibration sur une période indépendante
+7. **Analyser la sensibilité et l'incertitude** : PEST, Monte Carlo
+
+<Warning>Un modèle MODFLOW non calibré est inutilisable pour la gestion. La calibration doit démontrer que l'erreur résiduelle moyenne (RMS) est < 5 % de la fluctuation totale des niveaux. Documenter systématiquement les hypothèses et les limites du modèle conceptuel.</Warning>
+
+### Interfaces graphiques pour MODFLOW
+
+- **Visual MODFLOW** (Waterloo Hydrogeologic) : interface complète avec pré/post-traitement
+- **GMS — Groundwater Modeling System** (Aquaveo) : intègre MODFLOW, MT3D, SEAWAT
+- **FloPy** : librairie Python pour MODFLOW 6 — permet l'automatisation et le traitement en batch
+- **ModelMuse** (USGS) : open source, interface officielle USGS
+
+## Concept de rendement soutenable (Sustainable Yield)
+
+Le rendement soutenable d'un aquifère n'est pas simplement le volume pompable sans épuiser le stock — c'est le débit qui peut être prélevé indéfiniment sans causer des impacts inacceptables sur :
+- Les niveaux piézométriques (subsidence, dessèchement de puits voisins)
+- Les cours d'eau et milieux humides connectés à l'aquifère
+- La qualité de l'eau (intrusion salée, remontée d'eaux profondes)
+- Les écosystèmes aquatiques dépendants
+
+La notion de **safe yield** (Todd, 1959) est aujourd'hui remplacée par celle de **sustainable yield** (Gleeson et al., 2012) qui intègre les dimensions environnementales et sociales.
+
+## Allocation des eaux souterraines au Canada
+
+### Cadre législatif provincial
+
+La gestion des eaux souterraines est de compétence provinciale au Canada :
+
+| Province | Loi principale | Régime d'allocation |
+|----------|---------------|---------------------|
+| Québec | Loi affirmant le caractère collectif des ressources en eau (LQE) + RPEP | Déclaration de prélèvement, permis > 75 m³/jour |
+| Ontario | Ontario Water Resources Act + Clean Water Act | Permit to Take Water (PTTW) |
+| Alberta | Water Act | Prior appropriation (first in time, first in right) |
+| C.-B. | Water Sustainability Act (2016) | Licensing system, groundwater inclus depuis 2016 |
+| Manitoba | Water Rights Act | Licence d'eau |
+
+<Tip>Au Québec, le RPEP (2014) est l'outil réglementaire clé pour la protection des captages. Tout prélèvement municipal doit être déclaré et les zones de protection délimitées. Les nouveaux puits industriels > 75 m³/jour nécessitent une autorisation ministérielle.</Tip>
+
+## Interaction eaux souterraines — eaux de surface
+
+### Rivières gagnantes et perdantes
+
+- **Rivière gagnante (gaining stream)** : la nappe alimente la rivière — niveaux phréatiques > niveau de la rivière. Prédominante en régions humides.
+- **Rivière perdante (losing stream)** : la rivière recharge la nappe — niveaux phréatiques < niveau de la rivière. Prédominante dans les régions arides.
+
+La mesure du débit gagnant/perdant se fait par des jaugeages différentiels (streamflow depletion analysis). Le pompage d'un puits peut induire une prise d'eau indirecte dans une rivière gainante.
+
+### Zone hyporhéique
+
+La zone hyporhéique est la zone de transition entre les eaux de surface et les eaux souterraines peu profondes. Les échanges hyporhéiques (hyporheic exchange) contrôlent :
+- La température de l'eau en rivière (critique pour les salmonidés)
+- La biogeochimie de l'azote et du carbone
+- La diversité des macroinvertébrés benthiques
+
+## Intrusion d'eau salée dans les aquifères côtiers
+
+### Relation de Ghyben-Herzberg
+
+Pour un aquifère côtier non captif en équilibre hydrostatique, la profondeur de l'interface eau douce/eau salée sous le niveau de la mer est :
+
+`z = (ρf / (ρs - ρf)) · h`
+
+`z ≈ 40 · h`
+
+Où :
+- `z` = profondeur de l'interface sous le niveau marin (m)
+- `h` = hauteur de la nappe douce au-dessus du niveau marin (m)
+- `ρf` = 1000 kg/m³ (eau douce)
+- `ρs` = 1025 kg/m³ (eau salée)
+
+Un abaissement de la nappe de 1 m provoque une remontée de l'interface de 40 m. Le surpompage côtier est donc particulièrement risqué.
+
+<Warning>L'intrusion saline est souvent irréversible à l'échelle humaine. Une fois un aquifère côtier salinisé, sa restauration peut prendre des décennies et nécessite des investissements considérables (barrières hydrauliques, injections d'eau douce). La prévention est essentielle.</Warning>
+
+## Eaux souterraines dans le Bouclier canadien
+
+Le Bouclier canadien couvre 48 % de la superficie du Canada. Ses aquifères fracturés présentent des caractéristiques particulières :
+
+- **Écoulement en milieu fracturé** : la conductivité hydraulique est très hétérogène (plusieurs ordres de grandeur sur quelques mètres)
+- **Âge des eaux** : certaines eaux profondes du Bouclier ont des temps de résidence de milliers à millions d'années (eaux fossiles)
+- **Minéralisation** : les eaux profondes peuvent être très minéralisées (saumures)
+- **Radon** : les granites et gneiss libèrent du radon — surveiller dans les puits creusés en roc
+
+Les méthodes d'investigation adaptées incluent les essais de packer (isolation de zones fracturées), la diagraphie acoustique (FWS) et la géophysique en forage (caliper, résistivité, gamma naturel).
+
+<CardGroup cols={2}>
+  <Card title="Eaux souterraines" icon="water" href="/hydrogeologie/eaux-souterraines">
+    Loi de Darcy, équation de Theis et protection des captages
+  </Card>
+  <Card title="Mécanique des sols" icon="layer-group" href="/geotechnique/mecanique-sols">
+    Perméabilité des sols et écoulements en milieu saturé
+  </Card>
+  <Card title="SIG et télédétection" icon="satellite" href="/geomatique/sig-teledetection">
+    Cartographie hydrogéologique et modélisation spatiale
+  </Card>
+  <Card title="Génie environnemental" icon="leaf" href="/genie-environnemental/introduction">
+    Gestion des sites contaminés et qualité de l'eau
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes et guides** : ASTM D4050 (essais de pompage), ASTM D4044 (slug tests), RPEP (Québec, 2014), Ontario Clean Water Act guides
+- **Logiciels** : MODFLOW 6 (USGS), Visual MODFLOW, AquiferTest, GMS, FloPy (Python), FEFLOW (DHI)
+- **Organismes** : MELCCFP, Groundwater Canada, USGS Water Resources, Canadian Water Network
+- **Références** : Domenico & Schwartz — *Physical and Chemical Hydrogeology*; Anderson et al. — *Applied Groundwater Modeling*; Gleeson et al. — *Sustainable Groundwater Management*; Communiqués du PACES (Programme d'acquisition de connaissances sur les eaux souterraines, Québec)

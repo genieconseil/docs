@@ -1,0 +1,278 @@
+---
+title: "Thermodynamique chimique"
+description: "Équilibres de phases, équations d'état et modèles de coefficients d'activité"
+icon: "temperature-high"
+---
+
+La thermodynamique chimique est le fondement théorique de la conception des procédés de séparation et de réaction. Elle répond à deux questions fondamentales : dans quelle direction une transformation va-t-elle spontanément évoluer, et quel est l'état d'équilibre final ? Pour l'ingénieur chimiste, ces réponses permettent de calculer les compositions à l'équilibre dans les séparateurs, les températures et pressions d'opération optimales, et les limites théoriques de conversion dans les réacteurs.
+
+## Équilibres de phases
+
+### Règle des phases de Gibbs
+
+La règle des phases de Gibbs définit le nombre de variables intensives indépendantes (degrés de liberté) d'un système à l'équilibre :
+
+```
+F = C - P + 2
+```
+
+où `F` est le nombre de degrés de liberté, `C` le nombre de composants et `P` le nombre de phases. Pour un mélange binaire (`C = 2`) à l'équilibre liquide-vapeur (`P = 2`) : `F = 2`. Cela signifie que la fixation de la température détermine entièrement la pression et les compositions des deux phases.
+
+### Équilibre liquide-vapeur (ELV)
+
+**Loi de Raoult** (solutions idéales) :
+```
+y_i × P = x_i × P_i^sat(T)
+```
+
+La **constante d'équilibre** ou **K-valeur** :
+```
+K_i = y_i / x_i = P_i^sat / P  (Raoult)
+```
+
+La loi de Raoult s'applique lorsque les forces intermoléculaires entre molécules identiques et différentes sont similaires — c'est le cas des mélanges d'hydrocarbures de structure semblable (benzène-toluène, par exemple).
+
+**Loi de Henry** (solutés très dilués) :
+```
+y_i × P = x_i × H_i(T)
+```
+
+où `H_i` est la constante de Henry (Pa), beaucoup plus grande que `P_i^sat` pour les gaz peu solubles (CO₂, O₂, N₂ dans l'eau).
+
+### Diagrammes de phases binaires
+
+Les diagrammes `T-x-y` (à pression constante) et `P-x-y` (à température constante) représentent les régions d'équilibre. La courbe du bas (liquide) et la courbe du haut (vapeur) définissent la zone biphasique. Le **point critique** marque la limite supérieure de pression (ou inférieure de température) à laquelle les deux phases coexistent.
+
+**Azéotropes** : Un azéotrope est un mélange de composition spécifique dont les phases liquide et vapeur ont la même composition (`x_i = y_i`, `K_i = 1`). Exemples industriels :
+
+| Système | Composition azéotrope | T_az (°C) à 1 atm | Type |
+|---------|----------------------|---------------------|------|
+| Éthanol - Eau | 95,6 % vol. éthanol | 78,1 | Minimum |
+| HCl - Eau | 20,2 % masse HCl | 108,6 | Maximum |
+| Acétone - CHCl₃ | 65,5 % mol. CHCl₃ | 64,7 | Maximum |
+| Cyclohexane - Éthanol | 70 % mol. cyclohexane | 64,9 | Minimum |
+
+<Warning>
+Les azéotropes imposent des limites aux séparations par distillation simple. Pour dépasser la composition azéotropique, on utilise la distillation extractive (ajout d'un solvant), la distillation azéotropique hétérogène (formation d'un second azéotrope hétérogène), ou les membranes de pervaporation.
+</Warning>
+
+## Équations d'état
+
+Les équations d'état (EOS — *Equations of State*) décrivent la relation `P-V-T` d'un fluide pur ou d'un mélange, et permettent de calculer les enthalpies, entropies, fugacités et coefficients d'activité en phase vapeur.
+
+### Gaz idéal
+
+```
+PV = nRT
+```
+
+Valable uniquement à basse pression et haute température. `R = 8,314 J/(mol·K)`.
+
+### Van der Waals (1873)
+
+```
+(P + a/V²)(V - b) = RT
+```
+
+Première EOS à corriger le comportement idéal : `a` représente les interactions attractives intermoléculaires (Pa·m⁶/mol²) et `b` le volume exclu (m³/mol). Historiquement importante mais insuffisamment précise pour les applications industrielles.
+
+### Équation de Peng-Robinson (1976)
+
+L'EOS de Peng-Robinson (PR) est l'une des plus utilisées dans l'industrie pétrogazière et dans les simulateurs de procédés (HYSYS, ASPEN, PRO/II) :
+
+```
+P = RT / (V - b) - a(T) / [V(V + b) + b(V - b)]
+```
+
+Les paramètres sont calculés à partir des propriétés critiques et du facteur acentrique :
+
+```
+a(T) = 0,45724 × R² × Tc² / Pc × α(T)
+b = 0,07780 × R × Tc / Pc
+```
+
+La fonction de correction de température `α(T)` :
+```
+α(T) = [1 + κ × (1 - √(T/Tc))]²
+κ = 0,37464 + 1,54226 × ω - 0,26992 × ω²
+```
+
+où `Tc` est la température critique (K), `Pc` la pression critique (Pa), et `ω` le **facteur acentrique** (sans dimension), qui caractérise la non-sphéricité de la molécule.
+
+**Valeurs typiques du facteur acentrique :**
+
+| Composé | ω |
+|---------|---|
+| Méthane (CH₄) | 0,011 |
+| n-Octane (C₈H₁₈) | 0,399 |
+| Éthanol | 0,644 |
+| Eau | 0,345 |
+| CO₂ | 0,239 |
+
+### Équation de Soave-Redlich-Kwong (SRK, 1972)
+
+Développée par Soave à partir de l'équation de Redlich-Kwong (1949) :
+
+```
+P = RT / (V - b) - a(T) / [V(V + b)]
+```
+
+La SRK donne des résultats légèrement moins précis que la PR pour les densités de liquides, mais est encore largement utilisée, notamment pour les systèmes gazeux.
+
+<Note>
+Pour les mélanges, les règles de mélange de Van der Waals classiques (`a_mix = ΣΣ x_i x_j a_{ij}`, `b_mix = Σ x_i b_i`) sont utilisées avec des paramètres d'interaction binaires `k_{ij}` ajustés sur des données expérimentales. Les règles de mélange de Huron-Vidal et MHV2 permettent d'intégrer des modèles de coefficients d'activité dans l'EOS.
+</Note>
+
+## Modèles de coefficients d'activité (solutions non idéales)
+
+Pour les mélanges liquides fortement non idéaux (mélanges polaire-non-polaire, association par liaison hydrogène), la loi de Raoult modifiée utilise le coefficient d'activité `γ_i` :
+
+```
+y_i × P = γ_i × x_i × P_i^sat
+```
+
+Le coefficient d'activité quantifie l'écart à l'idéalité : `γ_i > 1` indique une répulsion entre les molécules (écart positif à Raoult), `γ_i < 1` une attraction (écart négatif, rare). Pour un mélange idéal, `γ_i = 1` pour tout `i`.
+
+### Équation de Margules (1 suffixe)
+
+Pour les mélanges légèrement non idéaux :
+```
+ln γ_1 = A × x_2²
+ln γ_2 = A × x_1²
+```
+
+Un seul paramètre `A` = ln γ_1^∞ (coefficient d'activité à dilution infinie). Valide pour des molécules de taille similaire.
+
+### Équation de Van Laar
+
+```
+ln γ_1 = A / (1 + A × x_1 / (B × x_2))²
+ln γ_2 = B / (1 + B × x_2 / (A × x_1))²
+```
+
+Deux paramètres `A` et `B`, mieux adaptée aux mélanges dont les composants ont des tailles différentes.
+
+### Modèle NRTL (Non-Random Two-Liquid)
+
+Développé par Renon et Prausnitz (1968), le modèle NRTL est robuste pour les mélanges très non idéaux, y compris les systèmes à deux phases liquides (LLE) :
+
+```
+ln γ_1 = x_2² × [τ_21 × (G_21 / (x_1 + x_2 × G_21))² + τ_12 × G_12 / (x_2 + x_1 × G_12)²]
+```
+
+avec :
+```
+G_12 = exp(-α × τ_12)
+G_21 = exp(-α × τ_21)
+τ_12 = (g_12 - g_22) / (RT)
+τ_21 = (g_21 - g_11) / (RT)
+```
+
+Le **paramètre de non-aléatoirité** `α` (typiquement 0,2 pour les hydrocarbures, 0,47 pour les alcools aqueux) reflète la tendance des molécules à se regrouper par affinité. Les paramètres `g_12 - g_22` et `g_21 - g_11` sont ajustés sur des données d'équilibre liquide-vapeur expérimentales.
+
+### Modèle UNIQUAC
+
+L'équation UNIQUAC (*Universal Quasi-Chemical*, Abrams & Prausnitz, 1975) est basée sur la théorie des solutions locales et tient compte explicitement des tailles et des formes moléculaires via les paramètres structuraux `r` (volume de Van der Waals) et `q` (aire de surface) :
+
+```
+ln γ_i = ln γ_i^C + ln γ_i^R
+```
+
+La partie **combinatorielle** `ln γ_i^C` tient compte des effets entropiques liés à la différence de taille des molécules. La partie **résiduelle** `ln γ_i^R` capture les interactions énergétiques.
+
+### Méthode UNIFAC (contribution de groupe)
+
+UNIFAC (*UNIQUAC Functional-group Activity Coefficients*, Fredenslund, Jones & Prausnitz, 1975) est une méthode prédictive qui décompose chaque molécule en groupes fonctionnels (CH₃, CH₂, OH, C=O, etc.) et calcule les coefficients d'activité à partir des interactions entre groupes. Elle permet d'estimer γ sans données expérimentales pour le mélange spécifique :
+
+```
+ln γ_i = ln γ_i^C + ln γ_i^R
+```
+
+Avantage majeur : applicable aux systèmes pour lesquels aucune donnée ELV n'est disponible, utile en phase de screening de procédés. Les paramètres de groupes sont régulièrement révisés (UNIFAC-Dortmund, modified UNIFAC).
+
+<Tip>
+Pour le choix du modèle thermodynamique dans un simulateur de procédés : utilisez l'EOS PR ou SRK pour les hydrocarbures et les gaz (P > 10 bar), NRTL ou UNIQUAC pour les systèmes polaires à pression modérée, et NRTL avec Henry's Law pour les gaz dissous dans des solvants. Le logiciel ASPEN Plus propose un assistant de sélection du modèle thermodynamique basé sur ces critères.
+</Tip>
+
+## Équilibre de réaction chimique
+
+### Constante d'équilibre et énergie libre de Gibbs
+
+Pour une réaction à l'équilibre thermodynamique, la constante d'équilibre `K_eq` est reliée à la variation d'énergie libre de Gibbs standard :
+
+```
+K_eq = exp(-ΔG°_rxn / RT)
+```
+
+avec :
+```
+ΔG°_rxn = ΔH°_rxn - T × ΔS°_rxn
+```
+
+Un `ΔG°_rxn < 0` indique une réaction thermodynamiquement favorable (K > 1), mais ne dit rien sur la vitesse de réaction (cinétique).
+
+### Équation de Van't Hoff
+
+L'effet de la température sur la constante d'équilibre est donné par :
+
+```
+d(ln K) / dT = ΔH°_rxn / (R × T²)
+```
+
+- Réaction **exothermique** (`ΔH°_rxn < 0`) : `K` diminue quand `T` augmente → l'équilibre favorise les réactifs à haute température. Exemple : synthèse de l'ammoniac (procédé Haber-Bosch).
+- Réaction **endothermique** (`ΔH°_rxn > 0`) : `K` augmente avec `T`. Exemple : reformage à la vapeur du méthane.
+
+### Fugacité
+
+La fugacité `f_i` est la variable thermodynamiquement correcte pour l'équilibre des phases, généralisant la pression partielle :
+
+- En phase gaz : `f_i = φ_i × y_i × P` (où `φ_i` est le coefficient de fugacité, calculé par EOS)
+- En phase liquide : `f_i = γ_i × x_i × P_i^sat × exp(V_i^L × (P - P_i^sat) / RT)`
+
+Le terme exponentiel est la correction de Poynting, généralement négligeable à basse pression.
+
+À l'équilibre liquide-vapeur : `f_i^V = f_i^L` pour tout composant `i`.
+
+### Minimisation de l'énergie de Gibbs
+
+Pour les systèmes réactifs à plusieurs réactions simultanées, la méthode de minimisation de l'énergie de Gibbs est plus générale que l'approche basée sur les constantes d'équilibre individuelles :
+
+```
+Minimiser G = Σ_i n_i × μ_i  sous les contraintes de bilan atomique
+```
+
+Cette méthode est implémentée dans ASPEN Plus (réacteur Gibbs), HYSYS et Cantera. Elle est utilisée, par exemple, pour calculer l'équilibre dans les reformeurs à vapeur et dans les systèmes de combustion.
+
+## Applications pratiques et sélection des modèles
+
+Le choix du modèle thermodynamique est l'une des décisions les plus critiques lors de la configuration d'une simulation de procédé. Une erreur de modèle peut conduire à des erreurs de 10 à 30 % sur les compositions à l'équilibre, entraînant un sur- ou sous-dimensionnement significatif des équipements.
+
+| Système | Modèle recommandé | Commentaire |
+|---------|------------------|-------------|
+| Hydrocarbures légers (C₁-C₁₀), gaz naturel | PR ou SRK | Standard industrie pétrogazière |
+| Raffinerie (coupes larges) | PR avec kij ajustés | BIP sur données PVT |
+| Alcools, cétones en solution | NRTL ou UNIQUAC | Données ELV nécessaires |
+| Électrolytes (acides, bases, sels) | ELECNRTL, OLI | Modèles électrolytiques spécialisés |
+| Polymères | PC-SAFT, Flory-Huggins | Modèles de chaînes |
+| Aucune donnée disponible | UNIFAC | Estimation, vérifier avec expériences |
+
+<Note>
+Le logiciel NIST WebBook fournit des données thermodynamiques expérimentales (propriétés critiques, ELV, enthalpies de formation) pour des milliers de composés. La base de données DECHEMA contient des paramètres NRTL et UNIQUAC pour de nombreux systèmes binaires industriels.
+</Note>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Opérations unitaires" icon="filter" href="/genie-chimique/operations-unitaires">
+    Distillation, absorption et échangeurs de chaleur
+  </Card>
+  <Card title="Génie des réacteurs" icon="atom" href="/genie-chimique/genie-reacteurs">
+    Application de la thermodynamique à l'équilibre de réaction
+  </Card>
+  <Card title="Introduction au génie chimique" icon="flask" href="/genie-chimique/introduction">
+    Vue d'ensemble et industries clés
+  </Card>
+  <Card title="Procédés industriels" icon="industry" href="/genie-chimique/procedes-industriels">
+    Applications thermodynamiques dans les procédés réels
+  </Card>
+</CardGroup>

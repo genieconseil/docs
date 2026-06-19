@@ -1,0 +1,159 @@
+---
+title: "Applied Thermodynamics"
+description: "Laws of thermodynamics, thermodynamic cycles, heat transfer, heat exchanger design, and refrigeration systems"
+icon: "temperature-high"
+---
+
+Thermodynamics governs energy conversion between heat and work. In engineering practice, it underpins the design of power plants, gas turbines, HVAC systems, heat exchangers, refrigeration cycles, and increasingly, thermal energy storage systems.
+
+## Laws of Thermodynamics
+
+### Zeroth Law — Thermal Equilibrium
+If system A is in thermal equilibrium with system C, and system B is also in equilibrium with C, then A and B are in equilibrium with each other. This defines the concept of temperature and makes thermometers possible.
+
+### First Law — Conservation of Energy
+For a closed system: `ΔU = Q - W`
+
+For a steady-state open system (enthalpy form, neglecting kinetic and potential energy changes):
+
+`Q - Ws = h₂ - h₁`
+
+Where `h` is specific enthalpy (kJ/kg), `Q` is heat transferred per unit mass (positive when added to system), and `Ws` is shaft work per unit mass (positive when done by system).
+
+### Second Law — Entropy
+All real processes are irreversible and increase the total entropy of the universe:
+
+`ΔStotal = ΔSsystem + ΔSsurroundings ≥ 0`
+
+The Carnot efficiency sets the maximum possible thermal efficiency between two thermal reservoirs:
+
+`η_Carnot = 1 - TL/TH` (temperatures in Kelvin)
+
+No real heat engine can exceed this efficiency. A gas turbine operating between 1400 K and 400 K has a Carnot limit of `η = 1 - 400/1400 ≈ 71%`; actual cycle efficiency is typically 35-45%.
+
+### Third Law
+The entropy of a perfect crystal approaches zero as temperature approaches absolute zero (0 K = -273.15°C).
+
+<Note>The Kelvin scale is fundamental to thermodynamics. Always convert Celsius to Kelvin (K = °C + 273.15) when using thermodynamic equations involving temperatures in ratios or differences representing energy.</Note>
+
+## Thermodynamic Cycles
+
+### Carnot Cycle
+The reversible cycle operating between two temperatures TH and TL. Composed of two isothermal and two adiabatic (isentropic) processes. Theoretically maximum efficiency but impractical to implement — used as a benchmark.
+
+### Rankine Cycle (Steam Power Plants)
+The practical cycle for steam-based power generation:
+
+1. **Pump** (1→2): isentropic compression of saturated liquid; `wp = h₂ - h₁ = v₁·(P₂ - P₁)`
+2. **Boiler** (2→3): heat addition at constant pressure; `qin = h₃ - h₂`
+3. **Turbine** (3→4): isentropic expansion producing work; `wt = h₃ - h₄`
+4. **Condenser** (4→1): heat rejection at constant pressure; `qout = h₄ - h₁`
+
+Thermal efficiency: `η = (wt - wp) / qin = (h₃ - h₄ - (h₂ - h₁)) / (h₃ - h₂)`
+
+Typical values: simple Rankine 33-38%; with superheat, reheat, and regeneration 40-46%.
+
+### Brayton Cycle (Gas Turbines)
+The cycle for gas turbines and jet engines:
+
+1. **Compressor**: isentropic compression of ambient air; `wc = h₂ - h₁`
+2. **Combustor**: constant-pressure heat addition (fuel combustion); `qin = h₃ - h₂`
+3. **Turbine**: isentropic expansion; `wt = h₃ - h₄`
+
+Ideal efficiency: `η = 1 - 1/r_p^((γ-1)/γ)` where `r_p` is the pressure ratio and `γ = Cp/Cv ≈ 1.4` for air.
+
+Net work: `wnet = wt - wc`; back work ratio (fraction of turbine work needed to drive compressor) = `wc/wt` — typically 40-80% for gas turbines.
+
+**Combined cycle** (Brayton + Rankine): exhaust gas from the gas turbine heats a steam Rankine cycle. Overall efficiency exceeds 60% in modern plants.
+
+<Tip>The steam tables (or their software equivalent) are indispensable for Rankine cycle calculations. Memorize the saturation properties of water at 100°C (atmospheric pressure) and 374°C (critical point) as sanity checks.</Tip>
+
+## Heat Transfer
+
+### Conduction (Fourier's Law)
+`q = -k·A·dT/dx` (W)
+
+For a planar wall in steady state: `q = k·A·(T₁ - T₂)/L = (T₁ - T₂)/Rcond`
+
+Thermal conduction resistance: `Rcond = L/(k·A)` (K/W)
+
+Typical thermal conductivities: copper 385, aluminum 205, steel 50, glass 1.0, concrete 1.5-2.0, mineral wool insulation 0.04 W/(m·K)
+
+### Convection (Newton's Law of Cooling)
+`q = h·A·(Ts - T∞)` (W)
+
+Convective resistance: `Rconv = 1/(h·A)` (K/W)
+
+Typical h values (W/(m²·K)): natural convection in air 2-25; forced air 25-250; forced water 500-10,000; boiling water 5,000-100,000.
+
+The Nusselt number relates convective to conductive heat transfer: `Nu = h·L/k`. Correlations (Dittus-Boelter, Churchill, etc.) relate Nu to Re and Pr for common geometries.
+
+### Radiation (Stefan-Boltzmann Law)
+`q = ε·σ·A·T⁴` (W)
+
+Stefan-Boltzmann constant: `σ = 5.67 × 10⁻⁸` W/(m²·K⁴)
+
+Emissivity ε: blackbody 1.0; polished aluminum 0.05; oxidized steel 0.7; concrete/brick 0.9.
+
+Net radiation between two large parallel surfaces: `q = σ·A·(T₁⁴ - T₂⁴) / (1/ε₁ + 1/ε₂ - 1)`
+
+### Thermal Resistance Network
+For a composite wall or multilayer system in series:
+
+`Rtotal = Rcond,1 + Rcond,2 + ... + Rconv,inner + Rconv,outer`
+
+`q = ΔT_total / Rtotal`
+
+`U = 1/(Rtotal·A)` = overall heat transfer coefficient (W/(m²·K))
+
+## Heat Exchanger Design
+
+### LMTD Method
+`Q = U·A·ΔTlm·F`
+
+`ΔTlm = (ΔT₁ - ΔT₂) / ln(ΔT₁/ΔT₂)` (log mean temperature difference)
+
+For pure counter-flow or co-flow exchangers, F = 1. For cross-flow and multi-pass shell-and-tube, F < 1 from TEMA charts.
+
+### NTU-Effectiveness Method
+Useful when outlet temperatures are unknown:
+
+`ε = Q / Qmax = Q / (Cmin·(Th,in - Tc,in))`
+
+`NTU = U·A / Cmin`
+
+For counter-flow exchanger: `ε = (1 - exp(-NTU·(1-Cr))) / (1 - Cr·exp(-NTU·(1-Cr)))` where `Cr = Cmin/Cmax`
+
+<Warning>Fouling factors reduce exchanger effectiveness over time. TEMA standards specify design fouling resistances (e.g., 0.000176 m²·K/W for cooling water). Always include fouling in the design U-value to ensure performance over the maintenance cycle.</Warning>
+
+## Refrigeration and Heat Pumps
+
+The vapor-compression cycle reverses the direction of heat flow:
+
+1. **Compressor**: isentropic compression of refrigerant vapor
+2. **Condenser**: heat rejection QH to hot reservoir (ambient air or water)
+3. **Expansion valve**: throttling reduces pressure and temperature (irreversible)
+4. **Evaporator**: heat absorption QL from cold reservoir (space to be cooled)
+
+**Coefficient of Performance (cooling mode)**: `COP_cooling = QL/W = QL/(QH - QL)`
+
+**COP (heating mode)**: `COP_heating = QH/W = QH/(QH - QL)`
+
+Carnot COP limits: `COP_cooling,max = TL/(TH - TL)` and `COP_heating,max = TH/(TH - TH)`
+
+Real systems achieve 60-70% of Carnot COP. A ground-source heat pump operating between 5°C and 45°C has `COP_heating,Carnot = 318/(318-278) = 7.95`; actual COP ≈ 4-5.
+
+<CardGroup cols={2}>
+  <Card title="Materials Science" icon="atom" href="/en/mechanical/materials">
+    High-temperature materials and thermal treatments
+  </Card>
+  <Card title="Renewable Energy" icon="sun" href="/genie-electrique/energie-renouvelable">
+    Thermodynamic cycles in renewable energy systems
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    ANSYS, COMSOL for thermal simulation
+  </Card>
+  <Card title="Thermodynamique (FR)" icon="temperature-high" href="/genie-mecanique/thermodynamique">
+    Version française complète avec cycles de Rankine et Brayton
+  </Card>
+</CardGroup>

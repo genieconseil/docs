@@ -1,0 +1,174 @@
+---
+title: "Géomatique et arpentage"
+description: "Définition de la géomatique, méthodes d'arpentage, systèmes de coordonnées et datums canadiens, arpentage légal et arpentage de construction"
+icon: "map"
+---
+
+La géomatique est la discipline scientifique et technique qui s'intéresse à l'acquisition, au stockage, au traitement, à l'analyse et à la diffusion des données à référence spatiale. Elle regroupe l'arpentage, les systèmes d'information géographique (SIG), la télédétection, la photogrammétrie et la cartographie. Au Canada, la géomatique est une profession réglementée qui joue un rôle central dans l'aménagement du territoire, les grands projets d'infrastructure et la gestion des ressources naturelles.
+
+## Définition et champs d'application
+
+### Sous-disciplines de la géomatique
+
+| Sous-discipline | Objet d'étude | Applications |
+|----------------|--------------|-------------|
+| **Arpentage** | Mesure et positionnement sur le terrain | Cadastre, travaux de construction, frontières |
+| **Photogrammétrie** | Mesures à partir de photographies | Cartographie, modèles 3D, surveillance |
+| **Télédétection** | Acquisition à distance (satellites, avions, drones) | Cartographie, ressources naturelles, environnement |
+| **SIG** | Gestion et analyse de données spatiales | Urbanisme, transport, gestion des risques |
+| **Cartographie** | Représentation graphique du territoire | Navigation, communication, décision |
+| **Géodésie** | Forme et champ de gravité de la Terre | Systèmes de référence, positionnement précis |
+
+## Méthodes d'arpentage
+
+### Station totale
+
+La station totale est l'instrument polyvalent de base en arpentage. Elle mesure simultanément les angles (horizontaux et verticaux) et les distances (électro-optiques, précision ±(1–3 mm + 1–2 ppm)) :
+
+`Distance horizontale = D·cos(angle zénithal)`
+
+`Différence d'élévation = D·sin(angle zénithal) + hauteur instrument - hauteur signal`
+
+La précision des coordonnées calculées dépend de la fermeture de polygone (erreur de fermeture / périmètre), typiquement 1/5 000 à 1/20 000 pour les levés cadastraux.
+
+### GPS/GNSS RTK
+
+Le positionnement par GNSS (Global Navigation Satellite System) en mode RTK (Real-Time Kinematic) permet d'obtenir des coordonnées précises (±1–3 cm planimetrie, ±2–5 cm hauteur) en temps réel :
+
+- **GPS** : constellation américaine (24–31 satellites, L1/L2)
+- **GLONASS** : constellation russe
+- **Galileo** : constellation européenne (en déploiement)
+- **BeiDou** : constellation chinoise
+
+Les réseaux de stations CORS (Continuously Operating Reference Stations) — comme le réseau HxGN SmartNet ou le réseau SOPAC — fournissent les corrections différentielles en temps réel, éliminant le besoin d'une base locale.
+
+<Note>Pour les levés de précision (cadastre légal, délimitation de propriétés), le positionnement GNSS doit être combiné à des contrôles de terrain avec des bornes géodésiques reconnues du réseau de Ressources naturelles Canada (RNCan). La précision sub-centimétrique requiert généralement une occupation statique et un post-traitement.</Note>
+
+### LiDAR terrestre (TLS — Terrestrial Laser Scanning)
+
+Le scanner laser terrestre acquiert des millions de points 3D par seconde (nuage de points) avec des précisions de ±2 à 10 mm à des distances de 1 à 500 m. Applications :
+
+- Relevés de façades et structures existantes (BIM as-built)
+- Inspection et surveillance de structures (ponts, tunnels, barrages)
+- Relevés archéologiques et patrimoniaux
+- Mesures de volumes (carrières, stockages)
+
+### Photogrammétrie par drone (UAV)
+
+Les drones équipés de caméras métriques ou de capteurs LiDAR permettent la génération de :
+- **Orthophotographies** (résolution 2–10 cm)
+- **Modèles numériques de terrain** (MNT) et **modèles numériques de surface** (MNS)
+- **Nuages de points denses** par Structure from Motion (SfM)
+- **Modèles 3D** de bâtiments, infrastructures, carrières
+
+La précision cartographique dépend du GSD (Ground Sampling Distance), du nombre et de la précision des points de contrôle au sol (GCP), et de la géométrie de vol.
+
+## Systèmes de coordonnées et datums au Canada
+
+### Datum horizontal — NAD83 (CSRS)
+
+Le **NAD83 (CSRS)** — North American Datum 1983, Canadian Spatial Reference System — est le datum horizontal officiel du Canada. Il est matérialisé par le réseau de bornes géodésiques de RNCan et aligned avec ITRF à quelques centimètres.
+
+Les fuseaux UTM (Universal Transverse Mercator) divisent le Canada en zones de 6° de longitude. Zones courantes :
+
+| Province | Zone UTM principale |
+|----------|-------------------|
+| Colombie-Britannique | 9, 10 |
+| Alberta | 11, 12 |
+| Saskatchewan | 12, 13 |
+| Manitoba | 13, 14 |
+| Ontario | 15, 16, 17 |
+| Québec | 18, 19, 20 |
+| Maritimes | 20, 21 |
+
+Le système de coordonnées planes MTM (Modified Transverse Mercator) est utilisé au Québec et en Ontario avec des fuseaux de 3° pour réduire les distorsions dans les travaux de grande précision.
+
+### Datum vertical — CGVD2013
+
+Le **CGVD2013** (Canadian Geodetic Vertical Datum of 2013) remplace le CGVD28 comme datum altimétrique officiel du Canada. Il est basé sur le géoïde de gravité CGG2013 et est directement compatible avec le GNSS — les altitudes orthométriques (au-dessus du géoïde) peuvent être calculées en temps réel depuis les hauteurs ellipsoïdales GNSS.
+
+`H (altitude orthométrique) = h (hauteur ellipsoïdale GPS) - N (ondulation du géoïde)`
+
+<Warning>Les projets utilisant des données de différentes époques ou sources doivent vérifier le datum vertical utilisé. La différence entre CGVD28 et CGVD2013 peut atteindre 20–30 cm dans certaines régions du Canada, ce qui est critique pour les projets de drainage et les ouvrages hydrauliques.</Warning>
+
+## Arpentage légal au Canada
+
+### Ordre des arpenteurs-géomètres du Québec (OAGQ)
+
+Au Québec, la profession d'arpenteur-géomètre est régie par la **Loi sur les arpenteurs-géomètres** (RLRQ c A-23). L'**Ordre des arpenteurs-géomètres du Québec (OAGQ)** est l'organisme de réglementation professionnel. Seul un arpenteur-géomètre peut :
+
+- Établir ou confirmer des limites de propriétés
+- Dresser des plans d'arpentage légaux (plans de cadastre)
+- Délivrer des rapports de localisation (certificats de localisation)
+- Mener des opérations cadastrales officielles
+
+### Équivalents provinciaux
+
+| Province | Ordre/Association | Titre |
+|----------|------------------|-------|
+| Ontario | Association of Ontario Land Surveyors (AOLS) | Ontario Land Surveyor (OLS) |
+| C.-B. | BCLS (Association of BC Land Surveyors) | British Columbia Land Surveyor |
+| Alberta | ALSA (Alberta Land Surveyors' Association) | Alberta Land Surveyor |
+| Canada (fédéral) | CBLS (Canada Lands Survey System) | Canada Lands Surveyor |
+
+### Cadastre et registre foncier
+
+Le cadastre québécois rénové (depuis 1994) identifie chaque lot par un numéro unique au niveau provincial. Le **Registre foncier du Québec** (géré par le MERN) enregistre tous les droits réels immobiliers. La réforme cadastrale a créé environ 3,8 millions de lots géoréférencés en coordonnées MTM.
+
+## Arpentage de construction
+
+L'arpentage de construction (construction staking) est l'activité d'implantation des éléments d'un projet sur le terrain à partir des plans :
+
+### Implantation (staking)
+
+- **Implantation de bâtiment** : axes de colonnes, limites d'excavation, niveaux de fondation
+- **Implantation routière** : axe de route, bords de chaussée, profil en long
+- **Implantation d'ouvrage d'art** : culées de pont, piles, tablier
+
+### Relevés as-built
+
+Les relevés as-built documentent la position réelle des ouvrages construits par rapport aux plans. Ils sont requis pour :
+- La réception des travaux
+- Les dossiers de maintenance
+- Les futurs projets d'extension ou réhabilitation
+- Les certifications de conformité (BOMA, LEED)
+
+### Surveillance et auscultation
+
+La surveillance géotechnique et structurale utilise l'arpentage de précision :
+- Réseaux de repères de nivellement (tassements de remblais, barrages)
+- Réseaux de cibles rétro-réflectrices (déplacements de murs de soutènement)
+- Systèmes automatisés (total stations robotisées, GNSS continu)
+- Interférométrie radar (InSAR) par satellite pour les grands glissements
+
+## Normes et précisions en arpentage
+
+| Type de levé | Précision planimetrique | Précision altimétrique |
+|-------------|------------------------|----------------------|
+| Arpentage légal | ≤ 2 cm | ≤ 3 cm |
+| Levé topographique 1:500 | ≤ 20 cm | ≤ 10 cm |
+| Levé topographique 1:2000 | ≤ 50 cm | ≤ 25 cm |
+| LiDAR aéroporté terrain ouvert | ≤ 15 cm | ≤ 15 cm |
+| Drone photogrammétrie avec GCP | ≤ 5 cm | ≤ 5 cm |
+
+<CardGroup cols={2}>
+  <Card title="SIG et télédétection" icon="satellite" href="/geomatique/sig-teledetection">
+    Analyse spatiale, satellite et traitement des nuages de points
+  </Card>
+  <Card title="Génie civil" icon="road" href="/genie-civil/structures">
+    Arpentage de construction et implantation d'ouvrages
+  </Card>
+  <Card title="Génie environnemental" icon="leaf" href="/genie-environnemental/introduction">
+    Cartographie environnementale et surveillance de sites
+  </Card>
+  <Card title="Géotechnique" icon="layer-group" href="/geotechnique/mecanique-sols">
+    Surveillance des ouvrages géotechniques
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : ISO 17123 (instruments optiques et électroniques), ASPRS Positional Accuracy Standards, Normes de précision OAGQ, Spécifications de produits cartographiques de RNCan
+- **Logiciels** : AutoCAD Civil 3D (Autodesk), Leica Infinity, Trimble Business Center, ArcGIS Pro, QGIS, Agisoft Metashape (photogrammétrie), CloudCompare (nuages de points)
+- **Organismes** : OAGQ, RNCan (Ressources naturelles Canada — Géodésie), CCOG (Conseil canadien de géomatique), OGC (Open Geospatial Consortium)
+- **Références** : Schofield & Breach — *Engineering Surveying*; Wolf et al. — *Elementary Surveying*; publications de RNCan sur le système de référence spatial canadien

@@ -1,0 +1,296 @@
+---
+title: "Génie des réacteurs chimiques"
+description: "Cinétique des réactions, types de réacteurs et équations de conception"
+icon: "atom"
+---
+
+Le génie des réacteurs est la branche du génie chimique qui traite de la conception, de l'analyse et de l'optimisation des réacteurs chimiques — les cœurs des procédés industriels où les transformations chimiques se produisent. Il combine la cinétique chimique (à quelle vitesse se produit une réaction ?) avec la thermodynamique (jusqu'où la réaction peut-elle aller ?) et le transfert de masse et de chaleur (comment assurer des conditions uniformes dans le réacteur ?) pour répondre à la question centrale : quelle taille de réacteur faut-il pour atteindre une conversion donnée ?
+
+L'ouvrage de référence est *Chemical Reaction Engineering* de Octave Levenspiel (3e édition, Wiley, 1999), complété par *Elements of Chemical Reaction Engineering* de H. Scott Fogler (Pearson, 6e édition, 2020).
+
+## Cinétique des réactions
+
+### Loi de vitesse en loi de puissance
+
+Pour une réaction `aA + bB → produits`, la loi de vitesse empirique en loi de puissance s'écrit :
+
+```
+-r_A = k × C_A^α × C_B^β
+```
+
+où `r_A` est la vitesse de disparition du composé A (mol/L·s), `k` la constante de vitesse, `C_A` et `C_B` les concentrations (mol/L), et `α`, `β` les ordres partiels déterminés expérimentalement. L'ordre global est `n = α + β`. Il est important de noter que les ordres partiels ne correspondent pas nécessairement aux coefficients stœchiométriques `a` et `b`, sauf pour les réactions élémentaires.
+
+### Équation d'Arrhenius
+
+La dépendance en température de la constante de vitesse suit l'équation d'Arrhenius :
+
+```
+k(T) = A × exp(-E_a / (R × T))
+```
+
+- `A` : facteur pré-exponentiel (mêmes unités que `k`)
+- `E_a` : énergie d'activation (J/mol), typiquement 40 à 200 kJ/mol
+- `R = 8,314 J/(mol·K)`
+- `T` : température absolue (K)
+
+Une règle empirique utile : pour de nombreuses réactions, la constante de vitesse double tous les 10 °C (règle de Van't Hoff), ce qui correspond à une énergie d'activation d'environ 50-60 kJ/mol à 300 K.
+
+**Demi-vie pour une réaction du premier ordre :**
+```
+t_{1/2} = ln(2) / k = 0,693 / k
+```
+
+### Mécanismes réactionnels
+
+Pour les réactions hétérogènes (catalyse solide-gaz, par exemple), le modèle de Langmuir-Hinshelwood-Hougen-Watson (LHHW) est couramment utilisé :
+
+```
+-r_A = k × K_A × C_A / (1 + K_A × C_A + K_B × C_B + ...)
+```
+
+Ce modèle décrit l'adsorption-désorption des réactifs sur les sites actifs du catalyseur. Il est essentiel pour la conception des réacteurs catalytiques à lit fixe (hydrogénation, réformage, synthèse Fisher-Tropsch).
+
+## Réacteur Discontinu (Batch)
+
+### Équation de conception
+
+Dans un réacteur discontinu (batch) à volume constant, l'équation de conception est :
+
+```
+C_{A0} × dX_A / dt = -r_A(X_A)
+```
+
+où `X_A` est le taux de conversion du composant A (`X_A = (C_{A0} - C_A) / C_{A0}`).
+
+**Réaction du 1er ordre** (`-r_A = k × C_A = k × C_{A0} × (1 - X_A)`) :
+```
+t = -ln(1 - X_A) / k = ln(C_{A0} / C_A) / k
+```
+
+**Réaction du 2e ordre** (`-r_A = k × C_A²`) :
+```
+t = X_A / (k × C_{A0} × (1 - X_A)) = (1/C_A - 1/C_{A0}) / k
+```
+
+<Note>
+Les réacteurs batch sont privilégiés en chimie fine et pharmaceutique pour leur flexibilité : un même réacteur peut être utilisé pour différents produits en changeant simplement les conditions opératoires et les réactifs. Les volumes industriels vont typiquement de 100 L à 50 000 L.
+</Note>
+
+### Temps de cycle
+
+Le temps total d'un batch inclut le temps de réaction `t_rxn`, le temps de nettoyage, le temps de remplissage et vidange, et le temps de chauffage/refroidissement. L'optimisation du temps de cycle est cruciale pour la productivité en chimie de spécialité.
+
+## Réacteur Continu Parfaitement Agité (RCPA / CSTR)
+
+### Équation de conception
+
+Le CSTR (*Continuous Stirred Tank Reactor*) opère en régime permanent avec une agitation parfaite — la composition et la température dans le réacteur sont uniformes et égales aux compositions de sortie. L'équation de conception est :
+
+```
+V = F_{A0} × X_A / (-r_A)|_{sortie}
+```
+
+Le taux de conversion est évalué aux conditions de *sortie* du réacteur, ce qui est la caractéristique fondamentale du CSTR.
+
+Le **temps de séjour** :
+```
+τ = V / Q = C_{A0} × X_A / (-r_A)
+```
+
+**Réaction du 1er ordre** :
+```
+τ = (C_{A0} - C_A) / (k × C_A) = X_A / (k × (1 - X_A))
+X_A = k × τ / (1 + k × τ)
+```
+
+### CSTRs en série
+
+`n` réacteurs CSTR identiques en série avec chacun un temps de séjour `τ_i` approchent le comportement d'un PFR quand `n → ∞`. Pour une réaction du 1er ordre, la concentration après `n` CSTRs est :
+
+```
+C_A / C_{A0} = 1 / (1 + k × τ_i)^n
+```
+
+Cette stratégie est utilisée industriellement pour améliorer la conversion globale tout en maintenant la robustesse de l'opération CSTR (bonne régulation thermique, facilité d'agitation).
+
+## Réacteur Tubulaire Piston (RTP / PFR)
+
+### Équation de conception
+
+Le PFR (*Plug Flow Reactor*) est un réacteur continu dans lequel les réactifs traversent le réacteur de façon ordonnée, sans mélange axial. La composition varie le long de l'axe du réacteur. L'équation de conception différentielle est :
+
+```
+F_{A0} × dX_A = (-r_A) × dV
+```
+
+Sous forme intégrale :
+```
+V / F_{A0} = ∫₀^{X_A} dX_A / (-r_A)
+```
+
+**Réaction du 1er ordre** :
+```
+τ = C_{A0} × ∫₀^{X_A} dX_A / (k × C_{A0} × (1 - X_A)) = -ln(1 - X_A) / k
+```
+
+**Réaction du 2e ordre** :
+```
+τ = X_A / (k × C_{A0} × (1 - X_A))
+```
+
+### PFR vs CSTR — Comparaison fondamentale
+
+Pour les réactions d'ordre positif, le PFR nécessite un volume inférieur au CSTR pour atteindre la même conversion, car le CSTR opère à la concentration de sortie (la plus faible), donc à la vitesse de réaction la plus faible. Cette comparaison est illustrée graphiquement par le **diagramme de Levenspiel** (graphe de `1/(-r_A)` en fonction de `X_A`) :
+
+- Volume du CSTR = rectangle de hauteur `1/(-r_A)|_{X_A}` et de base `X_A`
+- Volume du PFR = aire sous la courbe `1/(-r_A)` de 0 à `X_A`
+
+<Tip>
+Pour des réactions présentant un maximum de vitesse (réactions autocatalytiques, certaines réactions en réseau), la combinaison optimale CSTR + PFR peut être plus efficace qu'un PFR seul. Le CSTR opère au maximum de vitesse, puis le PFR atteint la conversion finale.
+</Tip>
+
+## Distribution des temps de séjour (DTS)
+
+La DTS (*Residence Time Distribution*, RTD) caractérise le comportement de l'écoulement réel dans un réacteur, qui diffère souvent des modèles idéaux (PFR ou CSTR).
+
+### Fonction E(t)
+
+La fonction `E(t)` est la distribution des temps de séjour : `E(t)dt` est la fraction du fluide qui séjourne dans le réacteur entre les temps `t` et `t+dt`.
+
+```
+∫₀^∞ E(t) dt = 1  (normalisation)
+```
+
+**Temps de séjour moyen :**
+```
+t̄ = ∫₀^∞ t × E(t) dt
+```
+
+**Variance** (mesure de l'étalement) :
+```
+σ² = ∫₀^∞ (t - t̄)² × E(t) dt
+```
+
+### DTS des réacteurs idéaux
+
+- **CSTR** : `E(t) = (1/τ) × exp(-t/τ)` — distribution exponentielle décroissante
+- **PFR** : `E(t) = δ(t - τ)` — distribution de Dirac (tout le fluide sort exactement après τ)
+
+### Modèle de dispersion axiale
+
+Pour les écoulements réels avec mélange axial partiel, le modèle de dispersion utilise le **nombre de Péclet** :
+
+```
+Pe = u × L / D_ax
+```
+
+où `u` est la vitesse d'écoulement, `L` la longueur du réacteur et `D_ax` le coefficient de dispersion axiale. `Pe → ∞` correspond au PFR idéal ; `Pe → 0` au CSTR idéal.
+
+**Mesure expérimentale** : injection d'un traceur inerte en entrée (méthode impulsion ou échelon) et mesure de la réponse en sortie. La DTS est essentielle pour diagnostiquer les zones mortes (*dead zones*), les courts-circuits (*channeling*) et les recirculations dans les réacteurs industriels.
+
+## Sélectivité et rendement
+
+La sélectivité et le rendement sont les critères économiques clés pour les réactions en réseau (réactions parallèles ou en série).
+
+### Définitions
+
+**Sélectivité instantanée** (locale) :
+```
+s_{D/U} = r_D / r_U  (rapport des vitesses de formation du produit désiré et indésirable)
+```
+
+**Sélectivité globale** (*overall selectivity*) :
+```
+S̃ = moles de produit désiré formées / moles de réactif A consommées × facteur stœchiométrique
+```
+
+**Rendement en produit désiré** (*yield*) :
+```
+Y = X_A × S̃
+```
+
+### Réactions en réseau
+
+**Réactions en série** `A → B → C` (B = produit désiré) :
+
+La concentration en B passe par un maximum. Pour maximiser la production de B, il faut arrêter la réaction avant que B ne se transforme en C. Le PFR donne une sélectivité supérieure au CSTR pour les réactions en série, car la concentration de B est plus faible dans un CSTR (mélange parfait), favorisant la réaction secondaire `B → C`.
+
+**Réactions parallèles** `A → B (désirée)` et `A → C (indésirable)` :
+
+Si `α_D > α_U` (ordre de la réaction désirée supérieur) → opérer à concentration élevée en A → PFR ou réacteur batch
+Si `α_D < α_U` → opérer à concentration faible en A → CSTR ou alimentation diluée
+
+## Effets thermiques dans les réacteurs
+
+### Bilan énergétique du CSTR
+
+Pour un CSTR en régime permanent avec une réaction exothermique :
+
+```
+Q̇ - F_{A0} × Σ θ_i × Cp_i × (T - T_0) + (-ΔH_{rxn}(T)) × F_{A0} × X_A = 0
+```
+
+où `θ_i = F_{i0}/F_{A0}` est le rapport molaire d'alimentation, `T_0` la température d'alimentation, et `Q̇` le flux de chaleur échangé avec le fluide caloporteur.
+
+### Température adiabatique de montée
+
+Pour un réacteur adiabatique (`Q̇ = 0`), la température augmente de :
+
+```
+ΔT_ad = -ΔH_{rxn} × C_{A0} / (ρ × Cp)
+```
+
+Cette valeur est la **montée adiabatique de température** pour une conversion de 100 %. Elle est un indicateur clé de danger potentiel :
+
+| ΔT_ad | Signification |
+|-------|---------------|
+| < 50 °C | Risque faible |
+| 50 – 200 °C | Attention requise, contrôle thermique à prévoir |
+| > 200 °C | Évaluation rigoureuse du risque d'emballement thermique obligatoire |
+
+### Multiplicité des états stationnaires dans le CSTR
+
+Pour les réactions exothermiques, le bilan thermique du CSTR peut admettre jusqu'à **trois états stationnaires** (intersection de la courbe de génération de chaleur sigmoïde et de la droite de refroidissement). L'état intermédiaire est instable. Ce phénomène, connu sous le nom de **multiplicité des états stationnaires** (Damköhler, 1940), est fondamental pour comprendre la stabilité opératoire des réacteurs exothermiques.
+
+<Warning>
+L'emballement thermique (*thermal runaway*) dans un réacteur exothermique peut conduire à une surpression catastrophique, une décomposition incontrôlée ou une explosion. Les critères de Barkelew (1959) et de Semenov permettent d'évaluer la sensibilité au runaway. Les calorymètres RC1 (Mettler-Toledo) et DSC (calorimétrie différentielle à balayage) sont utilisés pour mesurer `ΔH_rxn` et les cinétiques de décomposition lors des études de sécurité des réacteurs.
+</Warning>
+
+## Sécurité des réacteurs chimiques
+
+La sécurité est indissociable de la conception des réacteurs. Les principaux risques sont :
+
+- **Emballement thermique** : réaction exothermique avec perte du contrôle du refroidissement
+- **Accumulation de réactifs** : dosage trop rapide d'un réactif sans consommation suffisante
+- **Formation de sous-produits instables** : peroxides, nitroglycérine, N₂O₄
+- **Incompatibilité chimique** : mélange accidentel de réactifs incompatibles
+
+**Outils d'évaluation :**
+
+- **DSC** (*Differential Scanning Calorimetry*) : mesure du `ΔH_rxn` et détection des décompositions exothermiques
+- **RC1 (Mettler-Toledo)** : calorimètre de réaction à l'échelle du laboratoire (100-2000 mL), fournit `ΔH_rxn`, la puissance thermique `Qr(t)`, et les paramètres cinétiques
+- **ARC** (*Accelerating Rate Calorimetry*) : détermine la température de début d'emballement (TDEO) et la décomposition adiabatique
+- **CHETAH et SuperChems** : logiciels d'évaluation du potentiel énergétique des composés chimiques
+
+L'analyse de type **HAZOP** (*Hazard and Operability Study*) est obligatoire pour tous les réacteurs industriels traitant des substances dangereuses, conformément aux lignes directrices du CCPS (Center for Chemical Process Safety, AIChE).
+
+<Note>
+Au Canada, les procédés impliquant des réacteurs chimiques avec des substances dangereuses sont soumis aux exigences du Règlement sur les systèmes de gestion de la sécurité des procédés (SGSP) dans plusieurs provinces. En Ontario, le Règlement 851 (Industrial Establishments) et le Règlement 860 (Designated Substances) s'appliquent. Au Québec, le RSST (Règlement sur la santé et la sécurité du travail) et les normes de la CNESST s'appliquent.
+</Note>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Thermodynamique chimique" icon="temperature-high" href="/genie-chimique/thermodynamique-chimique">
+    Équilibres de réaction et calcul des constantes d'équilibre
+  </Card>
+  <Card title="Opérations unitaires" icon="filter" href="/genie-chimique/operations-unitaires">
+    Séparation des produits de réaction par distillation et absorption
+  </Card>
+  <Card title="Sécurité des procédés" icon="shield-halved" href="/genie-chimique/securite-procedes">
+    HAZOP, analyse des risques et gestion de la sécurité des procédés
+  </Card>
+  <Card title="Introduction au génie chimique" icon="flask" href="/genie-chimique/introduction">
+    Vue d'ensemble de la discipline et parcours de carrière
+  </Card>
+</CardGroup>

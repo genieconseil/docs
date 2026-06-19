@@ -1,0 +1,163 @@
+---
+title: "Outils de calcul pour ingénieurs"
+description: "Logiciels de calcul structurel, mécanique, CFD, outils open source, calculateurs en ligne et feuilles Excel"
+icon: "calculator"
+---
+
+Le choix des outils de calcul appropriés est aussi important que la compréhension des méthodes analytiques. Un logiciel puissant mal utilisé peut donner des résultats erronés avec une apparence de précision trompeuse. Connaître les capacités, les limites et les hypothèses de chaque outil est une compétence fondamentale de l'ingénieur.
+
+## Logiciels de calcul structurel
+
+### ETABS (Computers and Structures Inc.)
+Spécialisé dans l'analyse des bâtiments à plusieurs niveaux :
+- Analyse statique et dynamique (spectrale, temporelle)
+- Dimensionnement en béton armé, acier et composite
+- Analyse sismique selon NBCC, ASCE 7, EC8
+- Modélisation des dalles, voiles, rampes et fondations
+- Intégration BIM (IFC)
+
+Idéal pour : bâtiments de hauteur moyenne à grande, structures irrégulières en zone sismique.
+
+### SAP2000 (Computers and Structures Inc.)
+Outil polyvalent pour le génie civil général :
+- Éléments frames, shells, solid, câbles, isolateurs
+- Analyse non-linéaire (matérielle et géométrique)
+- Analyse de pont (influence lines, vehicle loads)
+- Analyse des coques et réservoirs
+- Modules d'optimisation
+
+Idéal pour : ponts, silos, réservoirs, charpentes industrielles, structures spéciales.
+
+### RISA-3D (RISA Technologies)
+Très utilisé en Amérique du Nord pour les charpentes en acier :
+- Dimensionnement acier selon AISC 360, CSA S16
+- Vérification béton armé selon ACI 318, CSA A23.3
+- Dimensionnement bois selon NDS, CSA O86
+- Interface intuitive, rapide pour les structures courantes
+
+### Robot Structural Analysis (Autodesk)
+Intégré à l'écosystème Autodesk (Revit, AutoCAD) :
+- Interopérabilité BIM native avec Revit
+- Analyse linéaire et non-linéaire
+- Normes européennes (Eurocode) bien supportées
+
+<Warning>Toujours vérifier les résultats de tout logiciel de calcul par des méthodes manuelles simplifiées ou des modèles de référence. Un modèle mal construit (appuis incorrects, mauvais matériaux, charges erronées) donnera des résultats erronés sans message d'erreur apparent.</Warning>
+
+## Logiciels de simulation mécanique et thermique
+
+### ANSYS (ANSYS Inc.)
+Suite de référence pour la simulation ingénierie :
+- **ANSYS Mechanical** : analyse par éléments finis (contraintes, déformations, fatigue, dynamique)
+- **ANSYS Fluent** : CFD (Computational Fluid Dynamics) — écoulements turbulents, transfert de chaleur, multiphase
+- **ANSYS HFSS** : simulation électromagnétique haute fréquence
+- Optimisation topologique, analyse de fiabilité
+
+### Abaqus (Dassault Systèmes)
+Référence pour l'analyse non-linéaire avancée :
+- Plasticité, viscoplasticité, creep (fluage)
+- Contacts complexes (frottement, impact)
+- Crash et analyse de choc
+- Couplage thermomécanique
+
+Très utilisé dans l'automobile, l'aéronautique et le nucléaire.
+
+### SolidWorks Simulation (Dassault Systèmes)
+Intégré à SolidWorks CAD :
+- Accessible aux ingénieurs mécaniciens de conception
+- Analyse linéaire statique, thermique, fréquentielle
+- Simulation d'injection plastique, fatigue
+
+### COMSOL Multiphysics
+Excellent pour les phénomènes couplés :
+- Thermique + mécanique + électrique + fluidique dans un seul modèle
+- Écoulements réactifs, électrochimie, acoustique
+- Très utilisé en recherche et développement
+
+<Tip>Les logiciels de simulation par éléments finis exigent une vérification rigoureuse du maillage (convergence avec raffinement), des conditions aux limites et des propriétés matériaux. Un ingénieur expérimenté dans l'interprétation des résultats est indispensable.</Tip>
+
+## Outils open source
+
+### OpenSees (University of California, Berkeley)
+Référence mondiale pour la simulation sismique des structures :
+- Éléments non-linéaires avancés (béton confiné, acier avec écrouissage)
+- Analyse temporelle sous accélérogrammes réels
+- Interface Tcl/Python; intégration avec OpenSeesPy
+- Gratuit, validé par des milliers de publications académiques
+
+### OpenFOAM (OpenCFD)
+Suite CFD open source la plus utilisée au monde :
+- Mécanique des fluides incompressibles et compressibles
+- Turbulence (k-ε, k-ω SST, LES, DNS)
+- Transfert de chaleur, combustion, multiphase
+- Scalable sur HPC (calcul parallèle MPI)
+- Courbe d'apprentissage importante mais communauté très active
+
+### CalculiX
+Solveur EF open source compatible avec le format Abaqus :
+- Analyse statique, thermique, dynamique
+- Visualisation avec ParaView (VTK)
+- Intégré à FreeCAD via le module FEM
+
+### FreeCAD
+Modeleur 3D open source pour l'ingénierie :
+- Modélisation paramétrique
+- Module de dessin technique 2D
+- Intégration avec CalculiX pour l'analyse FEA
+- Courbe d'apprentissage mais amélioration continue
+
+### Code_Aster (EDF)
+Logiciel de simulation thermomécanique développé par EDF (France) :
+- Validé pour le nucléaire (ASN, ASME)
+- Comportements matériaux complexes (irradiation, vieillissement)
+- Interface Salome-Meca pour le pré- et post-traitement
+- Gratuit avec documentation extensive en français
+
+## Calculateurs en ligne utiles
+
+- **SkyCiv** (skyciv.com) : analyse de poutres, treillis, sections
+- **MechCalc** (mechcalc.com) : calculs de résistance des matériaux et de thermodynamique
+- **The Engineering ToolBox** (engineeringtoolbox.com) : propriétés des matériaux, conversions, formules
+- **WolframAlpha** : calculs symboliques et numériques, vérification rapide
+- **Psychrometric Chart Online** : calculs CVAC, humidité, enthalpie de l'air humide
+- **Pipe Flow Calculator** (pipeflowcalculations.com) : pertes de charge, Darcy-Weisbach
+- **CivilWeb** : calculateurs de fondations, déflexion de poutres, capacité portante
+
+## Feuilles de calcul Excel pour ingénieurs
+
+Excel reste omniprésent en pratique d'ingénierie. Bonnes pratiques essentielles :
+
+**Structure** : séparer les données d'entrée (cellules jaunes), les calculs intermédiaires et les résultats (cellules vertes). Documenter les sources et les hypothèses.
+
+**Validation** : inclure des cellules de vérification (équilibre statique, dimensionnement adimensionnel). Vérifier manuellement les formules critiques.
+
+**VBA et macros** : pour automatiser les calculs répétitifs, générer des rapports, interfacer avec d'autres logiciels.
+
+**Solver** : optimisation de dimensionnement sous contraintes (diamètre de conduite optimal, coupe transversale minimale).
+
+<Warning>Les feuilles de calcul Excel sont difficiles à auditer, à versionner et à tester. Pour les calculs critiques, utiliser un logiciel validé ou documenter la feuille de calcul avec une vérification par un second ingénieur. Conserver les révisions avec contrôle de version (nom de fichier + date ou SharePoint).</Warning>
+
+## Sélection d'outils : critères de décision
+
+| Critère | Questions à poser |
+|---|---|
+| Précision et validation | Le logiciel est-il validé pour mon type de problème? Exemples de benchmarks? |
+| Coût de licence | Achat, abonnement, concurrent ou named user? Coût total de propriété? |
+| Courbe d'apprentissage | Temps de formation nécessaire? Ressources disponibles (tutoriels, formation)? |
+| Interopérabilité | Formats d'import/export compatibles avec le reste de la chaîne (IFC, DXF, STEP)? |
+| Acceptation réglementaire | Le logiciel est-il accepté par les autorités (AHJ) pour les soumissions? |
+| Support technique | Délai de réponse, qualité du support, forum utilisateur actif? |
+
+<CardGroup cols={2}>
+  <Card title="Normes et codes" icon="file-contract" href="/ressources/normes-codes">
+    Codes de calcul et normes de référence
+  </Card>
+  <Card title="Structures" icon="building" href="/genie-civil/structures">
+    Méthodes d'analyse structurale
+  </Card>
+  <Card title="Thermodynamique" icon="temperature-high" href="/genie-mecanique/thermodynamique">
+    Simulation thermique et CFD
+  </Card>
+  <Card title="Architecture logicielle" icon="diagram-project" href="/genie-logiciel/architecture">
+    Outils de développement et DevOps
+  </Card>
+</CardGroup>

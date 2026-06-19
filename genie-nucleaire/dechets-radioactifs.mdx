@@ -1,0 +1,166 @@
+---
+title: "Gestion des déchets radioactifs"
+description: "Classification, stockage et gestion à long terme des déchets radioactifs au Canada"
+icon: "biohazard"
+---
+
+## Principes généraux de la gestion des déchets radioactifs
+
+La gestion des déchets radioactifs est l'un des défis techniques et sociétaux les plus complexes du génie nucléaire. Elle diffère fondamentalement de la gestion des déchets industriels conventionnels par la nature même du danger : la radioactivité ne peut pas être neutralisée chimiquement ou thermiquement — elle diminue uniquement par désintégration radioactive, selon des échelles de temps qui s'étendent de quelques jours à des millions d'années selon les radionucléides.
+
+Le principe fondamental est la **protection de l'être humain et de l'environnement**, à la fois pour les générations actuelles et futures, par un confinement sûr et un isolement progressif des déchets radioactifs de la biosphère, proportionnel à leur niveau de dangerosité et à la durée de leur activité.
+
+Au Canada, la gestion des déchets radioactifs est encadrée par la **Politique sur la gestion des déchets radioactifs** du gouvernement fédéral (2002, mise à jour 2020), la **Loi sur les déchets de combustible nucléaire (2002)** et les exigences réglementaires de la CCSN (REGDOC-2.11.1 et 2.11.2).
+
+## Classification des déchets radioactifs
+
+Le Canada utilise une classification fondée sur les niveaux d'activité et les demi-vies des radionucléides présents, harmonisée avec le schéma de l'AIEA (GSG-1) :
+
+| Catégorie | Activité | Demi-vie dominante | Exemples typiques | Méthode de gestion privilégiée |
+|---|---|---|---|---|
+| **Déchets très faiblement radioactifs (DTFR)** | < 100 Bq/g (masse) | Courte à variable | Outils, gravats de béton légèrement contaminés, terres, vêtements de travail en fin de vie d'installation | Décharge conventionnelle après déclassification par la CCSN, ou élimination contrôlée |
+| **Déchets faiblement radioactifs (DFR)** | Faible ; pas de chaleur significative | Principalement < 30 ans | Filtres, résines échangeuses d'ions, vêtements de protection, outillage contaminé, sources scellées usagées | Stockage peu profond (near-surface disposal) — SGDN |
+| **Déchets moyennement radioactifs (DMR)** | Intermédiaire ; pas de chaleur significative | Variable | Composants internes de réacteur (grappes d'ajusteurs, barres de contrôle), gaines de combustible, déchets de déclassement de réacteur | Stockage intermédiaire de longue durée — dépôt à profondeur intermédiaire envisagé |
+| **Déchets hautement radioactifs (DHR)** | Élevée ; chaleur de désintégration significative | Longue — jusqu'à millions d'années | Combustible nucléaire irradié (usé), produits de fission vitrifiés (retraitement), actinides séparés | Dépôt géologique profond (DGP) |
+
+<Info>
+La frontière entre DFR et DMR est fixée à environ 4 GBq/t pour les émetteurs alpha et 12 GBq/t pour les émetteurs bêta/gamma dans les lignes directrices de l'AIEA (GSG-1). En pratique, cette classification est complétée par des critères de radiotoxicité à long terme.
+</Info>
+
+## Décroissance radioactive et demi-vie
+
+La demi-vie (t₁/₂) est le temps nécessaire pour que l'activité d'un radionucléide diminue de moitié par désintégration. La loi de décroissance radioactive est :
+
+`A(t) = A₀ × (1/2)^(t/t₁/₂) = A₀ × e^(-λt)`
+
+où `λ = ln(2) / t₁/₂` est la constante de désintégration.
+
+**Règle pratique des 10 demi-vies :** après 10 demi-vies, l'activité d'un radionucléide est réduite à `(1/2)^10 ≈ 1/1000` de sa valeur initiale (0,1 %). Cette règle permet d'estimer la durée pendant laquelle un radionucléide donné doit être isolé.
+
+Radionucléides importants dans la gestion des déchets :
+
+| Radionucléide | Demi-vie | Type d'émission | Origine | Remarques |
+|---|---|---|---|---|
+| Tritium (³H) | 12,3 ans | Bêta faible | Réacteurs à eau lourde (CANDU) | Présent dans l'eau lourde des circuits |
+| Cobalt-60 (⁶⁰Co) | 5,27 ans | Bêta + gamma (1,17 et 1,33 MeV) | Activation du cobalt dans les composants d'acier | Source majeure d'irradiation en maintenance |
+| Iode-131 (¹³¹I) | 8,02 jours | Bêta + gamma | Produit de fission — relâché en cas d'accident | Risque thyroïdien à court terme |
+| Strontium-90 (⁹⁰Sr) | 28,8 ans | Bêta | Produit de fission | Analogue chimique du calcium — risque osseux |
+| Césium-137 (¹³⁷Cs) | 30,2 ans | Bêta + gamma (0,662 MeV via ¹³⁷ᵐBa) | Produit de fission dominant | Préoccupation majeure post-accident (Tchernobyl, Fukushima) |
+| Plutonium-239 (²³⁹Pu) | 24 100 ans | Alpha | Transmutation de l'U-238 | Hautement radiotoxique par inhalation |
+| Américium-241 (²⁴¹Am) | 432 ans | Alpha + gamma | Décroissance du Pu-241 | Croît dans le combustible irradié après retrait |
+| Iode-129 (¹²⁹I) | 15,7 millions d'années | Bêta faible | Produit de fission — longue durée | Défi pour l'évaluation de sûreté des DGP |
+| Uranium-235 (²³⁵U) | 703,8 millions d'années | Alpha | Uranium naturel | Radiotoxicité dominée par toxicité chimique à long terme |
+
+Après 10 demi-vies, le ¹³¹I disparaît en ~80 jours ; le ⁶⁰Co en ~53 ans ; le ¹³⁷Cs en ~300 ans. En revanche, le ²³⁹Pu nécessite plus de 240 000 ans pour être réduit au millième de son activité initiale — d'où la nécessité d'un confinement géologique.
+
+## Stockage actuel des déchets au Canada
+
+### Installation de gestion des déchets de l'Ouest (IGDO / WWMF)
+
+L'**Installation de gestion des déchets de l'Ouest (IGDO)**, exploitée par les Laboratoires Nucléaires Canadiens (LNC) à Chalk River (Ontario), est la principale installation de gestion des déchets faiblement et moyennement radioactifs générés par les activités de recherche et de développement nucléaire depuis les années 1940. Elle comprend plusieurs cellules de stockage peu profond, des monticules de déchets (waste mounds) et des bâtiments de stockage. Le programme de déclassement et de remise en état de l'IGDO est l'un des plus importants projets environnementaux au Canada.
+
+### Stockage humide en piscine (wet storage — used fuel bays)
+
+Immédiatement après son retrait du réacteur, le combustible nucléaire irradié est hautement radioactif et dégage une chaleur de désintégration importante (~1 % de la puissance nominale à l'arrêt, décroissant rapidement). Il est stocké dans des **piscines de stockage** (used fuel bays / spent fuel pools) remplies d'eau déminéralisée à environ 7 mètres de profondeur. L'eau assure simultanément le refroidissement du combustible et le blindage radiologique (7 m d'eau absorbent le rayonnement gamma de façon à permettre un accès sans dose significative en surface).
+
+Le combustible irradié CANDU reste typiquement en piscine pendant **6 à 10 ans** avant d'être transféré vers un stockage sec à long terme, une fois que sa chaleur de désintégration a suffisamment diminué (< ~1 kW par grappe). Des piscines de stockage sont présentes sur tous les sites de réacteurs en exploitation et en déclassement (Darlington, Bruce, Pickering, Point Lepreau, Gentilly-2, Douglas Point, Chalk River).
+
+### Stockage sec en conteneurs (dry storage)
+
+Après le refroidissement en piscine, le combustible irradié est transféré dans des **conteneurs de stockage sec** placés sur des plateformes extérieures bétonnées ou dans des bâtiments de stockage. Le Canada utilise principalement le système **MACSTOR** (MOdular Air-Cooled STORage) :
+
+Les modules MACSTOR sont des structures en béton massif contenant des compartiments étanches remplis de combustible irradié. La chaleur résiduelle est dissipée passivement par convection naturelle de l'air circulant dans les espaces internes — aucun système de refroidissement actif n'est requis. Des installations de stockage MACSTOR sont en service à Pickering, à Point Lepreau et à l'ancienne centrale de Douglas Point. Des systèmes similaires (CANSTOR) sont utilisés à Darlington.
+
+Le stockage sec est considéré comme sûr pendant au moins **50 à 100 ans**, offrant une flexibilité temporelle pour le développement et la mise en service d'une solution de gestion définitive (dépôt géologique profond).
+
+<Tip>
+La stratégie de « surveillance et attente » (monitored storage) adoptée par de nombreux pays, dont le Canada, reconnaît que le stockage intermédiaire de longue durée du combustible irradié est techniquement sûr pendant plusieurs décennies, ce qui permet le développement méthodique d'un dépôt géologique profond dans des conditions optimales, sans précipitation.
+</Tip>
+
+## La SGDN et la Gestion adaptative et progressive (GAP)
+
+### Création et mandat de la SGDN
+
+La **Société de gestion des déchets nucléaires (SGDN)** a été créée en 2002 en vertu de la **Loi sur les déchets de combustible nucléaire**, à la suite de consultations publiques approfondies (Comité d'étude Seaborn, 1998). Son mandat est de développer et de mettre en œuvre l'approche de gestion à long terme du combustible nucléaire irradié produit par les centrales canadiennes. Les propriétaires de déchets — OPG, Bruce Power et NB Power — financent la SGDN et siègent à son conseil d'administration.
+
+### Approche de gestion adaptative et progressive (GAP / APM)
+
+En 2007, après des années de consultations approfondies auprès des Canadiens (incluant les peuples autochtones), la SGDN a recommandé et le gouvernement du Canada a adopté la **Gestion adaptative et progressive (GAP)** comme approche nationale pour le combustible nucléaire irradié.
+
+La GAP repose sur quatre éléments fondamentaux :
+
+1. **Confinement et isolement centralisés** dans un **dépôt géologique profond (DGP)** — la solution technique définitive
+2. **Surveillance continue** de l'installation pendant la phase d'exploitation (plusieurs décennies)
+3. **Capacité de récupération** du combustible pendant la phase de surveillance (le combustible reste récupérable si une meilleure solution est développée)
+4. **Prise de décision adaptative** — capacité à ajuster l'approche à mesure que les connaissances scientifiques et techniques évoluent
+
+### Processus de sélection du site
+
+La SGDN a mené un processus de sélection de site long de plus d'une décennie, fondé sur le **volontariat des communautés** souhaitant accueillir l'installation. Après plusieurs étapes d'évaluation technique et d'engagement communautaire, **deux sites candidats** ont été retenus pour l'évaluation approfondie finale (circa 2024) :
+
+- **South Bruce (Ontario) :** communauté rurale dans le comté de Bruce, au nord-est du complexe nucléaire de Bruce. Le sous-sol est composé de **roche sédimentaire** (argile/calcaire du bassin du Michigan) — géologie argileuse offrant une très faible perméabilité hydraulique.
+- **Ignace (Ontario) :** communauté au nord-ouest de l'Ontario, dans le **bouclier canadien**. Le sous-sol est composé de **roche cristalline** (granite précambrien) — grande stabilité géologique et très faible porosité.
+
+<Note>
+La sélection finale du site fera l'objet d'une évaluation environnementale fédérale rigoureuse et d'un examen réglementaire par la CCSN, avant qu'un permis de construction puisse être accordé. La construction d'un DGP au Canada est envisagée au milieu du XXIe siècle.
+</Note>
+
+### Système multi-barrières du DGP
+
+La sûreté à long terme du DGP repose sur un **système multi-barrières** (engineered and natural barriers), chaque barrière fournissant un niveau de confinement indépendant :
+
+1. **Pastilles de combustible en UO₂ fritté :** matrice céramique dense qui retient la majorité des produits de fission solides même après des millénaires de stockage
+2. **Gaine en Zircaloy :** tube en alliage de zirconium entourant les crayons combustibles, intègre pour plusieurs siècles dans des conditions réductrices
+3. **Conteneur de confinement :** conteneur en cuivre (résistance à la corrosion sur de très longues durées en milieu anaérobie) avec insert structurel en acier ou en fonte. Le concept canadien est basé sur la **méthode KBS-3** suédoise adaptée aux dimensions des grappes CANDU
+4. **Tampon en bentonite :** argile gonflante (bentonite de sodium ou de calcium) remplissant l'espace entre le conteneur et la roche hôte. La bentonite se gonfle en présence d'eau, scellant hermétiquement l'espace annulaire, ralentissant extrêmement la migration des eaux souterraines et retenant les radionucléides par sorption
+5. **Roche hôte :** granite précambrien du Bouclier canadien (ou argile du bassin du Michigan à South Bruce), stable géologiquement depuis des centaines de millions d'années, avec des temps de transit des eaux souterraines pouvant atteindre des millénaires
+
+## Exemples internationaux
+
+### Onkalo, Finlande — Premier DGP au monde en construction
+
+La Finlande est le premier pays au monde à avoir atteint le stade de la construction d'un DGP pour combustible usé. L'installation **Onkalo** (« caverne » en finnois), développée par Posiva Oy (copropriété de TVO et Fortum), est située à **Eurajoki**, adjacent au site nucléaire d'Olkiluoto. La roche hôte est du granite cristallin précambrien, à une profondeur de **400 à 450 mètres**. Le permis de construction a été accordé en 2015, les galeries de stockage sont en cours de construction, et la réception des premiers conteneurs de combustible irradié est prévue vers **2025-2026**. Le DGP d'Onkalo utilisera la méthode **KBS-3V** (conteneurs en cuivre, tampons en bentonite, tunnels verticaux).
+
+### Méthode KBS-3 (Suède — SKB)
+
+La méthode **KBS-3** (Kärnbränslesäkerhet — sécurité du combustible nucléaire, version 3) est le concept de référence développé par la SKB (Svensk Kärnbränslehantering AB) suédoise depuis les années 1970. Elle prévoit des conteneurs en cuivre de 5 cm d'épaisseur entourant un insert en fonte, enveloppés de bentonite compactée et placés dans des trous de forage verticaux (KBS-3V) ou dans des tunnels horizontaux (KBS-3H). La Suède a sélectionné le site de **Forsmark** (granite, ~500 m de profondeur) pour son DGP.
+
+### WIPP, États-Unis (déchets transuraniennes)
+
+Le **Waste Isolation Pilot Plant (WIPP)** au Nouveau-Mexique est opérationnel depuis 1999 pour les déchets transuraniennes (TRU) de défense (plutonium, américium, etc.) dans des formations de sel gemme à ~655 m de profondeur. Le sel gemme présente la propriété de se déformer plastiquement, scellant naturellement toutes les ouvertures au fil du temps.
+
+## Déchets historiques — Bureau de gestion des déchets radioactifs de faible activité (BGDRFA)
+
+Le **Bureau de gestion des déchets radioactifs de faible activité (BGDRFA / LLRWMO)**, sous la responsabilité des LNC, gère les déchets radioactifs historiques situés dans des municipalités canadiennes, principalement à **Port Hope** et **Port Granby** (Ontario). Ces déchets résultent des activités du Programme de l'énergie atomique depuis les années 1930-1940 (raffinage du radium et de l'uranium, traitement du résidu de raffinage), et ont été utilisés de façon inappropriée comme remblai dans de nombreuses propriétés résidentielles et commerciales.
+
+Le **Projet d'assainissement de la région de Port Hope** est l'un des projets d'assainissement nucléaire les plus importants au Canada, visant à regrouper ces déchets dans deux installations de stockage à long terme sûres et surveillées.
+
+<Warning>
+Les déchets radioactifs ne peuvent pas être simplement « dilués » dans l'environnement — toute dispersion délibérée de matières radioactives est strictement interdite par la réglementation canadienne (Règlement sur les substances nucléaires et les appareils à rayonnement) et les conventions internationales. La gestion sûre, le confinement et l'isolement progressif sont les seules approches acceptables.
+</Warning>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card
+    title="Introduction au génie nucléaire"
+    icon="radiation"
+    href="/genie-nucleaire/introduction"
+  >
+    Aperçu du secteur, applications et organisations clés
+  </Card>
+  <Card
+    title="Réacteurs nucléaires"
+    icon="radiation"
+    href="/genie-nucleaire/reacteurs-nucleaires"
+  >
+    Types de réacteurs, fonctionnement du CANDU et cycle du combustible
+  </Card>
+  <Card
+    title="Sûreté nucléaire"
+    icon="shield-halved"
+    href="/genie-nucleaire/surete-nucleaire"
+  >
+    Défense en profondeur et réglementation canadienne
+  </Card>
+</CardGroup>

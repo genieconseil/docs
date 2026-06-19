@@ -1,0 +1,203 @@
+---
+title: "Biomécanique"
+description: "Mécanique du système musculo-squelettique, analyse de la marche et conception d'implants orthopédiques"
+icon: "person-running"
+---
+
+## Introduction à la biomécanique
+
+La biomécanique est la branche de la biophysique et de l'ingénierie biomédicale qui applique les lois de la mécanique — statique, dynamique, mécanique des milieux continus, rhéologie — aux systèmes biologiques, en particulier au corps humain. Elle permet de quantifier les forces, les contraintes, les déformations et les mouvements qui s'exercent dans et sur le corps humain lors d'activités quotidiennes, sportives ou pathologiques.
+
+La biomécanique joue un rôle central dans la conception des implants orthopédiques, dans la rééducation fonctionnelle, dans la prévention et l'analyse des blessures sportives, dans la conception des équipements de protection individuelle et dans la compréhension des mécanismes de déformation et de rupture des tissus biologiques.
+
+## Propriétés mécaniques du tissu osseux
+
+### Os cortical et os spongieux (trabéculaire)
+
+Le tissu osseux se décline en deux architectures distinctes aux propriétés mécaniques très différentes :
+
+**L'os cortical** (ou os compact) forme la couche externe dense des os longs (diaphyse du fémur, du tibia, de l'humérus). Sa porosité est faible (5–10 %) et sa structure lamellaire (ostéons de Havers) lui confère des propriétés mécaniques élevées :
+
+- Module de Young (élasticité) : **17 à 25 GPa** selon la direction de sollicitation
+- Résistance à la compression : **170 à 200 MPa**
+- Résistance en traction : **100 à 150 MPa**
+- Résistance au cisaillement : **65 à 70 MPa**
+- Déformation à la rupture : **1 à 3 %**
+
+**L'os spongieux** (trabéculaire) constitue l'intérieur des os courts et des épiphyses des os longs. Sa structure tridimensionnelle en treillis (trabécules) et sa porosité élevée (50–90 %) lui confèrent des propriétés mécaniques très inférieures mais très variables selon sa densité locale :
+
+- Module de Young : **0,1 à 5 GPa** (fortement dépendant de la densité volumique)
+- Résistance à la compression : **1 à 10 MPa**
+
+<Note>
+L'os est un matériau **anisotrope** et **viscoélastique**. Son module de Young est plus élevé dans la direction longitudinale (axe de la diaphyse) que dans les directions transversales, car les fibres de collagène et les ostéons sont orientés préférentiellement dans l'axe de chargement principal. De plus, ses propriétés mécaniques dépendent de la vitesse de déformation : l'os est plus rigide et plus résistant lors d'impacts rapides (accidents de la route) que lors de chargements quasi-statiques.
+</Note>
+
+### Comportement en fatigue
+
+L'os est soumis à des chargements cycliques répétés au cours de la vie. Des fissures microscopiques se propagent progressivement si les contraintes dépassent le seuil de remodelage osseux (capacité naturelle de l'os à réparer les microdommages). Les fractures de stress chez les coureurs à pied résultent d'une accumulation de microdommages dépassant la capacité de remodelage osseux.
+
+La relation de Wöhler (S-N) caractérise la durée de vie en fatigue : le nombre de cycles à la rupture N augmente exponentiellement quand l'amplitude de contrainte S diminue. Pour l'os cortical, la limite d'endurance se situe autour de **60–70 MPa** en traction.
+
+## Biomécanique articulaire
+
+### Hanche
+
+L'articulation de la hanche (coxo-fémorale) est une énarthrose (articulation en boule) entre la tête fémorale et le cotyle acétabulaire. Les forces transmises à travers la hanche sont considérablement amplifiées par rapport au poids corporel en raison du bras de levier défavorable des muscles abducteurs :
+
+- **Marche normale** : 2,5 à 3 fois le poids corporel (force de réaction articulaire mesurée *in vivo* par prothèses instrumentées)
+- **Montée des escaliers** : 3 à 4 fois le poids corporel
+- **Trébuchement** : jusqu'à **8 fois le poids corporel** (contraction musculaire réflexe intense)
+- **Soulèvement d'une charge lourde** : peut dépasser 5 fois le poids corporel
+
+Ces valeurs sont critiques pour le dimensionnement des prothèses totales de hanche (PTH).
+
+### Genou
+
+L'articulation du genou est une trocharthrose complexe permettant principalement la flexion-extension (0–135°) avec une légère rotation axiale en fin de flexion. Les forces de réaction fémorotibiale en marche atteignent **2,5 à 4 fois le poids corporel**. La force de compression fémoropatellaire peut dépasser **7 fois le poids corporel** lors de la descente des escaliers.
+
+Les ligaments croisés antérieur (LCA) et postérieur (LCP) jouent un rôle essentiel dans la stabilité antéro-postérieure. La rupture du LCA, blessure fréquente en sport, entraîne une instabilité rotatoire qui accélère la dégradation du cartilage articulaire.
+
+### Épaule
+
+Le complexe articulaire de l'épaule offre la plus grande amplitude de mobilité du corps humain grâce à l'association de quatre articulations (glénohumérale, acromioclaviculaire, sternoclaviculaire, scapulothoracique). La force de réaction de l'articulation glénohumérale peut atteindre **0,8 fois le poids corporel** lors de l'élévation du bras à 90°, et dépasser **1,5 fois le poids corporel** lors de certains gestes sportifs (lancer de baseball).
+
+<Tip>
+La modélisation musculo-squelettique avec des logiciels comme AnyBody Modeling System ou OpenSim permet de calculer les forces musculaires et articulaires lors de mouvements complexes. Ces outils utilisent des modèles musculo-tendineux basés sur la physiologie de Hill et des algorithmes d'optimisation pour résoudre le problème redondant de la distribution des forces musculaires (le nombre de muscles dépasse largement le nombre de degrés de liberté articulaire).
+</Tip>
+
+## Analyse de la marche
+
+### Méthodologie
+
+L'analyse quantitative de la marche (*Gait Analysis*) est réalisée dans des laboratoires spécialisés équipés de :
+
+- **Système de capture de mouvement** (*motion capture*) : marqueurs réfléchissants ou actifs placés sur des repères anatomiques, détectés par des caméras infrarouges (8 à 16 caméras). Fréquence d'acquisition typique : 100–200 Hz. Systèmes courants : Vicon, BTS, Motion Analysis.
+- **Plateformes de force** (*force plates*) : mesurent les forces de réaction du sol (GRF, *Ground Reaction Forces*) en trois dimensions (vertical, antéro-postérieur, médio-latéral). Capteurs piézoélectriques ou à jauge de contrainte. Marques commerciales : Kistler, AMTI, Bertec.
+- **Électromyographie de surface (EMG)** : enregistrement de l'activité électrique musculaire par électrodes de surface placées sur les groupes musculaires d'intérêt (quadriceps, ischio-jambiers, mollet, tibial antérieur).
+- **Podoscopes et semelles de pression** (*pedobarography*) : distribution de la pression plantaire.
+
+### Paramètres spatio-temporels
+
+Les paramètres spatio-temporels de la marche caractérisent le patron de marche :
+
+- **Cadence** : nombre de pas par minute (normale : 110–120 pas/min)
+- **Longueur du pas** : distance entre deux appuis successifs du même pied (normale : ~0,7 m)
+- **Vitesse de marche** : produit de la cadence par la longueur de la foulée (normale : 1,2–1,4 m/s)
+- **Durée du cycle de marche** : temps entre deux attaques du talon du même pied (~1,0–1,1 s)
+- **Durée de phase d'appui** : ~60 % du cycle ; durée de phase d'oscillation : ~40 % du cycle
+
+### Analyse cinématique et cinétique
+
+La cinématique de la marche décrit les angles articulaires de hanche, genou et cheville dans les trois plans de l'espace (sagittal, frontal, transverse) au cours du cycle de marche. La cinétique décrit les moments articulaires (produit des forces par le bras de levier) et les puissances articulaires (produit des moments par les vitesses angulaires).
+
+Ces données permettent d'identifier des anomalies du patron de marche (boiterie antalgique, pied équin, genou en flexum) et de suivre l'évolution après chirurgie ou rééducation.
+
+## Formules fondamentales en biomécanique
+
+### Contrainte de flexion
+
+Pour une poutre soumise à un moment fléchissant M, la contrainte normale σ est donnée par :
+
+```
+σ = Mc / I
+```
+
+où :
+- M = moment fléchissant (N·m)
+- c = distance de la fibre neutre à la fibre la plus éloignée (m)
+- I = moment quadratique de la section transversale (m⁴)
+
+Cette formule s'applique par exemple au calcul des contraintes dans un fémur soumis à des charges de flexion lors de la marche, ou dans un implant orthopédique.
+
+### Contrainte de torsion
+
+Pour un arbre cylindrique soumis à un couple T :
+
+```
+τ = Tr / J
+```
+
+où :
+- τ = contrainte de cisaillement (Pa)
+- T = couple de torsion (N·m)
+- r = rayon (m)
+- J = moment quadratique polaire (m⁴)
+
+### Facteur d'intensité des contraintes (mécanique de la rupture)
+
+Pour une fissure de longueur 2a dans un matériau soumis à une contrainte σ :
+
+```
+K_I = σ √(πa) · Y
+```
+
+où Y est un facteur de forme géométrique. La propagation de la fissure se produit quand K_I atteint la ténacité à la rupture K_Ic du matériau. Pour l'os cortical, K_Ic ≈ **2 à 5 MPa·√m**.
+
+## Conception des implants orthopédiques
+
+### Matériaux
+
+Le choix des matériaux pour les implants orthopédiques est dicté par plusieurs critères : résistance mécanique, résistance à la corrosion et à la fatigue, biocompatibilité, module d'élasticité proche de celui de l'os (pour minimiser le blindage de contrainte, *stress shielding*), et usinabilité.
+
+| Matériau | Module de Young (GPa) | Résistance en fatigue (MPa) | Applications |
+|----------|----------------------|----------------------------|--------------|
+| Ti-6Al-4V (grade 5) | 110 | 500–600 | Tiges fémorales, vis pédiculaires, cages intersomatiques |
+| Alliage CoCrMo | 210–230 | 400–700 | Têtes fémorales, plateaux tibiales, prothèses de genou |
+| UHMWPE (polyéthylène HD) | 0,5–1 | — | Inserts de genou, cotyles acétabulaires |
+| Zircone (ZrO₂) | 200 | — | Têtes fémorales céramiques |
+| Alumine (Al₂O₃) | 380 | — | Couples céramique-céramique |
+| Acier inoxydable 316L | 193 | 200–300 | Plaques et vis de fixation (temporaires) |
+
+### Mécanismes d'usure
+
+Dans les prothèses totales de hanche et de genou, l'usure du polyéthylène (UHMWPE) est un phénomène limitant la durée de vie de l'implant. Les débris d'usure de polyéthylène de taille submicronique (0,1–10 µm) induisent une réponse inflammatoire macrophagique conduisant à l'ostéolyse péri-implantaire et, à terme, au descellement aseptique de l'implant.
+
+Le développement du polyéthylène hautement réticulé (*highly cross-linked UHMWPE*, HXLPE) par irradiation gamma et traitement thermique a considérablement réduit le taux d'usure volumique (de ~100 mm³/an à ~20 mm³/an), améliorant la longévité des prothèses.
+
+### Ostéointégration
+
+L'ostéointégration est la fixation biologique directe d'un implant à l'os, sans tissu fibro-cartilagineux interposé. Elle est essentielle pour la fixation sans ciment des prothèses et des implants dentaires. Elle dépend de :
+
+- **La topographie de surface** : surfaces rugueuses (Ra 1–10 µm) créées par sablage, acide-gravure, grenaillage ou projection thermique (plasma spray d'hydroxyapatite)
+- **La microporosité** : structures poreuses fabriquées par fabrication additive (frittage sélectif par laser — SLS, impression 3D en titane) avec une taille de pores optimale de **100–400 µm** pour la croissance osseuse
+- **La stabilité primaire** : contact mécanique immédiat entre l'implant et l'os lors de la pose chirurgicale
+
+<Warning>
+Le blindage de contrainte (*stress shielding*) est un phénomène critique dans la conception des tiges fémorales cimentées et non cimentées. Lorsque la rigidité de l'implant est très supérieure à celle de l'os environnant, les contraintes mécaniques sont transmises préférentiellement à travers l'implant métallique, et l'os adjacent, soumis à des contraintes réduites, subit une résorption osseuse (loi de Wolff). Ce phénomène est particulièrement marqué avec les alliages de cobalt-chrome (E ≈ 210 GPa) par rapport au titane (E ≈ 110 GPa), et a conduit au développement de tiges en titane et de nouvelles géométries à rigidité progressivement variable.
+</Warning>
+
+## Méthode des éléments finis (MEF) en biomécanique
+
+La méthode des éléments finis est l'outil numérique de référence pour la simulation du comportement mécanique des tissus biologiques et des implants. Elle consiste à discrétiser le domaine géométrique (reconstruction 3D à partir d'images CT ou IRM, segmentation) en un maillage d'éléments finis (tétraédriques, hexaédriques), à attribuer des propriétés matérielles à chaque région, à définir les conditions aux limites (forces appliquées, appuis) et à résoudre le système d'équations différentielles résultant.
+
+Les applications en biomécanique comprennent : prédiction de la contrainte et de la déformation dans les os et les implants, simulation du risque de fracture, optimisation de la forme et de la rigidité des implants, étude de l'ostéointégration et de la formation osseuse périimplantaire, et simulation de la cinématique articulaire.
+
+Les logiciels courants incluent Abaqus (Dassault Systèmes), ANSYS, MSC Nastran, et des logiciels spécialisés biomédical comme Mimics (Materialise) pour la reconstruction géométrique.
+
+## Biomécanique du sport
+
+En biomécanique du sport, l'objectif est double : améliorer la performance athlétique et prévenir les blessures. Les techniques d'analyse incluent la capture de mouvement haute fréquence (1000 Hz), les plateformes de force instrumentées, les capteurs inertiels portables (*IMU*, accéléromètres + gyroscopes) et l'imagerie à haute vitesse.
+
+Des exemples d'applications incluent l'analyse du geste de lancer chez les lanceurs de baseball (forces sur le coude > 100 N·m), l'optimisation de la technique de nage pour réduire la traînée hydrodynamique, et la conception de semelles orthopédiques pour réduire le risque de fracture de stress chez les coureurs d'endurance.
+
+<Info>
+La biomécanique computationnelle (modèles musculo-squelettiques personnalisés combinés à la MEF) permet aujourd'hui de simuler des interventions chirurgicales virtuelles avant de les réaliser sur le patient, notamment pour la planification des ostéotomies de réorientation du bassin (chirurgie de Bernese pour la dysplasie acétabulaire) et le positionnement optimal des implants de reconstruction après résection tumorale.
+</Info>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Dispositifs médicaux" icon="stethoscope" href="/genie-biomedical/dispositifs-medicaux">
+    Classification, réglementation canadienne et internationale, gestion de la qualité et de la sécurité
+  </Card>
+  <Card title="Imagerie médicale" icon="x-ray" href="/genie-biomedical/imagerie-medicale">
+    Principes physiques et d'ingénierie derrière les modalités d'imagerie médicale modernes
+  </Card>
+  <Card title="Introduction au génie biomédical" icon="heart-pulse" href="/genie-biomedical/introduction">
+    Définition, champs d'application et perspectives de carrière en génie biomédical au Canada
+  </Card>
+  <Card title="Génie des matériaux" icon="cube" href="/genie-civil/materiaux">
+    Propriétés mécaniques et sélection des matériaux de construction et d'ingénierie
+  </Card>
+</CardGroup>

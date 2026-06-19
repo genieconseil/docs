@@ -1,0 +1,124 @@
+---
+title: "Foundations & Geotechnical Engineering"
+description: "Foundation types, bearing capacity, soil investigation, settlement analysis, and ground improvement"
+icon: "layer-group"
+---
+
+Foundations transfer structural loads to the ground. Adequate foundation design requires understanding soil behavior, geotechnical investigation methods, and the interaction between the structure and the ground.
+
+## Foundation Types
+
+### Shallow Foundations
+Shallow foundations bear directly on the soil at relatively low depth (depth-to-width ratio D/B < 1).
+
+- **Spread (isolated) footings**: individual pad under each column; economical when soil is competent
+- **Strip (continuous) footings**: beneath load-bearing walls; distributes linear loads
+- **Mat (raft) foundations**: a single reinforced concrete slab beneath the entire building footprint; used when soil is weak, loads are high, or differential settlement must be minimized
+
+<Note>Shallow foundations are generally appropriate when the net allowable bearing pressure qnet ≥ 100 kPa and the competent bearing stratum is within 3 m of the surface.</Note>
+
+### Deep Foundations
+When near-surface soils are inadequate, deep foundations transfer loads to deeper, more competent strata:
+
+- **Driven piles**: steel H-piles, steel pipe piles, precast concrete piles; installed by hammering, vibratory, or pressing methods
+- **Drilled shafts (caissons)**: large-diameter bored piles with concrete cast in place; can support very high loads
+- **Micropiles**: diameter < 300 mm; used for retrofit underpinning and restricted-access conditions
+- **Helical piles**: steel shaft with helical plates; fast installation, suitable for tension and compression
+
+## Bearing Capacity
+
+### Terzaghi's Bearing Capacity Equation
+For a strip footing on homogeneous soil:
+
+`qu = c·Nc + q·Nq + 0.5·γ·B·Nγ`
+
+Where:
+- `c` = soil cohesion (kPa)
+- `q = γ·D` = effective overburden stress at foundation level
+- `γ` = unit weight of soil (kN/m³)
+- `B` = footing width (m)
+- `Nc, Nq, Nγ` = dimensionless bearing capacity factors (functions of friction angle φ)
+
+Net allowable bearing capacity (FS = 3):
+
+`qallowable = (qu - q) / FS`
+
+### Pile Capacity
+Total pile resistance combines skin friction and tip resistance:
+
+`Qu = Qs + Qp = fs·As + qp·Ap`
+
+Where `fs` is the average unit skin friction along the shaft and `qp` is the unit tip resistance.
+
+<Warning>Never reduce the factor of safety below 2.5 for bearing capacity without a comprehensive geotechnical investigation and justified rationale. Bearing capacity failures are sudden and catastrophic.</Warning>
+
+## Soil Investigation
+
+A geotechnical investigation program typically includes:
+
+### Standard Penetration Test (SPT)
+A split-spoon sampler is driven 450 mm (18 in) by a 63.5 kg hammer falling 760 mm. The blow count for the last 300 mm is the N-value. Corrections applied:
+- `N60` = energy correction (field efficiency to 60% standard)
+- `(N1)60` = overburden correction using `CN = (Pa/σ'v)^0.5`
+
+Correlations: N60 → relative density Dr (sands), undrained shear strength Su (clays), friction angle φ.
+
+### Cone Penetration Test (CPT)
+A cone is pushed into the ground at a constant rate (2 cm/s). Continuous measurements of tip resistance `qc` and sleeve friction `fs`. The friction ratio `Rf = fs/qc` is used for soil classification.
+
+The CPT is more repeatable than the SPT and provides a continuous soil profile. Preferred for soft clay and loose sand characterization.
+
+### Laboratory Testing
+- **Grain size analysis**: sieve and hydrometer tests for soil classification (USCS, AASHTO)
+- **Atterberg limits**: plastic limit (PL), liquid limit (LL), plasticity index (PI = LL - PL) for fine-grained soils
+- **Consolidation test (oedometer)**: Cc (compression index), Cv (coefficient of consolidation), OCR
+- **Shear strength**: direct shear (φ, c), triaxial (UU, CU, CD), vane shear (Su in field)
+
+<Tip>For important projects, combine at least two investigation methods (e.g., SPT + CPT) to cross-validate data and interpolate between boreholes. The investigation budget is typically 0.5-1.5% of construction cost — well spent given the risk of foundation problems.</Tip>
+
+## Settlement Analysis
+
+### Immediate (Elastic) Settlement
+`Si = q·B·(1-ν²)·Iw / Es`
+
+Occurs immediately upon load application; governs in sands and stiff clays.
+
+### Primary Consolidation Settlement (Clays)
+`Sc = Cc/(1+e0) · H · log[(σ'v0 + Δσ'v)/σ'v0]` (normally consolidated clay)
+
+`Sc = Cs/(1+e0) · H · log[(σ'v0 + Δσ'v)/σ'v0]` (overconsolidated, Δσ' < preconsolidation pressure)
+
+Time rate of consolidation: `Tv = Cv·t / Hdr²` where Hdr is the drainage path length.
+
+### Differential Settlement Limits
+Differential settlement is more damaging than uniform settlement:
+- Rigid structures (brick, concrete frames): L/600
+- Flexible structures (steel frames): L/300
+- Foundation tilt: 1/300 for most buildings
+
+<Warning>Differential settlements exceeding L/300 to L/600 can crack finishes, jam doors, and in severe cases compromise structural integrity. Monitor settlements with survey benchmarks during and after construction.</Warning>
+
+## Ground Improvement
+
+When natural soils are inadequate and deep foundations are uneconomical:
+
+- **Dynamic compaction**: repeated drops of heavy weight (10-20 tonnes from 15-20 m); densifies loose granular fills and sands to 6-10 m depth
+- **Stone columns (vibro-replacement)**: gravel columns installed by vibratory probe; increase bearing capacity and accelerate consolidation in soft clays
+- **Chemical grouting**: injection of cement, silicate, or polyurethane grouts to fill voids and increase stiffness
+- **Lime/cement stabilization**: mixing lime or cement into soft clays increases strength and reduces compressibility
+- **Prefabricated vertical drains (PVDs)**: accelerate primary consolidation in soft clays by reducing drainage path length
+
+<CardGroup cols={2}>
+  <Card title="Structural Analysis" icon="building" href="/en/civil-engineering/structures">
+    Load transfer from structure to foundation
+  </Card>
+  <Card title="Hydraulics" icon="droplet" href="/en/civil-engineering/hydraulics">
+    Groundwater, drainage, and seepage
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Geotechnical software and online calculators
+  </Card>
+  <Card title="Fondations (FR)" icon="layer-group" href="/genie-civil/fondations">
+    Version française complète avec formules de Terzaghi
+  </Card>
+</CardGroup>

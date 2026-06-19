@@ -1,0 +1,134 @@
+---
+title: "Structural Analysis"
+description: "Load types per NBCC, analysis methods, key beam and column formulas, lateral systems, and deflection limits"
+icon: "building"
+---
+
+Structural analysis determines the internal forces (moments, shears, axial loads) in structural members under applied loads, ensuring adequate strength and stiffness throughout the design life of the structure.
+
+## Load Types (NBCC 2020)
+
+The National Building Code of Canada (NBCC) defines the following design loads:
+
+- **Dead load D**: self-weight of structural elements, superimposed dead loads (topping, finishes, MEP equipment)
+- **Live load L**: occupancy loads — floors (1.9-4.8 kPa depending on use), roofs (1.0 kPa minimum)
+- **Snow load S**: `S = Is·[Ss·(Cb·Cw·Cs·Ca) + Sr]`; ground snow load Ss varies by location (0.5-7.0 kPa in Canada)
+- **Wind load W**: reference velocity pressure `q = 0.5·ρ·V²`; exposure factor, topographic factor, and gust effect factor applied
+- **Seismic load E**: design spectral response acceleration Sa(T) from NBCC Appendix C maps; site class modification
+
+### ULS Load Combinations
+The governing combination depends on loading scenario:
+
+`1.4D`
+
+`1.25D + 1.5L + 0.5S` (or 0.5W)
+
+`1.25D + 1.5S + 0.5L` (or 0.5W)
+
+`1.0D ± 1.0E + 0.5L + 0.25S` (seismic)
+
+<Note>For counteracting loads (e.g., wind uplift on a roof), use 0.9D as the companion dead load factor to represent the minimum dead load scenario.</Note>
+
+## Analysis Methods
+
+### Linear Static Analysis
+Appropriate for regular structures under static or quasi-static loads. Assumes:
+- Small deformations
+- Linear elastic material behavior
+- Equilibrium in the undeformed configuration (first-order theory)
+
+P-delta effects (second-order) must be accounted for in slender structures or when the stability index `Q = ΣPu·Δo / (Vs·hs) > 0.05`.
+
+### Modal Spectral Analysis
+Required by NBCC for buildings with irregular configuration or height > 60 m in seismic zones. Extracts natural frequencies and mode shapes, then combines modal contributions using SRSS or CQC method.
+
+### Time-History Analysis
+Integrates the equations of motion step-by-step under actual or synthetic ground motion records. Required for base-isolated structures and structures with supplemental damping.
+
+<Tip>For buildings under 60 m in moderate seismic zones, the NBCC equivalent static force procedure is generally sufficient and much faster to apply than dynamic analysis.</Tip>
+
+## Key Beam Formulas
+
+### Moments and Shears
+
+| Loading Case | Max Moment | Max Shear |
+|---|---|---|
+| Simply supported, UDL w | `wL²/8` (midspan) | `wL/2` (at support) |
+| Simply supported, point load P at center | `PL/4` | `P/2` |
+| Cantilever, UDL w | `wL²/2` (at root) | `wL` (at root) |
+| Fixed-fixed, UDL w | `wL²/12` (at supports), `wL²/24` (midspan) | `wL/2` |
+
+### Deflection Formulas
+
+Simply supported, UDL: `δmax = 5wL⁴ / (384EI)` at midspan
+
+Simply supported, point load at center: `δmax = PL³ / (48EI)`
+
+Cantilever, UDL: `δmax = wL⁴ / (8EI)` at free end
+
+Cantilever, point load at tip: `δmax = PL³ / (3EI)`
+
+## Columns and Buckling
+
+### Euler Critical Load
+`Pcr = π²·E·I / (KL)²`
+
+Effective length factor K:
+- Pin-pin: K = 1.0
+- Fixed-fixed: K = 0.5
+- Fixed-free (flagpole): K = 2.0
+- Fixed-pin: K = 0.7
+
+Slenderness ratio: `λ = KL/r` where `r = √(I/A)` is the radius of gyration.
+
+Columns with λ > 100-120 are governed by elastic buckling; short columns (λ < 30) by material strength.
+
+### Interaction for Combined Axial + Bending
+For members under combined compression and bending, the interaction diagram or interaction formula must be checked:
+
+`Cf/Cr + (Mfx/Mrx + U1·Mfy/Mry) ≤ 1.0` (CSA S16 simplified)
+
+Where U1 is an amplification factor accounting for second-order effects.
+
+<Warning>Always check both in-plane buckling (about weak axis) and lateral-torsional buckling (LTB) for beams and beam-columns. LTB can govern for unbraced long spans and deep sections.</Warning>
+
+## Lateral Force-Resisting Systems
+
+Lateral loads from wind and seismic must be resisted and transmitted to the foundations:
+
+**Shear walls**: reinforced concrete or masonry walls acting in shear; very stiff, efficient for low-to-mid rise buildings
+
+**Braced frames (CBF)**: concentric brace frames — X, K, chevron configurations; economical but less ductile under seismic loading
+
+**Eccentrically braced frames (EBF)**: link element yields in shear before brace buckling; better ductility than CBF
+
+**Moment-resisting frames (SMRF)**: lateral loads resisted by beam-column moment connections; highly ductile for seismic, more flexible (higher drift)
+
+**Core walls**: stair and elevator cores acting as coupled shear walls; standard for high-rise buildings
+
+<Tip>For best seismic performance, combine systems: stiff shear walls or braces at the lower floors for stiffness, and moment frames at upper floors for ductility and redundancy.</Tip>
+
+## Deflection and Drift Limits
+
+| Element | Limit |
+|---|---|
+| Floors supporting brittle finishes | L/360 |
+| Floors, general | L/300 |
+| Roofs (avoid ponding) | L/240 |
+| Wind inter-story drift | H/400 to H/500 |
+| Seismic inter-story drift | 2.5% × hs (NBCC, ductile systems) |
+
+<CardGroup cols={2}>
+  <Card title="Foundations" icon="layer-group" href="/en/civil-engineering/foundations">
+    Foundation design and geotechnical considerations
+  </Card>
+  <Card title="Hydraulics" icon="droplet" href="/en/civil-engineering/hydraulics">
+    Hydraulic loads and water management
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Structural analysis software (ETABS, SAP2000, RISA)
+  </Card>
+  <Card title="Structures (FR)" icon="building" href="/genie-civil/structures">
+    Version française complète avec normes NBC
+  </Card>
+</CardGroup>

@@ -1,0 +1,139 @@
+---
+title: "Hydraulics & Hydrology"
+description: "Continuity and Bernoulli equations, pipe flow, open channel flow, storm water management, and drainage design"
+icon: "droplet"
+---
+
+Hydraulics governs the behavior of water in pipes, channels, and hydraulic structures. Hydrology quantifies rainfall-runoff relationships and peak flows for the design of drainage infrastructure.
+
+## Fundamental Equations
+
+### Continuity Equation
+For steady, incompressible flow, conservation of mass requires:
+
+`Q = A₁·V₁ = A₂·V₂`
+
+Where Q is the volumetric flow rate (m³/s), A is the cross-sectional area (m²), and V is the mean velocity (m/s). Velocity increases where the cross-section narrows.
+
+### Bernoulli's Equation
+For an ideal (inviscid), incompressible fluid in steady flow:
+
+`P/γ + V²/2g + z = H = constant`
+
+The three terms represent pressure head, velocity head, and elevation head respectively. Their sum is the total hydraulic head H.
+
+**Generalized Bernoulli** (with losses):
+
+`H₁ = H₂ + hf`
+
+Where `hf` represents all head losses between sections 1 and 2.
+
+**Practical applications**:
+- Orifice efflux velocity: `V = Cv·√(2g·h)` with `Cv ≈ 0.97-0.99`
+- Sharp-crested rectangular weir: `Q = Cd·(2/3)·L·√(2g)·H^(3/2)`, `Cd ≈ 0.62`
+- Venturi meter: `Q = Cd·A2·√(2g·Δh/(1-(A2/A1)²))`
+
+<Note>Bernoulli's equation applies along a streamline. For flow between pipe sections, it is usually applied along the pipe centerline as the energy equation.</Note>
+
+## Pipe Flow
+
+### Darcy-Weisbach Equation
+The standard method for head loss due to pipe friction:
+
+`hf = f · (L/D) · V²/(2g)`
+
+The Darcy friction factor f comes from the Moody diagram:
+- Laminar flow (Re < 2300): `f = 64/Re`
+- Turbulent, smooth pipe: Blasius formula `f = 0.316/Re^0.25` (Re < 100,000)
+- Turbulent, rough pipe (Colebrook-White): `1/√f = -2·log(ks/(3.7D) + 2.51/(Re·√f))`
+
+Swamee-Jain explicit approximation (avoids iteration):
+
+`f = 0.25 / [log(ks/(3.7D) + 5.74/Re^0.9)]²`
+
+### Hazen-Williams Formula (water only)
+Widely used in water distribution system design:
+
+`V = 0.849·C·R^0.63·S^0.54`
+
+`Q = 0.849·C·A·R^0.63·S^0.54`
+
+Typical C values: PVC 150, lined ductile iron 130-140, concrete 120, old unlined iron 80-100.
+
+<Warning>The Hazen-Williams formula is empirical, calibrated for water at typical temperatures, and should not be used for other fluids or for very high or low velocities. Darcy-Weisbach is more rigorous and universally applicable.</Warning>
+
+### Minor (Local) Losses
+`hm = K · V²/(2g)`
+
+Common K values: 90° standard elbow 0.9, 90° long-radius elbow 0.4, gate valve (fully open) 0.2, check valve 2.0, pipe entrance (sharp) 0.5, sudden expansion `(1 - A1/A2)²`.
+
+### Pipe Network Analysis
+For complex networks: Hardy-Cross iterative method or matrix (node-based) methods. Software: EPANET (free, US EPA), WaterGEMS, InfoWorks WS.
+
+## Open Channel Flow
+
+### Manning's Equation
+`V = (1/n) · R^(2/3) · S^(1/2)`   `Q = (1/n) · A · R^(2/3) · S^(1/2)`
+
+Where:
+- `n` = Manning's roughness coefficient: concrete 0.012, natural streams 0.025-0.050, riprap 0.025-0.030
+- `R = A/P` = hydraulic radius (m); A = flow area, P = wetted perimeter
+- `S` = channel bottom slope (m/m)
+
+**Normal depth** `yn`: the depth at which uniform flow occurs for given Q, n, S, and section shape.
+
+**Critical depth** `yc`: depth where Froude number `Fr = V/√(g·D) = 1`; D = hydraulic depth = A/T (T = top water surface width).
+
+- Fr < 1: subcritical flow (tranquil) — typical in most drainage channels
+- Fr > 1: supercritical flow (rapid) — downstream of steep chutes
+- Hydraulic jump: abrupt transition from supercritical to subcritical; significant energy dissipation
+
+## Storm Water Management
+
+### Rational Method
+For small urban catchments (< 80 ha):
+
+`Q = C·i·A / 360`
+
+Where:
+- `Q` = peak flow (m³/s)
+- `C` = runoff coefficient: 0.20 (parks/lawns), 0.65-0.80 (residential), 0.85-0.95 (commercial/industrial)
+- `i` = rainfall intensity (mm/h) for design return period and time of concentration tc
+- `A` = drainage area (ha)
+
+**Time of concentration** tc: travel time from the hydraulically most remote point to the outlet. Estimate using Kirpich, Bransby-Williams, or SCS TR-55 method.
+
+**IDF curves** (Intensity-Duration-Frequency): established from regional historical rainfall data. Design return periods: 2-10 years for minor systems (storm sewers), 100 years for major systems (roads, channels).
+
+<Tip>For larger catchments (> 80 ha) or when storage and routing are important, use the SCS (NRCS) curve number method or hydrograph routing methods. Software: SWMM (EPA, free), PCSWMM, HEC-HMS.</Tip>
+
+### Detention Pond Design
+Detention ponds reduce peak flows by temporarily storing runoff:
+
+1. Route the design storm hydrograph through the pond
+2. Size the outlet structure (weir, orifice, pipe) to limit outflow to the pre-development peak
+3. Size the pond volume to contain the difference between inflow and outflow hydrographs
+4. Include an emergency spillway for storms exceeding the design event
+
+### Drainage Infrastructure
+
+**Storm sewers**: design for full-pipe flow using Manning's equation; minimum velocity 0.6 m/s (self-cleaning), maximum 3-4 m/s (erosion control). Minimum slope typically 0.5-1.0%.
+
+**Culverts**: inlet-controlled or outlet-controlled depending on tailwater and inlet geometry. HY-8 (FHWA) software widely used.
+
+**Outfall protection**: riprap apron, energy dissipator basin, or plunge pool to prevent scour at channel outlets.
+
+<CardGroup cols={2}>
+  <Card title="Foundations" icon="layer-group" href="/en/civil-engineering/foundations">
+    Groundwater control and dewatering
+  </Card>
+  <Card title="Structures" icon="building" href="/en/civil-engineering/structures">
+    Hydraulic loads on structures
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    Hydraulic modeling software (EPANET, SWMM, HEC-RAS)
+  </Card>
+  <Card title="Hydraulique (FR)" icon="droplet" href="/genie-civil/hydraulique">
+    Version française complète avec Bernoulli et Manning
+  </Card>
+</CardGroup>

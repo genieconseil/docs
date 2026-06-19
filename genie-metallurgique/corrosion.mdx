@@ -1,0 +1,235 @@
+---
+title: "Corrosion et protection des métaux"
+description: "Théorie électrochimique, types de corrosion, mesure du taux de corrosion, protection cathodique et normes NACE/AMPP"
+icon: "bacteria"
+---
+
+La corrosion représente une perte économique annuelle estimée à 2–3 % du PIB mondial (environ 2 500 milliards USD). En ingénierie, la compréhension des mécanismes de corrosion et la mise en œuvre de protections adéquates sont essentielles pour la durabilité et la sécurité des infrastructures.
+
+## Théorie électrochimique de la corrosion
+
+### Réactions fondamentales
+
+La corrosion électrochimique implique deux demi-réactions simultanées :
+
+**Réaction anodique (oxydation — corrosion) :**
+```
+Fe → Fe²⁺ + 2e⁻
+```
+
+**Réactions cathodiques (réduction — possibles selon le milieu) :**
+- En milieu acide désaéré : `2H⁺ + 2e⁻ → H₂↑`
+- En milieu neutre/basique aéré : `O₂ + 2H₂O + 4e⁻ → 4OH⁻`
+
+Pour que la corrosion se produise, il faut une anode, une cathode, un électrolyte et un contact électrique entre anode et cathode — c'est la **pile de corrosion**.
+
+### Série galvanique et potentiels standards
+
+La série galvanique classe les métaux selon leur potentiel électrochimique en eau de mer. Plus l'écart entre deux métaux est grand, plus le risque de corrosion galvanique est important.
+
+| Métal / Alliage | Comportement | Potentiel (V/ECS) approx. |
+|-----------------|--------------|--------------------------|
+| Magnésium | Anodique (actif) | −1,73 |
+| Zinc | Anodique | −1,10 |
+| Aluminium (pur) | Anodique | −0,75 |
+| Acier au carbone | Anodique | −0,44 |
+| Plomb | Légèrement anodique | −0,13 |
+| Cuivre | Cathodique | +0,34 |
+| Acier inox 316 (passif) | Cathodique | +0,10 à +0,30 |
+| Titane | Noble | +0,25 à +0,40 |
+
+### Théorie du potentiel mixte
+
+Le **potentiel de corrosion (Ecorr)** est établi quand le courant anodique total égale le courant cathodique total. Le **diagramme d'Evans** (log i vs E) permet de visualiser ce concept et de déterminer graphiquement la densité de courant de corrosion (icorr).
+
+La **loi de Faraday** relie le courant de corrosion à la perte de masse :
+
+```
+m = (M × I × t) / (n × F)
+```
+
+Où M = masse molaire, n = nombre d'électrons échangés, F = 96 485 C/mol.
+
+## Types de corrosion
+
+### Corrosion uniforme (généralisée)
+
+La plus prévisible et la moins dangereuse. Attaque homogène sur toute la surface. Le taux de corrosion en mm/an peut être estimé et intégré à la conception (surépaisseur de corrosion).
+
+**Exemple** : acier non revêtu exposé à l'atmosphère rurale (0,05–0,1 mm/an), industrielle (0,1–0,2 mm/an).
+
+### Corrosion galvanique
+
+Se produit quand deux métaux de potentiels différents sont en contact électrique dans un électrolyte. Le métal le plus actif (anodique) se corrode préférentiellement.
+
+<Warning>
+Règle pratique : éviter les contacts entre métaux séparés de plus de 250 mV dans la série galvanique. Si inévitable, isoler électriquement, protéger le métal anodique ou augmenter le rapport surface cathodique/surface anodique.
+</Warning>
+
+**Exemple classique** : fixations en acier sur plaque d'aluminium — l'aluminium se corrode rapidement au contact des fixations en acier inox.
+
+### Corrosion par piqûres (Pitting)
+
+Attaque localisée très destructrice, particulièrement sur les métaux passivables (inox, aluminium, titane). Les chlorures brisent le film passif localement, créant des piqûres qui s'auto-entretiennent par acidification locale (hydrolyse de Fe²⁺).
+
+**Résistance à la piqûration** : caractérisée par l'indice PREN (Pitting Resistance Equivalent Number) :
+
+```
+PREN = %Cr + 3,3 × %Mo + 16 × %N
+```
+
+- 304L : PREN ≈ 19 (faible résistance)
+- 316L : PREN ≈ 24 (résistance modérée)
+- 2205 (duplex) : PREN ≈ 35 (bonne résistance)
+- 6Mo / 254 SMO : PREN ≈ 43 (excellente résistance)
+
+### Corrosion caverneuse (Crevice)
+
+Similaire aux piqûres, se produit dans les zones confinées (joints, boulons, dépôts) où l'oxygène est appauvri. Très problématique pour les échangeurs de chaleur à tubes, les brides de tuyauterie.
+
+### Corrosion intergranulaire
+
+Attaque préférentielle des joints de grains. Problème classique des aciers inoxydables austénitiques **sensibilisés** (chauffés entre 425–870 °C) : précipitation de Cr₂₃C₆ aux joints de grains, créant des zones appauvries en chrome.
+
+**Prévention** : aciers bas carbone (304L, 316L), aciers stabilisés au titane (321) ou niobium (347), recuit de mise en solution après soudage.
+
+### Corrosion sous contrainte (CSC / SCC)
+
+Rupture fragile d'un matériau normalement ductile sous l'action combinée d'une contrainte de traction et d'un environnement corrosif spécifique.
+
+| Matériau | Environnement critique |
+|----------|----------------------|
+| Acier au carbone | Ammoniac, carbonates, H₂S |
+| Inox austénitique | Chlorures (surtout à chaud > 60 °C) |
+| Laiton | Ammoniac (dezincification) |
+| Aluminium | Chlorures, mercure |
+| Titane | Méthanol, HF |
+
+### Fragilisation par l'hydrogène (HE)
+
+L'hydrogène atomique absorbé peut fragiliser des aciers à haute résistance (HRC > 40). Particulièrement critique en milieu H₂S (acide). La norme **NACE MR0175 / ISO 15156** spécifie les matériaux et conditions d'utilisation acceptables pour les environnements contenant du H₂S.
+
+**Risques** : soudures, fixations filetées haute résistance, aciers de casing pour puits pétroliers.
+
+## Mesure du taux de corrosion
+
+### Méthode gravimétrique (perte de masse)
+
+```
+Taux de corrosion (mm/an) = (87 600 × W) / (A × T × D)
+```
+
+Où W = perte de masse en g, A = aire en cm², T = temps en h, D = densité en g/cm³.
+
+Standard : ASTM G1 (préparation et pesée des coupons), ASTM G31 (essais d'immersion).
+
+### Résistance de polarisation (LPR — Linear Polarization Resistance)
+
+La méthode LPR (ASTM G59) mesure la résistance de polarisation Rp en perturbant légèrement le potentiel (±10–20 mV autour de Ecorr). La densité de courant de corrosion est :
+
+```
+icorr = B / Rp
+```
+
+Où B (constante de Stern-Geary) ≈ 26 mV pour les métaux actifs, 52 mV pour les métaux passifs.
+
+**Avantage** : mesure non destructive, en temps réel, utilisable pour la surveillance en ligne des pipelines.
+
+### Spectroscopie d'impédance électrochimique (EIS)
+
+Méthode précise donnant la résistance de transfert de charge, la résistance de l'électrolyte et la capacité de la double couche. Utilisée pour évaluer les revêtements et les inhibiteurs.
+
+## Protection contre la corrosion
+
+### Protection cathodique (CP)
+
+#### Anode sacrificielle
+
+Des anodes en zinc, aluminium ou magnésium sont connectées électriquement à la structure à protéger. Le métal d'anode se corrode préférentiellement.
+
+| Matériau d'anode | Potentiel (V/CSE) | Capacité (A·h/kg) | Application |
+|-----------------|-------------------|-------------------|-------------|
+| Zinc (MIL-A-18001) | −1,05 | 780 | Eau de mer, eau douce |
+| Aluminium (Al-Zn-In) | −1,05 à −1,10 | 2 700 | Eau de mer (offshore) |
+| Magnésium | −1,75 | 1 230 | Sols, eau douce |
+
+#### Courant imposé (ICCP — Impressed Current Cathodic Protection)
+
+Un courant continu est fourni par un redresseur externe, avec une anode inerte (graphite, platine, MMO/Ti). Permet de protéger de grandes structures comme les pipelines, les quais, les coques de navires.
+
+**Critères de protection** (NACE SP0169) :
+- Potentiel de structure ≤ −0,85 V/CSE (Cu/CuSO₄) en l'absence de bactéries sulfato-réductrices
+- ≤ −0,95 V/CSE en présence de SRB
+
+<Note>
+La surprotection (potentiel trop négatif, < −1,2 V/CSE) peut causer le décollement des revêtements et la fragilisation par l'hydrogène des aciers haute résistance. La surveillance permanente est essentielle.
+</Note>
+
+### Revêtements et peintures
+
+**Systèmes de peinture anticorrosion** (ISO 12944) :
+- **Primaire** : zinc riche en époxy ou zingage thermique (adhérence, protection sacrificielle)
+- **Intermédiaire** : époxy polyamide, résine vinylique (barrière)
+- **Finition** : polyuréthane, époxy (résistance UV, esthétique)
+
+**Catégories de corrosivité ISO 12944** : C1 (intérieur sec) à CX (offshore sous-marin)
+
+### Inhibiteurs de corrosion
+
+Ajoutés en faibles concentrations (10–1000 ppm) dans l'électrolyte pour réduire le taux de corrosion :
+
+- **Inhibiteurs anodiques** : chromates, phosphates, molybdates (forment un film passif)
+- **Inhibiteurs cathodiques** : sels de zinc, carbonates de calcium
+- **Inhibiteurs mixtes** : amines, imidazolines (utilisés dans les pipelines pétroliers)
+
+Les inhibiteurs anodiques sont dangereux s'ils sont sous-dosés : ils peuvent concentrer la corrosion en piqûres.
+
+## Normes et standards
+
+### NACE/AMPP (Merging en 2021 : NACE + SSPC = AMPP)
+
+- **NACE SP0169** : protection cathodique des pipelines enterrés — critères de protection, interférences électriques, maintenance
+- **NACE MR0175 / ISO 15156** : matériaux pour équipements en service dans des environnements H₂S (industrie pétrolière et gazière)
+- **NACE SP0188** : inspection des revêtements par holiday testing
+- **NACE TM0177** : essai de résistance à la CSC en milieu H₂S (méthode A, B, C, D)
+- **AMPP SP21424** : protection cathodique des structures marines
+
+### CSA Z662
+
+La norme CSA Z662 régit les réseaux de canalisations de pétrole et de gaz au Canada. Elle inclut des exigences spécifiques pour la protection cathodique, les revêtements et la surveillance de l'intégrité des pipelines.
+
+## Méthodes d'inspection
+
+### Contrôle par ultrasons (UT)
+
+Mesure de l'épaisseur résiduelle par réflexion d'ultrasons. La technique TOFD (Time of Flight Diffraction) et le phased array permettent une imagerie précise des défauts internes et de la corrosion sous revêtement.
+
+### Radiographie industrielle (RT)
+
+Détection de pertes d'épaisseur, cavités et inclusions. Utilise des sources gamma (Ir-192, Se-75) ou des générateurs X. Limité par les contraintes de radioprotection sur site.
+
+### Courants de Foucault (Eddy Current)
+
+Méthode non destructive particulièrement efficace pour détecter la corrosion sur les tubes d'échangeurs de chaleur (acier inox, Cu-Ni, titane). Rapidité d'inspection : 1 tube/min.
+
+### Inspection en ligne (ILI — In-Line Inspection)
+
+Les **racleurs intelligents (smart pigs)** parcourent l'intérieur des pipelines en service. Les technologies incluent :
+- MFL (Magnetic Flux Leakage) : perte d'épaisseur générale
+- UT : fissures et perte d'épaisseur précise
+- EMAT : fissures longitudinales
+
+<CardGroup cols={2}>
+  <Card title="Introduction à la métallurgie" icon="hammer" href="/genie-metallurgique/introduction">
+    Structures cristallines et propriétés mécaniques des métaux
+  </Card>
+  <Card title="Traitements thermiques" icon="temperature-high" href="/genie-metallurgique/traitements-thermiques">
+    Trempe, revenu, cémentation et durcissement structural
+  </Card>
+  <Card title="Normes canadiennes" icon="file-contract" href="/ressources/normes-canadiennes">
+    CSA Z662, NBC et autres normes canadiennes d'ingénierie
+  </Card>
+  <Card title="Normes internationales" icon="globe" href="/ressources/normes-internationales">
+    ASME, API, ISO et ASTM pour les matériaux et l'inspection
+  </Card>
+</CardGroup>

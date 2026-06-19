@@ -1,0 +1,238 @@
+---
+title: "Mécanique des roches"
+description: "Classification des roches, caractérisation des massifs rocheux (RQD, RMR, Q, GSI), résistance des roches intactes, discontinuités et excavations souterraines"
+icon: "circle-dot"
+---
+
+La mécanique des roches étudie le comportement mécanique des roches intactes et des massifs rocheux. Elle s'applique aux tunnels, aux cavernes souterraines, aux mines, aux fondations sur roc et aux talus rocheux. La distinction entre la roche intacte (matériau) et le massif rocheux (avec ses discontinuités) est fondamentale.
+
+## Classification des roches
+
+### Classification génétique
+
+| Famille | Mode de formation | Exemples | Propriétés typiques |
+|---------|------------------|----------|---------------------|
+| **Ignées** | Solidification du magma | Granite, basalte, gabbro, rhyolite | Très résistantes, UCS 100–300 MPa |
+| **Sédimentaires** | Dépôt et cimentation de sédiments | Calcaire, grès, shale, dolomie | UCS variable (10–200 MPa), stratifiées |
+| **Métamorphiques** | Transformation sous T et P | Gneiss, schiste, quartzite, marbre | Foliation importante, anisotropie |
+
+### Classification selon la résistance (ISRM)
+
+| Classe | Description | UCS (MPa) | Exemple |
+|--------|-------------|-----------|---------|
+| R0 | Extrêmement faible | < 0,25 | Tourbe indurée |
+| R1 | Très faible | 0,25–1 | Craie, halite |
+| R2 | Faible | 1–5 | Shale altéré |
+| R3 | Moyenne | 5–25 | Schiste |
+| R4 | Élevée | 25–100 | Calcaire, grès |
+| R5 | Très élevée | 100–250 | Granite, gneiss |
+| R6 | Extrêmement élevée | > 250 | Quartzite frais |
+
+## Caractérisation des massifs rocheux
+
+### RQD — Rock Quality Designation
+
+Le RQD (Deere, 1963) est mesuré sur carotte de forage comme le pourcentage de morceaux intacts de longueur ≥ 100 mm par rapport à la longueur totale forée :
+
+`RQD = (Σ longueurs de morceaux ≥ 100 mm / longueur totale de la passe) × 100 %`
+
+| RQD (%) | Qualité du massif |
+|---------|------------------|
+| 0–25 | Très mauvaise |
+| 25–50 | Mauvaise |
+| 50–75 | Moyenne |
+| 75–90 | Bonne |
+| 90–100 | Excellente |
+
+<Note>Le RQD dépend de l'orientation du forage par rapport aux discontinuités. Un forage perpendiculaire aux joints donnera un RQD plus faible qu'un forage parallèle. Pour une caractérisation complète, plusieurs forages d'orientations différentes sont recommandés.</Note>
+
+### RMR — Rock Mass Rating (Bieniawski, 1989)
+
+Le système RMR attribue une note globale (0–100) basée sur cinq paramètres notés :
+
+| Paramètre | Note maximale |
+|-----------|--------------|
+| Résistance à la compression uniaxiale (UCS) | 15 |
+| RQD | 20 |
+| Espacement des discontinuités | 20 |
+| Condition des discontinuités | 30 |
+| Conditions hydrologiques | 15 |
+| **Total** | **100** |
+
+Un ajustement d'orientation (de -12 à 0) est appliqué selon l'orientation des discontinuités par rapport à l'ouvrage.
+
+| RMR | Classe | Description |
+|-----|--------|-------------|
+| 81–100 | I | Très bon |
+| 61–80 | II | Bon |
+| 41–60 | III | Moyen |
+| 21–40 | IV | Mauvais |
+| < 21 | V | Très mauvais |
+
+Le RMR se corrèle au module de déformation Em (GPa) : `Em = 10^((RMR-10)/40)` pour RMR < 50.
+
+### Q-system (Barton, Lien & Lunde, 1974)
+
+Le Q-system est particulièrement adapté aux tunnels. Le Quality Index Q varie de 0,001 (roche effondrée) à 1000 (roche massive exceptionnelle) :
+
+`Q = (RQD/Jn) × (Jr/Ja) × (Jw/SRF)`
+
+Où :
+- `Jn` = nombre de familles de joints (1 à 20)
+- `Jr` = rugosité des joints (1 à 4)
+- `Ja` = altération des joints (0,75 à 20)
+- `Jw` = facteur d'eau (0,05 à 1)
+- `SRF` = Stress Reduction Factor (0,5 à 400)
+
+| Q | Qualité |
+|---|---------|
+| > 40 | Très bonne à exceptionnelle |
+| 10–40 | Bonne |
+| 1–10 | Moyenne |
+| 0,1–1 | Mauvaise |
+| < 0,1 | Très mauvaise à effondrée |
+
+### GSI — Geological Strength Index (Hoek, 1994)
+
+Le GSI (0–100) est estimé visuellement à partir de la structure du massif et de la condition des surfaces de discontinuités. Il est utilisé avec le critère de rupture Hoek-Brown pour estimer la résistance des massifs rocheux :
+
+`σ'1 = σ'3 + σci·(mb·σ'3/σci + s)^a`
+
+Où mb, s et a sont des constantes dérivées de GSI et de mi (constante de la roche intacte).
+
+## Résistance des roches intactes
+
+### Essai de compression uniaxiale (UCS)
+
+L'essai UCS (ASTM D7012, ISRM 1978) mesure la résistance maximale d'une éprouvette cylindrique (D/H = 1/2 à 1/2,5) soumise à une compression axiale sans confinement. L'UCS est le paramètre de base de toute caractérisation mécanique.
+
+### Essai de charge ponctuelle (Point Load Test)
+
+L'essai de charge ponctuelle (ISRM 1985, ASTM D5731) est réalisable directement sur carotte ou fragment de roche sans préparation. L'indice de charge ponctuelle Is(50) est converti en UCS approximatif :
+
+`UCS ≈ 22 × Is(50)` (coefficient variable de 16 à 24 selon la roche)
+
+Cet essai est particulièrement utile pour les sondages de grande longueur.
+
+### Essai brésilien (Tensile Strength)
+
+L'essai brésilien (ASTM D3967) mesure la résistance à la traction indirecte en comprimant diametralement un disque de roche. La résistance à la traction T0 :
+
+`T0 = 2P / (π·D·t)`
+
+Typiquement T0 ≈ UCS/10 à UCS/15. La résistance à la traction est critique pour le forage et l'abattage à l'explosif.
+
+## Discontinuités dans les massifs rocheux
+
+Les discontinuités (joints, failles, plans de stratification, clivage) contrôlent le comportement des massifs rocheux. Leurs paramètres géoméchaniques incluent :
+
+- **Orientation** : pendage (dip) et direction de pendage (dip direction), mesurés à la boussole de géologue
+- **Espacement** : distance entre joints parallèles (cm à m)
+- **Persistance** : longueur tracée du joint en surface (m)
+- **Rugosité** : profil JRC (Joint Roughness Coefficient, 0 à 20 selon Barton)
+- **Ouverture et remplissage** : air, eau, argile, calcite
+- **Résistance des parois** : JCS (Joint Compressive Strength)
+
+La résistance au cisaillement d'un joint (critère de Barton-Bandis) :
+
+`τ = σn · tan[JRC · log10(JCS/σn) + φr]`
+
+Où `φr` est l'angle de frottement résiduel (25–35° pour la plupart des roches).
+
+La projection stéréographique (stéréonet) est l'outil standard pour visualiser les orientations et réaliser l'analyse cinématique des talus rocheux.
+
+## Excavations souterraines — Équations de Kirsch
+
+Pour un tunnel circulaire de rayon r dans un massif homogène isotrope avec contraintes in situ σH (horizontale) et σV (verticale), les équations de Kirsch donnent les contraintes en tout point (R, θ) :
+
+**Contrainte radiale :**
+`σr = (σH+σV)/2 · (1-r²/R²) + (σH-σV)/2 · (1-4r²/R²+3r⁴/R⁴)·cos2θ`
+
+**Contrainte tangentielle (contrainte de cerclage) :**
+`σθ = (σH+σV)/2 · (1+r²/R²) - (σH-σV)/2 · (1+3r⁴/R⁴)·cos2θ`
+
+À la paroi du tunnel (R = r) :
+- **Toit/radier (θ = 90°/270°)** : `σθ = 3σH - σV`
+- **Piédroits (θ = 0°/180°)** : `σθ = 3σV - σH`
+
+<Warning>Si le rapport K0 = σH/σV est élevé (> 3) et que la résistance de la roche est faible, les contraintes tangentielles au toit peuvent dépasser la résistance à la compression, provoquant un écaillage (spalling) ou une rupture en onion-skin. Le coefficient K0 doit être mesuré in situ (essai de fracturation hydraulique, cellule de déformation).</Warning>
+
+## Soutènement des excavations souterraines
+
+### Boulons d'ancrage (rock bolts)
+
+Les boulons d'ancrage sont les éléments de soutènement les plus utilisés. Ils créent une zone comprimée autour du tunnel qui améliore l'auto-soutènement du massif.
+
+- **Boulons à ancrage ponctuel** : Swellex, Split Set — installation rapide
+- **Boulons cimentés** : fibre de verre ou acier, permanents
+- **Câbles d'ancrage** (cable bolts) : pour les grandes portées minières
+
+Le pattern de boulonnage est déterminé par le Q-system : `Bolt spacing ≈ 2,3·Q^0,4 / ESR`
+
+### Béton projeté (shotcrete)
+
+Le béton projeté (C35/45 MPa) est appliqué immédiatement après l'excavation pour :
+- Sceller les discontinuités et prévenir l'altération
+- Assurer la continuité structurale entre les boulons
+- Reprendre les charges de flexion en voûte
+
+L'épaisseur varie de 50 mm (bon massif) à 200+ mm (massif fracturé).
+
+### Cintres métalliques (steel sets)
+
+Les cintres TH (Toussaint-Heintzmann) ou HEB sont utilisés dans les roches très mauvaises (Q < 0,1) ou lors du percement de failles. Souvent combinés avec des planchettes de bois ou du béton projeté entre les cintres.
+
+### Méthode NATM (New Austrian Tunnelling Method)
+
+La NATM exploite la résistance résiduelle du massif en permettant une déformation contrôlée avant la mise en place du soutènement définitif. Elle repose sur une instrumentation intensive (convergencemètre, extensomètre) et l'ajustement du soutènement en temps réel.
+
+## Stabilité des talus rocheux
+
+### Analyse cinématique
+
+L'analyse cinématique sur stéréonet détermine quels modes de rupture sont géométriquement possibles selon les orientations des discontinuités et la direction/pendage de la pente.
+
+- **Rupture plane** : possible si le joint plonge dans la même direction que la pente et si son pendage est < pendage de la pente mais > φ
+- **Rupture en coin** : intersection de deux plans plonge dans la pente avec angle > φ
+- **Basculement direct** : joints sub-verticaux plongeant dans la pente
+- **Basculement flexural** : joints sub-verticaux plongeant contre la pente
+
+### Projection stéréographique
+
+La projection de Schmidt (égale-surface) est préférée à la projection de Wulff (égale-angle) pour les analyses structurales quantitatives (densité de pôles). Les logiciels Dips (Rocscience), Stereonet et DIPS permettent l'analyse automatisée.
+
+## Dynamitage — Notions fondamentales
+
+Le forage et le sautage constituent le principal mode d'abattage des roches dures. Les paramètres clés sont :
+
+| Paramètre | Définition | Valeur typique |
+|-----------|-----------|----------------|
+| Burden (B) | Distance entre le rang de trous et la face libre | 1,5–4 m |
+| Espacement (S) | Distance entre trous dans le rang | S ≈ 1,0–1,4 × B |
+| Sous-forage (J) | Longueur au-delà du plan de fond | J ≈ 0,3 × B |
+| Bourrage (T) | Longueur de la charge de bourrage | T ≈ B |
+| Ratio de poudre | Kg d'explosif / m³ de roche | 0,2–0,6 kg/m³ |
+
+L'ANFO (Ammonium Nitrate Fuel Oil) est l'explosif le plus utilisé en mine à ciel ouvert. Les émulsions sont préférées dans les conditions humides.
+
+<CardGroup cols={2}>
+  <Card title="Mécanique des sols" icon="layer-group" href="/geotechnique/mecanique-sols">
+    Propriétés des sols et essais de laboratoire
+  </Card>
+  <Card title="Stabilité des pentes" icon="mountain" href="/geotechnique/stabilite-pentes">
+    Méthodes de calcul et stabilisation des versants
+  </Card>
+  <Card title="Génie minier" icon="hammer" href="/genie-minier/introduction">
+    Méthodes d'excavation et gestion des risques souterrains
+  </Card>
+  <Card title="SIG et télédétection" icon="satellite" href="/geomatique/sig-teledetection">
+    Cartographie structurale et surveillance de versants
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : ASTM D7012 (UCS), ASTM D5731 (PLT), ASTM D3967 (essai brésilien), ISRM Suggested Methods
+- **Logiciels** : RS2/RS3 (Rocscience), FLAC3D (Itasca), Phase2, Unwedge, Dips, RocLab
+- **Organismes** : ISRM (International Society for Rock Mechanics), CGS, Canadian Institute of Mining (CIM)
+- **Références** : Hoek & Brown — *Underground Excavations in Rock*; Barton — *Rock Quality, Seismic Velocity, Attenuation and Anisotropy*; Goodman — *Introduction to Rock Mechanics*

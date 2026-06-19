@@ -1,0 +1,211 @@
+---
+title: "Traitements thermiques des métaux"
+description: "Recuit, normalisation, trempe, revenu, cémentation, précipitation durcissante, diagrammes TTT/TRC et trempabilité"
+icon: "temperature-high"
+---
+
+Les traitements thermiques modifient la microstructure des métaux par des cycles contrôlés de chauffage et de refroidissement, permettant d'obtenir les propriétés mécaniques désirées. La maîtrise de ces procédés est essentielle pour l'ingénieur métallurgiste.
+
+## Recuit (Annealing)
+
+Le recuit consiste à chauffer un métal au-dessus de sa température de recristallisation, à maintenir cette température, puis à refroidir lentement (au four). Il existe plusieurs types :
+
+### Recuit complet (Full Annealing)
+
+Applicable aux aciers hypoeutectoïdes. Chauffage 30–50 °C au-dessus de A₃, maintien, puis refroidissement très lent au four. Résultat : structure ferrite + perlite grossière, matériau ramolli, contraintes résiduelles éliminées.
+
+**Application** : pièces ayant subi un écrouissage excessif ou une soudure, avant usinage.
+
+### Recuit d'adoucissement (Process Annealing)
+
+Chauffage entre A₁ et A₃ (600–700 °C pour les aciers doux). Permet la recristallisation sans transformer complètement en austénite. Employé entre les passes de laminage à froid.
+
+### Recuit sphéroïdisant (Spheroidizing Annealing)
+
+Chauffage juste en dessous de A₁ pendant de longues périodes (12–24 h). La cémentite se sphéroïdise, donnant la microstructure la plus douce possible pour les aciers hypereutectoïdes. Améliore l'usinabilité et la formabilité.
+
+## Normalisation
+
+Chauffage 50 °C au-dessus de A₃ ou Acm, suivi d'un refroidissement à l'air libre. Plus rapide que le recuit complet, la normalisation donne une microstructure perlitique plus fine et des propriétés légèrement supérieures.
+
+**Utilisation courante** : homogénéisation des pièces moulées, amélioration de la structure des pièces forgées, préparation à un traitement ultérieur.
+
+## Durcissement par trempe
+
+### Mécanisme de la trempe
+
+L'austénitisation (30–50 °C au-dessus de A₃) est suivie d'un refroidissement rapide dans un milieu de trempe. La rapidité du refroidissement empêche la diffusion du carbone, forçant la formation de **martensite** — structure tétragonale centrée (BCT) très dure.
+
+| Milieu de trempe | Sévérité H | Risque de distorsion |
+|-----------------|------------|----------------------|
+| Eau salée | 2,0 | Très élevé |
+| Eau | 1,0 | Élevé |
+| Huile | 0,25–0,35 | Modéré |
+| Air | 0,02 | Faible |
+| Polymère (PAG) | 0,3–1,5 | Variable |
+
+La dureté maximale de la martensite dépend uniquement de la teneur en carbone :
+
+| Teneur en C (%) | Dureté max (HRC) |
+|-----------------|------------------|
+| 0,20 | 40 |
+| 0,40 | 55 |
+| 0,60 | 64 |
+| 0,80 | 66 |
+
+<Warning>
+La trempe crée des contraintes résiduelles importantes. Un revenu doit toujours suivre la trempe pour éviter la fissuration fragile, particulièrement pour les pièces de section variable.
+</Warning>
+
+## Revenu (Tempering)
+
+Le revenu consiste à réchauffer l'acier trempé à une température entre 150 °C et 680 °C, puis à refroidir à l'air. La martensite se décompose progressivement en structures plus stables, réduisant la dureté mais augmentant la ténacité.
+
+### Propriétés typiques selon le niveau de revenu (acier 4340)
+
+| Température de revenu | R_m (MPa) | R_e (MPa) | A% | HRC | KIC (MPa·√m) |
+|----------------------|-----------|-----------|-----|-----|--------------|
+| Non revenu (trempe) | 1900 | 1700 | 6 | 58 | 50 |
+| 200 °C | 1800 | 1600 | 9 | 54 | 60 |
+| 400 °C | 1500 | 1350 | 12 | 46 | 90 |
+| 600 °C | 1100 | 950 | 16 | 35 | 130 |
+
+<Tip>
+Le compromis résistance-ténacité est le principe fondamental du revenu. Pour les applications structurales critiques (comme les aciers pour la construction offshore ou les pièces aérospatiales), un revenu à haute température est préférable pour maximiser la ténacité.
+</Tip>
+
+### Fragilité de revenu
+
+À éviter : revenu entre 250–400 °C (fragilité de revenu du premier type) et entre 450–550 °C pour les aciers alliés (fragilité Krupp-Bain). Refroidissement rapide depuis 600 °C recommandé pour les aciers au Mn, Ni-Cr.
+
+## Cémentation et durcissement superficiel
+
+Ces procédés visent à obtenir une surface dure avec un cœur ductile — idéal pour les engrenages, arbres à cames et pièces d'usure.
+
+### Cémentation gazeuse (Gas Carburizing)
+
+Diffusion de carbone en phase gazeuse (atmosphère d'endogaz + propane/méthane) à 900–950 °C. Profondeur de cémentation typique : 0,5 à 2,0 mm. Suivi d'une trempe directe ou rediffusion.
+
+**Aciers utilisés** : 8620, 4118, 9310, 20MnCr5.
+
+### Nitruration
+
+Diffusion d'azote à 500–580 °C dans une atmosphère d'ammoniac (nitruration gazeuse) ou dans un bain de sel (nitruration liquide — Tenifer/QPQ). La nitruration produit une couche de nitrures très dure (700–1200 HV) sans nécessiter de trempe ultérieure.
+
+**Avantage** : déformations minimales, excellente résistance à la corrosion.
+
+### Durcissement par induction
+
+Chauffage très rapide de la surface par courants de Foucault (fréquence 1 kHz à 500 kHz), suivi d'une trempe à l'eau ou à l'huile. Profondeur : 0,5 à 5 mm selon la fréquence.
+
+**Avantage** : procédé sélectif, rapide, reproductible, économique en grande série.
+
+| Procédé | Profondeur | Dureté surface | Déformation | Alliage requis |
+|---------|------------|----------------|-------------|----------------|
+| Cémentation | 0,5–2,0 mm | 58–64 HRC | Modérée | Faible C |
+| Nitruration | 0,1–0,5 mm | 65–72 HRC | Très faible | Cr, Al, Mo |
+| Induction | 0,5–5 mm | 55–62 HRC | Faible | Moyen C |
+| Laser/EB | 0,2–1,5 mm | 58–65 HRC | Très faible | Moyen C |
+
+## Durcissement structural (Précipitation)
+
+### Principe du durcissement par précipitation
+
+Applicable aux alliages d'aluminium, de titane, de nickel et aux aciers inoxydables PH. Le mécanisme en trois étapes :
+
+1. **Mise en solution** : chauffage pour dissoudre tous les précipités dans la matrice (ex. : 530 °C pour AA6061)
+2. **Trempe** : refroidissement rapide pour sursaturer la matrice en éléments d'alliage
+3. **Vieillissement** : maintien à température intermédiaire pour précipiter des particules fines (zones de Guinier-Preston, puis θ', θ pour Al-Cu)
+
+### Conditions de traitement des alliages d'aluminium (normes ASTM/AMS)
+
+| Condition | Code | Description |
+|-----------|------|-------------|
+| Traité thermiquement (solution + trempe + vieillissement nat.) | T4 | Vieillissement naturel seulement |
+| Traité thermiquement complet | T6 | Mise en solution + trempe + vieillissement artificiel |
+| Sur-vieilli | T73 | Meilleure résistance à la corrosion sous contrainte |
+| Recuit | O | Recuit complet, état le plus mou |
+
+### Propriétés typiques des alliages d'aluminium
+
+| Alliage | Condition | R_m (MPa) | R_e (MPa) | A% |
+|---------|-----------|-----------|-----------|-----|
+| 6061 | T6 | 310 | 276 | 12 |
+| 7075 | T6 | 572 | 503 | 11 |
+| 2024 | T3 | 483 | 345 | 18 |
+| 7075 | T73 | 503 | 434 | 13 |
+
+## Diagrammes TTT et TRC
+
+### Diagramme TTT (Temps-Température-Transformation)
+
+Le diagramme TTT (ou IT — Isothermal Transformation) prédit les microstructures obtenues lors d'un maintien isotherme après austénitisation. Il présente les courbes en « nez » caractéristiques :
+
+- **Nez perlitique** (500–650 °C) : transformation en perlite
+- **Nez bainitique** (250–500 °C) : transformation en bainite
+- **Ms et Mf** : lignes de début et fin de transformation martensitique
+
+### Diagramme TRC (Transformation en Refroidissement Continu)
+
+Le diagramme TRC (ou CCT — Continuous Cooling Transformation) est plus représentatif des conditions industrielles. Les courbes sont décalées vers la droite et vers le bas par rapport au TTT. La **vitesse critique de trempe** (Vc) est la vitesse minimale pour obtenir 100 % de martensite.
+
+<Note>
+Les diagrammes TTT et TRC sont spécifiques à chaque composition d'acier et à la taille de grain austénitique. Les logiciels comme JMatPro ou Thermo-Calc permettent de les calculer pour des compositions personnalisées.
+</Note>
+
+## Trempabilité (Hardenability)
+
+### Définition
+
+La trempabilité mesure la capacité d'un acier à former de la martensite en profondeur lors de la trempe. Elle ne doit pas être confondue avec la dureté maximale atteignable.
+
+### Essai Jominy (ASTM A255 / CSA G40.20)
+
+Une éprouvette cylindrique standard (25 mm × 100 mm) est austénitisée puis refroidie par un jet d'eau à une extrémité. La dureté est mesurée tous les 1,6 mm (1/16 po). La courbe obtenue est la **courbe de trempabilité Jominy**.
+
+### Calcul de la trempabilité idéale (DI)
+
+La distance idéale (Ideal Diameter, D_I) exprime le diamètre maximal d'une barre ronde qui peut être durcie à 50 % de martensite en son centre lors d'une trempe idéale.
+
+D_I = D_C × f(Mn) × f(Si) × f(Cr) × f(Ni) × f(Mo)
+
+Où D_C dépend de la taille de grain austénitique et de la teneur en carbone.
+
+**Aciers très trempables** : 4340, H13, D2 (D_I > 150 mm)
+**Aciers faiblement trempables** : 1020, 1040 (D_I < 25 mm)
+
+## Revêtements de surface
+
+### Galvanisation
+
+- **Galvanisation à chaud** (HDG) : immersion dans un bain de zinc fondu (450 °C). Épaisseur : 45–85 µm. Norme CAN/CSA-G164.
+- **Galvanisation continue (Sendzimir)** : tôles en bobines, épaisseur 7–25 µm.
+- **Sherardisation** : diffusion de zinc en phase vapeur.
+
+### Chromage dur
+
+Dépôt électrolytique de chrome (CrVI ou CrIII). Dureté : 800–1100 HV, faible coefficient de frottement. Utilisé sur les vérins hydrauliques, axes, outils de coupe.
+
+<Warning>
+Le chromage au Cr(VI) est soumis à des réglementations environnementales strictes (REACH en Europe, réglementation fédérale au Canada). Les procédés sans Cr(VI) (HVOF, PVD) sont en forte progression.
+</Warning>
+
+### PVD et CVD
+
+- **PVD** (Physical Vapor Deposition) : dépôts de TiN, TiCN, TiAlN, DLC à 200–500 °C. Épaisseur : 2–6 µm. Dureté : 1500–3500 HV. Utilisé sur les outils de coupe.
+- **CVD** (Chemical Vapor Deposition) : dépôts d'Al₂O₃, TiC à 800–1100 °C. Épaisseur : 5–15 µm. Excellent adhérence, résistance à l'usure à haute température.
+
+<CardGroup cols={2}>
+  <Card title="Introduction à la métallurgie" icon="hammer" href="/genie-metallurgique/introduction">
+    Structures cristallines, diagramme fer-carbone et essais mécaniques
+  </Card>
+  <Card title="Corrosion et protection" icon="bacteria" href="/genie-metallurgique/corrosion">
+    Mécanismes de corrosion et méthodes de protection cathodique
+  </Card>
+  <Card title="Fabrication et procédés" icon="screwdriver-wrench" href="/genie-mecanique/fabrication-procedes">
+    Fonderie, forgeage, usinage et procédés de soudage
+  </Card>
+  <Card title="Conception mécanique" icon="drafting-compass" href="/genie-mecanique/conception-mecanique">
+    Fatigue, tolérances, assemblages boulonnés et ressorts
+  </Card>
+</CardGroup>

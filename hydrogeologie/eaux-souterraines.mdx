@@ -1,0 +1,223 @@
+---
+title: "Eaux souterraines"
+description: "Types d'aquifères, loi de Darcy, équation de Theis, méthode de Cooper-Jacob, essais de slug test, réseaux d'écoulement et protection des eaux souterraines"
+icon: "water"
+---
+
+Les eaux souterraines représentent environ 30 % des réserves d'eau douce de la planète et constituent la principale source d'eau potable pour des millions de Canadiens, notamment au Québec où plusieurs municipalités dépendent entièrement des aquifères locaux. L'hydrogéologie est la science qui étudie l'occurrence, la distribution, le mouvement et la qualité de ces eaux.
+
+## Concepts fondamentaux — Types d'aquifères
+
+### Aquifère libre (non captif)
+
+L'aquifère libre (ou phréatique) est délimité à sa partie supérieure par la surface libre de la nappe (niveau piézométrique = niveau réel de l'eau). La pression à la nappe est égale à la pression atmosphérique. Les variations de la nappe répondent directement aux infiltrations.
+
+- **Porosité efficace (Sy)** : fraction du volume total drainée par gravité (0,05 à 0,35 pour les sables et graviers)
+- Exemples au Canada : sables et graviers fluvioglaciaires, dépôts d'esker
+
+### Aquifère captif (artésien)
+
+L'aquifère captif est confiné entre deux couches imperméables (aquitards). La pression de l'eau dépasse la pression atmosphérique — les puits peuvent couler naturellement (puits artésiens). La piézométrie reflète le niveau auquel l'eau monterait dans un tube ouvert.
+
+- **Coefficient d'emmagasinement (S)** : très faible (10⁻⁵ à 10⁻³), lié à la compressibilité de l'eau et de la matrice
+- Exemples : calcaires fracturés du Saint-Laurent, grès du bassin des Basses-Terres
+
+### Aquifère perché
+
+L'aquifère perché est un aquifère libre de faible étendue situé au-dessus de la nappe principale, suspendu sur une lentille imperméable. Il est souvent saisonnier et vulnérable à la contamination.
+
+### Aquitard et aquiclude
+
+- **Aquitard** : couche peu perméable permettant des échanges verticaux lents (ex. : argile marine avec k ~ 10⁻⁹ m/s)
+- **Aquiclude** : couche pratiquement imperméable ne transmettant pas d'eau (ex. : granite massif)
+
+## Loi de Darcy et conductivité hydraulique
+
+### Loi de Darcy
+
+La loi de Darcy (Henri Darcy, 1856) décrit l'écoulement de l'eau dans les milieux poreux saturés :
+
+`Q = -K · A · (dh/dl)`
+
+`v = -K · i`
+
+Où :
+- `Q` = débit volumique (m³/s)
+- `K` = conductivité hydraulique (m/s)
+- `A` = section transversale (m²)
+- `dh/dl` = gradient hydraulique (m/m)
+- `v` = vitesse de Darcy ou flux spécifique (m/s)
+
+La vitesse de pore (vitesse réelle des molécules d'eau) est :
+
+`vp = v / ne`
+
+Où `ne` est la porosité efficace. La vitesse de pore est toujours > vitesse de Darcy et est utilisée pour les calculs de transport de contaminants.
+
+### Valeurs typiques de conductivité hydraulique
+
+| Matériau | K (m/s) | Utilisation aquifère |
+|----------|---------|---------------------|
+| Gravier propre | 10⁻² à 10⁻¹ | Excellent aquifère |
+| Sable grossier propre | 10⁻⁴ à 10⁻² | Très bon aquifère |
+| Sable fin | 10⁻⁶ à 10⁻⁴ | Bon aquifère |
+| Sable limoneux | 10⁻⁷ à 10⁻⁶ | Aquifère marginal |
+| Limon | 10⁻⁹ à 10⁻⁷ | Aquitard |
+| Argile | 10⁻¹¹ à 10⁻⁹ | Aquiclude/aquitard |
+| Calcaire karstique | 10⁻² à 10⁻¹ | Excellent, écoulement en conduits |
+| Granite fracturé | 10⁻⁷ à 10⁻⁴ | Variable selon fracturation |
+| Schiste | 10⁻¹³ à 10⁻¹⁰ | Très faible |
+
+<Note>Dans le Bouclier canadien, l'écoulement se fait essentiellement dans les fractures. La conductivité hydraulique équivalente peut varier de plusieurs ordres de grandeur sur quelques mètres selon la densité et l'interconnexion des fractures.</Note>
+
+## Équation de Theis — Flux transitoire vers un puits
+
+### Théorie de Theis (1935)
+
+L'équation de Theis décrit l'abaissement (rabattement) h0 - h autour d'un puits pompant à débit constant Q dans un aquifère captif infini et homogène :
+
+`s = (Q / 4πT) · W(u)`
+
+`u = r²S / (4Tt)`
+
+Où :
+- `s` = rabattement (m) = h0 - h
+- `Q` = débit de pompage (m³/s)
+- `T` = transmissivité (m²/s) = K × b
+- `S` = coefficient d'emmagasinement (sans dimension)
+- `r` = distance au puits pompant (m)
+- `t` = temps depuis le début du pompage (s)
+- `W(u)` = fonction de puits (intégrale exponentielle)
+
+La fonction de puits est tabulée :
+
+| u | W(u) |
+|---|------|
+| 10⁻⁴ | 8,63 |
+| 10⁻³ | 6,33 |
+| 10⁻² | 4,04 |
+| 10⁻¹ | 1,82 |
+| 0,5 | 0,56 |
+| 1,0 | 0,22 |
+
+### Méthode graphique de Theis
+
+L'interprétation consiste à superposer la courbe de terrain (s vs r²/t sur log-log) sur la courbe-type W(u) vs 1/u pour trouver le point de coïncidence donnant T et S.
+
+## Méthode de Cooper-Jacob (droite)
+
+Pour des faibles valeurs de u (u < 0,01, soit pour t grand ou r petit) :
+
+`s = (2,303·Q / 4πT) · log(2,25·T·t / r²·S)`
+
+Cette approximation donne une droite sur le graphique s vs log(t) :
+
+`T = 2,303·Q / (4π·Δs)`
+
+`S = 2,25·T·t0 / r²`
+
+Où `Δs` est l'abaissement par cycle logarithmique et `t0` est le temps à rabattement nul (intercept sur l'axe des x).
+
+<Tip>La méthode de Cooper-Jacob est la plus utilisée en pratique car elle est simple et robuste. Vérifiez toujours que u < 0,01 pour les derniers points de la droite. Si ce n'est pas le cas, utilisez la méthode de Theis.</Tip>
+
+## Essais de slug test
+
+Les essais de slug test mesurent K directement dans le puits sans pompage prolongé. On introduit ou retire rapidement un volume d'eau (ou un cylindre solide) et on mesure la récupération du niveau.
+
+### Méthode de Hvorslev (1951)
+
+Pour un puits sans zone de gravier filtrant :
+
+`K = r²·ln(Le/R) / (2·Le·t37)`
+
+Où `t37` est le temps pour que le niveau revienne à 37 % du changement initial, `Le` est la longueur de crépine et `R` son rayon.
+
+### Méthode de Bouwer & Rice (1976)
+
+Applicable aux aquifères libres :
+
+`K = rc²·ln(Re/rw) / (2Le) · (1/t)·ln(y0/yt)`
+
+Où `Re` est le rayon d'influence effectif calculé par des équations empiriques selon la géométrie du puits.
+
+## Réseaux d'écoulement (Flow Nets)
+
+Un réseau d'écoulement est constitué de deux familles de courbes orthogonales : les lignes de courant (parallèles au flux) et les équipotentielles (lignes d'égale charge hydraulique). Le débit total à travers le réseau :
+
+`Q = K · H · (Nf/Nd)`
+
+Où :
+- `Nf` = nombre de tubes de courant
+- `Nd` = nombre de chutes de potentiel
+- `H` = différence de charge hydraulique totale
+
+Les réseaux d'écoulement servent à :
+- Calculer les débits d'infiltration sous les barrages
+- Estimer les pressions interstitielles dans les remblais
+- Concevoir les systèmes de drainage
+
+## Systèmes d'écoulement régionaux
+
+Les systèmes d'écoulement de Toth (1963) distinguent :
+
+- **Système local** : recharge et décharge proches, topographie de faible amplitude
+- **Système intermédiaire** : traverse plusieurs vallées
+- **Système régional** : recharge en zone de relief, décharge dans les grandes vallées ou le St-Laurent
+
+Les **zones de recharge** se caractérisent par des pressions inférieures à hydrostatique, une direction d'écoulement vers le bas et la présence d'espèces végétales xérophytes. Les **zones de décharge** présentent des pressions suprahydrostatiques, des résurgences, des tourbières et des milieux humides.
+
+## Contamination des eaux souterraines
+
+### Principaux contaminants
+
+| Catégorie | Exemples | Comportement |
+|-----------|----------|-------------|
+| BTEX | Benzène, toluène (fuites UST) | Dissous, mobile |
+| DNAPL | TCE, PCE (solvants chlorés) | Plus dense que l'eau, s'enfonce |
+| LNAPL | Essence, diesel | Moins dense que l'eau, flotte |
+| Nitrates | Agriculture, fosses septiques | Très mobiles, pas d'atténuation |
+| Métaux lourds | Sites miniers, fonderies | Dépendent du pH et Eh |
+| Bactéries/virus | Fosses, abattoirs | Atténuation naturelle sur courte distance |
+
+### Transport des contaminants
+
+Le transport dans les eaux souterraines combine :
+- **Advection** : transport par le flux d'eau (v = K·i/ne)
+- **Dispersion mécanique** : mélange par hétérogénéité du milieu
+- **Diffusion moléculaire** : importante pour les milieux à faible vitesse (argiles)
+- **Réactions chimiques** : sorption, biodégradation, précipitation
+
+## Zones de protection des captages (WHPA)
+
+### Cadre canadien
+
+Les Wellhead Protection Areas (WHPA) ou aires d'alimentation en eau potable définissent des zones de protection autour des captages municipaux basées sur des critères hydrogéologiques et de temps de transit.
+
+Au Québec, le **Règlement sur le prélèvement des eaux et leur protection (RPEP, RLRQ c Q-2, r 35.2)** définit :
+- **Zone de protection immédiate** : 30 m autour du captage — clôturée, aucune activité
+- **Zone de protection intermédiaire** : délimitée par un temps de transit de 200 jours — activités agricoles et industrielles restreintes
+- **Zone de protection distale** : bassin versant entier contribuant au captage
+
+<Warning>Le non-respect des zones de protection peut entraîner la contamination irrémédiable d'un captage et la mise hors service d'un puits municipal. Les études hydrogéologiques pour la délimitation des WHPA doivent être réalisées par un hydrogéologue professionnel selon les guides du MELCCFP.</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Caractérisation des aquifères" icon="droplet" href="/hydrogeologie/aquiferes">
+    Paramètres hydrauliques, modèles et rendement soutenable
+  </Card>
+  <Card title="Mécanique des sols" icon="layer-group" href="/geotechnique/mecanique-sols">
+    Perméabilité, consolidation et pressions interstitielles
+  </Card>
+  <Card title="Génie environnemental" icon="leaf" href="/genie-environnemental/introduction">
+    Réhabilitation de sites contaminés
+  </Card>
+  <Card title="SIG et télédétection" icon="satellite" href="/geomatique/sig-teledetection">
+    Cartographie hydrogéologique et modélisation spatiale
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes et guides** : ASTM D4050 (essais de pompage), ASTM D4044/D4104 (slug tests), RPEP du Québec, Guides du MELCCFP
+- **Logiciels** : MODFLOW (USGS, open source), AquiferTest (Waterloo Hydrogeologic), FEFLOW, GMS (Aquaveo), Visual MODFLOW
+- **Organismes** : MELCCFP, Association canadienne des ressources hydriques (ACRH), Groundwater Canada, USGS Water Resources
+- **Références** : Freeze & Cherry — *Groundwater* (Prentice-Hall, 1979); Domenico & Schwartz — *Physical and Chemical Hydrogeology*; Fetter — *Applied Hydrogeology*

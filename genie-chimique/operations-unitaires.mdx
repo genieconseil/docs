@@ -1,0 +1,233 @@
+---
+title: "Opérations unitaires"
+description: "Bilans matière et énergie, distillation, échangeurs de chaleur et autres opérations de séparation"
+icon: "filter"
+---
+
+Les opérations unitaires constituent le langage commun du génie chimique. Elles désignent les étapes physiques fondamentales — transfert de masse, transfert de chaleur, séparations mécaniques — qui se retrouvent, identiques dans leur principe, dans toutes les industries. Ce concept, introduit par Arthur D. Little en 1915 et formalisé par Walker, Lewis et McAdams dans leur ouvrage *Principles of Chemical Engineering* (1923), permet à l'ingénieur de maîtriser un répertoire fini de méthodes applicables à une diversité infinie de procédés.
+
+## Bilans matière et énergie
+
+### Bilan matière
+
+Le bilan matière (ou bilan de masse) est le point de départ de toute conception de procédé. Il exprime la loi de conservation de la masse appliquée à un système délimité (volume de contrôle) :
+
+```
+Σṁ_entrée - Σṁ_sortie + ṁ_généré - ṁ_consommé = dM/dt
+```
+
+En régime permanent (*steady state*), l'accumulation est nulle : `dM/dt = 0`, d'où :
+
+```
+Σṁ_entrée = Σṁ_sortie  (sans réaction)
+Σṁ_entrée + ṁ_généré = Σṁ_sortie + ṁ_consommé  (avec réaction)
+```
+
+L'**analyse des degrés de liberté** (DOF — *Degrees of Freedom*) est indispensable avant de résoudre tout système : `DOF = Nombre d'inconnues - Nombre d'équations indépendantes`. Un système bien posé a `DOF = 0`.
+
+### Bilan d'énergie
+
+Le bilan d'énergie général pour un système ouvert en régime permanent est :
+
+```
+Q - Ẇ_s = ΔḢ + ΔĖ_K + ΔĖ_P
+```
+
+où `Q` est le flux de chaleur (W), `Ẇ_s` la puissance des travaux de l'arbre (*shaft work*), `ΔḢ` la variation d'enthalpie, `ΔĖ_K` la variation d'énergie cinétique et `ΔĖ_P` la variation d'énergie potentielle. En génie chimique, `ΔĖ_K` et `ΔĖ_P` sont souvent négligeables devant `ΔḢ`.
+
+<Tip>
+Pour les procédés sans réaction chimique, l'enthalpie est calculée à partir des capacités calorifiques : `ΔH = ṁ × Cp × ΔT`. Pour les procédés avec réaction, il faut ajouter la chaleur de réaction `ΔH_rxn`.
+</Tip>
+
+## Distillation
+
+La distillation est l'opération de séparation la plus importante de l'industrie chimique et pétrochimique. Elle exploite les différences de volatilité entre les composants d'un mélange liquide.
+
+### Méthode de McCabe-Thiele
+
+La méthode graphique de McCabe-Thiele (1925) permet de déterminer le nombre d'étages théoriques pour une colonne de distillation binaire. Elle repose sur deux droites opératoires tracées dans le diagramme `y-x` (fraction molaire vapeur en ordonnée, fraction molaire liquide en abscisse) :
+
+**Droite opératoire de la section de rectification :**
+```
+y = (L/V) × x + (D/V) × x_D
+```
+
+**Droite opératoire de la section d'épuisement :**
+```
+y = (L'/V') × x - (B/V') × x_B
+```
+
+où `L`, `V` sont les débits molaires de liquide et de vapeur dans la section de rectification, `L'`, `V'` dans la section d'épuisement, `D` le débit de distillat, `B` le débit de résidu, `x_D` et `x_B` les compositions du distillat et du résidu.
+
+La **ligne q** représente l'état thermique de l'alimentation. Pour une alimentation à l'état de liquide saturé, `q = 1` et la droite q est verticale.
+
+### Taux de reflux
+
+Le **taux de reflux** `R = L/D` est le rapport entre le débit de liquide retourné en tête de colonne et le débit de distillat soutiré. Un reflux élevé améliore la séparation mais augmente la consommation énergétique.
+
+Le **taux de reflux minimum** `R_min` est déterminé par l'équation d'Underwood (pour mélanges multicomposants) :
+
+```
+Σ [α_i × z_i / (α_i - θ)] = 1 - q
+V_min/F = Σ [α_i × z_i / (α_i - θ)]
+```
+
+En pratique, `R_opérationnel = 1,05 à 1,5 × R_min`.
+
+### Efficacité et garnissages
+
+**HETP (Height Equivalent to a Theoretical Plate) :**
+```
+HETP = Z / N_théoriques
+```
+où `Z` est la hauteur de garnissage et `N_théoriques` le nombre d'étages théoriques. Pour les garnissages aléatoires (anneaux Raschig, anneaux Pall, selles Intalox), `HETP ≈ 0,3 à 1,0 m`. Pour les garnissages structurés (Sulzer MellapakPlus, Koch-Glitsch FlexiPac), `HETP ≈ 0,15 à 0,5 m`.
+
+**Efficacité de plateau de Murphree :**
+```
+E_MV = (y_n - y_{n+1}) / (y_n* - y_{n+1})
+```
+où `y_n*` est la composition d'équilibre à la température et composition de la phase liquide du plateau `n`. Les efficacités typiques varient de 60 à 90 % selon le système.
+
+<Note>
+Les plateaux perforés (*sieve trays*), à clapets (*valve trays*) et à bulles (*bubble cap trays*) sont les trois principaux types de plateaux industriels. Les colonnes à garnissage sont préférées pour les faibles débits, les produits corrosifs ou lorsque la perte de charge doit être minimisée (distillation sous vide).
+</Note>
+
+## Absorption et stripping
+
+L'absorption est le transfert d'un soluté de la phase gaz vers un solvant liquide. Le stripping (désorption) est l'opération inverse.
+
+### Équation de Kremser
+
+Pour un absorbeur à `N` étages théoriques avec un équilibre linéaire (`y* = mx + b`) :
+
+```
+N = log[(y_1 - mx_0) / (y_{N+1} - mx_0) × (1 - 1/A) + 1/A] / log(A)
+```
+
+Le **facteur d'absorption** est :
+```
+A = L / (m × V)
+```
+
+où `L` et `V` sont les débits molaires de liquide et de gaz, et `m` la constante d'équilibre (pente de la droite d'équilibre). Pour une absorption efficace, `A > 1` (typiquement `A = 1,2 à 2,0`).
+
+**Exemple industriel :** Le lavage aux amines (MEA, DEA, MDEA) pour l'élimination du CO₂ et du H₂S des gaz naturels est dimensionné par ces équations. Des logiciels comme ProMax et HYSYS implémentent des modèles rigoureusement électrolytiques pour ces systèmes.
+
+## Échangeurs de chaleur
+
+### Méthode LMTD
+
+La méthode de la Différence de Température Logarithmique Moyenne (*Log Mean Temperature Difference*) est la méthode de base pour le dimensionnement des échangeurs :
+
+```
+Q = U × A × LMTD × F
+```
+
+Pour un échangeur à contre-courant :
+```
+LMTD = (ΔT_1 - ΔT_2) / ln(ΔT_1 / ΔT_2)
+```
+
+où `ΔT_1` et `ΔT_2` sont les différences de température aux deux extrémités de l'échangeur, `U` le coefficient global de transfert thermique (W/m²K), `A` l'aire d'échange (m²), et `F` le facteur de correction pour les échangeurs multipass (tiré des abaques TEMA, `F < 1` pour tout échangeur autre que l'idéal contre-courant).
+
+### Méthode NTU-efficacité
+
+La méthode NTU (*Number of Transfer Units*) est préférable lorsque les températures de sortie sont inconnues :
+
+```
+ε = Q_réel / Q_max
+NTU = U × A / C_min
+```
+
+où `C_min = min(ṁ_froid × Cp_froid, ṁ_chaud × Cp_chaud)` et `Q_max = C_min × (T_chaud_entrée - T_froid_entrée)`.
+
+### Types d'échangeurs
+
+| Type | Application typique | Avantages | Inconvénients |
+|------|--------------------|-----------|--------------| 
+| Calandre et tubes (S&T) | Raffineries, chimie de base | Robuste, facile à nettoyer, normes TEMA | Encombrant, facteurs de correction F |
+| Plaques et joints | Agroalimentaire, HVAC | Haute efficacité, compact, modulaire | Pression limitée (<25 bar) |
+| Spirale | Fluides visqueux, chargés | Auto-nettoyant | Entretien difficile |
+| Double tube | Petits débits, pilotes | Simple, peu coûteux | Faible surface par unité de volume |
+
+### Facteurs d'encrassement (TEMA)
+
+Les **fouling factors** (résistances d'encrassement) réduisent l'efficacité des échangeurs dans le temps. Les valeurs typiques selon TEMA :
+
+| Fluide | R_f (m²K/W) |
+|--------|-------------|
+| Eau de refroidissement de tour | 0,000 176 |
+| Eau de mer | 0,000 088 |
+| Vapeur d'eau | 0,000 088 |
+| Hydrocarbures légers | 0,000 176 |
+| Fuel oil | 0,000 880 |
+
+Le coefficient global corrigé est : `1/U_sale = 1/U_propre + R_f_côté calandre + R_f_côté tubes`
+
+<Warning>
+Un échangeur sous-dimensionné en raison de facteurs d'encrassement mal estimés peut entraîner une sous-performance du procédé, voire des arrêts non planifiés coûteux. Il est recommandé de procéder à des inspections thermiques périodiques et de comparer le `U` mesuré au `U` de conception.
+</Warning>
+
+## Filtration
+
+La filtration sépare un solide d'un fluide par passage à travers un milieu filtrant. L'équation de base est dérivée de la loi de Darcy :
+
+```
+dV/dt = A × ΔP / [μ × (α × c × V/A + R_m)]
+```
+
+où `V` est le volume de filtrat (m³), `A` la surface filtrante (m²), `ΔP` la pression différentielle (Pa), `μ` la viscosité du filtrat (Pa·s), `α` la résistance spécifique du gâteau (m/kg), `c` la masse de gâteau par unité de volume de filtrat (kg/m³), et `R_m` la résistance du milieu filtrant (m⁻¹).
+
+En intégrant sous pression constante :
+```
+t/V = (μ × α × c) / (2 × A² × ΔP) × V + (μ × R_m) / (A × ΔP)
+```
+
+Cette relation linéaire entre `t/V` et `V` permet de déterminer `α` et `R_m` expérimentalement. Des valeurs typiques de résistance spécifique : `α = 10⁹ à 10¹³ m/kg` selon la compressibilité du gâteau.
+
+## Évaporation
+
+L'évaporation concentre une solution en vaporisant le solvant (généralement de l'eau) par apport de chaleur.
+
+**Économie d'un évaporateur simple effet :**
+```
+Économie = kg_vapeur_produite / kg_vapeur_consommée ≈ 0,8 à 0,9
+```
+
+**Évaporateurs à effets multiples** : Dans un évaporateur à `n` effets, la vapeur produite dans le premier effet sert de source de chaleur au deuxième, et ainsi de suite. L'économie théorique est `≈ n` (un kg de vapeur vive évapore `n` kg d'eau). En pratique, l'économie est réduite par les pertes thermiques et l'élévation du point d'ébullition (BPR — *Boiling Point Rise*) due aux solutés.
+
+La **BPR** (°C) est déterminée par la corrélation de Dühring ou mesurée expérimentalement. Elle doit être soustraite de la différence de température disponible pour chaque effet, réduisant la force motrice de transfert de chaleur.
+
+## Séchage
+
+Le séchage élimine l'humidité résiduelle d'un solide par évaporation. La courbe de séchage à vitesse de séchage constante (*constant rate period*) correspond à l'évaporation de l'eau libre en surface — contrôlée par le transfert de masse et de chaleur à l'interface solide-gaz. La **période à vitesse décroissante** (*falling rate period*) commence à la **teneur en eau critique** `X_c` et est contrôlée par la diffusion interne de l'eau dans le solide.
+
+Le **diagramme psychrométrique** est l'outil fondamental pour concevoir les séchoirs à air :
+
+- **Humidité absolue** `H` (kg eau / kg air sec)
+- **Température de bulbe humide** `T_bh` : température d'équilibre d'une surface humide en contact avec l'air
+- **Point de rosée** : température à laquelle l'air devient saturé
+- **Enthalpie de l'air humide** : `h = Cp_air × T + H × (λ + Cp_vap × T)` avec `λ = 2501 kJ/kg` à 0°C
+
+Les séchoirs industriels courants comprennent les séchoirs à tambour rotatif (minerais, sucre), les séchoirs à lit fluidisé (granulés pharmaceutiques, engrais), les séchoirs par atomisation (*spray dryers*, lait en poudre, détergents) et les lyophilisateurs (produits biologiques thermosensibles).
+
+<Note>
+Les normes AIChE (American Institute of Chemical Engineers) et les standards ASME (American Society of Mechanical Engineers) Section VIII pour les appareils sous pression sont des références incontournables pour la conception et la certification des équipements de procédés en Amérique du Nord.
+</Note>
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Thermodynamique chimique" icon="temperature-high" href="/genie-chimique/thermodynamique-chimique">
+    Équilibres de phases et équations d'état pour les calculs de séparation
+  </Card>
+  <Card title="Génie des réacteurs" icon="atom" href="/genie-chimique/genie-reacteurs">
+    Cinétique et conception des réacteurs chimiques
+  </Card>
+  <Card title="Sécurité des procédés" icon="shield-halved" href="/genie-chimique/securite-procedes">
+    Analyse des risques liés aux opérations unitaires
+  </Card>
+  <Card title="Introduction au génie chimique" icon="flask" href="/genie-chimique/introduction">
+    Vue d'ensemble de la discipline et des industries
+  </Card>
+</CardGroup>

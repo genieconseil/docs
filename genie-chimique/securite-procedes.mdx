@@ -1,0 +1,341 @@
+---
+title: "Sécurité des procédés"
+description: "HAZOP, LOPA, systèmes instrumentés de sécurité et gestion des risques industriels"
+icon: "triangle-exclamation"
+---
+
+## Analyse des risques de procédés
+
+La sécurité des procédés (process safety) se distingue de la sécurité au travail (occupational safety) en ce qu'elle traite des dangers inhérents aux procédés chimiques : incendies, explosions, rejets toxiques. Elle repose sur une identification systématique des dangers et une évaluation rigoureuse des risques.
+
+### HAZOP (Hazard and Operability Study)
+
+L'étude HAZOP est la méthode d'analyse des risques la plus utilisée dans l'industrie chimique et pétrolière. Elle est formalisée par la norme **IEC 61882** et les guidelines du **CCPS** (Center for Chemical Process Safety, AIChE).
+
+**Principe :** une équipe multidisciplinaire (ingénieur de procédé, instrumentation, sécurité, opérations, maintenance) examine systématiquement le procédé en appliquant des mots-guides à des paramètres sur des nœuds définis à partir du P&ID.
+
+**Mots-guides standard HAZOP :**
+
+| Mot-guide | Signification | Exemple de déviation |
+|---|---|---|
+| AUCUN / PAS DE | Absence totale de la fonction | Pas de débit (pompe en panne) |
+| PLUS | Valeur supérieure à la normale | Débit élevé (vanne coincée ouverte) |
+| MOINS | Valeur inférieure à la normale | Température basse (perte utilité) |
+| CONTRAIRE | Sens opposé | Débit inverse (clapet défaillant) |
+| AUTRE QUE | Substitution qualitative | Mauvaise matière première chargée |
+| AINSI QUE | Présence additionnelle | Contamination de la charge |
+| TÔT / TARD | Déviation temporelle | Ajout de réactif trop tôt dans le cycle |
+| PARTIE DE | Incomplet | Composition partielle d'un mélange |
+
+**Format d'une feuille HAZOP :**
+
+Chaque enregistrement suit la séquence :
+**Nœud → Paramètre → Mot-guide → Déviation → Causes → Conséquences → Sauvegardes existantes → Actions recommandées (responsable + délai)**
+
+**Exemple complet :**
+- Nœud : Ligne d'alimentation réacteur R-101
+- Paramètre : Débit
+- Mot-guide : AUCUN
+- Déviation : Aucun débit d'alimentation au réacteur
+- Causes : Pompe P-101A/B en panne, vanne FCV-101 coincée fermée, ligne bouchée
+- Conséquences : Concentration réactif résiduel → potentiel emballement thermique (runaway) si accumulation
+- Sauvegardes existantes : Alarme basse débit FALL-101 (PFD = 0,1), opérateur intervient sous 15 min
+- Recommandation : Ajouter interlock d'arrêt automatique de l'alimentation réactif B si débit réactif A = 0 pendant > 2 min (FSLL-101 → close FCV-102)
+
+<Warning>
+La qualité d'un HAZOP dépend directement de l'expérience et de la pluridisciplinarité de l'équipe, et de la qualité des P&ID fournis. Un HAZOP réalisé sur des P&ID non finalisés (avant émission "Issue for Design") doit être revu obligatoirement avant mise en service.
+</Warning>
+
+### Analyse What-If
+
+L'analyse What-If est moins formelle et plus rapide que le HAZOP. Elle convient aux phases préliminaires ou aux révisions de modifications mineures.
+
+**Processus :** l'équipe formule des questions du type :
+- "Que se passe-t-il si la pompe de refroidissement tombe en panne ?"
+- "Que se passe-t-il si l'opérateur ouvre la vanne manuelle HV-205 au lieu de HV-204 ?"
+- "Que se passe-t-il si la concentration du réactif B est deux fois supérieure à la normale ?"
+
+Chaque question génère une conséquence, une évaluation de risque et une recommandation. L'approche est souvent utilisée en complément du HAZOP pour les systèmes utilitaires (HVAC, utilités, systèmes électriques).
+
+### AMDEC / FMEA (Analyse des Modes de Défaillance, de leurs Effets et de leur Criticité)
+
+L'AMDEC analyse composant par composant les modes de défaillance possibles et leurs effets sur le système. Elle est souvent utilisée pour les équipements critiques (soupapes, compresseurs, réacteurs) ou les systèmes instrumentés de sécurité.
+
+**Indice de Priorité de Risque (IPR) :**
+
+`IPR = Gravité × Probabilité × Détectabilité`
+
+Chaque critère est noté de 1 à 10 :
+
+| Critère | Note 1 | Note 5 | Note 10 |
+|---|---|---|---|
+| Gravité (G) | Aucun effet | Blessure légère / arrêt partiel | Décès / catastrophe majeure |
+| Probabilité (P) | Quasi-impossible | Rare (1 fois en 10 ans) | Très fréquent (mensuel) |
+| Détectabilité (D) | Détection certaine | Détection possible | Non détectable avant défaillance |
+
+- IPR < 100 : risque acceptable
+- IPR 100–200 : actions correctives souhaitables
+- IPR > 200 : actions correctives impératives
+
+---
+
+## Analyse en couches de protection (LOPA)
+
+La LOPA (Layer of Protection Analysis) est une méthode semi-quantitative qui évalue si les couches de protection existantes (ou proposées) sont suffisantes pour réduire la fréquence d'un événement redouté à un niveau tolérable.
+
+**Référence normative :** IEC 61511-3, CCPS *Layer of Protection Analysis: Simplified Process Risk Assessment*.
+
+### Principe de calcul
+
+La fréquence de l'événement redouté (FER) est calculée en multipliant la fréquence de la cause initiatrice par la probabilité de défaillance à la demande (PFD) de chaque couche de protection indépendante (IPL — Independent Protection Layer) :
+
+`FER = f_cause × PFD₁ × PFD₂ × ... × PFDₙ`
+
+Pour qu'une couche soit considérée comme une IPL, elle doit être :
+1. **Indépendante** des autres couches et de la cause initiatrice
+2. **Efficace** : capable de prévenir l'événement si elle fonctionne
+3. **Auditable** : son PFD peut être démontré
+
+### Valeurs de PFD typiques
+
+| Couche de protection | PFD typique |
+|---|---|
+| Procédure opératoire (opérateur formé, sans alarme) | 0,1 – 1 |
+| Alarme avec intervention opérateur (temps ≥ 10 min) | 0,1 |
+| Alarme avec intervention opérateur (temps < 10 min) | 0,5 – 1 |
+| SIS de niveau SIL 1 | 0,1 à 0,01 |
+| SIS de niveau SIL 2 | 0,01 à 0,001 |
+| SIS de niveau SIL 3 | 0,001 à 0,0001 |
+| Soupape de sécurité (PSV) correctement dimensionnée | 0,01 – 0,001 |
+| Enceinte de confinement (berm, cuvette de rétention) | 0,01 – 0,1 |
+| Détecteur de gaz + système d'extinction | 0,01 – 0,1 |
+
+### Critères de tolérance au risque
+
+Les critères varient selon la gravité de l'événement redouté et la réglementation locale :
+
+| Gravité de l'événement | Fréquence tolérable maximale |
+|---|---|
+| Incident mineur (blessure légère, dommage matériel < 100 k$) | 10⁻² à 10⁻³ /an |
+| Incident sérieux (blessure grave, dommage majeur) | 10⁻³ à 10⁻⁴ /an |
+| Événement catastrophique (décès, rejet toxique majeur) | 10⁻⁴ à 10⁻⁵ /an |
+| Catastrophe majeure (multiples décès) | < 10⁻⁵ /an |
+
+**Exemple de calcul LOPA :**
+- Cause : défaillance vanne de contrôle FCV-101 (coincée ouverte), fréquence = 0,1/an
+- Événement redouté : débordement réservoir avec déversement de liquide inflammable
+- Couche 1 : Alarme niveau haut (LAHH-201), PFD = 0,1
+- Couche 2 : SIS fermeture vanne ESD-201 (SIL 1, PFD = 0,05)
+- Couche 3 : Cuvette de rétention, PFD = 0,01
+
+`FER = 0,1 × 0,1 × 0,05 × 0,01 = 5 × 10⁻⁶ /an`
+
+Si le critère de tolérance est 10⁻⁵/an → objectif atteint avec les couches en place.
+
+---
+
+## Systèmes instrumentés de sécurité (SIS)
+
+### Normes et cadre réglementaire
+
+Les SIS sont régis par deux normes internationales complémentaires :
+- **IEC 61508** : Sécurité fonctionnelle des systèmes électriques/électroniques/électroniques programmables (générique, pour les fabricants d'équipements)
+- **IEC 61511** : Application des systèmes instrumentés de sécurité dans les industries de procédé (pour les utilisateurs/intégrateurs)
+
+Au Canada, la norme **CSA Z767** (Process Safety Management) et les réglementations provinciales de santé et sécurité au travail s'appliquent.
+
+### Niveaux d'intégrité de sécurité (SIL)
+
+Le SIL définit le niveau de réduction du risque apporté par le SIS :
+
+| SIL | PFD (demande basse fréquence) | Facteur de réduction du risque (RRF) |
+|---|---|---|
+| SIL 1 | 0,1 à 0,01 | 10 à 100 |
+| SIL 2 | 0,01 à 0,001 | 100 à 1 000 |
+| SIL 3 | 0,001 à 0,0001 | 1 000 à 10 000 |
+| SIL 4 | 0,0001 à 0,00001 | 10 000 à 100 000 |
+
+En industrie pétrolière et chimique, le SIL 3 est rarement dépassé. Le SIL 4 est généralement réservé aux secteurs nucléaire et aérospatial.
+
+### Architecture et voting logic
+
+L'architecture d'un SIS décrit la redondance des capteurs, de la logique et des éléments finals :
+
+- **1oo1** (1 out of 1) : un seul capteur, déclenche si défaillance → PFD élevée, architecture simple
+- **1oo2** (1 out of 2) : deux capteurs, déclenche si l'un des deux détecte → haute disponibilité, faible PFD, mais risque de fausse alarme
+- **2oo3** (2 out of 3) : trois capteurs, déclenche si au moins deux détectent → compromis optimal entre sécurité (pas de fausse alarme) et disponibilité (PFD faible)
+
+<Note>
+L'architecture 2oo3 est la plus commune pour les SIS à SIL 2 ou SIL 3 dans l'industrie pétrogazière. Elle permet de maintenir le système en ligne pour les tests de capteurs individuels (proof tests) sans interrompre la production.
+</Note>
+
+### Proof testing et maintenance
+
+Le PFD d'un SIS se dégrade avec le temps si des défaillances latentes ne sont pas détectées. Le **proof test** (test de validation fonctionnelle) doit démontrer que l'ensemble de la boucle de sécurité (capteur → logique → actionneur) fonctionne correctement.
+
+`PFD_moy = λ_du × TI / 2`
+
+Où λ_du est le taux de défaillance non détectée dangereux (h⁻¹) et TI est l'intervalle entre proof tests (h).
+
+- TI typique : 1 an (8 760 h) pour SIL 1, 6 mois à 1 an pour SIL 2, 3 à 6 mois pour SIL 3
+
+---
+
+## Dimensionnement des soupapes de sécurité (PSV/PRV)
+
+Les soupapes de sécurité (Pressure Safety Valves, PSV) ou soupapes de sûreté (PRV) constituent la dernière barrière passive contre la surpression. Leur dimensionnement suit les normes **API 520** (partie I : dimensionnement, partie II : installation) et **API 521** (guide pour les systèmes de dégagement de pression).
+
+### Scénarios de dimensionnement
+
+La PSV doit être dimensionnée pour le scénario de sur-pression le plus sévère :
+
+| Scénario | Source de chaleur / cause |
+|---|---|
+| Incendie externe | Flamme sur paroi du réservoir |
+| Perte de refroidissement | Arrêt eau de refroidissement, vapeur résiduelle dans échangeur |
+| Blocage de sortie | Vanne de sortie bloquée fermée |
+| Apport de chaleur excessif | Four ou échangeur en dérive |
+| Réaction runaway | Réaction chimique exothermique incontrôlée |
+| Défaillance de régulation de pression | Vannes HP ouvrant sur circuit BP |
+
+### Calcul du débit pour incendie externe (API 521)
+
+La chaleur absorbée par un réservoir exposé à un incendie est estimée par :
+
+`Q = F × C₁ × A^0.82`
+
+Où :
+- Q : chaleur absorbée (W)
+- F : facteur d'environnement (1,0 pour réservoir sans isolant, 0,3 avec isolant ignifugé)
+- C₁ : constante = 43 200 (en unités SI, réservoir avec drainage d'urgence) ou 70 900 (sans drainage)
+- A : surface mouillée du réservoir (m²), limitée à 260 m² pour les petits réservoirs
+
+### Formule de dimensionnement (API 520) pour gaz/vapeur
+
+`W = C × K_d × K_b × K_c × P₁ × A × √(M / (T × Z))`
+
+Où :
+- W : débit massique de calcul (kg/h)
+- C : constante dépendant du ratio de chaleurs spécifiques γ = Cp/Cv : `C = 0,03948 × √(γ × (2/(γ+1))^((γ+1)/(γ-1)))`
+- K_d : coefficient de décharge (0,975 pour gaz selon API)
+- K_b : facteur de contre-pression (= 1 si PSV à ressort classique, < 1 si contrepression variable)
+- K_c : facteur de combinaison (0,9 si disque de rupture en amont)
+- P₁ : pression absolue d'admission (kPa abs)
+- A : aire d'orifice requise (cm²)
+- M : masse molaire du fluide (g/mol)
+- T : température absolue à l'admission (K)
+- Z : facteur de compressibilité
+
+<Tip>
+Pour le dimensionnement des PSV, toujours utiliser la pression d'accumulation (non la pression de tarage) comme P₁. La pression d'accumulation maximale est 110% du MAWP pour un seul PSV en service normal, et 116% du MAWP pour le scénario d'incendie (per ASME Section VIII, Div. 1).
+</Tip>
+
+---
+
+## Risques incendie et explosion
+
+### Limites d'explosivité
+
+La concentration d'un gaz combustible dans l'air doit se situer entre la LIE (Limite Inférieure d'Explosivité) et la LSE (Limite Supérieure d'Explosivité) pour qu'une inflammation soit possible.
+
+| Gaz | LIE (% vol.) | LSE (% vol.) | T° d'auto-ignition |
+|---|---|---|---|
+| Méthane (CH₄) | 5,0 | 15,0 | 537°C |
+| Propane (C₃H₈) | 2,1 | 9,5 | 470°C |
+| Éthylène (C₂H₄) | 2,7 | 36,0 | 490°C |
+| Hydrogène (H₂) | 4,0 | 75,0 | 500°C |
+| Ammoniac (NH₃) | 15,0 | 28,0 | 651°C |
+| Chlorure de vinyle | 3,6 | 33,0 | 472°C |
+
+<Warning>
+L'hydrogène présente la plage d'explosivité la plus large de tous les gaz industriels courants (4–75%). La détection précoce, la ventilation adéquate et la classification de zone stricte sont impératives dans toute installation utilisant de l'hydrogène.
+</Warning>
+
+### BLEVE (Boiling Liquid Expanding Vapor Explosion)
+
+Le BLEVE est l'un des événements les plus énergétiques possibles dans l'industrie pétrolière et chimique. Il se produit lorsqu'un réservoir contenant un liquide sous pression (stocké au-dessus de sa température d'ébullition à pression atmosphérique) est soumis à une rupture soudaine.
+
+**Mécanisme :**
+1. Flamme externe chauffe la paroi du réservoir au-dessus du niveau de liquide (sans refroidissement par eau)
+2. La paroi se fragilise sous l'effet de la chaleur (acier perd 50% de sa résistance à ~650°C)
+3. Rupture catastrophique du réservoir
+4. Le liquide passe instantanément à la vapeur (détente rapide)
+5. Si le contenu est inflammable : boule de feu (fireball) et souffle
+
+**Effets destructeurs :**
+- Onde de surpression : dommages structurels dans un rayon de 200–500 m selon la taille
+- Projectiles (fragments de réservoir) : portée de 500 m à 1 km
+- Rayonnement thermique (boule de feu) : brûlures graves jusqu'à 150 m pour un réservoir de 50 m³ de GPL
+
+**Mesures préventives :**
+- Arrosage des réservoirs de GPL (déluge d'eau) : maintient la paroi froide sous exposition au feu
+- Soupapes de sécurité correctement dimensionnées (scénario incendie)
+- Distances de sécurité (codes d'implantation NFPA 58, CSA B149.2)
+
+### Classification des zones dangereuses (ATEX)
+
+La classification des zones détermine le type d'équipement électrique (et non-électrique) autorisé :
+
+| Zone (gaz/vapeurs) | Zone (poussières) | Définition | Exemples |
+|---|---|---|---|
+| Zone 0 | Zone 20 | Atmosphère explosive **présente en permanence ou longues périodes** | Intérieur réservoir, espace au-dessus d'un liquide inflammable |
+| Zone 1 | Zone 21 | Atmosphère explosive **probable en fonctionnement normal** | Proximité immédiate d'évents, d'échantillonneurs |
+| Zone 2 | Zone 22 | Atmosphère explosive **improbable, seulement en cas d'anomalie** | Zone éloignée d'évents, enceinte de pompes ventilée |
+
+**Références normatives :**
+- International : IEC 60079-10-1 (gaz), IEC 60079-10-2 (poussières)
+- Canada : **CSA C22.1** (Code canadien de l'électricité), classification par divisions (Division 1 ≈ Zone 0+1, Division 2 ≈ Zone 2)
+- Europe : Directive ATEX 2014/34/UE (équipements), 1999/92/CE (lieux de travail)
+
+---
+
+## Gestion des modifications (MOC — Management of Change)
+
+La gestion des modifications est l'un des éléments les plus critiques d'un système de gestion de la sécurité des procédés (SGSP / PSM). Selon la **CCPS**, entre 20% et 40% des accidents industriels majeurs sont liés à des modifications non gérées correctement.
+
+**Définition d'une modification :** tout changement par rapport à la conception, les procédures, les équipements, les matériaux de procédé ou le personnel qualifié. Cela inclut les changements "temporaires" et les "remplacement à l'identique" (qui doivent être vérifiés).
+
+### Processus MOC standard
+
+1. **Initiation et description** : description détaillée de la modification proposée, raison, périmètre
+2. **Classification** : modification temporaire ou permanente, mineure ou majeure
+3. **Évaluation des risques** : mini-HAZOP ou What-If si modification significative
+4. **Revue technique** : ingénierie, sécurité, environnement, qualité (selon périmètre)
+5. **Approbations** : selon matrice d'autorisation (superviseur, ingénieur senior, responsable sécurité)
+6. **Mise en œuvre** : travaux avec permis de travail appropriés
+7. **Mise à jour de la documentation** : P&ID, procédures, FDS, plans de formation
+8. **Formation et communication** : information des opérateurs et du personnel concerné
+9. **PSSR** (Pre-Startup Safety Review) : vérification avant remise en service
+10. **Fermeture du MOC** : confirmation que toutes les actions sont complétées
+
+### PSSR (Pre-Startup Safety Review)
+
+Le PSSR est une revue formelle effectuée avant la remise en service d'une nouvelle installation ou après une modification majeure. Elle vérifie que :
+- La construction est conforme au P&ID de conception
+- Les procédures de démarrage, d'opération et d'arrêt d'urgence sont en place
+- Les formations nécessaires ont été complétées
+- Les recommandations HAZOP et MOC ouvertes sont adressées ou acceptées avec délai
+
+**Réglementation canadienne :**
+- **Québec** : RSST (Règlement sur la santé et sécurité du travail), LSST
+- **Alberta** : OHS Act and Regulation, Major Industrial Accidents Act
+- **Canada fédéral** (oléoducs, nucléaire) : Réglementation de l'ONE (Office national de l'énergie) / Régie canadienne de l'énergie
+
+<Info>
+La norme de référence pour le PSM (Process Safety Management) aux États-Unis est l'OSHA 29 CFR 1910.119. Au Canada, le document de référence volontaire le plus utilisé est la **CSA Z767** (Gestion de la sécurité des procédés), harmonisée avec les pratiques CCPS.
+</Info>
+
+<CardGroup cols={2}>
+  <Card title="Procédés industriels" icon="industry" href="/genie-chimique/procedes-industriels">
+    Raffinage, pétrochimie, Haber-Bosch et polymères
+  </Card>
+  <Card title="Pharmaceutique & Biotechnologie" icon="pills" href="/genie-chimique/pharmaceutique-biotech">
+    BPF, salles blanches, bioréacteurs et QbD
+  </Card>
+  <Card title="Réglementation environnementale" icon="leaf" href="/genie-chimique/reglementation-environnementale">
+    Émissions, rejets, conformité réglementaire au Canada
+  </Card>
+  <Card title="Génie des réactions" icon="atom" href="/genie-chimique/genie-reactions">
+    Cinétique chimique, réacteurs industriels, runaway
+  </Card>
+</CardGroup>

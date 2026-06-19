@@ -1,0 +1,213 @@
+---
+title: "Qualité de l'air"
+description: "Polluants atmosphériques, normes canadiennes, contrôle des émissions et modélisation de la dispersion"
+icon: "wind"
+---
+
+La qualité de l'air est un enjeu majeur de santé publique et de protection de l'environnement. Au Canada, les ingénieurs en environnement doivent maîtriser les mécanismes de formation des polluants, les technologies de contrôle des émissions, les outils de modélisation de la dispersion atmosphérique et le cadre réglementaire fédéral-provincial qui encadre les rejets industriels et les normes de l'air ambiant.
+
+## Classification des polluants atmosphériques
+
+### Polluants particulaires
+
+**PM2,5** (particules fines, diamètre aérodynamique < 2,5 μm) : pénètrent profondément dans les alvéoles pulmonaires, effets cardiovasculaires et respiratoires graves, associées à la mortalité prématurée. Sources : combustion (transports, industrie, biomasse), réactions atmosphériques secondaires (nitrates et sulfates d'ammonium).
+
+**PM10** (particules inhalables, < 10 μm) : irritation des voies respiratoires supérieures, effets moins graves que les PM2,5 pour la plupart des endpoints de santé. Sources similaires aux PM2,5 plus les sources de poussières fugitives (chantiers, routes non pavées, agriculture).
+
+**Poussières sédimentables** (> 10 μm) : impact principalement local (dépôt sur végétation, bâtiments), réglementation locale.
+
+### Polluants gazeux
+
+**Oxydes d'azote (NOx = NO + NO₂)** : produits lors de la combustion à haute température (procédé thermique, carburant). Le NO est ensuite oxydé en NO₂ dans l'atmosphère. Le NO₂ est un précurseur de l'ozone troposphérique et des particules nitratées secondaires.
+
+**Oxydes de soufre (SOx, principalement SO₂)** : issus de la combustion de combustibles fossiles soufrés (charbon, mazout, gaz naturel acide) et de la métallurgie des sulfures (fonte de cuivre, zinc, nickel). Précurseur des pluies acides (H₂SO₄) et des PM2,5 sulfatées.
+
+**Ozone troposphérique (O₃)** : polluant secondaire formé par réaction photochimique entre NOx et COV en présence de rayonnement UV. Pic en après-midi et en zones rurales à l'aval des centres urbains. Effets négatifs sur la santé respiratoire et les rendements agricoles.
+
+**Composés organiques volatils (COV)** : hydrocarbures, solvants, aldéhydes — précurseurs de l'ozone et des PM2,5 organiques secondaires (AOS). Les COV non méthaniques (COVNM) sont la métrique réglementaire au Canada.
+
+**Monoxyde de carbone (CO)** : produit de combustion incomplète, affecte le transport de l'oxygène (affinité pour l'hémoglobine 200× > O₂). Sources principales : transport routier (moteurs à essence), chaufferettes au bois.
+
+**Métaux lourds et traces** : Plomb (Pb) — impacts neurologiques, sources historiques : essence, peintures, actuellement fonderies et batteries. Mercure (Hg) — centrales au charbon, incinérateurs, méthylation biologique en milieu aquatique (bioaccumulation dans la chaîne alimentaire). Arsenic (As) — fonderies de cuivre, industries chimiques. Cadmium (Cd) — incinération de déchets, production de métaux.
+
+## Normes canadiennes de qualité de l'air ambiant (NQCA)
+
+Les **Normes de qualité de l'air ambiant canadiennes (NQCA)**, établies en 2015 et mises à jour en 2020 dans le cadre du **Système de gestion de la qualité de l'air (SGQA)**, constituent le principal instrument de gouvernance fédérale-provinciale-territoriale pour la qualité de l'air au Canada.
+
+<Note>
+Les NQCA sont des normes ambitieuses fondées sur la santé, plus strictes que les lignes directrices de l'OMS. Elles définissent des seuils de gestion (objectifs à atteindre d'ici 2025) et des niveaux plafonds (jamais à dépasser).
+</Note>
+
+### PM2,5
+
+- **Moyenne sur 24 heures** : seuil de gestion 27 μg/m³, plafond 28 μg/m³ (percentile 98 de la distribution annuelle)
+- **Moyenne annuelle** : seuil de gestion 8,8 μg/m³, plafond 10 μg/m³
+- Objectif à long terme (post-2025) : s'approcher de 10 μg/m³ annuel (guideline OMS révisée 2021 = 5 μg/m³)
+
+### Ozone (O₃)
+
+- **Moyenne sur 8 heures (4e valeur maximale annuelle)** : seuil de gestion 63 ppb, plafond 70 ppb
+- La gestion se fait par la réduction des émissions de NOx et de COV dans les corridors transfrontaliers (Canada-États-Unis)
+
+### NO₂ et SO₂
+
+- NO₂ (1h) : 60 ppb (valeur de gestion); (annuelle) : 17 ppb
+- SO₂ (1h) : 70 ppb; (annuelle) : 4 ppb
+
+## Technologies de contrôle des émissions de sources ponctuelles
+
+### Précipitateurs électrostatiques (ESP)
+
+Les ESP capturent les particules par ionisation corona et attraction électrostatique. Ils opèrent selon l'équation de **Deutsch-Anderson** :
+
+$$\eta = 1 - \exp\left(-\frac{w \cdot A}{Q}\right)$$
+
+où η est l'efficacité de collecte, w est la vitesse de migration des particules (m/s, typiquement 0,05–0,15 m/s), A est la surface de collection (m²) et Q est le débit volumique (m³/s).
+
+- Efficacité de collecte : **> 99%** pour les centrales thermiques au charbon
+- Faible perte de charge (< 500 Pa) — faible coût d'exploitation énergétique
+- Limitations : résistivité des cendres (cendres à haute résistivité : back-corona, cendres à faible résistivité : rétroaspersion), sensibilité à l'humidité
+
+### Filtres à manches (baghouses)
+
+Filtration des gaz chargés en poussières à travers des manchons textiles :
+
+- **Type à secouage (shaker)** : compartiments mis hors service pour nettoyage cyclique — adaptés aux poussières peu abrasives
+- **Type pulse-jet** : nettoyage par impulsions d'air comprimé inversé (150–700 kPa) sans arrêt de production — le plus répandu
+- **Type à jet rotatif** : variation du pulse-jet pour grandes sections
+
+Efficacité de collecte : **> 99,5%** pour PM2,5 si médiane de la distribution granulométrique > 5 μm. Chute de pression : 1000–3000 Pa. Température maximale d'utilisation : 150–260°C selon le tissu (fibre de verre pour haute T°).
+
+### Épurateurs humides (scrubbers)
+
+**Épurateur venturi** : accélération du gaz dans un col venturi, injection d'eau, formation de gouttelettes qui capturent les particules par impaction inertielle. Applicable aux PM et au SO₂ simultanément.
+
+- Efficacité PM : 70–98% selon la pression différentielle (1–10 kPa)
+- Élimination SO₂ : 50–95% avec ajout d'alcali (NaOH, Ca(OH)₂) dans le liquide de lavage
+- Production d'effluents liquides à traiter (boues de neutralisation)
+
+**Tour à garnissage (packed tower)** : contact gaz-liquide en contre-courant sur garnissage structuré — haute efficacité d'absorption SO₂ (95–99%) avec lait de chaux.
+
+### Réduction catalytique sélective (SCR — Selective Catalytic Reduction)
+
+Le SCR est la technologie de référence pour la réduction des NOx dans les effluents gazeux à haute température (300–400°C) :
+
+**Réaction chimique :**
+$$4 \text{ NO} + 4 \text{ NH}_3 + \text{O}_2 \rightarrow 4 \text{ N}_2 + 6 \text{ H}_2\text{O}$$
+
+- Réactif : ammoniac anhydre (NH₃) ou solution d'urée (32,5% — AdBlue)
+- Catalyseur : TiO₂/V₂O₅/WO₃ en nid d'abeille (monolithe)
+- Efficacité de réduction des NOx : **80–95%**
+- Risque de glissement d'ammoniac (NH₃ slip) : < 5 ppm — surveiller pour éviter les émissions secondaires d'ammoniac
+
+<Warning>
+Le SCR nécessite une fenêtre de température opérationnelle étroite (280–420°C). En dehors de cette plage, le catalyseur est inefficace ou peut être endommagé. Le SCR sans rehausse thermique est peu adapté aux sources d'émission basse température.
+</Warning>
+
+## Modélisation de la dispersion atmosphérique
+
+### Modèle gaussien
+
+La dispersion d'un panache de fumée d'une source ponctuelle en conditions atmosphériques stables ou neutres est décrite par l'**équation de dispersion gaussienne** :
+
+$$C(x,y,z) = \frac{Q}{2\pi \sigma_y \sigma_z \bar{u}} \exp\!\left(-\frac{y^2}{2\sigma_y^2}\right) \left[\exp\!\left(-\frac{(z-H)^2}{2\sigma_z^2}\right) + \exp\!\left(-\frac{(z+H)^2}{2\sigma_z^2}\right)\right]$$
+
+où :
+- C(x,y,z) : concentration [μg/m³] au point (x,y,z)
+- Q : taux d'émission [μg/s]
+- σy, σz : coefficients de dispersion latérale et verticale [m] — fonctions de x et de la classe de stabilité
+- ū : vitesse du vent horizontal [m/s]
+- H : hauteur effective de la cheminée = hauteur physique + exhaussement thermique du panache (Δh, formule de Briggs)
+- Le terme entre crochets représente l'effet du sol (réflexion du panache au sol, z = 0)
+
+### Classes de stabilité de Pasquill-Gifford
+
+| Classe | Conditions | Stabilité |
+|--------|-----------|-----------|
+| A | Ensoleillé, vent faible (< 2 m/s) | Très instable |
+| B | Ensoleillé modéré, vent 2–3 m/s | Instable |
+| C | Ensoleillé faible, vent 3–5 m/s | Légèrement instable |
+| D | Couvert ou nuit, vent > 6 m/s | Neutre |
+| E | Légèrement nuageux la nuit | Légèrement stable |
+| F | Ciel dégagé la nuit, vent < 3 m/s | Stable |
+
+### Modèles réglementaires
+
+**AERMOD** (AMS/EPA Regulatory Model) : modèle gaussien à couche limite planétaire (PBL), recommandé par Environnement et Changement climatique Canada (ECCC) et adopté par les provinces canadiennes pour les évaluations réglementaires de sources industrielles. Intègre les effets de bâtiments (downwash), les sources surfaciques, volumiques, et en ligne.
+
+**CALPUFF** : modèle lagrangien à bouffées, adapté aux terrains complexes, aux rejets intermittents et aux distances de transport > 50 km. Utilisé pour les études d'impact sur les zones éloignées (parcs nationaux, zones sensibles à l'acidification).
+
+**Hauteur de cheminée selon la Bonne Pratique d'Ingénierie (GEP)** : pour éviter la capture des fumées par les remous de bâtiments (building downwash), la hauteur GEP est définie selon la règle EPA : H_GEP = H_s + 1,5 × L, où H_s est la hauteur du bâtiment et L est la plus petite dimension (hauteur ou largeur) de la façade exposée au vent.
+
+<Tip>
+Lors de la planification d'un nouveau projet industriel au Québec, l'Autorisation ministérielle requiert une modélisation de la dispersion atmosphérique selon le Guide de la modélisation de la dispersion atmosphérique (MELCCFP, 2005, mis à jour). Le modèle AERMOD est généralement exigé.
+</Tip>
+
+## Gaz à effet de serre (GES)
+
+### Potentiel de réchauffement planétaire (PRP)
+
+| GES | Formule | PRP (100 ans, AR6) | Sources principales |
+|-----|---------|-------------------|---------------------|
+| Dioxyde de carbone | CO₂ | 1 (référence) | Combustion fossil, déforestation |
+| Méthane | CH₄ | 28–36 | Élevage, décharges, O&G, riziculture |
+| Protoxyde d'azote | N₂O | 265–273 | Agriculture, industrie chimique |
+| Hexafluorure de soufre | SF₆ | 23 500 | Appareillage électrique haute tension |
+| HFC-134a (réfrigérant) | CH₂FCF₃ | 1 430 | Réfrigération, climatisation |
+| Perfluorocarbone (CF₄) | CF₄ | 6 630 | Électrolyse de l'aluminium |
+
+### Cadre réglementaire canadien
+
+**Programme de déclaration des gaz à effet de serre (PDGES) d'ECCC** : toute installation émettant ≥ **10 000 tonnes CO₂e/an** doit déclarer ses émissions annuellement. Les données sont publiées dans le Registre des polluants d'ECCC (INRP).
+
+**Protocole de quantification des GES du Québec** (MELCCFP) : encadre la quantification, la surveillance et la déclaration des émissions de GES pour les installations assujetties au **Système de plafonnement et d'échange de droits d'émission de GES (SPEDE)** du Québec (seuil : 25 000 t CO₂e/an).
+
+**Règlement fédéral sur les combustibles propres (RCG)** : réduction du contenu en carbone des combustibles de transport, de chauffage et industriels de 15 g CO₂e/MJ d'ici 2030.
+
+<Note>
+Le Canada s'est engagé à réduire ses émissions de GES de 40–45% sous les niveaux de 2005 d'ici 2030 (CDN, 2021) et vise la carboneutralité en 2050. Ces objectifs transforment les exigences réglementaires pour les nouvelles installations industrielles.
+</Note>
+
+## Qualité de l'air intérieur
+
+La population canadienne passe en moyenne 90% de son temps à l'intérieur. Les polluants de l'air intérieur incluent :
+
+**Radon (Rn-222)** : gaz radioactif issu de la désintégration de l'uranium naturellement présent dans le sol, s'accumule dans les sous-sols des bâtiments. Lignes directrices de Santé Canada : **niveau d'intervention de 200 Bq/m³** (recommandation de réduction si niveau entre 200 et 600 Bq/m³, action requise si > 600 Bq/m³). Deuxième cause de cancer du poumon au Canada après le tabagisme.
+
+**Formaldéhyde (HCHO)** : émis par les matériaux de construction (panneaux de particules, contreplaqué à base de résines urée-formaldéhyde), peintures, produits ménagers. Lignes directrices de Santé Canada : < 50 ppb (62 μg/m³) pour une exposition de long terme.
+
+**CO₂ intérieur** : indicateur de l'adéquation de la ventilation. Concentrations > 1000 ppm indiquent une ventilation insuffisante (ASHRAE 62.1 : apport minimal 7,5–15 L/s par personne selon type d'occupation).
+
+**Norme ASHRAE 62.1** (Ventilation for Acceptable Indoor Air Quality) : utilisée comme référence de conception en Amérique du Nord pour les débits de ventilation et la qualité de l'air intérieur des bâtiments non résidentiels.
+
+<Warning>
+La Loi sur la santé et la sécurité du travail (LSST) au Québec et son équivalent dans chaque province imposent des valeurs d'exposition professionnelle (VEP) pour les contaminants en milieu de travail. Ces VEP (en ppm ou mg/m³) sont souvent plus élevées que les normes ambiantes et doivent être distinguées dans les études d'impact.
+</Warning>
+
+## Résumé des technologies de contrôle des émissions
+
+| Technologie | Polluant cible | Efficacité (%) | Conditions | Coût relatif |
+|-------------|---------------|---------------|------------|-------------|
+| ESP | PM (> 0,5 μm) | 95–99,5 | T° 100–350°C | Moyen |
+| Filtre à manches | PM tous diamètres | 99–99,9 | T° < 260°C | Moyen |
+| Scrubber venturi | PM + SO₂ | 70–98 (PM), 50–90 (SO₂) | Gaz humides OK | Moyen |
+| Tour à garnissage | SO₂, HCl, NH₃ | 90–99 | Bonne solubilité | Élevé |
+| SCR | NOx | 80–95 | T° 280–420°C | Élevé |
+| SNCR | NOx | 30–60 | T° 850–1050°C | Faible |
+| Régénération thermique (RTO) | COV | 95–99 | COV concentrés | Élevé |
+| Adsorption sur charbon actif | COV, Hg | 90–99 | Faibles concentrations | Moyen |
+
+<CardGroup cols={2}>
+  <Card title="Traitement des eaux" icon="droplet" href="/genie-environnemental/traitement-eaux">
+    Procédés de traitement de l'eau potable et des eaux usées, normes canadiennes et conception d'ouvrages.
+  </Card>
+  <Card title="Gestion des déchets" icon="trash-can" href="/genie-environnemental/gestion-dechets">
+    Hiérarchie des déchets, conception d'enfouissement, valorisation énergétique et réglementation canadienne.
+  </Card>
+  <Card title="Réhabilitation de sites" icon="seedling" href="/genie-environnemental/rehabilitation-sites">
+    Caractérisation environnementale, évaluation des risques et technologies de décontamination des sols.
+  </Card>
+  <Card title="Génie industriel — Procédés" icon="industry" href="/genie-industriel/procedes">
+    Optimisation des procédés industriels, réduction des émissions à la source et efficacité énergétique.
+  </Card>
+</CardGroup>

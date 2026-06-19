@@ -1,0 +1,247 @@
+---
+title: "Irrigation et drainage agricoles"
+description: "Besoins en eau des cultures, systèmes d'irrigation, drainage souterrain et impacts environnementaux"
+icon: "droplet"
+---
+
+## L'eau en agriculture : enjeux fondamentaux
+
+L'eau est le facteur de production agricole le plus limitant à l'échelle mondiale. En irrigation, l'ingénieur doit satisfaire les besoins hydriques des cultures au bon moment et en bonne quantité, tout en minimisant les pertes par percolation, évaporation et ruissellement. En drainage, l'objectif est inverse : évacuer l'excès d'eau des sols pour prévenir l'asphyxie racinaire, permettre la portance des engins agricoles et maintenir la température du sol propice à la germination. Ces deux disciplines, apparemment opposées, sont intimement liées dans la gestion intégrée du cycle de l'eau à la parcelle.
+
+## Besoins en eau des cultures et évapotranspiration
+
+### L'évapotranspiration de référence (ET₀)
+
+L'évapotranspiration (ET) est la somme des flux d'eau perdus par évaporation du sol et transpiration des plantes. Elle constitue la base de tout bilan hydrique et de toute planification d'irrigation. La méthode de référence internationale, recommandée par la FAO (publication n° 56, 1998), est l'équation de **Penman-Monteith** appliquée à un couvert de gazon de référence :
+
+$$
+ET_0 = \frac{0.408\Delta(R_n - G) + \gamma\frac{900}{T+273}u_2(e_s - e_a)}{\Delta + \gamma(1 + 0.34u_2)}
+$$
+
+Où :
+- **ET₀** = évapotranspiration de référence (mm/jour)
+- **Δ** = pente de la courbe de pression de vapeur saturante (kPa/°C)
+- **Rn** = rayonnement net à la surface de la culture (MJ/m²/jour)
+- **G** = flux de chaleur dans le sol (MJ/m²/jour, ≈ 0 sur base journalière)
+- **γ** = constante psychrométrique (kPa/°C)
+- **T** = température de l'air à 2 m de hauteur (°C)
+- **u₂** = vitesse du vent à 2 m de hauteur (m/s)
+- **eₛ** = pression de vapeur saturante (kPa)
+- **eₐ** = pression de vapeur réelle (kPa)
+- **(eₛ - eₐ)** = déficit de pression de vapeur (DPV)
+
+<Info>
+Les stations météorologiques du réseau d'**Agriculture et Agroalimentaire Canada (AAC)** et d'**Environnement et Changement climatique Canada (ECCC)** fournissent les données nécessaires au calcul d'ET₀. Des outils comme **ET Gauge** et le portail **AgroClimat** de l'IRDA (Québec) automatisent ce calcul à partir des données de stations en réseau.
+</Info>
+
+### Le coefficient cultural (Kc) et l'ETc
+
+L'évapotranspiration réelle d'une culture spécifique (ETc) s'obtient par :
+
+$$
+ET_c = K_c \times ET_0
+$$
+
+Le **coefficient cultural Kc** intègre les différences de hauteur de couvert, de résistance stomatique et d'albédo entre la culture et le couvert de référence. Il varie selon le stade phénologique (initial, développement, mi-saison, fin de saison) :
+
+| Culture | Kc initial | Kc mi-saison | Kc fin saison |
+|---------|-----------|--------------|---------------|
+| Maïs-grain | 0.30 | 1.20 | 0.35 |
+| Blé de printemps | 0.30 | 1.15 | 0.25 |
+| Pomme de terre | 0.45 | 1.15 | 0.75 |
+| Soja | 0.40 | 1.15 | 0.50 |
+| Luzerne (coupe) | 0.40 | 1.20 | 1.15 |
+| Betterave sucrière | 0.35 | 1.20 | 0.70 |
+
+### Le besoin net en irrigation
+
+Le **besoin net en irrigation (NIR)** pour une période donnée est la différence entre l'ETc et la pluie efficace (*effective rainfall* — Pe) :
+
+$$
+NIR = ET_c - P_e
+$$
+
+La pluie efficace est la fraction des précipitations effectivement stockée dans la zone racinaire et disponible pour les cultures (les pertes par ruissellement et percolation profonde sont déduites). Des méthodes simplifiées (USDA SCS) ou détaillées (bilan hydrique journalier) permettent de l'estimer.
+
+## Réserve utile du sol (RU)
+
+La capacité de stockage de l'eau par le sol est caractérisée par deux paramètres fondamentaux :
+
+- **Capacité au champ (CC)** : teneur en eau résiduelle après ressuyage gravitaire du sol saturé, correspondant à une tension d'environ **1/3 bar (33 kPa)**. L'eau est retenue dans les mésopores et macropores fins.
+- **Point de flétrissement permanent (PFP)** : teneur en eau en dessous de laquelle les plantes ne peuvent plus extraire l'eau du sol malgré leurs efforts osmotiques, correspondant à une tension de **15 bars (1 500 kPa)**.
+- **Réserve utile (RU)** = CC − PFP, exprimée en mm d'eau par mètre de profondeur de sol. Typiquement : **100 à 200 mm/m** selon la texture.
+
+Le **dépletion maximale admissible (DMA)**, ou MAD (*Management Allowed Depletion*), est la fraction de la RU qu'on autorise à consommer avant d'irriguer. On utilise généralement **MAD = 50 % × RU** pour les cultures sensibles au stress hydrique, avec des valeurs plus élevées (60-65 %) pour les cultures tolérantes.
+
+<Tip>
+Pour optimiser la programmation des irrigations, installez des capteurs de tension d'eau dans le sol (tensiomètres, sondes capacitives ou TDR) à deux profondeurs : dans la première moitié de la zone racinaire (pour déclencher l'irrigation) et dans la moitié inférieure (pour détecter les excès de percolation). Un suivi combiné avec l'ET calculée par bilan hydrique permet une irrigation de précision minimisant les pertes.
+</Tip>
+
+## Systèmes d'irrigation : comparaison et choix
+
+### Tableau comparatif des systèmes
+
+| Système | Efficacité | Cultures adaptées | Avantages | Inconvénients |
+|---------|-----------|-------------------|-----------|---------------|
+| Surface (gravitaire) | 50–70 % | Maïs, fourrages, riz | Faible coût d'installation, simple | Nécessite un sol bien nivelé, fort risque de ruissellement et d'érosion |
+| Aspersion (pivot central) | 70–85 % | Blé, maïs, pomme de terre, luzerne | Couvre de grandes surfaces, peut appliquer des intrants | Pertes par évaporation et dérive du vent, non adapté aux cultures hautes |
+| Aspersion (rampe fixe/enrouleur) | 70–85 % | Maraîchage, tabac, gazons | Flexibilité, précision de l'apport | Coût de main-d'œuvre, infrastructure complexe |
+| Micro-irrigation (goutte-à-goutte) | 85–95 % | Fruits, légumes, vigne, serres | Efficacité maximale, fertigation possible | Risque de colmatage, investissement élevé, entretien rigoureux |
+
+### Irrigation de surface (gravitaire ou par sillons)
+
+L'irrigation de surface est la plus ancienne et reste dominante dans les pays en développement. Au Canada, elle est principalement utilisée dans les districts d'irrigation albertains et saskatchewanais pour les grandes cultures et les fourrages. L'eau s'écoule par gravité le long de sillons ou de planches nivelées. Une bonne planification exige un travail topographique précis (nivellement laser) et un sol de pente régulière (0.1-0.5 %). L'efficacité est limitée par les pertes en tête de sillon (ruissellement) et en queue de sillon (percolation profonde).
+
+### Irrigation par aspersion : pivots et coefficient d'uniformité
+
+Les pivots centraux (*center pivots*) sont le système dominant dans les Prairies canadiennes et les grandes plaines américaines. Un pivot typique irriguait de 50 à 130 hectares en décrivant un arc de cercle autour d'un point d'ancrage. La vitesse de rotation est réglable pour ajuster la dose d'irrigation.
+
+La performance d'un système d'aspersion est évaluée par le **coefficient d'uniformité de Christiansen (CU)** :
+
+$$
+CU = 100 \times \left[1 - \frac{\sum|x_i - \bar{x}|}{n\bar{x}}\right]
+$$
+
+Un CU ≥ 85 % est généralement exigé pour les cultures à haute valeur ajoutée. La pression de service des pivots est typiquement de 200-400 kPa à l'extrémité de la rampe.
+
+### Micro-irrigation (goutte-à-goutte)
+
+La micro-irrigation délivre l'eau directement à la zone racinaire via des émetteurs (goutteurs) à débit contrôlé de **1 à 4 L/h** sous une pression de **70-150 kPa**. Le débit d'un émetteur suit la loi :
+
+$$
+q = K_d \times h^x
+$$
+
+Où *Kd* est le coefficient de décharge, *h* la pression de service et *x* l'exposant d'émetteur (x ≈ 0.5 pour les émetteurs non régulés). Les émetteurs régulés maintiennent un débit constant sur une plage de pression étendue (70-350 kPa), ce qui est essentiel sur les terrains accidentés.
+
+<Warning>
+La micro-irrigation est particulièrement vulnérable au colmatage par les biofilms bactériens, les dépôts calcaires et les particules fines. Un programme rigoureux de filtration (filtre à sable, filtre à disques ou filtre à tamis selon la qualité de l'eau) et de chloration périodique (choc chloré) est indispensable pour maintenir les performances sur le long terme.
+</Warning>
+
+## Programmation et pilotage de l'irrigation
+
+### Bilan hydrique journalier
+
+La méthode du **bilan hydrique journalier** consiste à suivre la réserve en eau du sol en cumulant les apports (pluie efficace, irrigation) et les pertes (ETc) :
+
+$$
+\theta_{j+1} = \theta_j + I_j + P_{e,j} - ET_{c,j}
+$$
+
+L'irrigation est déclenchée lorsque la réserve descend à (CC − DMA) et la dose est calculée pour revenir à la CC, en tenant compte de l'efficacité d'application du système.
+
+### Méthodes tensiométriques et capacitives
+
+Les **tensiomètres** mesurent la tension de l'eau dans le sol (0-80 kPa). L'irrigation est déclenchée lorsque la tension dépasse un seuil prédéfini (ex. : 25-30 kPa pour la pomme de terre, 40-50 kPa pour le maïs). Les **sondes capacitives** (FDR) et **TDR** (*Time Domain Reflectometry*) mesurent la teneur volumique en eau du sol en exploitant les propriétés diélectriques de l'eau. Elles permettent un suivi continu et une transmission sans fil des données vers une centrale ou une application mobile.
+
+### Télédétection et NDVI
+
+L'indice de végétation par différence normalisée (**NDVI**) calculé à partir d'images satellites ou de drones permet d'identifier les zones de stress hydrique avant que les symptômes visuels apparaissent. Couplé à des modèles d'ET de surface (SEBAL, METRIC), il permet d'évaluer l'ET réelle à l'échelle de la parcelle ou du district d'irrigation.
+
+## Systèmes de drainage agricole
+
+### Drainage de surface
+
+Le drainage de surface consiste à évacuer rapidement les eaux de surface excédentaires vers des exutoires. Les aménagements comprennent :
+- **Planage et profilage du terrain** : création de pentes régulières (0.1-0.3 %) pour orienter le ruissellement
+- **Systèmes en crêtes et sillons (*bedding*)** : billons permanents dirigeant l'eau vers des fossés collecteurs dans les sols lourds mal drainés
+- **Voies d'eau enherbées (*waterways*)** : chenaux végétalisés recevant les eaux de surface concentrées, limitant l'érosion
+
+### Drainage souterrain (tuyaux drains)
+
+Le drainage souterrain par tuyaux drains enterrés est la technique dominante dans les zones agricoles à nappe superficielle du Canada (Ontario, Québec, Prairies). Des tuyaux perforés (PVC annelé, DN 100-200 mm) sont posés à une profondeur de **0.9 à 1.2 m** et une pente minimale de **0.1 à 0.3 %** pour assurer un écoulement gravitaire jusqu'à l'exutoire.
+
+L'espacement des drains est calculé par l'**équation de Hooghoudt** (cas permanent) :
+
+$$
+L^2 = \frac{8 K_2 d_e m + 4 K_1 m^2}{q}
+$$
+
+Pour les conditions les plus courantes (K uniforme, drains à la même profondeur), la formule simplifiée donne :
+
+$$
+L = \sqrt{\frac{8 K d_e h + 4 K h^2}{q}}
+$$
+
+Où :
+- **L** = espacement entre drains (m)
+- **K** = conductivité hydraulique saturée du sol (m/j)
+- **dₑ** = épaisseur équivalente de Hooghoudt (profondeur équivalente au substratum imperméable, corrigée pour la convergence près des drains)
+- **h** = hauteur maximale de la nappe au milieu des drains au-dessus du drain (m)
+- **q** = coefficient de drainage — débit de conception (m/j)
+
+Le **coefficient de drainage (DC)** représente le taux d'abaissement de la nappe cible, exprimé en mm/jour. Il varie de **1-2 mm/j** pour les prairies de foin à **10-12 mm/j** pour les cultures maraîchères à forte valeur ajoutée.
+
+### Fossés à ciel ouvert et équation de Manning
+
+Les fossés agricoles collectent les eaux des drains souterrains et des zones de ruissellement de surface. Leur capacité hydraulique est calculée par l'**équation de Manning** :
+
+$$
+Q = \frac{1}{n} A R^{2/3} S^{1/2}
+$$
+
+Où :
+- **Q** = débit (m³/s)
+- **n** = coefficient de Manning (0.025-0.030 pour fosé en terre entretenu)
+- **A** = section transversale mouillée (m²)
+- **R** = rayon hydraulique = A / périmètre mouillé (m)
+- **S** = pente du radier (m/m)
+
+Les fossés doivent être dimensionnés pour le débit de pointe d'une crue de récurrence 5-10 ans, avec une revanche suffisante pour éviter les débordements.
+
+<Note>
+Les structures de contrôle du niveau d'eau (*control structures*, *stoplogs*) installées aux exutoires des réseaux de drainage souterrain permettent de pratiquer le **drainage contrôlé** (*controlled drainage*). En relevant le niveau d'eau en arrière-saison et au printemps, on réduit les pertes de nitrates et de phosphore vers les cours d'eau, et on conserve l'eau pour répondre à d'éventuels besoins précoces des cultures.
+</Note>
+
+### Modélisation : DRAINMOD
+
+**DRAINMOD** (développé par l'Université d'État de Caroline du Nord) est le modèle de simulation numérique de référence pour la conception et l'évaluation des systèmes de drainage souterrain. Il simule sur une base horaire le bilan hydrique du profil de sol (infiltration, redistribution, ascension capillaire, drainage latéral, ET) pour une séquence pluviométrique historique longue (30-50 ans). Ses sorties permettent d'optimiser la profondeur et l'espacement des drains, d'évaluer la performance d'un réseau existant et de simuler l'impact du changement climatique sur les régimes de drainage.
+
+## Impacts environnementaux et enjeux de durabilité
+
+Le drainage agricole intensif accélère le transfert de nutriments (azote et phosphore) et de sédiments depuis les champs vers les cours d'eau, contribuant à l'eutrophisation des lacs et des zones côtières. Les problèmes spécifiques incluent :
+
+- **Azote nitrique (NO₃⁻)** : très soluble et mobile dans le profil de sol; les eaux de drainage souterrain peuvent contenir des concentrations de 10-30 mg N/L, dépassant largement la norme de potabilité (10 mg N/L)
+- **Phosphore** : transport prioritairement par érosion hydrique de surface; les systèmes en crêtes et sillons et les fossés à végétation dense limitent ces pertes
+- **Pesticides** : certaines molécules hydrophiles (ex. atrazine, imidaclopride) sont entraînées par les eaux de drainage vers les fossés et les cours d'eau
+
+### Pratiques de gestion bénéfiques (PGB)
+
+La stratégie **4R de gestion des éléments nutritifs** (bonne source, bonne dose, bon moment, bon endroit) est promue par **Agriculture et Agroalimentaire Canada** et les fertilisants Canada pour minimiser les pertes de nutriments. Parmi les PGB hydrauliques :
+
+- **Zones tampons riveraines** : bandes végétalisées (5-30 m) le long des fossés et cours d'eau, filtrant les sédiments et captant les nutriments
+- **Bassins de sédimentation** : rétention temporaire des eaux de ruissellement pour décanter les particules chargées en phosphore
+- **Marais filtrants construits (*constructed wetlands*)** : très efficaces pour la dénitrification biologique (réduction de NO₃⁻ de 30-70 % à l'échelle du bassin versant)
+- **Drainage contrôlé** : réduction des pertes de N de 30-50 % par rapport au drainage conventionnel
+
+<Warning>
+En Ontario, la **Loi sur le drainage (Drainage Act R.S.O. 1990, c. D.17)** encadre strictement la construction et la réfection des cours d'eau et fossés qui drainent les terres de deux propriétaires ou plus. Tout projet de drainage collectif doit suivre une procédure d'ingénierie officielle avec rapport d'un ingénieur agrément et consultation des propriétaires concernés. Des exigences similaires existent dans les autres provinces via leurs *Water Rights Acts* ou législations équivalentes.
+</Warning>
+
+## Réglementation canadienne du drainage
+
+Au Canada, la gestion des eaux agricoles est une compétence provinciale. Les principales législations incluent :
+
+- **Ontario** : *Drainage Act* — procédure de drainage municipal, rôle de l'ingénieur de drainage, financement par quote-part
+- **Manitoba** : *Water Rights Act* et *Drainage Implementation Program* — permis de drainage obligatoires, contrôle provincial des modifications au réseau de drainage
+- **Saskatchewan** : *Water Security Agency Act* — gestion intégrée de l'eau dans les Prairies, coordination avec les districts d'irrigation
+- **Alberta** : *Water Act* — licences d'eau pour l'irrigation et le drainage; le ministre peut imposer des conditions environnementales
+
+AAC publie également les **Pratiques de gestion bénéfiques (PGB)** à travers le programme Agri-investissement, offrant des incitatifs financiers pour l'adoption de pratiques réduisant les impacts environnementaux du drainage.
+
+## Voir aussi
+
+<CardGroup cols={2}>
+  <Card title="Introduction au génie agricole" icon="tractor" href="/genie-agricole/introduction">
+    Définition, sous-domaines, secteur agricole canadien et perspectives de carrière en génie agricole
+  </Card>
+  <Card title="Traitement des eaux" icon="droplet" href="/genie-environnemental/traitement-eaux">
+    Procédés de traitement de l'eau potable et des eaux usées, normes canadiennes et américaines
+  </Card>
+  <Card title="Réhabilitation de sites" icon="seedling" href="/genie-environnemental/rehabilitation-sites">
+    Techniques de réhabilitation des sols contaminés et des écosystèmes dégradés
+  </Card>
+  <Card title="Hydraulique" icon="water" href="/genie-civil/hydraulique">
+    Hydraulique à surface libre, équations de l'écoulement et conception d'ouvrages hydrauliques
+  </Card>
+</CardGroup>

@@ -1,0 +1,199 @@
+---
+title: "Charpente métallique"
+description: "Conception des structures en acier : profilés, philosophie LRFD/ASD, poutres, colonnes, connexions et construction composite selon CSA S16"
+icon: "grip-lines"
+---
+
+La charpente métallique est omniprésente dans la construction moderne : bâtiments industriels, commerciaux, ponts, tours et structures spéciales. La norme canadienne **CSA S16-19** (Calcul des charpentes en acier) régit la conception de ces structures au Canada.
+
+## Nuances d'acier et profilés
+
+### Nuances d'acier structurales
+
+| Nuance | Norme | Re min (MPa) | Rm (MPa) | Application |
+|--------|-------|--------------|-----------|-------------|
+| 300W | CSA G40.21 | 300 | 450–600 | Charpente générale |
+| 350W | CSA G40.21 | 350 | 480–650 | Colonnes, poutres |
+| 350WT | CSA G40.21 | 350 | 480–650 | Zones sismiques |
+| A992 | ASTM | 345 | 448–620 | Profilés W importés |
+| A572 Gr. 50 | ASTM | 345 | 450 | Équivalent 350W |
+| A514 | ASTM | 690–760 | 760–895 | Structures légères HY-80 |
+
+### Profilés courants
+
+**Profilés W (Wide Flange / IPN à ailes larges)** : le profilé le plus utilisé en charpente. Désignation : W410×85 (hauteur nominale 410 mm, 85 kg/m). Optimisé pour la flexion.
+
+**Profilés HSS (Hollow Structural Section)** : sections creuses rectangulaires (HSS150×100×6) et circulaires (HSS168×6.4). Excellents pour les colonnes et les treillis.
+
+**Cornières (Angles)** : L102×102×9.5. Utilisées comme membrures secondaires, contreventements, jarrets.
+
+**Canaux (Channels)** : C et MC. Utilisés pour les lisses de mur, éléments de façade.
+
+**Plaques et tôles** : pour les semelles de poutres composées, les goussets, les platines.
+
+## Philosophie de conception
+
+### LRFD (Load and Resistance Factor Design)
+
+La méthode aux états limites utilisée dans CSA S16 vérifie :
+
+```
+ΣγᵢQᵢ ≤ φRn
+```
+
+Où :
+- γᵢ = facteurs de majoration des charges (1,25D + 1,5L selon le CNB 2020)
+- Qᵢ = effets des charges
+- φ = facteur de résistance (φ = 0,90 pour acier en flexion, 0,90 en cisaillement)
+- Rn = résistance nominale
+
+### ASD (Allowable Stress Design)
+
+Ancienne méthode encore utilisée pour la vérification d'ouvrages existants. Les contraintes de calcul doivent rester inférieures aux contraintes admissibles (typiquement 0,6 Fy).
+
+## Conception des poutres
+
+### Flexion
+
+La résistance en flexion dépend du mode de flambement latéral-torsionnel (FLT) :
+
+**Classe 1 (section plastique)** : peut développer la rotule plastique complète, Mr = φMp = φ × Fy × Zx
+
+**Classe 2 (section compacte)** : peut atteindre My mais pas la redistribution plastique complète
+
+**Classe 3 (section semi-compacte)** : limite à My = φ × Fy × Sx (flambement local avant Mp)
+
+**Classe 4 (section mince)** : flambement local de la membrure ou de l'âme avant la plastification
+
+### Flambement latéral-torsionnel (FLT)
+
+Quand la semelle en compression n'est pas retenue latéralement, la poutre peut flamber. La longueur de déversement non retenue Lu est comparée à L₁ (longueur limite pour Mr = Mp) et L₂ (longueur limite pour Mr = My).
+
+Pour Lu < L₁ : pas de FLT, pleine résistance plastique
+Pour L₁ < Lu < L₂ : FLT inélastique (interpolation linéaire)
+Pour Lu > L₂ : FLT élastique (formule d'Euler-Timoshenko)
+
+### Cisaillement
+
+```
+Vr = φ × 0,66 × Fy × Aw
+```
+
+Où Aw = hauteur de l'âme × épaisseur de l'âme. Des raidisseurs d'âme sont requis si h/w > 1 100/√Fy.
+
+## Conception des colonnes
+
+### Rapport d'élancement
+
+```
+KL/r ≤ 200 (valeur recommandée CSA S16)
+```
+
+Où K = facteur de longueur effective, L = longueur non retenue, r = rayon de giration.
+
+### Facteurs de longueur effective K
+
+| Conditions aux appuis | K théorique | K recommandé (CSA) |
+|-----------------------|-------------|---------------------|
+| Encastré-Encastré | 0,5 | 0,65 |
+| Encastré-Articulé | 0,7 | 0,80 |
+| Articulé-Articulé | 1,0 | 1,0 |
+| Encastré-Libre | 2,0 | 2,1 |
+| Portique non contreventé | Variable | 1,2 à 2,0 |
+
+### Charge critique d'Euler et résistance à la compression
+
+```
+Pcr = π²EI / (KL)²
+```
+
+CSA S16 utilise la courbe SSRC (Structural Stability Research Council) qui tient compte des imperfections géométriques et des contraintes résiduelles. La résistance à la compression Cr est réduite par un facteur de colonne n = 1,34.
+
+## Connexions
+
+### Connexions boulonnées
+
+**Boulons ASTM A325** (F1852) : Re = 635 MPa, Rm = 825 MPa — usage général
+**Boulons ASTM A490** : Re = 900 MPa, Rm = 1 030 MPa — connexions haute résistance
+
+**Modes de ruine en cisaillement :**
+- Cisaillement du boulon
+- Appui sur la pièce (bearing)
+- Déchirement net de la pièce
+- Arrachement par blocs (block shear)
+
+**Précontrainte** : les boulons de frottement (Slip-Critical) sont serrés à 70 % de leur résistance à la traction (méthode de la clé dynamométrique, indicateurs de tension directe DTI).
+
+### Connexions soudées (CSA W59)
+
+**Soudures d'angle (fillet welds)** : le mode le plus courant. Résistance :
+
+```
+Vr = φw × 0,67 × Xu × Aw × (1 + 0,5 sin¹·⁵θ)
+```
+
+Où Xu = résistance ultime du métal d'apport, θ = angle de la force par rapport à l'axe de la soudure.
+
+**Soudures à pénétration complète (CJP)** : résistance au moins égale à celle du métal de base.
+
+**Classification des électrodes** : E4918 (CSA W48), E7018 (AWS A5.1) — les chiffres indiquent la résistance à la traction en ksi ou en 10 MPa.
+
+## Ossatures contreventées et à portique
+
+### Ossature contreventée (Braced Frame)
+
+Les efforts horizontaux (vent, séisme) sont repris par des diagonales de contreventement. Types :
+- **Contreventement concentrique (CBF)** : diagonales croisant au centre. Simple mais faible ductilité sismique.
+- **Contreventement excentrique (EBF)** : lien fusible (shear link) en cisaillement. Excellente ductilité, utilisé en zones sismiques Rd = 4,0.
+
+### Ossature à portique (Moment Frame)
+
+Les noeuds rigides résistent aux efforts horizontaux par flexion et cisaillement dans les poteaux et poutres. Types sismiques (SCFR — Special Concentrated Moment Frame, Rd = 5, Ro = 1,5).
+
+## Construction composite
+
+### Poutres composites
+
+L'association d'une poutre en acier et d'une dalle en béton armé (reliées par des goujons de cisaillement — shear studs) permet :
+- Réduction de 30–50 % de la section d'acier requise
+- Augmentation de la rigidité (réduction des flèches)
+
+**Goujons de cisaillement** : diamètre 19–22 mm, hauteur 75–100 mm, en acier grade AWS D1.1.
+
+Résistance du goujon : `Qr = 0,5 × φsc × Asc × √(f'c × Ec) ≤ φsc × Asc × Fu`
+
+### Dalles composites sur platelage
+
+Le platelage métallique (Canam P-3615, P-2436) sert de coffrage permanent et d'armature positive pour la dalle. Treillis électrosoudé complémentaire pour la résistance négative aux appuis.
+
+## Résistance au feu
+
+### Exigences du CNB 2020
+
+Le Code national du bâtiment impose des degrés de résistance au feu (DRF) selon l'utilisation et le nombre d'étages : 45 min, 1 h, 2 h, 3 h.
+
+### Méthodes de protection
+
+- **Ignifugation projetée** (vermiculite, béton projeté) : économique pour les structures cachées
+- **Revêtements intumescents** : se gonflent sous l'effet de la chaleur pour créer une couche isolante. ULC-S134/ULC-S101 pour la certification au Canada.
+- **Protection par écran** (gypse, béton) : DRF jusqu'à 3 h
+- **Acier nu** (calcul de masse thermique) : acceptable pour certaines applications selon l'annexe C du CNB
+
+<Note>
+Les logiciels CADS AC3D, SAFIR et les modules de feu ABAQUS permettent le calcul de la résistance au feu par analyse avancée, pouvant démontrer la conformité pour des géométries complexes.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Ponts et ouvrages d'art" icon="archway" href="/genie-civil/ponts-ouvrages">
+    Charges, types de ponts et code canadien des ponts CSA S6
+  </Card>
+  <Card title="Normes canadiennes" icon="file-contract" href="/ressources/normes-canadiennes">
+    CSA S16, NBC et autres normes de construction canadiennes
+  </Card>
+  <Card title="Mécanique des solides" icon="cube" href="/genie-mecanique/mecanique-solides">
+    Flambement, flexion et théories de la rupture
+  </Card>
+  <Card title="Logiciels par discipline" icon="laptop-code" href="/ressources/logiciels-par-discipline">
+    ETABS, SAP2000, RISA et autres logiciels de calcul de structures
+  </Card>
+</CardGroup>
