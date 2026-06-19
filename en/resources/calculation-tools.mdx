@@ -1,0 +1,182 @@
+---
+title: "Calculation Tools & Software for Engineers"
+description: "Comprehensive guide to engineering software, online calculators, open-source tools, and AI-assisted calculation resources for all engineering disciplines."
+icon: "calculator"
+---
+
+# Calculation Tools & Software for Engineers
+
+Choosing the right software can make the difference between a productive engineering workflow and hours of manual work. This guide covers the key tools by discipline, with notes on cost, accessibility, and student licensing.
+
+<Info>
+  The full French version of this page with additional Canadian context is available at [/ressources/outils-calcul](/ressources/outils-calcul). The French page [/ressources/logiciels-par-discipline](/ressources/logiciels-par-discipline) provides a comprehensive discipline-by-discipline software matrix.
+</Info>
+
+## Structural & Civil Engineering
+
+<CardGroup cols={2}>
+  <Card title="ETABS / SAP2000 / SAFE" icon="building">
+    **CSI (Computers & Structures Inc.)** — Industry standard for building and structural analysis. ETABS for buildings, SAP2000 for general structures, SAFE for slabs/foundations. Student licenses available via university programs.
+  </Card>
+  <Card title="RISA-3D / RISA Floor" icon="grid-2">
+    **RISA Technologies** — Popular in North America for steel, concrete, and wood design. Integrates with Revit. Widely used by consulting firms.
+  </Card>
+  <Card title="STAAD.Pro" icon="diagram-project">
+    **Bentley Systems** — Common in industrial and infrastructure projects. Strong pipe stress and offshore modules.
+  </Card>
+  <Card title="Revit Structure" icon="cube">
+    **Autodesk** — BIM authoring for structural models. Free student/educator license via Autodesk Education Community.
+  </Card>
+</CardGroup>
+
+### Free / Open Source Structural Tools
+- **OpenSees** — Open-source finite element platform for earthquake engineering (UC Berkeley). Free.
+- **SkyCiv** — Cloud-based structural analysis, free tier available for simple beams and trusses.
+- **ClearCalcs** — Spreadsheet-style structural calculations, free tier for basic members.
+- **StructX** — Free online structural calculators (beams, columns, connections).
+
+## Geotechnical Engineering
+
+| Software | Developer | Key Use | License |
+|----------|-----------|---------|---------|
+| GeoStudio (SLOPE/W, SEEP/W, SIGMA/W) | Seequent/Bentley | Slope stability, seepage, stress-deformation | Commercial |
+| Plaxis 2D/3D | Bentley | Advanced FEM geotechnical | Commercial |
+| RS2 / RS3 | Rocscience | Rock mechanics, tunnels, slopes | Commercial |
+| SETTLE3 | Rocscience | Settlement analysis | Commercial |
+| FLAC / FLAC3D | Itasca | Continuum geomechanics | Commercial |
+| Slide2 | Rocscience | Slope stability (limit equilibrium) | Commercial |
+
+<Tip>
+  Rocscience offers a **free 30-day trial** and educational licenses for students. GeoStudio student licenses are available through Bentley's academic program.
+</Tip>
+
+## Hydraulics & Hydrology
+
+<CardGroup cols={2}>
+  <Card title="HEC-RAS" icon="droplet">
+    **US Army Corps of Engineers** — The standard for river hydraulics, flood modelling, and dam break analysis. **Free** to download. Version 6+ includes 2D modelling capabilities.
+  </Card>
+  <Card title="HEC-HMS" icon="cloud-rain">
+    **US Army Corps of Engineers** — Hydrological modelling (rainfall-runoff, unit hydrographs, routing). **Free**.
+  </Card>
+  <Card title="SWMM" icon="city">
+    **US EPA** — Storm Water Management Model for urban drainage and sewer systems. **Free**. InfoSWMM and PCSWMM are commercial frontends.
+  </Card>
+  <Card title="InfoWorks ICM" icon="waves">
+    **Autodesk** — Integrated catchment modelling combining 1D/2D surface and sewer network simulation. Industry standard for complex urban drainage.
+  </Card>
+</CardGroup>
+
+## Mechanical & Thermal Engineering
+
+| Software | Primary Use | Notes |
+|----------|-------------|-------|
+| SolidWorks | 3D CAD, design, FEA (Simulation) | CSWA/CSWP certifications; student license via SOLIDWORKS Education |
+| ANSYS Mechanical | FEA, structural, thermal | ANSYS Student (free, limited size); used in most engineering schools |
+| Abaqus/CAE | Non-linear FEA, crash, composites | Dassault; academic license available |
+| COMSOL Multiphysics | Multiphysics coupling | Very powerful for coupled thermal-structural-fluid problems |
+| Autodesk Inventor | 3D CAD, simulation | Free via Autodesk Education |
+| Fusion 360 | CAD/CAM/CAE | Free for students and startups (revenue <$1M/year) |
+
+## Electrical Engineering
+
+| Software | Use | License |
+|----------|-----|---------|
+| ETAP | Power system analysis (load flow, short circuit, arc flash) | Commercial; standard in industry |
+| MATLAB + Simulink | Control systems, signal processing, power electronics | Student license ~$50/year; free via many universities |
+| LTSpice | Analog/switching circuit simulation | **Free** (Analog Devices) |
+| KiCad | PCB layout and schematic | **Free, open source** — industry-grade |
+| Altium Designer | Professional PCB design | Commercial; Altium Education licenses available |
+| EPLAN Electric P8 | Electrical panel and control cabinet documentation | Commercial |
+
+## Chemical & Process Engineering
+
+<CardGroup cols={2}>
+  <Card title="Aspen HYSYS / Aspen Plus" icon="flask">
+    **AspenTech** — The industry standard for process simulation. HYSYS for oil & gas; Aspen Plus for chemical and refining. Student/university licenses available through AspenTech Academic Program.
+  </Card>
+  <Card title="DWSIM" icon="flask">
+    **Open source** — Free, Python-based process simulator. Covers thermodynamics (Peng-Robinson, NRTL, etc.) and unit operations. Excellent for learning and small projects.
+  </Card>
+  <Card title="ProMax" icon="industry">
+    **Bryan Research & Engineering** — Specialized for gas treating, LNG, and sulfur recovery. Common in Western Canada gas processing.
+  </Card>
+  <Card title="CHEMCAD" icon="atom">
+    **Chemstations** — Full process simulation suite. More affordable alternative to Aspen for smaller firms.
+  </Card>
+</CardGroup>
+
+## Mining Engineering
+
+- **Leapfrog Geo** (Seequent/Bentley) — 3D geological modelling and resource estimation. Industry standard.
+- **GEOVIA Surpac** (Dassault) — Mine design and geological database management.
+- **Vulcan** (Maptek) — Block model creation, open pit and underground design.
+- **Deswik.Suite** — Underground mine design and scheduling.
+- **Whittle** (Dassault) — Pit optimization using Lerchs-Grossmann algorithm.
+- **MineSight** (Hexagon) — Ore body modelling and mine planning.
+
+## General Calculation & Math Tools
+
+| Tool | Best For | Cost |
+|------|----------|------|
+| **MATLAB** | Engineering computation, signal processing, control systems | Commercial (~$150/student/year or free via university) |
+| **Python** (NumPy, SciPy, Pandas, Matplotlib) | Data analysis, scientific computing, automation | **Free** |
+| **Mathcad** (PTC) | Engineering calculation documentation with live math | Commercial; free trial available |
+| **Maple** (Maplesoft — Canadian!) | Symbolic math, differential equations | Commercial; educational licenses |
+| **Excel** + engineering add-ins | Quick calculations, data tables, unit conversions | Included in Microsoft 365 |
+| **Wolfram Alpha** | Quick formula lookups, unit conversions | Free (basic), Pro subscription available |
+
+## Project Management Software
+
+- **Microsoft Project** — Scheduling, resource leveling, critical path. Free via Microsoft 365 Education.
+- **Oracle Primavera P6** — Enterprise-grade for large projects. Common in EPC and construction.
+- **OpenProject** — Open-source alternative. Self-hosted, free.
+- **Procore** / **Autodesk Construction Cloud** — Construction management platforms.
+
+## Online Calculators
+
+<CardGroup cols={2}>
+  <Card title="Engineering Toolbox" icon="wrench">
+    Thousands of free engineering calculators, material properties, and reference tables. Covers all disciplines.
+  </Card>
+  <Card title="SkyCiv Free Tools" icon="building">
+    Free online beam calculator, section properties calculator, truss analyser.
+  </Card>
+  <Card title="Omni Calculator" icon="calculator">
+    500+ engineering and physics calculators. Good for quick unit conversions and formula lookups.
+  </Card>
+  <Card title="StructX" icon="layer-group">
+    Free structural calculators for beams, columns, connections per AISC, ACI, CSA standards.
+  </Card>
+</CardGroup>
+
+## AI Tools for Engineering
+
+<Warning>
+  AI tools (Claude, ChatGPT, Copilot) can help with code generation, documentation, and formula lookup, but **must never replace engineering judgment**. Always verify AI-generated calculations independently. Never stamp or seal work that hasn't been fully reviewed by a licensed professional.
+</Warning>
+
+**Productive AI use cases for engineers:**
+- Generating Python/MATLAB scripts for data processing
+- Writing and formatting technical reports
+- Searching for applicable standards and code clauses
+- Explaining unfamiliar engineering concepts
+- Code review and debugging for simulation scripts
+- Generating first drafts of specifications (requires expert review)
+
+## See Also
+
+<CardGroup cols={2}>
+  <Card title="Software by Discipline (FR)" icon="laptop-code" href="/ressources/logiciels-par-discipline">
+    Complete French matrix of engineering software organized by discipline.
+  </Card>
+  <Card title="Canadian Standards" icon="file-contract" href="/ressources/normes-canadiennes">
+    Key Canadian codes and standards for all engineering disciplines.
+  </Card>
+  <Card title="Project Management" icon="calendar-check" href="/en/project-management/planning">
+    Engineering project management guide in English.
+  </Card>
+  <Card title="Community Q&A" icon="comments" href="/communaute/questions-reponses">
+    Ask software-specific questions to the GénieConseil engineering community.
+  </Card>
+</CardGroup>

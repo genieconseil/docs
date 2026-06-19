@@ -1,0 +1,149 @@
+---
+title: "Engineering Project Management"
+description: "Complete guide to managing engineering projects: lifecycle phases, CPM/PERT scheduling, earned value management, risk management, and Canadian procurement context."
+icon: "calendar-check"
+---
+
+# Engineering Project Management
+
+Effective project management is a core competency for engineers. Whether managing a $500K building renovation or a $5B infrastructure megaproject, the fundamentals of scope, schedule, cost, and risk apply universally.
+
+<Info>
+  This page is the English version. The full French content with Canadian-specific references is available at [/gestion-projets/planification](/gestion-projets/planification).
+</Info>
+
+## Engineering Project Lifecycle
+
+Engineering projects follow a phased approach that gates decisions and controls risk:
+
+| Phase | Also Known As | Key Deliverables | Cost Estimate Accuracy |
+|-------|---------------|------------------|----------------------|
+| Conceptual | Pre-feasibility, Screening | Project scope, order-of-magnitude cost | ±30–50% (AACE Class 5) |
+| Pre-FEED | Feasibility, Scoping | Basis of design, preliminary layout | ±20–30% (AACE Class 4) |
+| FEED | Preliminary Engineering | Process flow diagrams, equipment lists | ±10–20% (AACE Class 3) |
+| Detailed Engineering | Final Design | Construction drawings, specs, BOQ | ±5–10% (AACE Class 2) |
+| Procurement & Construction | Execution | Built asset | ±5% (AACE Class 1) |
+| Commissioning & Startup | Handover | Tested, operational facility | — |
+
+<Tip>
+  Gate reviews (Go/No-Go decisions) at the end of each phase prevent investing detailed engineering dollars in projects that won't meet business objectives. Use AACE Class 5 estimates ruthlessly at early gates.
+</Tip>
+
+## Scheduling Techniques
+
+### Work Breakdown Structure (WBS)
+Decompose the project scope into manageable work packages — typically to a level where one person or team can own the work, and duration can be estimated with confidence.
+
+### Critical Path Method (CPM)
+The critical path is the longest sequence of dependent activities — any delay on the critical path delays the project.
+
+**Forward Pass** (Early Start / Early Finish):
+- `ES = max(EF of all predecessors)`
+- `EF = ES + Duration`
+
+**Backward Pass** (Late Start / Late Finish):
+- `LF = min(LS of all successors)`
+- `LS = LF - Duration`
+
+**Total Float** = `LF - EF` = `LS - ES` (zero on critical path)
+
+### PERT (Program Evaluation and Review Technique)
+When activity durations are uncertain, use three-point estimates:
+
+`Expected Duration (TE) = (Optimistic + 4 × Most Likely + Pessimistic) / 6`
+
+`Standard Deviation (σ) = (Pessimistic - Optimistic) / 6`
+
+### S-Curve Tracking
+Plot cumulative planned value (PV) vs. actual cost (AC) and earned value (EV) over time. An S-curve flattening early signals schedule slippage.
+
+## Earned Value Management (EVM)
+
+EVM integrates scope, schedule, and cost into a unified performance measurement system:
+
+| Metric | Formula | Meaning |
+|--------|---------|---------|
+| **Schedule Variance (SV)** | EV − PV | Negative = behind schedule |
+| **Cost Variance (CV)** | EV − AC | Negative = over budget |
+| **Schedule Performance Index (SPI)** | EV / PV | <1.0 = behind schedule |
+| **Cost Performance Index (CPI)** | EV / AC | <1.0 = over budget |
+| **Estimate at Completion (EAC)** | BAC / CPI | Forecasted total cost |
+| **Variance at Completion (VAC)** | BAC − EAC | Projected over/under budget |
+
+<Warning>
+  A CPI below 0.85 in the first 20% of a project is a strong predictor of final cost overrun. Early corrective action is far more effective than late recovery.
+</Warning>
+
+## Risk Management
+
+### Risk Register
+Document all identified risks with:
+- **Description** — what could happen and why
+- **Probability** — likelihood (1–5 or %)
+- **Impact** — consequence on cost/schedule/quality (1–5)
+- **Risk Score** — Probability × Impact
+- **Risk Owner** — accountable person
+- **Response Strategy** — avoid, transfer, mitigate, accept
+
+### Risk Response Strategies
+
+| Strategy | Description | Example |
+|----------|-------------|---------|
+| **Avoid** | Eliminate the threat | Change scope to avoid contaminated soil |
+| **Transfer** | Shift risk to third party | Insurance, fixed-price contract |
+| **Mitigate** | Reduce probability or impact | Add geotechnical investigations early |
+| **Accept** | Acknowledge and monitor | Small-probability, low-impact risks |
+
+### Monte Carlo Schedule Risk Analysis
+Use tools like Oracle Primavera Risk Analysis or @RISK (Palisade) to run thousands of schedule simulations with probabilistic durations. Output a P50 (most likely) and P80 (80% confidence) completion date.
+
+## Procurement & Contracting
+
+### Contract Types
+
+| Contract Type | Risk Bearer | Best For |
+|---------------|-------------|---------|
+| Lump Sum / Fixed Price | Contractor | Well-defined scope, low uncertainty |
+| Cost-Plus (T&M) | Owner | Poorly defined scope, R&D projects |
+| Unit Price | Shared | Civil works with variable quantities |
+| Design-Build (DB) | Contractor | Fast-track, single point of responsibility |
+| P3 (DBFMO) | Private consortium | Large infrastructure, long lifecycle |
+
+### Canadian Public Procurement
+- **Federal**: Public Services and Procurement Canada (PSPC), MERX platform, AMP/CETA thresholds
+- **Quebec**: Act Respecting Contracting by Public Bodies (Bill 12), SEAO platform, lowest compliant bidder rule (some exceptions for quality weighting)
+- **Ontario**: Infrastructure Ontario, Supply Ontario, BPS Procurement Directive
+
+## Project Management Software
+
+<CardGroup cols={2}>
+  <Card title="Microsoft Project" icon="calendar">
+    Industry standard for schedule management. Integrates with Microsoft 365. Best for traditional CPM scheduling.
+  </Card>
+  <Card title="Oracle Primavera P6" icon="chart-gantt">
+    Enterprise-grade for megaprojects. Used by EPC firms, mining, and oil & gas. Steep learning curve but very powerful.
+  </Card>
+  <Card title="Procore" icon="building">
+    Construction management platform (RFIs, submittals, daily reports, drawings). Cloud-based, mobile-first.
+  </Card>
+  <Card title="Autodesk Construction Cloud" icon="cube">
+    BIM 360 integrated with project management. Best for projects with significant BIM deliverables.
+  </Card>
+</CardGroup>
+
+## See Also
+
+<CardGroup cols={2}>
+  <Card title="Cost Estimation" icon="dollar-sign" href="/en/resources/calculation-tools">
+    Tools and methodologies for engineering cost estimation.
+  </Card>
+  <Card title="Risk Management (FR)" icon="shield-halved" href="/gestion-projets/gestion-risques">
+    Detailed French guide to engineering risk management.
+  </Card>
+  <Card title="Contracts & Procurement (FR)" icon="file-signature" href="/gestion-projets/contrats-appels-offres">
+    French guide to CCDC contracts and public procurement in Canada.
+  </Card>
+  <Card title="Community Forum" icon="comments" href="/communaute/questions-reponses">
+    Ask project management questions to the GénieConseil community.
+  </Card>
+</CardGroup>
