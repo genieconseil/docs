@@ -1,0 +1,273 @@
+---
+title: "Forage et production pétrolière"
+description: "Techniques de forage, complétion de puits et méthodes de récupération des hydrocarbures"
+icon: "wrench"
+---
+
+## Forage rotatif
+
+Le forage rotatif est la méthode universelle d'excavation des puits pétroliers et gaziers. Le principe repose sur la rotation d'un trépan au fond du puits, combinée à la circulation d'un fluide de forage pour remonter les déblais et maintenir la pression de fond.
+
+### Composants principaux du système de forage
+
+La garniture de forage (drill string) constitue la colonne vertébrale du système :
+- **Mât (derrick)** : structure acier de 40 à 60 m de hauteur supportant la charge totale de la garniture
+- **Top drive** : moteur électrique ou hydraulique monté sur le pont du mât, remplaçant la table de rotation et la tige carrée (kelly) sur les appareils modernes; permet la rotation et la circulation simultanées
+- **Tiges de forage (drill pipe — DP)** : tubes acier de 4-1/2" à 5-1/2" de diamètre, assemblés en sections de 9 m (single), 18 m (double) ou 27 m (triple), transmettent la rotation et le poids
+- **Colliers de forage (drill collars — DC)** : tubulaires à parois épaisses (50-230 kg/m), concentrés au-dessus du trépan pour fournir le poids sur le trépan (WOB — Weight on Bit)
+- **Trépan (bit)** : élément coupant au fond du puits :
+  - **PDC (Polycrystalline Diamond Compact)** : dents de carbure de tungstène avec couche diamant synthétique; dominant en formations tendres à moyennement dures, vitesse de pénétration élevée
+  - **Tri-cône (tri-cone roller)** : trois cônes rotatifs avec dents ou inserts WC; utilisé dans les formations dures et abrasives
+  - **Diamant imprégné** : formations très dures (quartzite, granite)
+
+### Système de circulation du fluide de forage (boue)
+
+La boue de forage remplit des fonctions essentielles et critiques :
+
+1. **Transport des déblais (cuttings)** : remonter les fragments de roche du fond à la surface
+2. **Refroidissement et lubrification du trépan** : dissiper la chaleur de friction
+3. **Contrôle de la pression de formation** : la colonne hydrostatique de boue équilibre ou surpasse la pression de pore
+4. **Stabilisation des parois du puits** : éviter l'effondrement des zones argileuses non consolidées
+5. **Formation du cake (mud cake)** : dépôt de filtre sur les parois poreuses pour limiter les pertes de fluide
+
+**Types de boue :**
+- **WBM (Water-Based Mud)** : le plus courant et le moins cher; peut être à base d'eau douce, salée ou saturée en sel
+- **OBM (Oil-Based Mud)** : huile minérale comme phase continue; excellente pour les formations argileuses réactives, mais réglementation environnementale stricte
+- **SBM (Synthetic-Based Mud)** : huile synthétique (ester, paraoléfine); propriétés similaires à l'OBM mais meilleure biodégradabilité offshore
+
+**Calcul de la pression hydrostatique :**
+
+`P_hydrostatique = ρ × g × h`
+
+En unités pétrolières impériales : `P (psi) = 0.052 × ρ (ppg) × h (pieds)`
+
+Densité de boue typique : 1,05 à 2,4 g/cm³ (8,7 à 20 ppg). Pour maintenir la stabilité de puits, la pression hydrostatique doit dépasser légèrement la pression de pore (+3 à 5% de surpression typique) sans toutefois fracturer la formation.
+
+<Warning>
+Une densité de boue insuffisante entraîne un kick (influx de fluide de formation) pouvant mener à un éruption (blowout). Une densité excessive provoque des pertes de circulation et peut fracturer la formation.
+</Warning>
+
+### Prévention des éruptions — BOP (Blow-Out Preventer)
+
+Le BOP est l'équipement de sécurité le plus critique du forage. Il est installé en tête de puits et peut fermer hermétiquement le puits en cas de perte de contrôle :
+
+- **Annulaire (Shaffer, Cameron)** : élément d'obturation caoutchouc qui se ferme autour de tout élément dans le puits (tige, collier, câble) ou complètement à vide; premier en ligne de défense
+- **Rams à tiges (pipe rams)** : mâchoires fixes correspondant au diamètre de tige utilisé; fermeture rigide autour de la tige
+- **Rams aveugle (blind rams)** : fermeture complète du puits en l'absence de tige
+- **Rams cisaillants (shear rams)** : cisaille la tige de forage et ferme le puits hermétiquement; utilisé en dernier recours (bien démontré lors de Deepwater Horizon — défaillance critique)
+
+<Note>
+Depuis l'accident Deepwater Horizon (Golfe du Mexique, 2010), la réglementation offshore mondiale, incluant les eaux canadiennes, a considérablement renforcé les exigences de certification et de test des BOP, notamment pour les BOP doubles (stack) offshore.
+</Note>
+
+## Trajectoire du puits
+
+### Puits vertical
+
+Le puits vertical est le plus simple : forage rectiligne vers le bas depuis la surface jusqu'à l'objectif. Il demeure courant pour des cibles uniques peu profondes, mais présente des limitations pour les réservoirs à faible perméabilité.
+
+### Puits directionnel et horizontal
+
+Le forage directionnel permet de dévier le puits de la verticale de manière contrôlée :
+
+- **Point de déviation (Kickoff Point — KOP)** : profondeur à laquelle la déviation débute
+- **Taux de construction (Build Rate)** : vitesse d'augmentation de l'inclinaison, exprimé en degrés par 30 mètres (typiquement 2–8°/30m)
+- **Puits horizontal** : atteint une inclinaison de 90°, avec une section horizontale de 1 000 à 3 000 m dans la couche cible; essentiel pour les formations schiteuses (shale), les sables étanches (tight sands) et les formations carbonatées fracturées
+
+Les avantages des puits horizontaux incluent une surface de drainage radicalement plus grande (contact avec la formation multiplié par 5 à 20×), la possibilité de multistages de fracturation hydraulique, et la capacité d'exploiter des réservoirs minces sans perforer plusieurs puits verticaux.
+
+**ERD (Extended Reach Drilling)** : puits avec déport horizontal (departure) supérieur à 4 fois la profondeur verticale. L'exemple classique est le champ de Wytch Farm (Royaume-Uni), où des puits ERD depuis la côte atteignaient plus de 11 km de déport horizontal pour accéder à un réservoir sous la Manche. Cette technologie est également utilisée offshore pour réduire le nombre de plateformes.
+
+### Mesure et contrôle en temps réel
+
+- **MWD (Measurement While Drilling)** : mesure l'inclinaison et l'azimut du puits en temps réel à l'aide d'accéléromètres et magnétomètres intégrés dans le BHA (Bottom Hole Assembly), transmission par impulsions de pression dans la boue (mud pulse telemetry)
+- **LWD (Logging While Drilling)** : mesures pétrophysiques en temps réel : rayon gamma (lithologie), résistivité (saturation), neutron-densité (porosité), imagerie de paroi — données cruciales pour le géodirigé (geosteering) dans les puits horizontaux
+
+## Design du tubage (Casing Design)
+
+La séquence de tubage est conçue de l'extérieur vers l'intérieur, chaque tube étant cimenté en place avant de forer la section suivante :
+
+| Tubage | Diamètre typique | Profondeur | Fonction |
+|---|---|---|---|
+| Conducteur | 30" (762 mm) | 20–50 m | Isole les sédiments superficiels meubles |
+| Surface casing | 13-3/8" (340 mm) | 300–800 m | Protège les aquifères, supporte le BOP |
+| Intermédiaire | 9-5/8" (244 mm) | Variable | Isole les zones de pression anormale |
+| Production | 7" (178 mm) ou 5-1/2" | TD (Total Depth) | Conduit de production des hydrocarbures |
+| Liner | 5" ou 4-1/2" | Partial | Tubage partiel depuis le sabot du précédent |
+
+**Charges de design :**
+- **Burst** (pression interne) : pression maximale attendue à l'intérieur (kick, test d'étanchéité)
+- **Collapse** (pression externe) : pression différentielle extérieure en cas de vide interne partiel
+- **Tension** : poids propre du tubage suspendu en tête de puits
+
+Facteurs de sécurité typiques : 1,2–1,4 en collapse et burst; 1,6–2,0 en tension.
+
+**Cimentation :** Le ciment API Classe G ou H (selon API 10A) est pompé dans l'espace annulaire entre le tubage et la paroi du puits pour isoler les zones géologiques, empêcher la migration de gaz, et ancrer mécaniquement le tubage. Des additifs (accélérateurs, retardateurs, agents de légèreté/densité, anti-gaz) permettent d'adapter le ciment aux conditions de fond.
+
+<Tip>
+En Alberta, l'AER exige un isolement cimentaire adéquat des aquifères potables (protection de l'eau souterraine) selon la Directive 009. La vérification de la cimentation par log CBL (Cement Bond Log) est fréquemment requise.
+</Tip>
+
+## Complétion et stimulation
+
+### Perforation
+
+La perforation établit la communication hydraulique entre le puits et la formation productive. Un pistolet perforateur (perforating gun) armé de charges à jet coniques (shaped charges) est descendu sur câble (wireline) ou sur tige dans la zone productive. Lors de la détonation, chaque charge perce le tubage, le ciment et la formation sur 10–40 cm de profondeur.
+
+- **SPF (shots per foot)** : densité de perforation; typiquement 4–12 perforations par pied selon la formation
+- **Phasage (phasing)** : angle entre les perforations successives; 60° ou 120° optimisent la connexion avec les fractures naturelles
+
+### Fracturation hydraulique (Hydraulic Fracturing)
+
+La fracturation hydraulique est la technique de stimulation dominante, particulièrement pour les réservoirs non conventionnels (schistes, tight sands) à très faible perméabilité (< 0,1 mD).
+
+**Pression d'initiation de fracture :**
+
+`P_f = 3σ_h - σ_H + T_s - P_p`
+
+où σ_h = contrainte horizontale minimale, σ_H = contrainte horizontale maximale, T_s = résistance à la traction de la roche, P_p = pression de pore.
+
+Les fractures hydrauliques se propagent perpendiculairement à la contrainte minimale. Dans la plupart des bassins sédimentaires à profondeur > 700 m, les fractures sont verticales et s'orientent parallèlement à σ_H.
+
+**Fluides de fracturation :**
+- **Gel de guar** : fluide visqueux portant de grands volumes de proppant; utilisé pour réservoirs conventionnels et carbonates
+- **Slick water** : eau avec 0,5–2% de réducteur de friction (polyacrylamide); viscosité très faible, vitesse d'injection élevée, crée des fractures complexes dans les schistes
+- **CO2 ou N2 énergisé** : pour réservoirs à basse pression ou sensibles à l'eau
+
+**Agents de soutènement (proppant)** : maintiennent la fracture ouverte après relâchement de la pression d'injection :
+- **Sable Ottawa (40/70 mesh)** : le moins cher, utilisé pour les basses pressions de fermeture (< 6 000 psi)
+- **Sable enrobé de résine (resin-coated sand)** : meilleure résistance, réduit les fines
+- **Céramique** : haute résistance à l'écrasement (> 10 000 psi), réservé aux puits profonds à haute pression
+
+**Application dans le Montney (C.-B.)** : un puits horizontal type du Montney compte 30 à 50 étages de fracturation, chaque étage espacé d'environ 300 m. Chaque étage peut recevoir 500 à 2 000 tonnes de proppant et 1 000 à 5 000 m³ d'eau. Les puits du Montney peuvent atteindre des débits initiaux de 5 à 30 MMscfd de gaz.
+
+### Acidification
+
+L'acidification est utilisée pour restaurer ou améliorer la perméabilité des réservoirs carbonatés ou des grès enduits d'argile :
+- **HCl (acide chlorhydrique)** : dissout les calcaires et dolomites — `CaCO3 + 2HCl → CaCl2 + H2O + CO2`
+- **HCl + HF (mud acid)** : pour les grès — le HF dissout les silicates argileux bouchant les pores; la composition typique est 12% HCl + 3% HF
+
+## Méthodes de récupération
+
+### Récupération primaire
+
+La récupération primaire utilise l'énergie naturelle du réservoir pour expulser les hydrocarbures vers le puits. Les mécanismes principaux incluent :
+
+- **Détente de gaz dissous (solution gas drive)** : gaz dissous dans l'huile se libère lors de la chute de pression, expandant et expulsant l'huile
+- **Cap gazeux (gas cap drive)** : expansion d'un cap gazeux existant pousse l'huile vers le bas vers les perforations
+- **Poussée d'eau (water drive)** : influx d'eau de l'aquifère adjacent maintient la pression et déplace l'huile
+- **Drainée par gravité** : dans les réservoirs épais et à forte perméabilité verticale
+
+**Déclin de production :** Le déclin naturel de production suit typiquement la loi d'Arps :
+- Déclin exponentiel : `q = q_i × e^{-D_i × t}` (D_i constant)
+- Déclin hyperbolique : `q = q_i / (1 + b × D_i × t)^{1/b}` (b = 0 à 1)
+- Déclin harmonique : cas particulier b = 1
+
+Le facteur de récupération primaire est de l'ordre de **10–30 % de l'huile en place (OOIP)** pour les réservoirs conventionnels.
+
+### Récupération secondaire — Injection d'eau (Waterflooding)
+
+Le waterflooding est la méthode de récupération secondaire la plus répandue dans le monde. De l'eau (eau produite recyclée ou eau de surface) est injectée dans des puits d'injection pour maintenir la pression du réservoir et déplacer l'huile résiduelle vers les puits producteurs.
+
+**Efficacité de balayage** :
+`E_R = E_A × E_V × E_D`
+
+où E_A = efficacité aréale, E_V = efficacité verticale, E_D = efficacité de déplacement.
+
+**Rapport de mobilité** : paramètre clé contrôlant la qualité du déplacement :
+
+`M = (k_rw / μ_w) / (k_ro / μ_o)`
+
+Un rapport M < 1 indique un déplacement favorable (l'eau avance uniformément). M > 1 provoque du fingering (doigts de percée précoce de l'eau). Pour l'huile légère et l'eau à faible viscosité, M est souvent voisin de 1–3.
+
+**Patterns d'injection :** 5-spot (1 injecteur entouré de 4 producteurs), 7-spot, line drive inversé.
+
+**Weyburn (Saskatchewan)** : Outre son rôle d'EOR (Enhanced Oil Recovery) au CO2, le champ de Weyburn est une référence mondiale de séquestration géologique. Plus de 30 millions de tonnes de CO2 ont été injectées depuis 2000, avec monitoring intensif de la migration du CO2 dans le réservoir Midale (Mississippien).
+
+Le facteur de récupération additionnel par waterflooding est typiquement de **15–25 % OOIP**.
+
+### Récupération tertiaire (EOR/IOR)
+
+- **Injection de CO2 miscible** : le CO2 supercritique injecté dans le réservoir se mélange avec l'huile, réduisant sa viscosité et la tension interfaciale. La pression minimale de miscibilité (MMP) est la pression à laquelle le CO2 et l'huile deviennent miscibles (typiquement 1 400–2 500 psi selon la composition de l'huile)
+- **Injection de polymères** : l'ajout de polyacrylamide hydrolysé (HPAM) à l'eau d'injection augmente sa viscosité, améliorant le rapport de mobilité (M) et l'efficacité de balayage; concentrations typiques de 500–2 000 ppm
+- **Injection de tensioactifs (surfactants)** : réduit la tension interfaciale huile-eau (IFT) en dessous de 10⁻³ mN/m, mobilisant l'huile capillaire piégée
+- **Injection thermique** : voir section SAGD/CSS ci-dessous
+
+## SAGD et CSS pour sables bitumineux
+
+### SAGD (Steam Assisted Gravity Drainage)
+
+Le SAGD est la méthode in-situ dominante pour l'extraction du bitume dans les sables pétrolifères de l'Alberta. Développée par le Dr Roger Butler (Imperial Oil/Université de Calgary) dans les années 1970-1980, cette technologie est maintenant le pilier de l'exploitation in-situ.
+
+**Principe :** Deux puits horizontaux parallèles sont forés dans la zone inférieure du réservoir de bitume, espacés verticalement de **5 mètres** (puits producteur en bas, injecteur juste au-dessus) :
+
+1. De la vapeur d'eau saturée (250–280°C, 40–80 bar) est injectée en continu dans le puits supérieur
+2. La vapeur monte et forme une **chambre de vapeur (steam chamber)** qui s'élargit latéralement et vers le haut avec le temps
+3. Le bitume chauffé (viscosité réduite de millions de cP à < 10 cP) et le condensat de vapeur s'écoulent par **gravité** vers le puits producteur inférieur
+4. Les fluides produits sont remontés par pompes (ESP — Electric Submersible Pump) à la surface
+
+**Indicateur de performance — SOR (Steam-to-Oil Ratio)** :
+
+`SOR = m³ équivalent eau froide de vapeur injectée / m³ bitume produit`
+
+- SOR courant (cSOR) : mesure instantanée, typiquement 2–5
+- SOR cumulatif (eSOR) : rapport sur la durée de vie du projet
+- Objectif économique : cSOR < 3 pour maintenir la rentabilité. Un SOR élevé signifie plus de gaz naturel brûlé pour produire la vapeur → coût opérationnel élevé et empreinte GES plus grande.
+
+**Opérateurs SAGD majeurs en Alberta :**
+- **Cenovus Energy** : Christina Lake (100 000+ bbl/j), Foster Creek (140 000+ bbl/j)
+- **MEG Energy** : Christina Lake (110 000+ bbl/j visé)
+- **Imperial Oil** : Cold Lake (méthode CSS), Kearl (surface mining)
+- **CNRL** : Kirby, Wolf Lake, Primrose
+- **Suncor** : In Situ (Firebag, MacKay River)
+
+### CSS (Cyclic Steam Stimulation — Huff and Puff)
+
+Le CSS utilise un seul puits pour les trois phases cycliques :
+1. **Injection** : vapeur injectée pendant 30–60 jours sous haute pression
+2. **Trempage (soak)** : le puits est fermé 5–15 jours pour que la chaleur diffuse dans le bitume
+3. **Production** : le bitume ramolli est produit par le même puits pendant 100–200 jours
+
+Le cycle se répète plusieurs fois (3–10 cycles) jusqu'à ce que la performance diminue. Utilisé par **Imperial Oil à Cold Lake** depuis les années 1980, avec des milliers de puits cycliques.
+
+## Installations de production et traitement
+
+### Séparation de surface
+
+Les fluides produits (mélange de gaz, huile et eau) doivent être séparés avant traitement et commercialisation :
+- **Séparateurs triphasiques** : gaz/huile/eau en un seul équipement (horizontal ou vertical), temps de séjour de 1–5 minutes pour les liquides
+- **FWKO (Free Water Knock-Out)** : premier vaisseau de séparation pour retirer l'eau libre avant le séparateur principal
+- **Test separators** : équipements de mesure pour évaluer la performance de puits individuels
+
+### Traitement du gaz naturel
+
+- **Déshydratation** : absorption de la vapeur d'eau par le glycol TEG (Tri-Ethylène Glycol) dans des tours d'absorption; spécification commerciale < 112 mg/m³ d'eau
+- **Désulfuration (Sweetening)** : élimination de H2S et CO2 par absorption aux amines (MDEA — méthyldiéthanolamine, DEA — diéthanolamine); produit du gaz acide envoyé à l'unité Claus pour récupération du soufre élémentaire
+- **Récupération des liquides (NGL)** : récupération des hydrocarbures plus lourds que le méthane (éthane, propane, butane, pentane+) par procédé de réfrigération ou Turbo-Expander; augmente la valeur du gaz
+
+### Flow Assurance et pipelines
+
+Les principaux défis de flow assurance (assurance d'écoulement) incluent :
+- **Hydrates de gaz** : structures cristallines clathrate (CH4·nH2O) qui bouchent les pipelines à T < 20°C et haute pression; inhibiteurs : MEG (monoéthylène glycol) ou MeOH (méthanol), ou isolation thermique
+- **Paraffine** : dépôts de cires dans les pipelines à basse température; contrôle par racleur (pig) mécanique ou injection d'inhibiteurs
+- **Pigging** : passage régulier de racleurs (pigs) en polyuréthane ou intelligents (smart pigs, MFL — Magnetic Flux Leakage) pour nettoyage et inspection
+
+### Comptage fiscal (Custody Transfer Metering)
+
+La précision du comptage est critique pour les redevances (royautés) et la comptabilité commerciale :
+- **Compteurs Coriolis** : mesure directe de masse, précision ±0,1–0,2 %; standard pour gaz et liquides
+- **Turbines volumétriques** : pour gaz naturel haute pression
+- **Compteurs multiphasiques (MPFM)** : mesurent simultanément les débits de gaz, huile et eau sans séparation préalable; technologie en expansion pour les puits offshore
+
+<Note>
+En Alberta, le comptage fiscal est réglementé par l'AER (Directive 017 — Measurement Requirements for Oil and Gas Operations). Les données de production alimentent le système Petrinex pour le calcul des redevances provinciales.
+</Note>
+
+<CardGroup cols={2}>
+  <Card title="Introduction au génie pétrolier" icon="oil-well" href="/genie-petrolier/introduction">
+    Histoire, secteur canadien et fondamentaux du système pétrolier
+  </Card>
+  <Card title="Introduction au génie minier" icon="mountain" href="/genie-minier/introduction">
+    Génie minier canadien, types de mines et associations professionnelles
+  </Card>
+</CardGroup>

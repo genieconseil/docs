@@ -1,182 +1,218 @@
 ---
 title: "Water and Wastewater Treatment"
-description: "Drinking water and wastewater treatment processes, Canadian and US standards, and key design parameters"
+description: "Drinking water and wastewater treatment processes, Canadian and US standards, and design parameters"
 icon: "droplet"
 ---
 
-Water and wastewater treatment engineering encompasses the physical, chemical, and biological processes used to produce safe drinking water and to treat municipal and industrial effluents before their return to the environment. This page covers both drinking water treatment and wastewater treatment, with a focus on Canadian and US regulatory frameworks.
+## Why Water Treatment Engineering Matters
+
+Safe drinking water and effective wastewater treatment are the two most consequential public health infrastructure investments a society can make. Waterborne pathogens — *Giardia lamblia*, *Cryptosporidium parvum*, *E. coli* O157:H7, *Vibrio cholerae* — have caused catastrophic mortality throughout history and continue to do so in regions without reliable treatment infrastructure. In Canada, the Walkerton (Ontario) tragedy of May 2000, in which seven people died and over 2,300 fell ill after municipal drinking water was contaminated with *E. coli* O157:H7 and *Campylobacter jejuni*, illustrated that even high-income countries remain vulnerable when water treatment and monitoring systems fail.
+
+Environmental engineers design, optimize, and manage the physical, chemical, and biological processes that transform contaminated source waters into safe drinking water, and that treat municipal and industrial wastewater to standards protective of receiving water body quality.
 
 <Note>
-The full French-language version of this content is available at [/genie-environnemental/traitement-eaux](/genie-environnemental/traitement-eaux), which includes additional detail on Quebec-specific regulations (MELCCFP, Règlement Q-2 r.12) and provincial standards.
+Le contenu complet en français est disponible à [/genie-environnemental/traitement-eaux](/genie-environnemental/traitement-eaux). La version française couvre en détail les règlements canadiens (RERE, Règlement de l'Ontario 170/03), les Recommandations de Santé Canada pour la qualité de l'eau potable, et les pratiques de gestion des biosolides selon le CCME.
 </Note>
 
 ## Drinking Water Treatment
 
-### Source Water and Intake
+### Source Water and Intake Screening
 
-Treatment begins with source water characterization. Key parameters measured at intake include turbidity (NTU), colour, pH, alkalinity, hardness, total organic carbon (TOC), microbial indicators (total coliform, E. coli, Cryptosporidium oocysts, Giardia cysts), and presence of regulated chemicals (nitrates, heavy metals, DBP precursors).
+Drinking water treatment begins at the source. Surface water sources (rivers, lakes, reservoirs) are subject to variable turbidity, microbial contamination, algal blooms, and industrial or agricultural runoff. Groundwater sources are generally more stable but may contain elevated iron, manganese, hardness, arsenic, or radon depending on local geology. Source water characterization — including seasonal monitoring of turbidity, total organic carbon (TOC), microbial indicators (*E. coli*, *Enterococcus*), and regulated contaminants — drives the selection of treatment processes.
 
-Raw water quality dictates the treatment train. Surface water (rivers, lakes) generally requires full treatment (coagulation through disinfection); groundwater under the direct influence (GUDI) of surface water also requires filtration and disinfection; deep confined aquifer water may need only disinfection.
+Intake screening removes gross debris: trash racks (spacing 25-150 mm) and fine screens (0.5-6 mm) protect downstream equipment. Intake location (depth, distance from shore) is optimized to minimize intake of algae, thermal stratification effects, and shoreline sediment.
 
 ### Coagulation and Flocculation
 
-Colloidal particles (0.001–1 µm) carry a negative surface charge and remain in stable suspension. Coagulation destabilizes them by charge neutralization:
+Most surface water treatment begins with coagulation to destabilize colloidal particles and dissolved natural organic matter (NOM). Common coagulants include:
 
-- **Alum** (aluminum sulphate, Al₂(SO₄)₃·18H₂O): common coagulant, optimal pH 6.5–7.5
-- **Ferric sulphate** (Fe₂(SO₄)₃) and **ferric chloride** (FeCl₃): effective over wider pH range (5–8), better colour removal
-- **Polymers** (cationic, anionic, non-ionic): used as primary coagulants or coagulant aids
+- **Alum** (aluminum sulphate, Al₂(SO₄)₃·18H₂O): produces Al(OH)₃ floc; optimal pH 6.0-7.5; doses typically 5-50 mg/L depending on raw water quality
+- **Ferric sulphate** (Fe₂(SO₄)₃) or **ferric chloride** (FeCl₃): effective over a broader pH range (4.5-9.0); denser, faster-settling floc; useful for waters with high NOM
+- **Polyaluminium chloride (PACl)**: pre-polymerized coagulant with higher charge density; effective at lower doses and temperatures than alum
 
-The jar test determines optimal coagulant dose and pH. Rapid mix (G > 300 s⁻¹, 30–60 s) followed by slow mix (G = 20–80 s⁻¹, 20–30 min) promotes floc growth. The Camp number (Gt product) is typically 10,000–100,000 for flocculation.
+Zeta potential measurement (target: -3 to +3 mV) guides coagulant dose optimization. **Jar testing** — a bench-scale simulation of coagulation, flocculation, and sedimentation — is the standard tool for dose optimization at water treatment plants.
+
+Coagulation is followed by **flocculation**: gentle mixing in a series of chambers with decreasing velocity gradient (*G* = 10-75 s⁻¹, *GT* = 10⁴-10⁵) to promote particle collisions and growth of settleable floc.
 
 ### Sedimentation
 
-Conventional horizontal-flow clarifiers remove settled floc by gravity. Design parameters:
+Conventional horizontal-flow clarifiers and upflow clarifiers remove floc by gravity. Design parameters for conventional rectangular clarifiers:
 
-- **Surface overflow rate (SOR)** = Q/A (m/day): typically 20–40 m/day for conventional clarifiers, 100–160 m/day for lamella (inclined plate) settlers
-- **Detention time**: 2–4 hours
-- **Weir overflow rate**: < 250 m³/m·day
+- **Surface overflow rate (SOR)** = Q / A (where A is plan area): typically **20-40 m³/m²/day (m/day)** for conventional alum floc
+- **Hydraulic retention time (HRT)**: typically 2-4 hours
+- **Weir overflow rate**: ≤ 250 m³/m/day to prevent floc breakup
 
-High-rate settlers (lamella plates, tube settlers) dramatically reduce footprint by effectively multiplying settling area.
+$$
+SOR = \frac{Q}{A}
+$$
+
+**Lamella (tube/plate) settlers** increase effective settling area by a factor of 5-10× through inclined surfaces, allowing much higher surface loading rates (100-200 m/day) in a smaller footprint. **Dissolved air flotation (DAF)** is preferred for low-density floc (algae, colored water) where particles rise rather than settle.
 
 ### Filtration
 
-Rapid sand filtration (RSF) is the most common polishing step:
+Filtered water is the primary barrier against particles, protozoa (*Giardia*, *Cryptosporidium*), and some viruses in surface water treatment. Process types include:
 
-- Loading rate: 5–12 m/h (single-medium sand), up to 20 m/h (dual-media anthracite/sand)
-- Filter media: sand (effective size 0.45–0.55 mm), anthracite (ES 0.9–1.1 mm), garnet
-- Backwash at 37–50 m/h for 10–15 minutes when head loss reaches 2–3 m
-- Target effluent turbidity: < 0.1 NTU (95th percentile) for effective disinfection
+- **Rapid sand filtration (RSF)**: silica sand (effective size 0.5-0.7 mm, uniformity coefficient ≤ 1.5), loading rate **5-12 m/h**, backwash at 36-60 m/h with air scouring; turbidity target < 0.1 NTU
+- **Dual-media filtration**: anthracite over sand; extends filter run length; loading rates up to 20 m/h
+- **Slow sand filtration**: biological layer (*Schmutzdecke*) provides pathogen removal; loading rate 0.1-0.4 m/h; not backwashed — sand scraped and replaced; highly effective for rural and small systems
+- **Pressure filters**: same media as RSF but in pressure vessels; simpler for small plants; limited to < 5 NTU influent
 
-Slow sand filtration (SSF) uses biological activity in the **schmutzdecke** (biological mat) at 0.1–0.4 m/h — highly effective but land-intensive.
+<Info>
+The **log removal credit** concept, used by regulators in Canada and the US, assigns quantified pathogen removal credits (in log₁₀ units) to each treatment step for *Giardia*, *Cryptosporidium*, and viruses. For example, conventional treatment (coagulation + sedimentation + filtration) receiving 2-log *Giardia* credit must achieve a maximum filter effluent turbidity ≤ 0.3 NTU in 95% of measurements and ≤ 1.0 NTU at all times.
+</Info>
 
 ### Disinfection
 
-Disinfection is the critical barrier against waterborne pathogens. The **CT concept** relates the concentration (mg/L) and contact time (minutes) needed for a given log inactivation:
+Disinfection is the final barrier against pathogenic microorganisms. The **CT concept** (concentration × contact time) quantifies disinfection efficacy:
 
-$$CT_{required} = C \times t$$
+$$
+CT = C \times T_{10}
+$$
 
-For Giardia: 3-log (99.9%) inactivation at 5°C with free chlorine requires CT ≈ 165 mg·min/L. For Cryptosporidium, UV is far more effective than chlorine (CT > 22,000 mg·min/L required for 3-log with chlorine vs. UV dose of 10–12 mJ/cm² for 3-log).
+Where:
+- **C** = disinfectant residual concentration (mg/L) at the end of the contact chamber
+- **T₁₀** = time for 10% of the tracer to pass through (conservative estimate of actual contact time, accounting for hydraulic short-circuiting)
 
-**UV disinfection**: germicidal range 200–300 nm (peak at 254 nm). Minimum dose for regulatory credit: 40 mJ/cm² for 4-log virus, 3-log Giardia, 3-log Cryptosporidium (EPA UV Guidance Manual, 2006). UV does not provide a residual — typically followed by chloramination.
+**Chlorine** (free chlorine as Cl₂, HOCl/OCl⁻) is the most widely used disinfectant. Required CT values for 3-log *Giardia* inactivation at 10°C and pH 7.0: approximately 65 mg·min/L. Chlorine is ineffective against *Cryptosporidium* at practical doses.
 
-**Chlorination byproducts**: free chlorine reacts with natural organic matter (NOM) to form trihalomethanes (THMs) and haloacetic acids (HAAs). Health Canada maximum acceptable concentrations: THMs 0.1 mg/L, HAAs 0.08 mg/L.
+**UV disinfection** inactivates *Cryptosporidium* and *Giardia* at a **minimum UV dose of 40 mJ/cm²** (per US EPA UV Guidance Manual and Health Canada GDWQ), independent of water chemistry. UV does not provide a residual and is typically combined with chlorination. Medium-pressure UV lamps offer broader spectrum inactivation; low-pressure lamps are more energy efficient.
 
-### Canadian and US Standards
+**Ozone** provides strong oxidation and broad-spectrum disinfection, including *Cryptosporidium* inactivation (CT ≈ 6 mg·min/L for 3-log at 10°C). However, ozone can react with bromide ions to form bromate (a regulated disinfection byproduct, DBP; MCL = 10 µg/L in Canada and US) and with NOM to form biodegradable organic carbon (BDOC), necessitating biological activated carbon (BAC) filtration downstream.
 
-| Standard/Guideline | Jurisdiction | Scope |
-|-------------------|-------------|-------|
-| Guidelines for Canadian Drinking Water Quality (GCDWQ) | Health Canada | MACs and aesthetic objectives for all parameters |
-| Ontario Reg. 170/03 | Ontario MECP | Small and large municipal systems |
-| Drinking Water Protection Regulation | BC | Water system classification and treatment |
-| Safe Drinking Water Act (SDWA) | US EPA | National Primary/Secondary Drinking Water Regulations |
-| Surface Water Treatment Rule (SWTR) | US EPA | Filtration and disinfection requirements |
-| AWWA Standards (e.g., B100–B701) | AWWA | Design and materials standards |
+Chlorine reacts with NOM to form **trihalomethanes (THMs)** and **haloacetic acids (HAAs)** — the most regulated DBP classes. Health Canada's GDWQ sets maximum acceptable concentrations (MACs): total THMs ≤ 100 µg/L, total HAAs ≤ 80 µg/L.
+
+### Additional Treatment Steps
+
+- **Taste and odor control**: activated carbon adsorption (PAC in sedimentation basin or GAC filters) for geosmin and MIB from cyanobacterial blooms
+- **Fluoridation**: 0.7 mg/L F⁻ (Health Canada recommended level) for dental caries prevention
+- **Corrosion control**: pH adjustment (target pH 7.5-8.5 at the tap), orthophosphate addition, or calcium carbonate saturation (Langelier Saturation Index > 0) to prevent leaching of lead and copper from distribution system plumbing
 
 ## Wastewater Treatment
 
-### Preliminary and Primary Treatment
+### Preliminary Treatment
 
-**Preliminary treatment** removes gross solids and grit that would damage downstream equipment:
-- Bar screens: coarse (50–100 mm), medium (6–25 mm), fine (1–6 mm); mechanically raked
-- Grit chambers: aerated grit chambers or vortex-type, designed to remove particles > 0.21 mm (200 µm) at 28 L/person/day design flow
+**Bar screens** (mechanically cleaned, 6-25 mm clear openings) remove rags, plastics, and large solids that could damage downstream equipment. **Fine screens** (1-6 mm) and **drum screens** provide additional protection. **Grit chambers** (velocity-controlled channels, vortex units, or aerated chambers) remove inorganic grit (sand, gravel, coffee grounds) that would cause abrasive wear in pumps and digesters, while allowing organic matter to remain in suspension.
 
-**Primary clarifiers** remove settleable solids by gravity:
-- Removal efficiency: ~50–65% TSS, ~30–35% BOD₅
-- SOR: 24–32 m/day (average flow), 48–64 m/day (peak flow)
-- Detention time: 1.5–2.5 hours
+### Primary Treatment
 
-### Secondary Treatment — Activated Sludge
+**Primary clarifiers** are circular or rectangular sedimentation tanks with hydraulic retention times of 1.5-2.5 hours and surface overflow rates of 30-50 m/day. Primary treatment achieves approximately:
+- **50-60% removal of total suspended solids (TSS)**
+- **30-35% removal of five-day biochemical oxygen demand (BOD₅)**
 
-The activated sludge process uses a mixed microbial culture to biodegrade dissolved and colloidal organics. Key design parameters:
+Primary sludge (raw sludge) contains approximately 3-5% total solids and high concentrations of pathogens and odor compounds.
 
-| Parameter | Symbol | Typical Range |
-|-----------|--------|--------------|
-| Mixed Liquor Suspended Solids | MLSS | 2,000–4,000 mg/L |
-| Solids Retention Time | SRT (θc) | 5–15 days (aerobic) |
-| Food-to-Microorganism ratio | F/M | 0.1–0.4 kg BOD/kg MLVSS·day |
-| Dissolved oxygen | DO | ≥ 2 mg/L |
-| Hydraulic Retention Time | HRT | 6–8 hours |
+### Secondary Biological Treatment
 
-The SRT (sludge age) controls effluent quality and sludge production:
+Secondary treatment uses microorganisms to oxidize dissolved organic matter and remove suspended organics not captured in primary clarifiers. Key processes:
 
-$$SRT = \frac{V \times MLSS}{Q_w \times MLSS_w}$$
+**Activated sludge** is the dominant secondary treatment process worldwide. A mixed culture of heterotrophic bacteria oxidizes BOD in an aerated reactor, and the biomass is separated in a secondary clarifier. Design parameters:
 
-where V is reactor volume (m³), Q_w the waste sludge flow rate (m³/day), and MLSS_w the waste sludge concentration (mg/L).
+- **MLSS (Mixed Liquor Suspended Solids)**: 2,000-4,000 mg/L in conventional plants; 8,000-12,000 mg/L in MBRs
+- **Sludge Retention Time (SRT)** (also called solids retention time or mean cell residence time — MCRT):
 
-Effluent quality goals for secondary treatment under the Canadian **Wastewater Systems Effluent Regulations (WSER, SOR/2012-139)**:
+$$
+SRT = \frac{V \times MLSS}{Q_w \times MLSS_w}
+$$
 
-| Parameter | WSER Limit |
-|-----------|-----------|
-| CBOD₅ | ≤ 25 mg/L |
-| TSS | ≤ 25 mg/L |
-| Un-ionized ammonia (as N) | ≤ 1.25 mg/L |
-| Total residual chlorine | ≤ 0.02 mg/L |
+Where *V* = reactor volume (m³), *Qw* = waste sludge flow rate (m³/day), *MLSSw* = waste sludge concentration (mg/L). Typical SRT: 5-15 days for BOD removal; 10-20 days for nitrification.
+
+- **Dissolved oxygen (DO)**: ≥ 2 mg/L in the aerobic zone to prevent filamentous bulking
+- **Food-to-microorganism ratio (F:M)**: 0.05-0.5 g BOD/g MLVSS/day
+
+**Trickling filters** distribute wastewater over a packed media (plastic cross-flow media, rock) where a biofilm oxidizes BOD. Lower energy input than activated sludge; less control over effluent quality.
+
+**Membrane Bioreactors (MBR)** combine activated sludge with ultrafiltration membranes (pore size 0.04-0.4 µm) that replace secondary clarifiers. MBRs produce near-sterile effluent (turbidity < 0.2 NTU, no detectable *Giardia* or *Cryptosporidium*) at higher MLSS concentrations, reducing footprint by 50-60% compared to conventional activated sludge.
+
+### Tertiary Treatment
+
+Tertiary processes target nutrients and fine suspended solids not removed in secondary treatment:
+
+- **Nitrification**: conversion of NH₄⁺ to NO₃⁻ by *Nitrosomonas* and *Nitrobacter* in aerobic conditions; requires SRT ≥ 10-15 days at 15°C; sensitive to DO and pH
+- **Denitrification**: biological conversion of NO₃⁻ to N₂ gas in anoxic conditions using endogenous or external carbon (methanol, acetic acid, raw wastewater); total nitrogen targets typically < 10 mg/L for sensitive receiving waters
+- **Phosphorus removal**: biological enhanced phosphorus removal (EBPR) via poly-phosphate accumulating organisms (PAOs) in anaerobic-aerobic sequences (A²O, UCT processes); chemical precipitation with alum, ferric salts, or lime
+- **Tertiary filtration**: granular media or disk filters for TSS polishing before disinfection
+- **UV or chlorine disinfection**: final pathogen reduction before discharge
 
 <Warning>
-Facilities discharging to sensitive receiving waters (cold-water fish habitat, shellfish areas) typically face more stringent effluent limits than the WSER baseline, established through environmental impact assessment and site-specific water quality objectives.
+Nitrogen and phosphorus discharges to sensitive water bodies — particularly the Great Lakes, Quebec's Lake Champlain watershed, and coastal estuaries — are subject to increasingly stringent effluent limits as part of Canada's commitments under the Great Lakes Water Quality Agreement (GLWQA) and provincial nutrient management policies. Municipalities upgrading for nutrient removal should anticipate phosphorus limits of 0.1-1.0 mg/L TP and total nitrogen targets of 3-10 mg/L TN in sensitive receiving waters.
 </Warning>
 
-### Biological Nutrient Removal (BNR)
+## Key Parameters: Raw vs. Treated Values
 
-Nitrogen and phosphorus removal prevents eutrophication in receiving water bodies.
+| Parameter | Raw Municipal Wastewater | Primary Effluent | Secondary Effluent | WSER Limit (Canada) |
+|-----------|------------------------|-----------------|-------------------|---------------------|
+| BOD₅ (mg/L) | 150–300 | 100–200 | 10–20 | CBOD ≤ 25 |
+| COD (mg/L) | 300–600 | 200–400 | 40–100 | — |
+| TSS (mg/L) | 150–350 | 70–150 | 10–20 | ≤ 25 |
+| Total Nitrogen (mg/L) | 30–60 | 25–50 | 15–30 | — |
+| Total Phosphorus (mg/L) | 5–12 | 4–9 | 3–7 | — |
+| Turbidity (NTU) | High | 30–100 | 2–10 | — |
+| E. coli (CFU/100 mL) | 10⁶–10⁸ | 10⁵–10⁷ | 10²–10⁴ | — |
+| Un-ionized NH₃ (mg/L) | Variable | Variable | Variable | ≤ 1.25 |
 
-**Nitrification** (aerobic, SRT > 10 days at 15°C): NH₄⁺ → NO₂⁻ → NO₃⁻ by Nitrosomonas and Nitrobacter
+The **Wastewater Systems Effluent Regulations (WSER)** (Canada SOR/2012-139) under the *Fisheries Act* establish the national baseline effluent standards for wastewater systems serving populations ≥ 1 person and discharging ≥ 2,500 m³/day or ≥ 500 m³/day in sensitive areas.
 
-**Denitrification** (anoxic, carbon source required): NO₃⁻ → N₂ gas — methanol or raw wastewater as carbon source
+## Membrane Processes
 
-**Biological phosphorus removal** (EBPR): luxury P uptake by polyphosphate-accumulating organisms (PAOs) in alternating anaerobic/aerobic zones (A²/O process)
+Membrane separation plays an increasing role in both drinking water and wastewater treatment:
 
-### Membrane Bioreactors (MBR)
+| Membrane Type | Pore Size | Operating Pressure | Applications |
+|--------------|-----------|-------------------|--------------|
+| Microfiltration (MF) | 0.1–10 µm | 10–300 kPa | *Giardia* / *Cryptosporidium* removal, MBR, pretreatment for RO |
+| Ultrafiltration (UF) | 0.01–0.1 µm | 100–600 kPa | Virus removal, MBR, NOM removal, water reuse |
+| Nanofiltration (NF) | 0.001–0.01 µm | 500–1,500 kPa | Hardness removal, DBP precursor removal, color removal |
+| Reverse Osmosis (RO) | < 0.001 µm | 1,000–8,000 kPa | Desalination, PFAS removal, advanced water reuse, high-purity industrial water |
 
-MBRs combine activated sludge with ultrafiltration membranes, eliminating secondary clarifiers:
-- MLSS 8,000–15,000 mg/L (higher than conventional)
-- Effluent TSS < 1 mg/L (essentially particle-free)
-- Pathogen removal credit: 3–4 log virus, > 4 log Giardia/Cryptosporidium
-- Higher capital and energy cost, but smaller footprint
-
-### Tertiary Treatment and Advanced Processes
-
-| Process | Removal Target | Notes |
-|---------|---------------|-------|
-| Sand/cloth filtration | TSS polishing to < 5 mg/L | Before disinfection or reuse |
-| UV disinfection | Pathogens | 40 mJ/cm² minimum |
-| Ozonation | Trace organics, EDCs | Bromate formation risk |
-| Reverse osmosis | TDS, pharmaceuticals | For water reuse applications |
-| Constructed wetlands | N, P, pathogens | Low energy, land-intensive |
-
-## Membrane Filtration Processes
-
-| Membrane Type | Pore Size | Driving Pressure | Rejects |
-|---------------|-----------|-----------------|---------|
-| Microfiltration (MF) | 0.1–10 µm | 10–200 kPa | Bacteria, protozoa, TSS |
-| Ultrafiltration (UF) | 0.01–0.1 µm | 100–500 kPa | Viruses, macromolecules |
-| Nanofiltration (NF) | 0.001–0.01 µm | 500–1,500 kPa | Divalent ions, hardness, colour |
-| Reverse Osmosis (RO) | < 0.001 µm | 1,500–8,000 kPa | Monovalent ions, TDS |
+Membrane fouling (particulate, organic, biofouling, and scaling) is the primary operational challenge. Pretreatment, chemical cleaning cycles (CEB: chemically enhanced backwash; CIP: clean-in-place with NaOCl, citric acid, NaOH), and anti-scalant addition are standard mitigation strategies.
 
 ## Sludge Management and Biosolids
 
-Biosolids from wastewater treatment undergo stabilization before beneficial reuse or disposal:
+Sludge from water and wastewater treatment is a significant waste stream requiring management. Processes include:
 
-- **Anaerobic digestion** (35–37°C mesophilic or 55°C thermophilic): 40–60% volatile solids destruction, biogas production (~0.35 m³ CH₄/kg VS destroyed at STP)
-- **Aerobic digestion**: lower VS reduction, no energy recovery
-- **Dewatering**: belt filter presses, centrifuges, screw presses → 18–35% total solids
-- **Land application**: CCME Guidelines for the Land Application of Biosolids (2010) sets limits on metal concentrations (Pb, Cd, Cu, Zn, Ni, Mo, As, Se) and loading rates. Class A biosolids (pathogen reduction to < 3 MPN Salmonella/4 g TS) vs. Class B
+- **Thickening**: gravity thickening (secondary sludge) or dissolved air flotation thickening; target 5-8% TS
+- **Anaerobic digestion**: mesophilic (35-38°C) or thermophilic (50-55°C) digestion; 40-60% volatile solids reduction; biogas production (60-70% CH₄) for energy recovery; typical HRT 20-30 days
+- **Dewatering**: belt filter press, centrifuge, or screw press; target 18-25% TS cake
+- **Land application of biosolids**: governed in Canada by the **CCME (Canadian Council of Ministers of the Environment) Guidelines for Compost Quality** and provincial regulations; metal loading limits (cadmium, copper, lead, mercury, molybdenum, nickel, selenium, zinc) protect soil quality over a 45-year cumulative period
 
 <Tip>
-Biogas from anaerobic digestion can meet 20–50% of a wastewater plant's energy demand. Combined heat and power (CHP) systems using biogas can achieve 30–35% electrical efficiency plus heat recovery, significantly reducing the carbon footprint of wastewater treatment.
+Biogas captured from anaerobic digesters can supply 50-100% of a wastewater treatment plant's energy needs through combined heat and power (CHP) systems. Many Canadian municipalities have implemented biogas recovery programs, with plants like the Ashbridges Bay Treatment Plant (Toronto) generating electricity equivalent to powering thousands of homes annually. Engineers designing new or upgraded digesters should assess biogas utilization as a key project component to reduce both operating costs and greenhouse gas emissions.
 </Tip>
+
+## Canadian and US Regulatory Standards
+
+### Health Canada Guidelines for Canadian Drinking Water Quality (GDWQ)
+
+Health Canada publishes **Guidelines for Canadian Drinking Water Quality (GDWQ)** — non-binding federal recommendations that form the scientific basis for binding provincial and territorial regulations. Key parameters include:
+- Turbidity: MAC ≤ 1 NTU (treated surface water); ≤ 0.1 NTU for UV-disinfected systems
+- *E. coli*: none detectable per 100 mL
+- Total THMs: ≤ 100 µg/L; Total HAAs: ≤ 80 µg/L
+- Nitrate: ≤ 45 mg/L (as NO₃⁻) or ≤ 10 mg/L (as N)
+
+**Ontario Regulation 170/03** (*Safe Drinking Water Act*) is one of the most prescriptive provincial drinking water frameworks in Canada, requiring accredited operators, continuous turbidity monitoring, real-time alarming, comprehensive sampling and reporting, and municipal annual reports. The **AWWA (American Water Works Association)** publishes widely adopted design standards (C900 for PVC water mains, B300 for sodium hypochlorite, etc.) that are referenced in Canadian municipal specifications.
+
+### US EPA Standards
+
+The **Safe Drinking Water Act (SDWA)** authorizes EPA to set **National Primary Drinking Water Regulations (NPDWRs)** with Maximum Contaminant Levels (MCLs) for over 90 contaminants. The **Surface Water Treatment Rule (SWTR)** and its revisions (Interim Enhanced SWTR, Long Term 1 and 2 Enhanced SWTRs) establish treatment technique requirements for *Giardia*, *Cryptosporidium*, and *Legionella* based on source water contamination levels.
+
+For wastewater, the **National Pollutant Discharge Elimination System (NPDES)** under the *Clean Water Act* governs point source discharges. **40 CFR Part 133** establishes secondary treatment standards: BOD₅ ≤ 30 mg/L (monthly average), TSS ≤ 30 mg/L, pH 6.0-9.0, removal efficiency ≥ 85% for both BOD and TSS.
+
+<Info>
+The US EPA has issued health advisories for per- and polyfluoroalkyl substances (PFAS) in drinking water, with maximum contaminant level goals (MCLGs) of zero for PFOA and PFOS, and MCLs of 4 ng/L (ppt) each. Health Canada has set a MAC of 600 ng/L for total PFAS in drinking water (interim, 2021). Granular activated carbon (GAC) and high-pressure membrane systems (NF, RO) are the primary treatment technologies for PFAS removal.
+</Info>
+
+## See Also
 
 <CardGroup cols={2}>
   <Card title="Air Quality" icon="wind" href="/en/environmental/air-quality">
-    Pollutants, Canadian standards, emission controls, and dispersion modeling
+    Air pollutant standards, dispersion modeling, emission control technologies, and Canadian and US ambient air quality objectives
   </Card>
   <Card title="Site Remediation" icon="seedling" href="/en/environmental/site-remediation">
-    Environmental site assessment, contaminants, and remediation technologies
+    Contaminated site assessment, remediation technologies, risk-based closure criteria, and Canadian federal and provincial standards
   </Card>
-  <Card title="Version française" icon="language" href="/genie-environnemental/traitement-eaux">
-    Contenu complet en français avec les normes provinciales québécoises
+  <Card title="French Version" icon="language" href="/genie-environnemental/traitement-eaux">
+    Version française complète — traitement des eaux potables et usées, normes canadiennes, RERE et gestion des biosolides
   </Card>
   <Card title="Biomedical Engineering" icon="heart-pulse" href="/en/biomedical/introduction">
-    Introduction to biomedical engineering in a North American context
+    Introduction to biomedical engineering, medical devices, imaging, and North American regulatory context
   </Card>
 </CardGroup>

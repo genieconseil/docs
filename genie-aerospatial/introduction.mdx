@@ -1,0 +1,180 @@
+---
+title: "Introduction au génie aérospatial"
+description: "Histoire du génie aérospatial, quatre forces du vol, disciplines aéronautiques et astronautiques, industrie canadienne et parcours professionnels"
+icon: "plane"
+---
+
+Le génie aérospatial est la branche de l'ingénierie qui se consacre à la conception, au développement, aux essais et à la production des aéronefs, des engins spatiaux et des systèmes connexes. C'est l'une des disciplines d'ingénierie les plus exigeantes sur le plan technique, combinant aérodynamique, propulsion, structures, matériaux et avionique dans des systèmes où la fiabilité est absolument critique. Le Canada possède une industrie aérospatiale de classe mondiale, se classant parmi les cinq premiers producteurs mondiaux.
+
+## Bref historique
+
+### Les pionniers
+
+- **1903** : Les frères Wright réalisent le premier vol motorisé contrôlé à Kitty Hawk (12 secondes, 37 m)
+- **1919** : Première traversée de l'Atlantique par Alcock et Brown dans un Vickers Vimy (Terre-Neuve à Irlande)
+- **1939–1945** : La Seconde Guerre mondiale révolutionne l'aviation : moteurs à réaction (Whittle/von Ohain), avions à grande vitesse
+- **1947** : Chuck Yeager franchit le mur du son dans le Bell X-1 (Mach 1,06)
+- **1957** : Spoutnik 1 — premier satellite artificiel (URSS) — début de l'ère spatiale
+- **1961** : Youri Gagarine — premier humain dans l'espace
+- **1969** : Apollo 11 — premiers humains sur la Lune
+- **1981–2011** : Programme de la navette spatiale américaine
+- **Années 2000+** : Commercialisation de l'espace (SpaceX, Blue Origin, Virgin Galactic)
+
+### Le Canada dans l'espace
+
+Le Canada est le troisième pays à avoir mis un satellite en orbite (Alouette 1, 1962). Le **Canadarm** (SRMS) a équipé la navette spatiale de 1981 à 2011 et le **Canadarm2** est l'élément canadien clé de la Station spatiale internationale. Le Canada participe au programme Artemis (retour sur la Lune) avec le **Canadarm3**.
+
+## Les quatre forces du vol
+
+Tout aéronef en vol rectiligne uniforme est soumis à l'équilibre de quatre forces :
+
+### 1. Portance (Lift — L)
+
+La portance est la force perpendiculaire à la vitesse de l'écoulement, générée par les ailes. Équation de la portance :
+
+`L = ½ · ρ · V² · S · CL`
+
+Où :
+- `ρ` = masse volumique de l'air (kg/m³) — 1,225 kg/m³ au niveau de la mer à 15°C
+- `V` = vitesse de l'aéronef (m/s)
+- `S` = surface alaire (m²)
+- `CL` = coefficient de portance (sans dimension, dépend de l'angle d'attaque et du profil)
+
+### 2. Trainée (Drag — D)
+
+La traînée est la force parallèle et opposée à la vitesse de l'écoulement :
+
+`D = ½ · ρ · V² · S · CD`
+
+Pour un avion en palier : D = T (thrust) et L = W (weight).
+
+### 3. Poussée (Thrust — T)
+
+La poussée est générée par les moteurs (à réaction ou à hélice). La poussée nette d'un turboréacteur :
+
+`T = ṁ·Ve - ṁ0·V0 + (Pe - P0)·Ae`
+
+Où ṁ est le débit massique de gaz d'échappement, Ve la vitesse d'éjection et Ae la section de tuyère.
+
+### 4. Poids (Weight — W)
+
+Le poids est la force gravitationnelle agissant vers le bas sur le centre de gravité de l'aéronef :
+
+`W = m · g`
+
+La **finesse** (rapport portance/traînée) L/D caractérise l'efficacité aérodynamique. Un planeur de compétition atteint L/D ≈ 60, un avion commercial moderne (A350, B787) ≈ 20, un chasseur supersonique ≈ 5–10.
+
+<Note>En vol de croisière, un Boeing 787 Dreamliner transporte environ 250 passagers avec une finesse d'environ 20 à Mach 0,85, ce qui signifie qu'il parcourt 20 km horizontalement pour chaque kilomètre d'altitude perdue en vol plané sans moteur.</Note>
+
+## Sous-disciplines du génie aérospatial
+
+### Aéronautique
+
+L'aéronautique traite des aéronefs évoluant dans l'atmosphère :
+
+| Sous-discipline | Objet | Outils |
+|----------------|-------|--------|
+| Aérodynamique | Forces et moments sur les ailes et fuselages | CFD, souffleries |
+| Propulsion | Moteurs à réaction, turbopropulseurs, hélices | Cycle thermodynamique, combustion |
+| Structures aéronautiques | Fuselage, ailes, gouvernes | FEA, matériaux composites |
+| Avionique | Systèmes embarqués, navigation, communications | DO-178C, électronique |
+| Systèmes de vol | Commandes de vol, hydraulique, pneumatique | Essais en vol |
+
+### Astronautique
+
+L'astronautique traite des véhicules évoluant en dehors de l'atmosphère :
+
+- **Mécanique orbitale** : orbites de Kepler, manoeuvres de Hohmann, rendez-vous orbital
+- **Propulsion spatiale** : moteurs-fusées (chimique, ionique, nucléaire)
+- **Structures spatiales** : résistance au vide, aux cycles thermiques (±150°C)
+- **Attitude et orbite** : contrôle de pointage, roues à réaction, propulseurs
+- **Charges utiles** : instruments scientifiques, télécommunications, observation de la Terre
+
+## Types d'aéronefs
+
+| Catégorie | Exemples | Applications |
+|-----------|---------|-------------|
+| **Aviation commerciale** | A320, B737, A350, B787 | Transport de passagers/fret |
+| **Aviation générale** | Cessna 172, Piper PA-28 | Loisir, affaires, formation |
+| **Aviation d'affaires** | Bombardier Global 7500, Learjet 75 | Transport exécutif |
+| **Avions militaires** | CF-18 Hornet, F-35, CC-150 Polaris | Combat, transport, patrouille |
+| **Giravions** | Bell 412, Sikorsky S-92, AW139 | Héliportage, offshore, SAR |
+| **UAV/Drones** | MQ-9 Reaper, DJI Matrice, senseFly eBee | Surveillance, livraison, cartographie |
+| **Avions de transport** | C-17, CC-177, CC-130J Hercules | Transport militaire et humanitaire |
+
+## L'industrie aérospatiale canadienne
+
+Le Canada abrite une industrie aérospatiale dynamique, concentrée principalement au Québec (Montréal), en Ontario et en Colombie-Britannique.
+
+### Entreprises clés
+
+**Bombardier (Montréal)** : L'un des trois grands constructeurs d'avions d'affaires mondiaux. La famille Global (5500, 6500, 7500) et la Challenger (350, 605, 650) sont des références en aviation d'affaires. Production à Montréal, Belfast et Wichita.
+
+**CAE (Montréal)** : Leader mondial des simulateurs de vol et de la formation. CAE équipe les compagnies aériennes, les militaires et les opérateurs médicaux dans plus de 35 pays. Le simulateur de vol complet (FFS, Full Flight Simulator) reproduit fidèlement les caractéristiques de vol et les pannes de tous les aéronefs modernes.
+
+**Pratt & Whitney Canada (Longueuil)** : Division de RTX Corporation, PW Canada est un leader mondial des turbopropulseurs et turbosoufflantes pour l'aviation d'affaires, régionale et militaire. Les moteurs PT6 (turbopropulseur) et PW100/PW150 équipent des milliers d'aéronefs mondialement.
+
+**MDA Space (Sainte-Anne-de-Bellevue)** : Développeur du Canadarm et de la technologie spatiale robotique canadienne. MDA développe également des systèmes RADARSAT et des technologies d'observation de la Terre.
+
+**Magellan Aerospace (Mississauga)** : Fabricant de composants aérospatiaux avancés (structures, pièces forgées) pour Airbus, Boeing, Lockheed Martin et Pratt & Whitney.
+
+**Bell Textron Canada (Mirabel)** : Assemblage d'hélicoptères commerciaux Bell (412, 429, 505, 525).
+
+<Tip>Le Grand Montréal est l'un des cinq plus grands pôles aérospatiaux mondiaux, avec plus de 230 entreprises et 43 000 emplois directs (données Aéro Montréal). Le cluster bénéficie d'un écosystème unique combinant constructeurs, équipementiers, centres de formation et de recherche.</Tip>
+
+## Certifications et réglementation
+
+### Canada — Transports Canada
+
+**Transports Canada** (AARTA — Aviation civile) est l'autorité réglementaire canadienne pour l'aviation civile. Les certifications clés :
+
+- **Certificat de type** (Type Certificate) : approbation d'un nouveau type d'aéronef pour sa mise en service
+- **Certificat de navigabilité** (Certificate of Airworthiness) : attestation qu'un aéronef individuel est en état de voler
+- **Licences de pilote** : PPL, CPL, ATPL selon les catégories
+- **Règles de l'air UAV** : partie IX du Règlement de l'aviation canadien (RAC) — catégories de drones (< 250 g, 250 g–25 kg, > 25 kg)
+
+### Homologations internationales
+
+- **FAA** (Federal Aviation Administration, États-Unis) : certifications FAR Part 25 (avions de transport), Part 23 (aviation générale)
+- **EASA** (European Union Aviation Safety Agency) : CS-25 (avions de transport), CS-23
+- **OACI** (Organisation de l'aviation civile internationale) : normes et pratiques recommandées (SARP) via les annexes à la Convention de Chicago (1944)
+
+Les fabricants canadiens doivent généralement obtenir des validations croisées FAA et EASA en plus de la certification Transports Canada pour accéder aux marchés américain et européen.
+
+## Parcours professionnels au Canada
+
+### Formation
+
+- **Polytechnique Montréal** : Génie aérospatial (baccalauréat et maîtrise)
+- **ÉTS (École de technologie supérieure)** : Génie mécanique avec concentration aérospatiale
+- **Université de Toronto — UTIAS** : Centre de recherche aérospatial de premier plan
+- **Carleton University** (Ottawa) : Génie aérospatial
+- **BCIT, Seneca** : Programmes techniques en maintenance aérospatiale (AME — Aircraft Maintenance Engineer)
+
+### Associations professionnelles
+
+- **Ingénieurs Canada / OIQ** : Ingénieurs aérospatiaux au Québec sont membres de l'OIQ
+- **CASI** (Canadian Aeronautics and Space Institute) : association professionnelle des aérospatialistes canadiens
+- **Aéro Montréal** : grappe aérospatiale québécoise
+
+<CardGroup cols={2}>
+  <Card title="Aérodynamique" icon="wind" href="/genie-aerospatial/aerodynamique">
+    Portance, traînée, profils NACA et effets de compressibilité
+  </Card>
+  <Card title="Génie mécanique" icon="gears" href="/genie-mecanique/introduction">
+    Mécanique des fluides, thermodynamique et structures
+  </Card>
+  <Card title="Génie électrique" icon="bolt" href="/genie-electrique/introduction">
+    Avionique, systèmes embarqués et commandes électriques
+  </Card>
+  <Card title="Ressources et normes" icon="file-contract" href="/ressources/normes-codes">
+    Standards FAA, EASA, Transports Canada et OACI
+  </Card>
+</CardGroup>
+
+## Voir aussi
+
+- **Normes** : FAR Part 25/23, CS-25/23 (EASA), Règlement de l'aviation canadien (RAC), DO-178C (logiciels embarqués), DO-254 (électronique embarquée)
+- **Logiciels** : ANSYS Fluent/Mechanical, NASTRAN, CATIA V5/V6, Siemens NX, OpenFOAM, AVL (Athena Vortex Lattice), XFOIL
+- **Organismes** : Transports Canada, CASI, Aéro Montréal, Agence spatiale canadienne, AIAA (American Institute of Aeronautics and Astronautics)
+- **Références** : Anderson — *Introduction to Flight*; Raymer — *Aircraft Design: A Conceptual Approach*; Shevell — *Fundamentals of Flight*

@@ -1,0 +1,158 @@
+---
+title: "Control Systems"
+description: "Open-loop vs closed-loop, transfer functions, Bode plots, PID tuning, and stability criteria"
+icon: "sliders"
+---
+
+Control systems engineering provides the mathematical tools to analyze and design systems that behave predictably despite disturbances and parameter variations. It is fundamental to automation, robotics, process control, and power electronics.
+
+## Open-Loop vs Closed-Loop Control
+
+### Open-Loop Systems
+The control action is computed without measuring the output. The controller acts based solely on the reference input.
+
+Examples: traffic signal with fixed timing, open-loop stepper motor positioning, washing machine cycle timer.
+
+**Advantages**: simple implementation, no stability concerns, low cost
+**Disadvantages**: no error correction, sensitive to disturbances and model uncertainty
+
+### Closed-Loop Systems (Feedback Control)
+The output is measured and fed back to compute an error signal: `e(t) = r(t) - y(t)`. The controller acts to reduce this error.
+
+Block diagram: `Reference r(t) → [+] → Controller C(s) → Plant G(s) → Output y(t)`
+                                  `↑← Sensor H(s) ←←←←←←←←←←←←←←←←←←←←←↓`
+
+**Advantages**: automatic error correction, robustness to disturbances, ability to meet tight performance specs
+**Disadvantages**: added complexity, potential instability if poorly tuned, sensor noise amplification
+
+<Note>Nearly all industrial control loops — temperature, pressure, flow, level, speed, position — use closed-loop feedback. Open-loop control is reserved for applications where disturbances are negligible and precision is low.</Note>
+
+## Transfer Functions
+
+### Laplace Transform Basics
+The Laplace transform converts differential equations to algebraic equations in the complex variable `s = σ + jω`:
+- Differentiation: `d/dt → s` (with zero initial conditions)
+- Integration: `∫dt → 1/s`
+
+### Transfer Function G(s)
+`G(s) = Y(s)/U(s)` (output over input, zero initial conditions)
+
+**First-order system**: `G(s) = K/(τs + 1)`
+- K = DC gain (steady-state output / input magnitude)
+- τ = time constant (s); at t = τ, step response reaches 63.2% of final value
+
+**Second-order system**: `G(s) = ωn²/(s² + 2ζωn·s + ωn²)`
+- ωn = natural frequency (rad/s)
+- ζ = damping ratio: overdamped ζ > 1 (no overshoot), critically damped ζ = 1, underdamped ζ < 1 (oscillatory)
+
+For ζ = 0.7: peak overshoot ≈ 5%, settling time ≈ 5.8/ωn — a good target for many industrial loops.
+
+### Closed-Loop Transfer Function
+For unity feedback (H(s) = 1):
+
+`T(s) = G(s)C(s) / (1 + G(s)C(s))`
+
+Steady-state error for unit step input: `ess = 1/(1 + Kp)` where `Kp = lim[s→0] G(s)C(s)` is the position error constant.
+
+## Bode Plots
+
+The frequency response `G(jω)` (replace s with jω) reveals how the system responds to sinusoidal inputs:
+
+**Magnitude plot**: `|G(jω)|dB = 20·log₁₀|G(jω)|` vs. log(ω)
+**Phase plot**: `∠G(jω)` (degrees) vs. log(ω)
+
+### Reading the Bode Plot
+- **Gain crossover frequency** ωgc: frequency where magnitude = 0 dB (|G(jω)| = 1)
+- **Phase crossover frequency** ωpc: frequency where phase = -180°
+- **Phase margin** PM = 180° + ∠G(jωgc); PM > 45° indicates stable, well-damped response
+- **Gain margin** GM (dB) = 0 - |G(jωpc)|dB; GM > 6 dB recommended
+
+<Tip>For a quick check: PM ≈ 100ζ (degrees) for second-order systems. So PM = 45° → ζ ≈ 0.45, which gives ≈ 20% overshoot. PM = 60° → ζ ≈ 0.6, ≈ 10% overshoot.</Tip>
+
+## PID Controller
+
+The PID controller is the most widely deployed controller in industry (>90% of control loops):
+
+`u(t) = Kp·e(t) + Ki·∫e(t)dt + Kd·de(t)/dt`
+
+Equivalently: `u(t) = Kp·[e(t) + (1/Ti)·∫e(t)dt + Td·de(t)/dt]`
+
+### Effect of Each Term
+
+**Proportional (Kp)**: Immediate reaction proportional to error. Large Kp reduces steady-state error but can cause oscillations. Alone (P-only), leaves a residual steady-state error (offset) for most process types.
+
+**Integral (Ki = Kp/Ti)**: Integrates error over time; eliminates steady-state offset. Can cause integrator windup when the actuator saturates — implement anti-windup (clamp the integral, or back-calculation).
+
+**Derivative (Kd = Kp·Td)**: Reacts to the rate of change of error; anticipates future error; improves transient response and reduces overshoot. Amplifies measurement noise — always use a derivative filter `τf = Td/5 to Td/10`.
+
+<Warning>Start with PI control (no derivative) for most processes. Add derivative only when the PI response is too sluggish or oscillatory. Derivative action on noisy signals (flow, pressure) often causes more problems than it solves.</Warning>
+
+### Ziegler-Nichols Tuning — Closed-Loop Method
+1. Set to proportional control only (disable I and D)
+2. Increase Kp slowly until the output oscillates with constant amplitude → ultimate gain **Ku** and ultimate period **Tu** (seconds)
+3. Apply Z-N table:
+
+| Controller | Kp | Ti (= Kp/Ki) | Td (= Kd/Kp) |
+|---|---|---|---|
+| P | 0.5·Ku | — | — |
+| PI | 0.45·Ku | Tu/1.2 | — |
+| PID | 0.6·Ku | Tu/2 | Tu/8 |
+
+The Z-N settings typically yield ~25% overshoot. Reduce Kp by 20-30% for a smoother response.
+
+### IMC (Internal Model Control) Tuning
+For a first-order plus dead time (FOPDT) process model `G(s) = (K·e^(-Ls))/(τs + 1)`:
+
+`Kp = τ/(K·(λ + L))`, `Ti = τ`, `Td = 0` (PI)
+
+Where λ is the desired closed-loop time constant (a tuning parameter; larger λ → slower but more robust).
+
+## Stability Analysis
+
+### Routh-Hurwitz Criterion
+For the characteristic polynomial `D(s) = ansn + an-1s^(n-1) + ... + a1s + a0`:
+1. All coefficients must be positive
+2. Construct the Routh array and check that all elements in the first column are positive
+
+If any first-column element is negative, the system is unstable; the number of sign changes equals the number of right-half-plane poles.
+
+### Nyquist Criterion
+Plot `L(jω) = C(jω)·G(jω)·H(jω)` for ω from -∞ to +∞. For an open-loop stable system: if the Nyquist plot does not encircle the critical point (-1, 0j), the closed-loop system is stable.
+
+The gain margin and phase margin can be read directly from the Nyquist plot.
+
+### Root Locus
+Traces the closed-loop poles as gain K increases from 0 to ∞. Starts at open-loop poles (K=0) and ends at open-loop zeros (K=∞). If any branch crosses the imaginary axis, the system becomes unstable at that gain.
+
+## Industrial Applications
+
+### Programmable Logic Controllers (PLCs)
+PLCs execute programs cyclically (scan time 1-100 ms). IEC 61131-3 standardized languages: Ladder Diagram (LD), Function Block Diagram (FBD), Structured Text (ST), Instruction List (IL), Sequential Function Chart (SFC).
+
+Common vendors: Siemens (S7 family), Allen-Bradley (ControlLogix), Schneider (Modicon), Mitsubishi.
+
+### SCADA Systems
+Supervisory Control and Data Acquisition for geographically distributed systems. Communication protocols: Modbus RTU/TCP, DNP3, IEC 61850, OPC-UA (modern, secure).
+
+Typical SCADA applications: water/wastewater networks, natural gas pipelines, power substations, oil & gas facilities.
+
+### Typical Control Loops
+- **Temperature**: PI or PID with derivative filter; common in furnaces, reactors, HVAC
+- **Pressure**: fast PI (pressure dynamics are often fast); avoid derivative on noisy pressure signals
+- **Flow**: fast PI; cascade control (flow inner loop, concentration or level outer loop)
+- **Level**: P or PI; integrating process — no integral action needed for type-1 process
+
+<CardGroup cols={2}>
+  <Card title="Electrical Circuits" icon="bolt" href="/en/electrical/circuits">
+    Circuit foundations for control system implementation
+  </Card>
+  <Card title="Software Architecture" icon="diagram-project" href="/en/software/architecture">
+    Embedded software and SCADA system architecture
+  </Card>
+  <Card title="Calculation Tools" icon="calculator" href="/en/resources/calculation-tools">
+    MATLAB/Simulink for control design and simulation
+  </Card>
+  <Card title="Systèmes de contrôle (FR)" icon="sliders" href="/genie-electrique/systemes-controle">
+    Version française complète avec Bode, PID et Nyquist
+  </Card>
+</CardGroup>

@@ -1,0 +1,280 @@
+---
+title: "Mécanique des solides"
+description: "Contraintes, déformations, cercle de Mohr, théories de rupture, torsion, flexion, flambement et réservoirs sous pression"
+icon: "cube"
+---
+
+La mécanique des solides est la base de toute conception en génie mécanique et civil. Elle permet de prédire le comportement des matériaux soumis à des charges et de s'assurer que les composants ne se déforment pas excessivement ni ne se rompent en service.
+
+## Contraintes et déformations
+
+### Contrainte normale
+
+La contrainte normale σ est la force normale par unité d'aire :
+
+```
+σ = F / A  (Pa ou MPa)
+```
+
+### Contrainte de cisaillement
+
+```
+τ = V / A  (force transversale sur une section)
+```
+
+### Déformation axiale
+
+```
+ε = δ / L  (sans dimension, ou mm/mm)
+```
+
+La déformation transversale est reliée à la déformation axiale par le coefficient de Poisson ν :
+
+```
+ε_trans = −ν × ε_axial
+```
+
+Valeurs typiques : acier ν ≈ 0,30 ; aluminium ν ≈ 0,33 ; béton ν ≈ 0,20.
+
+## Loi de Hooke généralisée
+
+En état de contrainte triaxiale, la loi de Hooke tridimensionnelle est :
+
+```
+ε_x = (1/E) × [σ_x − ν(σ_y + σ_z)]
+ε_y = (1/E) × [σ_y − ν(σ_x + σ_z)]
+ε_z = (1/E) × [σ_z − ν(σ_x + σ_y)]
+γ_xy = τ_xy / G  ;  G = E / [2(1+ν)]
+```
+
+### Module d'élasticité des matériaux courants
+
+| Matériau | E (GPa) | G (GPa) | ν |
+|----------|---------|---------|---|
+| Acier | 200 | 77 | 0,30 |
+| Aluminium 6061 | 69 | 26 | 0,33 |
+| Cuivre | 120 | 45 | 0,34 |
+| Titane Ti-6Al-4V | 114 | 43 | 0,34 |
+| Béton | 25–40 | — | 0,15–0,20 |
+| Bois (épicéa, parallèle au fil) | 10–15 | — | — |
+
+## Contraintes principales et cercle de Mohr
+
+En un point d'un corps solide, les contraintes dépendent de l'orientation du plan de coupure. Les **contraintes principales** σ₁ et σ₂ (en 2D) sont les valeurs extrêmes sur tous les plans, et elles agissent sur des plans où la contrainte de cisaillement est nulle.
+
+### Formules des contraintes principales (2D)
+
+```
+σ₁,₂ = (σ_x + σ_y)/2 ± √[(σ_x − σ_y)²/4 + τ_xy²]
+
+τ_max = √[(σ_x − σ_y)²/4 + τ_xy²]
+```
+
+L'angle des plans principaux :
+```
+tan(2θ_p) = 2τ_xy / (σ_x − σ_y)
+```
+
+### Cercle de Mohr
+
+Le cercle de Mohr est la représentation graphique de l'état de contrainte. Centre à ((σ_x + σ_y)/2, 0), rayon R = τ_max. Très utile pour visualiser les contraintes sur des plans quelconques et vérifier les calculs.
+
+## Théories de rupture
+
+### Critère de Von Mises (matériaux ductiles)
+
+Le critère de Von Mises (contrainte équivalente ou contrainte de Von Mises) est le plus utilisé pour les métaux ductiles :
+
+```
+σ_VM = √[σ_x² + σ_y² − σ_x·σ_y + 3τ_xy²]   (2D)
+
+σ_VM = (1/√2) × √[(σ₁−σ₂)² + (σ₂−σ₃)² + (σ₃−σ₁)²]   (3D)
+```
+
+Rupture (plastification) quand σ_VM ≥ Sy.
+
+### Critère de Tresca (maximum shear stress)
+
+```
+τ_max = (σ_max − σ_min) / 2 ≥ Sy / 2
+```
+
+Plus conservateur que Von Mises, préféré dans certains codes de pression (ASME VIII).
+
+### Critère de contrainte normale maximale (matériaux fragiles)
+
+Pour les matériaux fragiles (fonte, céramique, béton) :
+```
+σ_max ≥ Su   (rupture en traction)
+σ_min ≤ −Suc  (rupture en compression)
+```
+
+Le critère de Coulomb-Mohr est une version modifiée pour les matériaux dont la résistance en compression diffère de celle en traction.
+
+## Torsion des arbres circulaires
+
+### Contrainte de cisaillement en torsion
+
+Pour un arbre circulaire plein ou creux soumis à un couple T :
+
+```
+τ = T × c / J
+```
+
+Où c = rayon extérieur, J = moment polaire d'inertie
+
+- Section pleine : J = π d⁴/32
+- Section creuse : J = π(d_ext⁴ − d_int⁴)/32
+
+### Angle de torsion
+
+```
+φ = T × L / (G × J)   (radians)
+```
+
+### Puissance transmise
+
+```
+T = P / ω   où P en watts, ω en rad/s
+T = 9 550 × P(kW) / N(tr/min)   (N·m)
+```
+
+## Flexion des poutres
+
+### Formule de flexion (formule de Navier)
+
+La contrainte de flexion en un point à distance y de l'axe neutre :
+
+```
+σ = M × y / I   (formule générale)
+σ_max = M × c / I = M / Z   (en fibre extrême)
+```
+
+Où I = moment d'inertie de la section, Z = I/c = module de résistance élastique en flexion.
+
+### Contrainte de cisaillement dans les poutres
+
+La contrainte de cisaillement horizontale (et verticale) :
+
+```
+τ = V × Q / (I × b)
+```
+
+Où Q = moment statique de la partie de la section au-delà du point considéré par rapport à l'axe neutre, b = largeur de la section au point considéré.
+
+**Flux de cisaillement** q = V × Q / I (N/mm)
+
+### Moments d'inertie courants
+
+| Section | I (axe fort) |
+|---------|-------------|
+| Rectangle b × h | bh³/12 |
+| Cercle de rayon r | πr⁴/4 |
+| Tube creux r_ext, r_int | π(r_ext⁴ − r_int⁴)/4 |
+| I-section (approximation) | bh³/12 − b_w(h−2t)³/12 |
+
+## Déflexion des poutres
+
+### Méthode de la double intégration
+
+```
+EI × d²y/dx² = M(x)
+EI × dy/dx = ∫M(x)dx + C₁
+EI × y = ∬M(x)dx + C₁x + C₂
+```
+
+Les constantes C₁ et C₂ sont déterminées par les conditions aux limites (déplacement et rotation nuls aux appuis fixes).
+
+### Méthode des aires des moments (Mohr)
+
+Les déplacements et rotations sont calculés à partir des aires et centroïdes du diagramme M/EI (diagramme des courbures).
+
+### Théorème de Castigliano
+
+La déflexion dans la direction d'une charge Q est :
+
+```
+δ = ∂U / ∂Q
+```
+
+Où U = énergie de déformation totale de la structure. Très utile pour les structures statiquement indéterminées et les systèmes complexes.
+
+## Flambement des colonnes
+
+### Formule d'Euler (charge critique)
+
+Pour une colonne idéale, élastique, articulée aux deux extrémités :
+
+```
+Pcr = π² E I / (KL)²
+```
+
+Où K = facteur de longueur effective (K = 1 pour articulé-articulé, K = 0,5 pour encastré-encastré).
+
+### Rapport d'élancement
+
+```
+λ = KL / r   où r = √(I/A) = rayon de giration
+```
+
+**Élancement limite** (entre les modes inélastique et élastique) :
+```
+λ_c = π × √(E / Fy)   (pour les aciers de construction ≈ 100–150)
+```
+
+Pour λ < λ_c : flambement inélastique (colonne de Johnson)
+Pour λ > λ_c : flambement élastique (colonne d'Euler)
+
+## Réservoirs sous pression à paroi mince
+
+### Hypothèse de paroi mince : r/t > 10
+
+**Contrainte circonférentielle (hoop stress)** :
+
+```
+σ_hoop = p × r / t
+```
+
+**Contrainte axiale (meridional stress)** pour un cylindre :
+
+```
+σ_axial = p × r / (2t)
+```
+
+**Contrainte sphérique** : les deux contraintes sont égales à pr/2t.
+
+<Note>
+Pour les réservoirs à paroi épaisse (r/t < 10), les formules de Lamé sont requises : σ_r = A − B/r² et σ_θ = A + B/r², avec A et B déterminés par les conditions aux limites de pression intérieure et extérieure.
+</Note>
+
+### Application au code ASME Section VIII
+
+Le code ASME pour les récipients sous pression utilise :
+- Facteur de joint d'efficacité E (soudures)
+- Facteur de sécurité intégré dans la contrainte admissible
+- Vérification de la contrainte de cisaillement maximal (Tresca)
+
+## Concentrations de contrainte
+
+La **contrainte locale maximale** au bord d'un trou, d'un congé ou d'une entaille est amplifiée par le **facteur de concentration de contrainte Kt** :
+
+```
+σ_max = Kt × σ_nominal
+```
+
+Les valeurs de Kt sont données par des chartes (Peterson's Stress Concentration Factors) ou calculées par éléments finis. Pour un trou circulaire dans une plaque infinie : Kt = 3.
+
+<CardGroup cols={2}>
+  <Card title="Conception mécanique" icon="drafting-compass" href="/genie-mecanique/conception-mecanique">
+    Fatigue, Goodman, assemblages boulonnés et ressorts
+  </Card>
+  <Card title="Fabrication et procédés" icon="screwdriver-wrench" href="/genie-mecanique/fabrication-procedes">
+    Usinage, fonderie, forgeage et procédés de soudage
+  </Card>
+  <Card title="Charpente métallique" icon="grip-lines" href="/genie-civil/charpente-metallique">
+    Flambement des colonnes et conception en acier
+  </Card>
+  <Card title="Introduction à la métallurgie" icon="hammer" href="/genie-metallurgique/introduction">
+    Propriétés mécaniques et essais des métaux
+  </Card>
+</CardGroup>
